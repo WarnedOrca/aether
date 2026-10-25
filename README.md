@@ -6,6 +6,14 @@ An original programming language for **verifiable business procedures**, plus a 
 
 **Main contribution: the checker.** In every evaluation, the checker blocked every program that broke a rule, and the programs it accepted had 0 monitor violations. The released model (v0.2) solves only 6/30 held-out trap tasks by itself. Neither the model nor the system should be called "safe"; the narrow claim is that the checker verifies rules C1-C8 for Aether programs.
 
+## Links
+
+- Code: https://github.com/WarnedOrca/aether
+- Model (v0.2 LoRA): https://huggingface.co/sidchalamala/aether-coder-1.5b-lora
+- Synthetic training data: https://huggingface.co/datasets/sidchalamala/aether-sop-programs
+- Benchmark and held-out trap set: https://huggingface.co/datasets/sidchalamala/aether-benchmark
+- Demo: run locally with `uv run --group demo python demo/app.py` (no hosted demo yet)
+
 ## Results
 
 "Correct" = passes the checker AND has the same effects as the reference program on generated test data (scorer field `safe_and_correct`; it is not a safety rating). Single runs, greedy decoding. Details: [docs/RESULTS.md](docs/RESULTS.md); how to reproduce: [docs/REPRODUCE.md](docs/REPRODUCE.md).

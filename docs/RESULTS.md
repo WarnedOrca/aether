@@ -1,5 +1,7 @@
 # Results (2026-10-25)
 
+Published artifacts: model https://huggingface.co/sidchalamala/aether-coder-1.5b-lora, data https://huggingface.co/datasets/sidchalamala/aether-sop-programs, benchmark and held-out set https://huggingface.co/datasets/sidchalamala/aether-benchmark, code https://github.com/WarnedOrca/aether.
+
 All numbers come from committed files in `eval/results/`. Each is a single run with greedy decoding on one local RTX 4070 GPU.
 
 "Correct" (scorer field `safe_and_correct`) means: passes the checker AND has the same effects as the reference program. It is not a safety rating, and neither the model nor the system should be called "safe".
