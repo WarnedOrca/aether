@@ -1,0 +1,25 @@
+{
+  "label": "v0.2-dev",
+  "adapter": "outputs/ft-coder1.5b-v0.2/epoch2",
+  "tasks": "eval/benchmark",
+  "n": 110,
+  "rounds_max": 3,
+  "date": "2026-10-25",
+  "seconds": 256,
+  "feedback": "parser + checker only",
+  "plain": {
+    "parse": 0.7818,
+    "check": 0.5455,
+    "exec": 0.3091,
+    "safe_and_correct": 0.3091
+  },
+  "repaired": {
+    "parse": 0.7545,
+    "check": 0.5727,
+    "exec": 0.3273,
+    "safe_and_correct": 0.3273
+  },
+  "plain_traps": 0.1,
+  "repaired_traps": 0.1333,
+  "monitor_problems_total": 0
+}

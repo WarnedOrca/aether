@@ -1,0 +1,25 @@
+{
+  "seed": 3,
+  "new_business_types": 30,
+  "kept": 1320,
+  "train": 1232,
+  "valid": 88,
+  "dropped": {
+    "overlap with evaluation sets": 22,
+    "not applicable": 212
+  },
+  "traps": 248,
+  "by_pattern": {
+    "lapsed": 195,
+    "escalation": 59,
+    "refund": 92,
+    "reminder": 199,
+    "wait_followup": 105,
+    "outreach": 196,
+    "followup": 196,
+    "summary": 89,
+    "confirm_new": 39,
+    "unsupported": 111,
+    "reorder": 39
+  }
+}

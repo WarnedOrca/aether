@@ -32,10 +32,12 @@ def set_seed(seed: int) -> None:
     os.environ["PYTHONHASHSEED"] = str(seed)
 
 
-def load_split(name: str, with_traps: bool = False) -> list[dict]:
+def load_split(name: str, with_traps: bool = False, extra: tuple[str, ...] = ()) -> list[dict]:
     rows = [json.loads(line) for line in (ROOT / "data/synthetic" / f"{name}.jsonl").open(encoding="utf-8")]
     if with_traps:  # v0.2: add trap-style samples (data/generate_traps.py)
         rows += [json.loads(line) for line in (ROOT / "data/synthetic_traps" / f"{name}.jsonl").open(encoding="utf-8")]
+    for folder in extra:  # v0.3: e.g. data/synthetic_v3 (30 more business types)
+        rows += [json.loads(line) for line in (ROOT / folder / f"{name}.jsonl").open(encoding="utf-8")]
     return rows
 
 
@@ -104,6 +106,7 @@ def main() -> None:
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--limit", type=int, default=0, help="train on N samples only (smoke test)")
     ap.add_argument("--with-traps", action="store_true", help="also train on data/synthetic_traps (v0.2)")
+    ap.add_argument("--extra", nargs="*", default=[], help="more data folders with train/valid.jsonl (v0.3)")
     args = ap.parse_args()
 
     import torch
@@ -115,7 +118,8 @@ def main() -> None:
     out.mkdir(parents=True, exist_ok=True)
     tok = AutoTokenizer.from_pretrained(args.model)
     pad_id = tok.pad_token_id if tok.pad_token_id is not None else tok.eos_token_id
-    train_rows, valid_rows = load_split("train", args.with_traps), load_split("valid", args.with_traps)
+    train_rows = load_split("train", args.with_traps, tuple(args.extra))
+    valid_rows = load_split("valid", args.with_traps, tuple(args.extra))
     if args.limit:
         train_rows, valid_rows = train_rows[: args.limit], valid_rows[: max(8, args.limit // 10)]
     train = [x for x in (encode(tok, r, args.max_len) for r in train_rows) if x]
