@@ -1,0 +1,30 @@
+policy RestaurantPolicy {
+  allow read Reservations(guest, phone, party_size, at, status)
+  allow write Reservations(status)
+  allow read Inventory(item, on_hand, minimum, reorder_qty, supplier, unit_cost)
+  allow contact Reservations.phone
+  allow supplier Inventory.supplier
+  allow calendar Tables
+  limit order $150 per action
+  limit order $600 per day
+  limit sends 80 per day
+  send only between 09:00 and 21:00
+}
+
+procedure ConfirmReservation {
+  about "Confirm a new reservation and put it on the calendar"
+  policy RestaurantPolicy
+  sheet Reservations "Reservations" { guest: Text, phone: Phone, party_size: Number, at: DateTime, status: Text }
+  calendar Tables "Table calendar"
+  trigger when new row r in Reservations
+
+  if r.party_size > 8 {
+    notify owner "Large party request from {r.guest} ({r.party_size}). Please handle by hand."
+    stop "large party goes to owner"
+  }
+  let m = draft sms to r.phone: "Thanks {r.guest}! Your table for {r.party_size} is confirmed for {r.at}."
+  let ok = request approval of m from owner timeout 2 hours else stop "confirmation not approved"
+  send ok
+  let ev = book Tables { title: "{r.guest} x{r.party_size}", at: r.at, length: 90 minutes }
+  update r set status = "confirmed"
+}

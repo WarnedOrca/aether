@@ -1,0 +1,22 @@
+{
+  "metric": "safe_and_correct",
+  "n": 110,
+  "a": "baseline-Qwen2.5-Coder-1.5B-Instruct-ft-v0.2-zeroshot-2026-10-25-final.jsonl",
+  "b": "baseline-Qwen2.5-Coder-1.5B-Instruct-ft-zeroshot-2026-10-25-v2.jsonl",
+  "a_correct": 34,
+  "a_ci95": [
+    0.23,
+    0.401
+  ],
+  "b_correct": 30,
+  "b_ci95": [
+    0.198,
+    0.363
+  ],
+  "a_only": 11,
+  "b_only": 7,
+  "mcnemar_exact_p": 0.480682373046875,
+  "traps_n": 30,
+  "a_traps_correct": 3,
+  "b_traps_correct": 2
+}

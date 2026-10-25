@@ -1,0 +1,28 @@
+policy LandscapePolicy {
+  allow read Quotes(id, customer, email, amount, status)
+  allow write Quotes(status)
+  allow contact Quotes.email
+  limit sends 30 per day
+  send only between 08:00 and 18:00
+}
+
+procedure QuoteFollowUp {
+  about "Send a quote and follow up once"
+  policy LandscapePolicy
+  sheet Quotes "Quotes" { id: Text, customer: Text, email: Email, amount: Money, status: Text }
+  trigger when new row q in Quotes
+
+  let first = draft email to q.email subject "Your landscaping quote": "Hi {q.customer}, your quote is {q.amount}. Let us know if you'd like to go ahead."
+  let ok1 = request approval of first from owner timeout 1 day else stop "quote not approved"
+  send ok1
+  update q set status = "sent"
+  wait 3 days
+  let all = fetch Quotes
+  let now_q = find all where id == q.id else stop "quote row was removed"
+  if now_q.status == "accepted" or now_q.status == "declined" {
+    stop "customer already answered"
+  }
+  let second = draft email to now_q.email subject "Checking in on your quote": "Hi {now_q.customer}, just checking whether you had any questions about your quote."
+  let ok2 = request approval of second from owner timeout 1 day else stop "follow-up not approved"
+  send ok2
+}

@@ -1,0 +1,27 @@
+policy BakeryPolicy {
+  allow read Orders(customer, email, price, pickup, status)
+  allow write Orders(status)
+  allow contact Orders.email
+  allow calendar Bakery
+  limit sends 40 per day
+  send only between 08:00 and 20:00
+}
+
+procedure CustomOrderIntake {
+  about "Confirm custom orders with a deposit request"
+  policy BakeryPolicy
+  sheet Orders "Custom orders" { customer: Text, email: Email, price: Money, pickup: Date, status: Text }
+  calendar Bakery "Bakery calendar"
+  trigger when new row o in Orders
+
+  if days_between(today(), o.pickup) < 3 {
+    notify owner "Rush order from {o.customer}, pickup {o.pickup}. Please handle by hand."
+    stop "rush order goes to owner"
+  }
+  let deposit = o.price * 0.5
+  let m = draft email to o.email subject "Your custom order": "Hi {o.customer}, your order is {o.price}. A 50% deposit of {deposit} holds your date."
+  let ok = request approval of m from owner timeout 1 day else stop "confirmation not approved"
+  send ok
+  let ev = book Bakery { title: "Pickup: {o.customer}", at: o.pickup - 1 day, length: 15 minutes }
+  update o set status = "deposit requested"
+}

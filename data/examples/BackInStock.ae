@@ -1,0 +1,19 @@
+procedure BackInStock {
+  about "Tell waitlisted customers when an item is back"
+  policy ShopPolicy
+  sheet Products "Products" { item: Text, qty: Number, price: Money }
+  sheet Waitlist "Waitlist" { customer: Text, email: Email, item: Text, notified: Bool }
+  trigger every day at 10:00
+
+  let products = fetch Products
+  let available = filter products where qty > 0
+  let wl = fetch Waitlist
+  let open = filter wl where notified == false
+  for each w in open up to 50 {
+    let hit = find available where item == w.item else skip
+    let m = draft email to w.email subject "{w.item} is back": "Good news {w.customer}! {w.item} is back in stock at {hit.price}."
+    let ok = request approval of m from owner timeout 1 day else skip
+    send ok
+    update w set notified = true
+  }
+}

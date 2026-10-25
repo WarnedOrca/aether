@@ -1,0 +1,39 @@
+policy ShopPolicy {
+  allow read Returns(order_id, customer, phone, amount, order_date)
+  allow write Returns(status)
+  allow read Products(item, qty, price)
+  allow read Waitlist(customer, email, item, notified)
+  allow write Waitlist(notified)
+  allow contact Returns.phone
+  allow contact Waitlist.email
+  limit refund $50 per action
+  limit refund $300 per day
+  refund without approval up to $15
+  limit sends 60 per day
+  send only between 09:00 and 19:00
+}
+
+procedure ProcessReturn {
+  about "Refund returns within limits"
+  policy ShopPolicy
+  sheet Returns "Returns" { order_id: Text, customer: Text, phone: Phone, amount: Money, order_date: Date, status: Text }
+  trigger when new row r in Returns
+
+  if days_between(r.order_date, today()) > 30 {
+    notify owner "Return {r.order_id} is past 30 days."
+    stop "outside return window"
+  }
+  if r.amount > $50.00 {
+    notify owner "Return {r.order_id} is {r.amount}, over $50. Please review."
+    stop "over refund limit"
+  }
+  if r.amount <= $15.00 {
+    refund r.amount for r.order_id reason "return within 30 days"
+  } else {
+    refund r.amount for r.order_id reason "return within 30 days", ask owner first timeout 1 day else stop "refund not approved"
+  }
+  update r set status = "refunded"
+  let m = draft sms to r.phone: "Hi {r.customer}, your refund of {r.amount} for order {r.order_id} has been issued."
+  let ok = request approval of m from owner timeout 1 day else stop "message not approved"
+  send ok
+}

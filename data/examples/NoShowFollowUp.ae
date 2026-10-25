@@ -1,0 +1,20 @@
+procedure NoShowFollowUp {
+  about "Offer rebooking to today's no-shows"
+  policy ClinicPolicy
+  sheet Appointments "Appointments" { patient: Text, phone: Phone, starts: DateTime, status: Text, reason: Text private }
+  trigger every day at 18:00
+
+  let all = fetch Appointments
+  let missed = filter all where date_of(starts) == today() and status == "no-show"
+  let n = summarize count of missed
+  if n == 0 {
+    stop "no no-shows today"
+  }
+  notify owner "No-shows today: {n}"
+  for each a in missed up to 30 {
+    let m = draft sms to a.phone: "Hi {a.patient}, we missed you today. Reply to this text to book a new time."
+    let ok = request approval of m from owner timeout 6 hours else skip
+    send ok
+    update a set status = "rebook-offered"
+  }
+}

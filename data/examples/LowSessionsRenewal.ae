@@ -1,0 +1,24 @@
+policy TutorPolicy {
+  allow read Students(student, parent_email, sessions_left, grade_notes)
+  allow read Scores(student, day, score)
+  allow contact Students.parent_email
+  deny reveal Students.grade_notes
+  limit sends 60 per day
+  send only between 08:00 and 20:00
+}
+
+procedure LowSessionsRenewal {
+  about "Offer renewal when a package is nearly used up"
+  policy TutorPolicy
+  sheet Students "Students" { student: Text, parent_email: Email, sessions_left: Number, grade_notes: Text private }
+  trigger every monday at 08:00
+
+  let all = fetch Students
+  let low = filter all where sessions_left <= 1
+  for each s in low up to 50 {
+    let m = draft email to s.parent_email subject "Sessions running low": "Hello, {s.student} has {s.sessions_left} session(s) left in their package. Would you like to renew?"
+    let ok = request approval of m from owner timeout 2 days else skip
+    send ok
+    log "renewal offer sent for {s.student}"
+  }
+}

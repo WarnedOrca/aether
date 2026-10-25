@@ -1,0 +1,478 @@
+=== --model Qwen/Qwen2.5-Coder-1.5B-Instruct --batch 8
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights:   7%|6         | 22/338 [00:00<00:02, 128.47it/s]Loading weights:  11%|#         | 37/338 [00:00<00:02, 137.58it/s]Loading weights:  15%|#5        | 52/338 [00:00<00:02, 142.45it/s]Loading weights:  21%|##        | 70/338 [00:00<00:01, 149.80it/s]Loading weights:  25%|##5       | 86/338 [00:00<00:01, 138.96it/s]Loading weights:  30%|##9       | 101/338 [00:00<00:01, 139.05it/s]Loading weights:  35%|###4      | 118/338 [00:00<00:01, 146.18it/s]Loading weights:  39%|###9      | 133/338 [00:00<00:01, 131.82it/s]Loading weights:  44%|####4     | 149/338 [00:01<00:01, 138.72it/s]Loading weights:  49%|####9     | 166/338 [00:01<00:01, 144.95it/s]Loading weights:  54%|#####3    | 181/338 [00:01<00:01, 131.25it/s]Loading weights:  60%|######    | 203/338 [00:01<00:00, 146.38it/s]Loading weights:  64%|######4   | 218/338 [00:01<00:00, 135.42it/s]Loading weights:  69%|######8   | 233/338 [00:01<00:00, 138.82it/s]Loading weights:  74%|#######4  | 251/338 [00:01<00:00, 132.48it/s]Loading weights:  80%|#######9  | 269/338 [00:01<00:00, 144.39it/s]Loading weights:  85%|########4 | 287/338 [00:02<00:00, 150.58it/s]Loading weights:  90%|########9 | 303/338 [00:02<00:00, 140.47it/s]Loading weights:  95%|#########5| 322/338 [00:02<00:00, 131.80it/s]Loading weights: 100%|##########| 338/338 [00:02<00:00, 144.06it/s]
+8/210 done, 9s
+16/210 done, 18s
+24/210 done, 30s
+32/210 done, 41s
+40/210 done, 52s
+48/210 done, 61s
+56/210 done, 70s
+64/210 done, 88s
+72/210 done, 96s
+80/210 done, 109s
+88/210 done, 123s
+96/210 done, 134s
+104/210 done, 142s
+112/210 done, 152s
+120/210 done, 164s
+128/210 done, 175s
+136/210 done, 185s
+144/210 done, 196s
+152/210 done, 208s
+160/210 done, 218s
+168/210 done, 232s
+176/210 done, 243s
+184/210 done, 258s
+192/210 done, 269s
+200/210 done, 283s
+208/210 done, 293s
+210/210 done, 300s
+{
+  "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "adapter": null,
+  "fewshot": true,
+  "date": "2026-10-25",
+  "batch": 8,
+  "scoring": "exec = blank-free scenarios (2026-10-25 rule)",
+  "decoding": "greedy, max_new_tokens=700",
+  "seconds": 300,
+  "monitor_problems_total": 0,
+  "benchmark": {
+    "n": 110,
+    "parse": 0.2818,
+    "check": 0.0364,
+    "runs": 0.0273,
+    "exec": 0.0273,
+    "exec_blank": 0.0273,
+    "exec_all": 0.0273,
+    "safe_and_correct": 0.0273
+  },
+  "benchmark_traps": {
+    "n": 30,
+    "parse": 0.2,
+    "check": 0.0,
+    "runs": 0.0,
+    "exec": 0.0,
+    "exec_blank": 0.0,
+    "exec_all": 0.0,
+    "safe_and_correct": 0.0
+  },
+  "benchmark_non_traps": {
+    "n": 80,
+    "parse": 0.3125,
+    "check": 0.05,
+    "runs": 0.0375,
+    "exec": 0.0375,
+    "exec_blank": 0.0375,
+    "exec_all": 0.0375,
+    "safe_and_correct": 0.0375
+  },
+  "synthetic_test": {
+    "n": 100,
+    "parse": 0.48,
+    "check": 0.06,
+    "runs": 0.06,
+    "exec": 0.03,
+    "exec_blank": 0.03,
+    "exec_all": 0.03,
+    "safe_and_correct": 0.03
+  }
+}
+=== --model Qwen/Qwen2.5-Coder-1.5B-Instruct --batch 8 --fewshot 0
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights:   7%|6         | 22/338 [00:00<00:02, 137.94it/s]Loading weights:  14%|#3        | 46/338 [00:00<00:02, 139.29it/s]Loading weights:  19%|#8        | 63/338 [00:00<00:01, 148.52it/s]Loading weights:  24%|##4       | 82/338 [00:00<00:01, 157.08it/s]Loading weights:  29%|##9       | 99/338 [00:00<00:01, 146.91it/s]Loading weights:  35%|###4      | 118/338 [00:00<00:01, 146.84it/s]Loading weights:  39%|###9      | 133/338 [00:00<00:01, 145.36it/s]Loading weights:  44%|####3     | 148/338 [00:01<00:01, 146.20it/s]Loading weights:  48%|####8     | 163/338 [00:01<00:01, 145.83it/s]Loading weights:  53%|#####2    | 178/338 [00:01<00:01, 142.22it/s]Loading weights:  57%|#####7    | 193/338 [00:01<00:01, 127.30it/s]Loading weights:  62%|######1   | 208/338 [00:01<00:00, 133.22it/s]Loading weights:  67%|######6   | 226/338 [00:01<00:00, 141.60it/s]Loading weights:  71%|#######1  | 241/338 [00:01<00:00, 129.08it/s]Loading weights:  78%|#######7  | 262/338 [00:01<00:00, 137.61it/s]Loading weights:  82%|########1 | 276/338 [00:01<00:00, 135.28it/s]Loading weights:  88%|########8 | 299/338 [00:02<00:00, 139.18it/s]Loading weights:  96%|#########5| 323/338 [00:02<00:00, 146.98it/s]Loading weights: 100%|##########| 338/338 [00:02<00:00, 146.18it/s]
+8/210 done, 18s
+16/210 done, 39s
+24/210 done, 60s
+32/210 done, 76s
+40/210 done, 95s
+48/210 done, 114s
+56/210 done, 129s
+64/210 done, 150s
+72/210 done, 168s
+80/210 done, 185s
+88/210 done, 202s
+96/210 done, 218s
+104/210 done, 239s
+112/210 done, 254s
+120/210 done, 270s
+128/210 done, 289s
+136/210 done, 308s
+144/210 done, 328s
+152/210 done, 347s
+160/210 done, 367s
+168/210 done, 386s
+176/210 done, 407s
+184/210 done, 428s
+192/210 done, 449s
+200/210 done, 469s
+208/210 done, 486s
+210/210 done, 504s
+{
+  "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "adapter": null,
+  "fewshot": false,
+  "date": "2026-10-25",
+  "batch": 8,
+  "scoring": "exec = blank-free scenarios (2026-10-25 rule)",
+  "decoding": "greedy, max_new_tokens=700",
+  "seconds": 504,
+  "monitor_problems_total": 0,
+  "benchmark": {
+    "n": 110,
+    "parse": 0.0,
+    "check": 0.0,
+    "runs": 0.0,
+    "exec": 0.0,
+    "exec_blank": 0.0,
+    "exec_all": 0.0,
+    "safe_and_correct": 0.0
+  },
+  "benchmark_traps": {
+    "n": 30,
+    "parse": 0.0,
+    "check": 0.0,
+    "runs": 0.0,
+    "exec": 0.0,
+    "exec_blank": 0.0,
+    "exec_all": 0.0,
+    "safe_and_correct": 0.0
+  },
+  "benchmark_non_traps": {
+    "n": 80,
+    "parse": 0.0,
+    "check": 0.0,
+    "runs": 0.0,
+    "exec": 0.0,
+    "exec_blank": 0.0,
+    "exec_all": 0.0,
+    "safe_and_correct": 0.0
+  },
+  "synthetic_test": {
+    "n": 100,
+    "parse": 0.0,
+    "check": 0.0,
+    "runs": 0.0,
+    "exec": 0.0,
+    "exec_blank": 0.0,
+    "exec_all": 0.0,
+    "safe_and_correct": 0.0
+  }
+}
+=== --model Qwen/Qwen3-1.7B --batch 8
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:   4%|3         | 11/311 [00:00<00:03, 90.22it/s]Loading weights:   7%|7         | 22/311 [00:00<00:03, 81.83it/s]Loading weights:  12%|#1        | 36/311 [00:00<00:02, 104.04it/s]Loading weights:  17%|#7        | 53/311 [00:00<00:02, 127.09it/s]Loading weights:  22%|##1       | 67/311 [00:00<00:02, 109.12it/s]Loading weights:  26%|##6       | 81/311 [00:00<00:01, 117.73it/s]Loading weights:  30%|###       | 94/311 [00:00<00:01, 118.20it/s]Loading weights:  35%|###5      | 109/311 [00:00<00:01, 108.53it/s]Loading weights:  41%|####1     | 128/311 [00:01<00:01, 127.88it/s]Loading weights:  46%|####5     | 142/311 [00:01<00:01, 126.42it/s]Loading weights:  50%|#####     | 156/311 [00:01<00:01, 120.14it/s]Loading weights:  55%|#####4    | 170/311 [00:01<00:01, 122.98it/s]Loading weights:  59%|#####9    | 184/311 [00:01<00:01, 126.80it/s]Loading weights:  63%|######3   | 197/311 [00:01<00:00, 117.58it/s]Loading weights:  68%|######7   | 211/311 [00:01<00:00, 120.25it/s]Loading weights:  72%|#######2  | 224/311 [00:01<00:00, 122.16it/s]Loading weights:  77%|#######6  | 239/311 [00:02<00:00, 128.86it/s]Loading weights:  81%|########1 | 253/311 [00:02<00:00, 125.32it/s]Loading weights:  86%|########5 | 266/311 [00:02<00:00, 118.40it/s]Loading weights:  90%|########9 | 279/311 [00:02<00:00, 119.84it/s]Loading weights:  94%|#########3| 292/311 [00:02<00:00, 122.45it/s]Loading weights: 100%|##########| 311/311 [00:02<00:00, 121.94it/s]
+8/210 done, 16s
+16/210 done, 32s
+24/210 done, 50s
+32/210 done, 70s
+40/210 done, 88s
+48/210 done, 106s
+56/210 done, 124s
+64/210 done, 147s
+72/210 done, 163s
+80/210 done, 186s
+88/210 done, 204s
+96/210 done, 232s
+104/210 done, 247s
+112/210 done, 263s
+120/210 done, 285s
+128/210 done, 307s
+136/210 done, 333s
+144/210 done, 350s
+152/210 done, 372s
+160/210 done, 386s
+168/210 done, 408s
+176/210 done, 426s
+184/210 done, 448s
+192/210 done, 464s
+200/210 done, 486s
+208/210 done, 502s
+210/210 done, 510s
+{
+  "model": "Qwen/Qwen3-1.7B",
+  "adapter": null,
+  "fewshot": true,
+  "date": "2026-10-25",
+  "batch": 8,
+  "scoring": "exec = blank-free scenarios (2026-10-25 rule)",
+  "decoding": "greedy, max_new_tokens=700",
+  "seconds": 510,
+  "monitor_problems_total": 0,
+  "benchmark": {
+    "n": 110,
+    "parse": 0.2364,
+    "check": 0.0455,
+    "runs": 0.0455,
+    "exec": 0.0182,
+    "exec_blank": 0.0364,
+    "exec_all": 0.0182,
+    "safe_and_correct": 0.0182
+  },
+  "benchmark_traps": {
+    "n": 30,
+    "parse": 0.1,
+    "check": 0.0,
+    "runs": 0.0,
+    "exec": 0.0,
+    "exec_blank": 0.0,
+    "exec_all": 0.0,
+    "safe_and_correct": 0.0
+  },
+  "benchmark_non_traps": {
+    "n": 80,
+    "parse": 0.2875,
+    "check": 0.0625,
+    "runs": 0.0625,
+    "exec": 0.025,
+    "exec_blank": 0.05,
+    "exec_all": 0.025,
+    "safe_and_correct": 0.025
+  },
+  "synthetic_test": {
+    "n": 100,
+    "parse": 0.36,
+    "check": 0.1,
+    "runs": 0.1,
+    "exec": 0.08,
+    "exec_blank": 0.08,
+    "exec_all": 0.07,
+    "safe_and_correct": 0.08
+  }
+}
+=== --model Qwen/Qwen2.5-Coder-0.5B-Instruct --batch 8
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights:  12%|#1        | 34/290 [00:00<00:00, 312.69it/s]Loading weights:  25%|##4       | 72/290 [00:00<00:00, 349.40it/s]Loading weights:  41%|####      | 118/290 [00:00<00:00, 370.63it/s]Loading weights:  58%|#####7    | 168/290 [00:00<00:00, 405.44it/s]Loading weights:  74%|#######3  | 214/290 [00:00<00:00, 411.78it/s]Loading weights:  88%|########8 | 256/290 [00:00<00:00, 414.33it/s]Loading weights: 100%|##########| 290/290 [00:00<00:00, 409.43it/s]
+8/210 done, 17s
+16/210 done, 33s
+24/210 done, 40s
+32/210 done, 58s
+40/210 done, 65s
+48/210 done, 82s
+56/210 done, 98s
+64/210 done, 108s
+72/210 done, 117s
+80/210 done, 124s
+88/210 done, 141s
+96/210 done, 148s
+104/210 done, 165s
+112/210 done, 171s
+120/210 done, 177s
+128/210 done, 184s
+136/210 done, 190s
+144/210 done, 195s
+152/210 done, 202s
+160/210 done, 208s
+168/210 done, 215s
+176/210 done, 221s
+184/210 done, 229s
+192/210 done, 236s
+200/210 done, 243s
+208/210 done, 249s
+210/210 done, 254s
+{
+  "model": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+  "adapter": null,
+  "fewshot": true,
+  "date": "2026-10-25",
+  "batch": 8,
+  "scoring": "exec = blank-free scenarios (2026-10-25 rule)",
+  "decoding": "greedy, max_new_tokens=700",
+  "seconds": 254,
+  "monitor_problems_total": 0,
+  "benchmark": {
+    "n": 110,
+    "parse": 0.3909,
+    "check": 0.0,
+    "runs": 0.0,
+    "exec": 0.0,
+    "exec_blank": 0.0,
+    "exec_all": 0.0,
+    "safe_and_correct": 0.0
+  },
+  "benchmark_traps": {
+    "n": 30,
+    "parse": 0.4667,
+    "check": 0.0,
+    "runs": 0.0,
+    "exec": 0.0,
+    "exec_blank": 0.0,
+    "exec_all": 0.0,
+    "safe_and_correct": 0.0
+  },
+  "benchmark_non_traps": {
+    "n": 80,
+    "parse": 0.3625,
+    "check": 0.0,
+    "runs": 0.0,
+    "exec": 0.0,
+    "exec_blank": 0.0,
+    "exec_all": 0.0,
+    "safe_and_correct": 0.0
+  },
+  "synthetic_test": {
+    "n": 100,
+    "parse": 0.61,
+    "check": 0.08,
+    "runs": 0.08,
+    "exec": 0.06,
+    "exec_blank": 0.05,
+    "exec_all": 0.05,
+    "safe_and_correct": 0.06
+  }
+}
+=== --model HuggingFaceTB/SmolLM2-1.7B-Instruct --batch 2
+Loading weights:   0%|          | 0/218 [00:00<?, ?it/s]Loading weights:   4%|4         | 9/218 [00:00<00:02, 80.44it/s]Loading weights:   9%|8         | 19/218 [00:00<00:02, 71.18it/s]Loading weights:  12%|#2        | 27/218 [00:00<00:02, 70.62it/s]Loading weights:  17%|#6        | 36/218 [00:00<00:02, 71.99it/s]Loading weights:  20%|##        | 44/218 [00:00<00:02, 69.32it/s]Loading weights:  25%|##4       | 54/218 [00:00<00:02, 75.00it/s]Loading weights:  29%|##8       | 63/218 [00:00<00:02, 74.33it/s]Loading weights:  33%|###3      | 72/218 [00:00<00:01, 75.78it/s]Loading weights:  38%|###7      | 82/218 [00:01<00:01, 76.14it/s]Loading weights:  41%|####1     | 90/218 [00:01<00:01, 72.05it/s]Loading weights:  45%|####4     | 98/218 [00:01<00:01, 70.97it/s]Loading weights:  50%|#####     | 109/218 [00:01<00:01, 74.54it/s]Loading weights:  55%|#####5    | 120/218 [00:01<00:01, 77.13it/s]Loading weights:  60%|#####9    | 130/218 [00:01<00:01, 82.91it/s]Loading weights:  64%|######3   | 139/218 [00:01<00:01, 77.07it/s]Loading weights:  67%|######7   | 147/218 [00:01<00:00, 75.10it/s]Loading weights:  72%|#######1  | 156/218 [00:02<00:00, 78.19it/s]Loading weights:  75%|#######5  | 164/218 [00:02<00:00, 77.80it/s]Loading weights:  79%|#######8  | 172/218 [00:02<00:00, 72.46it/s]Loading weights:  83%|########2 | 180/218 [00:02<00:00, 71.65it/s]Loading weights:  87%|########7 | 190/218 [00:02<00:00, 69.41it/s]Loading weights:  91%|######### | 198/218 [00:02<00:00, 71.01it/s]Loading weights:  96%|#########6| 210/218 [00:02<00:00, 78.09it/s]Loading weights: 100%|##########| 218/218 [00:02<00:00, 77.31it/s]
+2/210 done, 10s
+4/210 done, 25s
+6/210 done, 29s
+8/210 done, 34s
+10/210 done, 39s
+12/210 done, 44s
+14/210 done, 52s
+16/210 done, 56s
+18/210 done, 64s
+20/210 done, 79s
+22/210 done, 84s
+24/210 done, 89s
+26/210 done, 96s
+28/210 done, 103s
+30/210 done, 109s
+32/210 done, 114s
+34/210 done, 119s
+36/210 done, 124s
+38/210 done, 139s
+40/210 done, 147s
+42/210 done, 153s
+44/210 done, 158s
+46/210 done, 164s
+48/210 done, 169s
+50/210 done, 173s
+52/210 done, 179s
+54/210 done, 184s
+56/210 done, 189s
+58/210 done, 194s
+60/210 done, 202s
+62/210 done, 206s
+64/210 done, 213s
+66/210 done, 218s
+68/210 done, 233s
+70/210 done, 238s
+72/210 done, 253s
+74/210 done, 268s
+76/210 done, 273s
+78/210 done, 288s
+80/210 done, 293s
+82/210 done, 304s
+84/210 done, 310s
+86/210 done, 315s
+88/210 done, 320s
+90/210 done, 327s
+92/210 done, 333s
+94/210 done, 339s
+96/210 done, 344s
+98/210 done, 349s
+100/210 done, 355s
+102/210 done, 359s
+104/210 done, 365s
+106/210 done, 372s
+108/210 done, 384s
+110/210 done, 399s
+112/210 done, 405s
+114/210 done, 411s
+116/210 done, 418s
+118/210 done, 424s
+120/210 done, 440s
+122/210 done, 444s
+124/210 done, 451s
+126/210 done, 455s
+128/210 done, 470s
+130/210 done, 478s
+132/210 done, 493s
+134/210 done, 499s
+136/210 done, 513s
+138/210 done, 519s
+140/210 done, 524s
+142/210 done, 530s
+144/210 done, 536s
+146/210 done, 542s
+148/210 done, 547s
+150/210 done, 553s
+152/210 done, 559s
+154/210 done, 565s
+156/210 done, 571s
+158/210 done, 575s
+160/210 done, 580s
+162/210 done, 586s
+164/210 done, 591s
+166/210 done, 598s
+168/210 done, 603s
+170/210 done, 608s
+172/210 done, 613s
+174/210 done, 619s
+176/210 done, 624s
+178/210 done, 631s
+180/210 done, 637s
+182/210 done, 644s
+184/210 done, 651s
+186/210 done, 666s
+188/210 done, 672s
+190/210 done, 678s
+192/210 done, 682s
+194/210 done, 690s
+196/210 done, 696s
+198/210 done, 703s
+200/210 done, 708s
+202/210 done, 713s
+204/210 done, 719s
+206/210 done, 724s
+208/210 done, 729s
+210/210 done, 744s
+{
+  "model": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+  "adapter": null,
+  "fewshot": true,
+  "date": "2026-10-25",
+  "batch": 2,
+  "scoring": "exec = blank-free scenarios (2026-10-25 rule)",
+  "decoding": "greedy, max_new_tokens=700",
+  "seconds": 744,
+  "monitor_problems_total": 0,
+  "benchmark": {
+    "n": 110,
+    "parse": 0.3364,
+    "check": 0.0182,
+    "runs": 0.0182,
+    "exec": 0.0091,
+    "exec_blank": 0.0091,
+    "exec_all": 0.0091,
+    "safe_and_correct": 0.0091
+  },
+  "benchmark_traps": {
+    "n": 30,
+    "parse": 0.3667,
+    "check": 0.0,
+    "runs": 0.0,
+    "exec": 0.0,
+    "exec_blank": 0.0,
+    "exec_all": 0.0,
+    "safe_and_correct": 0.0
+  },
+  "benchmark_non_traps": {
+    "n": 80,
+    "parse": 0.325,
+    "check": 0.025,
+    "runs": 0.025,
+    "exec": 0.0125,
+    "exec_blank": 0.0125,
+    "exec_all": 0.0125,
+    "safe_and_correct": 0.0125
+  },
+  "synthetic_test": {
+    "n": 100,
+    "parse": 0.47,
+    "check": 0.18,
+    "runs": 0.18,
+    "exec": 0.07,
+    "exec_blank": 0.13,
+    "exec_all": 0.06,
+    "safe_and_correct": 0.07
+  }
+}

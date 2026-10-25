@@ -1,0 +1,26 @@
+policy ClinicBatchPolicy {
+  allow read Appointments(patient, phone, starts, status, reason)
+  allow write Appointments(status)
+  allow contact Appointments.phone
+  deny reveal Appointments.reason
+  limit sends 150 per day
+  send only between 08:00 and 20:00
+  approval batch valid 1 hour max 100 preview 5
+}
+
+procedure AppointmentRemindersBatch {
+  about "Remind patients of tomorrow's appointments (one batch approval)"
+  policy ClinicBatchPolicy
+  sheet Appointments "Appointments" { patient: Text, phone: Phone, starts: DateTime, status: Text, reason: Text private }
+  trigger every day at 09:00
+
+  let all = fetch Appointments
+  let tomorrows = filter all where date_of(starts) == today() + 1 day and status == "booked"
+  let msgs = draft each a in tomorrows up to 100 sms to a.phone: "Hi {a.patient default 'there'}, this is a reminder of your appointment tomorrow at {time_of(a.starts)}. Reply C to confirm."
+  let ok = request batch approval of msgs from owner timeout 12 hours else stop "batch not approved"
+  send ok
+  for each a in tomorrows up to 100 {
+    update a set status = "reminded"
+  }
+  log "reminder batch sent"
+}

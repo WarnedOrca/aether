@@ -1,0 +1,46 @@
+{
+  "rescored_from": "baseline-Qwen2.5-Coder-1.5B-Instruct-2026-10-25.jsonl",
+  "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "generated": "2026-10-25",
+  "note": "outputs generated with the pre-2026-10-25 SOP wording; scored with the split rule",
+  "benchmark": {
+    "n": 110,
+    "parse": 0.2727,
+    "check": 0.0364,
+    "runs": 0.0364,
+    "exec": 0.0182,
+    "exec_blank": 0.0273,
+    "exec_all": 0.0182,
+    "safe_and_correct": 0.0182
+  },
+  "benchmark_traps": {
+    "n": 30,
+    "parse": 0.2333,
+    "check": 0.0,
+    "runs": 0.0,
+    "exec": 0.0,
+    "exec_blank": 0.0,
+    "exec_all": 0.0,
+    "safe_and_correct": 0.0
+  },
+  "benchmark_non_traps": {
+    "n": 80,
+    "parse": 0.2875,
+    "check": 0.05,
+    "runs": 0.05,
+    "exec": 0.025,
+    "exec_blank": 0.0375,
+    "exec_all": 0.025,
+    "safe_and_correct": 0.025
+  },
+  "synthetic_test": {
+    "n": 100,
+    "parse": 0.48,
+    "check": 0.06,
+    "runs": 0.06,
+    "exec": 0.03,
+    "exec_blank": 0.03,
+    "exec_all": 0.03,
+    "safe_and_correct": 0.03
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "rescored_from": "baseline-Qwen3-1.7B-2026-10-25.jsonl",
+  "model": "Qwen/Qwen3-1.7B",
+  "generated": "2026-10-25",
+  "note": "outputs generated with the pre-2026-10-25 SOP wording; scored with the split rule",
+  "benchmark": {
+    "n": 110,
+    "parse": 0.3636,
+    "check": 0.0909,
+    "runs": 0.0818,
+    "exec": 0.0545,
+    "exec_blank": 0.0545,
+    "exec_all": 0.0364,
+    "safe_and_correct": 0.0545
+  },
+  "benchmark_traps": {
+    "n": 30,
+    "parse": 0.3,
+    "check": 0.0333,
+    "runs": 0.0333,
+    "exec": 0.0333,
+    "exec_blank": 0.0,
+    "exec_all": 0.0,
+    "safe_and_correct": 0.0333
+  },
+  "benchmark_non_traps": {
+    "n": 80,
+    "parse": 0.3875,
+    "check": 0.1125,
+    "runs": 0.1,
+    "exec": 0.0625,
+    "exec_blank": 0.075,
+    "exec_all": 0.05,
+    "safe_and_correct": 0.0625
+  },
+  "synthetic_test": {
+    "n": 100,
+    "parse": 0.36,
+    "check": 0.1,
+    "runs": 0.1,
+    "exec": 0.08,
+    "exec_blank": 0.08,
+    "exec_all": 0.07,
+    "safe_and_correct": 0.08
+  }
+}

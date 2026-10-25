@@ -1,0 +1,18 @@
+procedure LowStockReorder {
+  about "Reorder items that dropped below their minimum"
+  policy RestaurantPolicy
+  sheet Inventory "Inventory" { item: Text, on_hand: Number, minimum: Number, reorder_qty: Number, supplier: Text, unit_cost: Money }
+  trigger every day at 07:00
+
+  let all = fetch Inventory
+  let low = filter all where on_hand < minimum
+  for each i in low up to 4 {
+    let cost = i.reorder_qty * i.unit_cost
+    if cost > $150.00 {
+      notify owner "Reorder of {i.item} would cost {cost}, over the $150 limit. Please order by hand."
+      skip
+    }
+    order "{i.reorder_qty} x {i.item}" from i.supplier cost cost, ask owner first timeout 1 day else skip
+    log "ordered {i.item}"
+  }
+}

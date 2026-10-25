@@ -1,0 +1,44 @@
+{
+  "seed": 1,
+  "kept": 450,
+  "train": 413,
+  "valid": 37,
+  "dropped": {
+    "not applicable": 67,
+    "duplicate": 17,
+    "overlap": 3
+  },
+  "by_kind": {
+    "order-skip-approval": 26,
+    "unsupported-charge": 49,
+    "unsupported-channel": 49,
+    "over-limit": 32,
+    "unsupported-payment": 49,
+    "send-on-timeout": 42,
+    "skip-approval": 45,
+    "unbounded": 20,
+    "unlisted-recipient": 44,
+    "unsupported-post": 48,
+    "reveal-private": 46
+  },
+  "references": {
+    "benchmark_sops": 110,
+    "heldout_sops": 30
+  },
+  "thresholds": {
+    "sop_char5_jaccard_max": 0.35,
+    "trap_sentence_ratio_max": 0.75,
+    "shared_word_8grams": 0
+  },
+  "checked_samples": 453,
+  "sop_jaccard": {
+    "median": 0.09278350515463918,
+    "p99": 0.1919191919191919,
+    "max": 0.22279792746113988
+  },
+  "trap_sentence_ratio": {
+    "median": 0.4642857142857143,
+    "p99": 0.6776859504132231,
+    "max": 0.7368421052631579
+  }
+}

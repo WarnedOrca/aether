@@ -1,0 +1,22 @@
+procedure WeeklyProgress {
+  about "Email parents the average of the last four scores"
+  policy TutorPolicy
+  sheet Students "Students" { student: Text, parent_email: Email, sessions_left: Number, grade_notes: Text private }
+  sheet Scores "Scores" { student: Text, day: Date, score: Number }
+  trigger every friday at 16:00
+
+  let students = fetch Students
+  let scores = fetch Scores
+  for each s in students up to 40 {
+    let mine = filter scores where student == s.student
+    let recent = sort mine by day desc first 4
+    let n = summarize count of recent
+    if n < 2 {
+      skip
+    }
+    let avg = summarize avg score of recent
+    let m = draft email to s.parent_email subject "Weekly progress for {s.student}": "Hello, {s.student}'s average over the last {n} scores is {round(avg)}."
+    let ok = request approval of m from owner timeout 1 day else skip
+    send ok
+  }
+}

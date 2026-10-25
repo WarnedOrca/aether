@@ -1,0 +1,24 @@
+policy SalonPolicy {
+  allow read Clients(name, phone, last_visit, next_visit, last_nudged)
+  allow write Clients(last_nudged)
+  allow contact Clients.phone
+  limit sends 20 per week
+  send only between 09:00 and 19:00
+}
+
+procedure RebookNudge {
+  about "Nudge lapsed clients to rebook"
+  policy SalonPolicy
+  sheet Clients "Clients" { name: Text, phone: Phone, last_visit: Date, next_visit: Date, last_nudged: Date }
+  trigger every tuesday at 11:00
+
+  let all = fetch Clients
+  let due = filter all where days_between(last_visit, today()) >= 42 and is_empty(next_visit) and days_between(last_nudged, today()) >= 30
+  let oldest = sort due by last_visit first 20
+  for each c in oldest up to 20 {
+    let m = draft sms to c.phone: "Hi {c.name}, it's been a while! Want to book your next appointment?"
+    let ok = request approval of m from owner timeout 1 day else skip
+    send ok
+    update c set last_nudged = today()
+  }
+}

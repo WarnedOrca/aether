@@ -1,0 +1,29 @@
+policy DentalPolicy {
+  allow read Cancellations(slot_id, day, time)
+  allow read Waitlist(patient, phone, wants_day, signed_up, status)
+  allow write Waitlist(status)
+  allow contact Waitlist.phone
+  allow calendar Chairs
+  limit sends 40 per day
+  send only between 08:00 and 18:00
+}
+
+procedure FillCancelledSlot {
+  about "Offer a cancelled slot to the waitlist"
+  policy DentalPolicy
+  sheet Cancellations "Cancellations" { slot_id: Text, day: Date, time: Text }
+  sheet Waitlist "Waitlist" { patient: Text, phone: Phone, wants_day: Date, signed_up: Date, status: Text }
+  calendar Chairs "Chair calendar"
+  trigger when new row c in Cancellations
+
+  cancel Chairs event c.slot_id
+  let wl = fetch Waitlist
+  let waiting = filter wl where wants_day == c.day and status == "waiting"
+  let ordered = sort waiting by signed_up first 1
+  let p = find ordered where status == "waiting" else stop "nobody waiting for that day"
+  let m = draft sms to p.phone: "Hi {p.patient}, a spot opened on {c.day} at {c.time}. Reply to take it."
+  let ok = request approval of m from owner timeout 2 hours else stop "offer not approved"
+  send ok
+  update p set status = "offered"
+  log "offered {c.day} {c.time} to {p.patient}"
+}

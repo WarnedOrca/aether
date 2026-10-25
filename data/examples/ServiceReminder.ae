@@ -1,0 +1,23 @@
+policy GaragePolicy {
+  allow read Vehicles(owner_name, phone, last_service, miles_since, last_reminded)
+  allow write Vehicles(last_reminded)
+  allow contact Vehicles.phone
+  limit sends 60 per day
+  send only between 08:00 and 18:00
+}
+
+procedure ServiceReminder {
+  about "Remind customers when service is due"
+  policy GaragePolicy
+  sheet Vehicles "Vehicles" { owner_name: Text, phone: Phone, last_service: Date, miles_since: Number, last_reminded: Date }
+  trigger every monday at 08:30
+
+  let all = fetch Vehicles
+  let due = filter all where (days_between(last_service, today()) > 150 or miles_since > 4500) and days_between(last_reminded, today()) >= 60
+  for each v in due up to 40 {
+    let m = draft sms to v.phone: "Hi {v.owner_name}, your car is due for service. Reply to book a time."
+    let ok = request approval of m from owner timeout 1 day else skip
+    send ok
+    update v set last_reminded = today()
+  }
+}

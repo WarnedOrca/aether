@@ -1,0 +1,26 @@
+policy DaycarePolicy {
+  allow read Families(parent, email, balance, due_date, health_notes)
+  allow contact Families.email
+  deny reveal Families.health_notes
+  limit sends 40 per day
+  send only between 08:00 and 19:00
+}
+
+procedure LateTuition {
+  about "Remind late families; escalate very late ones to the owner"
+  policy DaycarePolicy
+  sheet Families "Families" { parent: Text, email: Email, balance: Money, due_date: Date, health_notes: Text private }
+  trigger every monday at 09:00
+
+  let all = fetch Families
+  let late = filter all where balance > $0.00 and days_between(due_date, today()) > 5
+  for each f in late up to 40 {
+    if days_between(f.due_date, today()) > 14 {
+      notify owner "{f.parent} is {days_between(f.due_date, today())} days late ({f.balance}). Please call."
+    } else {
+      let m = draft email to f.email subject "Tuition reminder": "Hello {f.parent}, our records show a balance of {f.balance}. Please let us know if you have questions."
+      let ok = request approval of m from owner timeout 1 day else skip
+      send ok
+    }
+  }
+}

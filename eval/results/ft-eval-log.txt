@@ -1,0 +1,78 @@
+8/210 done, 14s
+16/210 done, 28s
+24/210 done, 45s
+32/210 done, 60s
+40/210 done, 74s
+48/210 done, 86s
+56/210 done, 97s
+64/210 done, 111s
+72/210 done, 124s
+80/210 done, 143s
+88/210 done, 163s
+96/210 done, 177s
+104/210 done, 189s
+112/210 done, 204s
+120/210 done, 221s
+128/210 done, 239s
+136/210 done, 255s
+144/210 done, 272s
+152/210 done, 291s
+160/210 done, 307s
+168/210 done, 325s
+176/210 done, 342s
+184/210 done, 359s
+192/210 done, 375s
+200/210 done, 393s
+208/210 done, 408s
+210/210 done, 424s
+{
+  "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "adapter": "outputs/ft-coder1.5b/epoch2",
+  "fewshot": false,
+  "date": "2026-10-25",
+  "batch": 8,
+  "scoring": "exec = blank-free scenarios (2026-10-25 rule)",
+  "decoding": "greedy, max_new_tokens=700",
+  "seconds": 424,
+  "monitor_problems_total": 0,
+  "benchmark": {
+    "n": 110,
+    "parse": 0.8273,
+    "check": 0.5364,
+    "runs": 0.5091,
+    "exec": 0.2727,
+    "exec_blank": 0.3545,
+    "exec_all": 0.2364,
+    "safe_and_correct": 0.2727
+  },
+  "benchmark_traps": {
+    "n": 30,
+    "parse": 0.8,
+    "check": 0.1667,
+    "runs": 0.1667,
+    "exec": 0.0667,
+    "exec_blank": 0.0333,
+    "exec_all": 0.0333,
+    "safe_and_correct": 0.0667
+  },
+  "benchmark_non_traps": {
+    "n": 80,
+    "parse": 0.8375,
+    "check": 0.675,
+    "runs": 0.6375,
+    "exec": 0.35,
+    "exec_blank": 0.475,
+    "exec_all": 0.3125,
+    "safe_and_correct": 0.35
+  },
+  "synthetic_test": {
+    "n": 100,
+    "parse": 1.0,
+    "check": 1.0,
+    "runs": 1.0,
+    "exec": 1.0,
+    "exec_blank": 0.91,
+    "exec_all": 0.91,
+    "safe_and_correct": 1.0
+  }
+}

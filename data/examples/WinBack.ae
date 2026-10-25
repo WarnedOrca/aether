@@ -1,0 +1,25 @@
+policy GymPolicy {
+  allow read Members(name, email, ended)
+  allow append Outreach
+  allow contact Members.email
+  limit sends 200 per day
+  send only between 09:00 and 19:00
+}
+
+procedure WinBack {
+  about "Comeback offer to recently lapsed members"
+  policy GymPolicy
+  sheet Members "Members" { name: Text, email: Email, ended: Date }
+  sheet Outreach "Outreach log" { day: Date, campaign: Text, targeted: Number }
+  trigger when requested(days: Number)
+
+  let all = fetch Members
+  let recent = filter all where days_between(ended, today()) <= days and days_between(ended, today()) >= 0
+  let n = summarize count of recent
+  append Outreach { day: today(), campaign: "winback", targeted: n }
+  for each m in recent up to 150 {
+    let msg = draft email to m.email subject "We'd love you back": "Hi {m.name}, use code COMEBACK20 for 20% off when you rejoin."
+    let ok = request approval of msg from owner timeout 3 days else skip
+    send ok
+  }
+}

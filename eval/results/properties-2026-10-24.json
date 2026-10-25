@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-24",
+  "commit": "ea82d03",
+  "python": "3.12.15",
+  "seconds": 11.3,
+  "cases": {
+    "P1-P4,P7,P8,P9 (examples x behaviors x blank rates x seeds)": 24000,
+    "P5 batch tamper": 500,
+    "P6 random policies": 500
+  },
+  "violations": {},
+  "violation_examples": [],
+  "mutants": {
+    "total": 88,
+    "rejected": 88,
+    "rejected_with_expected_code": 88,
+    "by_operator": {
+      "delete_approval": 16,
+      "remove_loop_bound": 11,
+      "literal_recipient": 16,
+      "leak_private": 5,
+      "drop_cap": 19,
+      "weakening_rule": 16,
+      "remove_money_approval": 2,
+      "raise_amount": 3
+    }
+  }
+}

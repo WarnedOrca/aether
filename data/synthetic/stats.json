@@ -1,0 +1,31 @@
+{
+  "seed": 0,
+  "per_combo": 8,
+  "kept": 2166,
+  "dropped": {
+    "duplicate": 2
+  },
+  "splits": {
+    "train": 1649,
+    "valid": 125,
+    "test": 392
+  },
+  "patterns": {
+    "reminder": 352,
+    "followup": 352,
+    "lapsed": 352,
+    "summary": 175,
+    "refund": 176,
+    "confirm_new": 56,
+    "wait_followup": 176,
+    "outreach": 351,
+    "reorder": 72,
+    "escalation": 104
+  },
+  "test_domains": [
+    "florist",
+    "photostudio",
+    "plumbing",
+    "vet"
+  ]
+}
