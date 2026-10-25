@@ -31,6 +31,8 @@ uv run --group ml python -m eval.baseline --model $M --adapter outputs/ft-coder1
 
 uv run python -m release.build                 # dist/: dataset, benchmark (+ held-out), v0.2 model card (+ adapter), Space
 uv run --group demo python demo/app.py         # local demo at http://127.0.0.1:7860
+uv run python -m release.build_site             # static browser demo -> dist/site (published on the gh-pages branch)
+uv run --group ml python -m release.verify_model  # clean download-and-run test of the published adapter
 ```
 
 Greedy decoding makes generation deterministic for a fixed batch size and GPU. Small numeric differences across GPUs can change a few outputs.

@@ -37,3 +37,6 @@ dist/
 
 # Personal notes for local AI assistants (not published)
 CLAUDE.local.md
+
+# Local preview config
+.claude/launch.json

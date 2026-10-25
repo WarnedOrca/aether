@@ -48,6 +48,10 @@ This creates `dist/`. The model in `dist/model` is v0.2.
 4. **Model:** click your profile picture, then **New Model**. Name it `aether-coder-1.5b-lora`, set License **apache-2.0**, choose **Public**, and click **Create model**. Upload every file from `dist\model` (README.md, adapter_config.json, adapter_model.safetensors, which is about 71 MB).
 5. **Demo (note, 2026-10-25):** Hugging Face now requires a paid plan for Gradio and Docker Spaces; only Static Spaces are free. Do not subscribe. The steps below are kept for reference. Click your profile picture, then **New Space**. Name it `aether`, set SDK to **Gradio**, Hardware to **CPU basic (free)**, and choose **Public**, then click **Create Space**. First rebuild with your repository URL (`AETHER_GITHUB_REPO=https://github.com/<you>/aether.git uv run python -m release.build`) so the Space installs the checker from GitHub. Then upload the five flat files in `dist\space`: `app.py`, `example.ae`, `requirements.txt`, `README.md`, `LICENSE`. Wait for "Running", then open the **App** tab and click **Check and run**.
 
+## B2. Browser demo on GitHub Pages (free)
+
+The demo at https://warnedorca.github.io/aether/ is a static page (Pyodide) that runs only the checker and interpreter; the model is not hosted. To update it: run `uv run python -m release.build_site`, then commit the contents of `dist/site` to the `gh-pages` branch and push. GitHub Pages serves that branch (Settings, then Pages, then Deploy from a branch: `gh-pages`, `/ (root)`).
+
 ## C. After publishing
 
 Give the assistant the GitHub URL and the four Hugging Face URLs, and it will add the links to the README and cards. Record stars, downloads or users in CLAIMS only after they really exist, with the date and a link as proof. Keep claims narrow: the checker blocked every program that broke a rule, and the model alone solves 6/30 held-out traps. Never call the model or the system "safe".

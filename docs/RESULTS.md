@@ -1,6 +1,6 @@
 # Results (2026-10-25)
 
-Published artifacts: model https://huggingface.co/sidchalamala/aether-coder-1.5b-lora, data https://huggingface.co/datasets/sidchalamala/aether-sop-programs, benchmark and held-out set https://huggingface.co/datasets/sidchalamala/aether-benchmark, code https://github.com/WarnedOrca/aether.
+Published artifacts: model https://huggingface.co/sidchalamala/aether-coder-1.5b-lora, data https://huggingface.co/datasets/sidchalamala/aether-sop-programs, benchmark and held-out set https://huggingface.co/datasets/sidchalamala/aether-benchmark, code https://github.com/WarnedOrca/aether, browser demo (checker and interpreter only; model not hosted) https://warnedorca.github.io/aether/.
 
 All numbers come from committed files in `eval/results/`. Each is a single run with greedy decoding on one local RTX 4070 GPU.
 

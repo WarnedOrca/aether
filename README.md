@@ -12,7 +12,8 @@ An original programming language for **verifiable business procedures**, plus a 
 - Model (v0.2 LoRA): https://huggingface.co/sidchalamala/aether-coder-1.5b-lora
 - Synthetic training data: https://huggingface.co/datasets/sidchalamala/aether-sop-programs
 - Benchmark and held-out trap set: https://huggingface.co/datasets/sidchalamala/aether-benchmark
-- Demo: run locally with `uv run --group demo python demo/app.py` (no hosted demo yet)
+- Demo (checker and interpreter in your browser; the model is not hosted): https://warnedorca.github.io/aether/
+- Local demo with the model tab: `uv run --group demo python demo/app.py`
 
 ## Results
 

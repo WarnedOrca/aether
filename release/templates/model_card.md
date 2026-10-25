@@ -9,6 +9,8 @@ tags: [lora, code, dsl, aether]
 
 A LoRA adapter that turns a plain-English business procedure, plus the owner's policy and sheet list, into an Aether program. **The model is not a safety mechanism.** Every program it writes must pass the Aether checker before it runs. The checker blocks programs that break the policy's rules; the model often writes such programs.
 
+**Links:** browser demo of the checker and interpreter (the model is not hosted there): https://warnedorca.github.io/aether/ · code: https://github.com/WarnedOrca/aether · benchmark and held-out set: https://huggingface.co/datasets/sidchalamala/aether-benchmark
+
 "correct" below means passes the checker and has the same effects as the reference program (scorer field `safe_and_correct`). It is not a safety rating.
 
 ## Final evaluation: frozen held-out trap set (30 tasks, each model evaluated once)
