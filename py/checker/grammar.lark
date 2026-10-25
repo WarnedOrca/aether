@@ -1,0 +1,135 @@
+// Aether grammar (SPEC.md sections 2-5). Parsed with Lark LALR + contextual lexer,
+// so words like `day` or `at` can still be column names where a keyword is not expected.
+
+start: (policy | procedure)+
+
+// ---------- policies: body is captured raw and parsed line by line (start=prule),
+// so an unknown or weakening line becomes E704 instead of a parse failure.
+policy: "policy" NAME POLICY_BODY
+POLICY_BODY: /\{[^{}]*\}/
+
+prule: "allow" "read" NAME "(" names ")"                      -> allow_read
+     | "allow" "write" NAME "(" names ")"                     -> allow_write
+     | "allow" "append" NAME                                  -> allow_append
+     | "allow" "contact" colref                               -> allow_contact
+     | "allow" "supplier" colref                              -> allow_supplier_col
+     | "allow" "supplier" STRING                              -> allow_supplier_lit
+     | "allow" "calendar" NAME                                -> allow_calendar
+     | "deny" "reveal" colref                                 -> deny_reveal
+     | "limit" MONEY_OP MONEY "per" PERIOD                    -> limit_money
+     | "limit" "sends" INT "per" PERIOD                       -> limit_sends
+     | "refund" "without" "approval" "up" "to" MONEY          -> auto_refund
+     | "send" "only" "between" TIME "and" TIME                -> send_window
+     | "approval" "per_message"                               -> approval_per_message
+     | "approval" "batch" "valid" duration "max" INT "preview" INT -> approval_batch
+
+MONEY_OP: "refund" | "order"
+PERIOD: "action" | "day" | "week"
+names: NAME ("," NAME)*
+colref: NAME "." NAME
+
+// ---------- procedures
+procedure: "procedure" NAME "{" "about" STRING "policy" NAME decl* trigger stmt* "}"
+
+decl: "sheet" NAME STRING "{" col ("," col)* "}"   -> sheet
+    | "calendar" NAME STRING                       -> calendar
+col: NAME ":" TYPE PRIVATE?
+PRIVATE: "private"
+TYPE: "Text" | "Number" | "Money" | "Bool" | "DateTime" | "Date" | "Phone" | "Email"
+
+trigger: "trigger" "every" schedule                        -> trig_every
+       | "trigger" "when" "new" "row" NAME "in" NAME       -> trig_row
+       | "trigger" "when" "requested" "(" [param ("," param)*] ")" -> trig_requested
+schedule: "day" "at" TIME                    -> sch_daily
+        | WEEKDAY "at" TIME                  -> sch_weekly
+        | "month" "on" "day" INT "at" TIME   -> sch_monthly
+        | INT TUNIT                          -> sch_interval
+param: NAME ":" TYPE
+WEEKDAY: "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" | "sunday"
+
+// ---------- statements
+?stmt: let_stmt | append_stmt | update_stmt | send_stmt | notify_stmt | cancel_stmt
+     | wait_stmt | refund_stmt | order_stmt | if_stmt | for_stmt | stop_stmt
+     | skip_stmt | log_stmt
+
+let_stmt: "let" NAME "=" rhs
+?rhs: fetch | filter | sort | find | summarize | draft | draft_each
+    | approve | approve_batch | book | expr
+
+fetch: "fetch" NAME
+filter: "filter" NAME "where" expr
+sort: "sort" NAME "by" NAME [DESC] ["first" INT]
+DESC: "desc"
+find: "find" NAME "where" expr else_clause
+summarize: "summarize" AGG [NAME] "of" NAME
+AGG: "count" | "sum" | "avg" | "min" | "max"
+
+draft: "draft" message
+draft_each: "draft" "each" NAME "in" NAME ["up" "to" INT] message
+message: "sms" "to" expr ":" STRING                     -> sms
+       | "email" "to" expr "subject" STRING ":" STRING  -> email
+
+approve: "request" "approval" "of" NAME "from" "owner" "timeout" duration else_clause
+approve_batch: "request" "batch" "approval" "of" NAME "from" "owner" "timeout" duration else_clause
+else_clause: "else" "skip"          -> else_skip
+           | "else" "stop" STRING   -> else_stop
+
+book: "book" NAME "{" field ("," field)* "}"
+field: NAME ":" expr
+append_stmt: "append" NAME "{" field ("," field)* "}"
+update_stmt: "update" NAME "set" assign ("," assign)*
+assign: NAME "=" expr
+send_stmt: "send" NAME
+notify_stmt: "notify" "owner" STRING
+cancel_stmt: "cancel" NAME "event" expr
+wait_stmt: "wait" duration
+refund_stmt: "refund" expr "for" expr "reason" STRING [ask]
+order_stmt: "order" STRING "from" expr "cost" expr [ask]
+ask: "," "ask" "owner" "first" "timeout" duration else_clause
+if_stmt: "if" expr block ["else" block]
+block: "{" stmt* "}"
+for_stmt: "for" "each" NAME "in" NAME ["up" "to" INT] block
+stop_stmt: "stop" STRING
+skip_stmt: "skip"
+log_stmt: "log" STRING
+
+duration: NUMBER TUNIT
+TUNIT: /(minute|hour|day|week)s?\b/
+
+// ---------- expressions
+?expr: or_expr
+?or_expr: and_expr | or_expr "or" and_expr        -> or_
+?and_expr: not_expr | and_expr "and" not_expr     -> and_
+?not_expr: cmp | "not" not_expr                   -> not_
+?cmp: sum | sum CMPOP sum                         -> compare
+?sum: product | sum ADDOP product                 -> binop
+?product: atom | product MULOP atom               -> binop
+?atom: NUMBER TUNIT                               -> duration_lit
+     | NUMBER                                     -> number
+     | MONEY                                      -> money
+     | STRING                                     -> string
+     | "true"                                     -> true
+     | "false"                                    -> false
+     | NAME "(" [expr ("," expr)*] ")"            -> call
+     | NAME "." NAME                              -> attr
+     | NAME                                       -> name
+     | "(" expr ")"
+
+// Inside a message string: {expr} or {expr default 'text'}
+interp: expr ["default" SQSTRING]
+
+CMPOP: "==" | "!=" | "<=" | ">=" | "<" | ">"
+ADDOP: "+" | "-"
+MULOP: "*" | "/"
+MONEY: /\$[0-9]+(\.[0-9]{1,2})?/
+TIME.2: /[0-9]{2}:[0-9]{2}/
+INT: /[0-9]+/
+NUMBER: /[0-9]+(\.[0-9]+)?/
+STRING: /"[^"\n]*"/
+SQSTRING: /'[^'\n]*'/
+NAME: /[A-Za-z_][A-Za-z0-9_]*/
+COMMENT: /#[^\n]*/
+
+%import common.WS
+%ignore WS
+%ignore COMMENT

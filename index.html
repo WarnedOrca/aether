@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aether demo</title>
+<style>
+  :root { --bg:#ffffff; --fg:#1b1f24; --muted:#59636e; --line:#d1d9e0; --panel:#f6f8fa; --accent:#0969da; --bad:#cf222e; --good:#1a7f37; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --line:#3d444d; --panel:#151b23; --accent:#4493f8; --bad:#f85149; --good:#3fb950; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 980px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { margin: 0 0 4px; font-size: 28px; }
+  p.lead { margin: 0 0 16px; color: var(--muted); }
+  .note { border:1px solid var(--line); background:var(--panel); border-radius:8px; padding:12px 14px; margin:0 0 16px; font-size:14px; }
+  a { color: var(--accent); }
+  label { font-size: 14px; color: var(--muted); }
+  textarea { width:100%; min-height: 320px; font: 13px/1.45 ui-monospace, SFMono-Regular, Consolas, monospace; color:var(--fg); background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:10px; }
+  .row { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin:10px 0 18px; }
+  select, input[type=number] { font:inherit; color:var(--fg); background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:4px 8px; }
+  input[type=number] { width: 80px; }
+  button { font:inherit; font-weight:600; color:#fff; background:var(--accent); border:0; border-radius:6px; padding:8px 16px; cursor:pointer; }
+  button:disabled { opacity:.5; cursor:wait; }
+  h2 { font-size: 16px; margin: 18px 0 6px; }
+  pre { white-space: pre-wrap; word-break: break-word; margin:0; font: 13px/1.45 ui-monospace, SFMono-Regular, Consolas, monospace; background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:10px; min-height: 2.5em; }
+  #status { font-size: 14px; color: var(--muted); }
+  .bad { color: var(--bad); } .good { color: var(--good); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Aether</h1>
+  <p class="lead">A small language for business procedures. A checker enforces the policy's rules before anything runs.</p>
+  <div class="note">
+    This page runs only Aether's <strong>checker and interpreter</strong>, as Python inside your browser (via Pyodide). Everything uses mock data, and nothing you type is sent anywhere.
+    <strong>The fine-tuned model is not hosted here</strong>; to generate programs from English, run it locally (see the
+    <a href="https://github.com/WarnedOrca/aether">code repository</a>) or download the adapter from
+    <a href="https://huggingface.co/sidchalamala/aether-coder-1.5b-lora">Hugging Face</a>.
+  </div>
+
+  <label for="example">Example</label>
+  <div class="row">
+    <select id="example"></select>
+    <span id="status">Loading Python (first visit downloads about 10 MB)…</span>
+  </div>
+  <label for="src">Policy + procedure</label>
+  <textarea id="src" spellcheck="false"></textarea>
+  <div class="row">
+    <label><input type="checkbox" id="approve" checked> Owner approves messages</label>
+    <label>Sample-data seed <input type="number" id="seed" value="1" min="0"></label>
+    <button id="run" disabled>Check and run</button>
+  </div>
+
+  <h2>Checker</h2><pre id="verdict"></pre>
+  <h2>Plain-English rendering</h2><pre id="english"></pre>
+  <h2>What happened (mock outbox and actions)</h2><pre id="outbox"></pre>
+  <h2>Audit log</h2><pre id="audit"></pre>
+</main>
+<script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
+<script>
+const $ = (id) => document.getElementById(id);
+let pyodide = null;
+
+async function boot() {
+  const manifest = await (await fetch("files.json")).json();
+  const examples = await (await fetch("examples.json")).json();
+  for (const [name, text] of Object.entries(examples)) {
+    const opt = document.createElement("option");
+    opt.value = name; opt.textContent = name; $("example").appendChild(opt);
+  }
+  $("example").onchange = () => { $("src").value = examples[$("example").value]; };
+  $("src").value = examples[Object.keys(examples)[0]];
+
+  pyodide = await loadPyodide();
+  await pyodide.loadPackage("micropip");
+  await pyodide.runPythonAsync('import micropip\nawait micropip.install("lark")');
+  for (const path of manifest) {
+    const text = await (await fetch("py/" + path)).text();
+    const dir = "/home/pyodide/aether/" + path.split("/").slice(0, -1).join("/");
+    pyodide.FS.mkdirTree(dir);
+    pyodide.FS.writeFile("/home/pyodide/aether/" + path, text);
+  }
+  pyodide.runPython('import sys\nsys.path.insert(0, "/home/pyodide/aether")\nimport web_app');
+  $("status").textContent = "Ready.";
+  $("run").disabled = false;
+}
+
+$("run").onclick = async () => {
+  $("run").disabled = true; $("status").textContent = "Running…";
+  try {
+    pyodide.globals.set("SRC", $("src").value);
+    pyodide.globals.set("APPROVE", $("approve").checked);
+    pyodide.globals.set("SEED", parseInt($("seed").value || "1", 10));
+    const out = JSON.parse(pyodide.runPython("web_app.analyze(SRC, APPROVE, SEED)"));
+    for (const k of ["verdict", "english", "outbox", "audit"]) $(k).textContent = out[k];
+    $("verdict").className = out.verdict.startsWith("REJECTED") || out.verdict.startsWith("Syntax") ? "bad" : "good";
+    $("status").textContent = "Done.";
+  } catch (e) {
+    $("verdict").textContent = "Error: " + e; $("verdict").className = "bad"; $("status").textContent = "Error.";
+  }
+  $("run").disabled = false;
+};
+
+boot().catch((e) => { $("status").textContent = "Could not load Python: " + e; });
+</script>
+</body>
+</html>
