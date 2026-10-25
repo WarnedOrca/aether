@@ -1,0 +1,26 @@
+{
+ "synthetic": {
+  "max_jaccard": 0.252,
+  "max_sentence_ratio": 0.84,
+  "n_ge_0.75": 5,
+  "max_shared_8grams": 0
+ },
+ "synthetic_traps": {
+  "max_jaccard": 0.201,
+  "max_sentence_ratio": 0.811,
+  "n_ge_0.75": 2,
+  "max_shared_8grams": 0
+ },
+ "benchmark_110": {
+  "max_jaccard": 0.46,
+  "max_sentence_ratio": 1.0,
+  "n_ge_0.75": 14,
+  "max_shared_8grams": 6
+ },
+ "heldout_v1_30": {
+  "max_jaccard": 0.257,
+  "max_sentence_ratio": 1.0,
+  "n_ge_0.75": 4,
+  "max_shared_8grams": 0
+ }
+}

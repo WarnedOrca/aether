@@ -1,0 +1,38 @@
+{
+ "folder": "eval/heldout2",
+ "tasks": 90,
+ "against": {
+  "synthetic": {
+   "reference_sops": 2166,
+   "max_sop_jaccard": 0.252,
+   "max_sentence_ratio": 0.84,
+   "tasks_with_sentence_ratio_ge_0.75": 5,
+   "max_shared_8grams": 0,
+   "worst_sentence_task": "h2-dance-3"
+  },
+  "synthetic_traps": {
+   "reference_sops": 450,
+   "max_sop_jaccard": 0.201,
+   "max_sentence_ratio": 0.811,
+   "tasks_with_sentence_ratio_ge_0.75": 2,
+   "max_shared_8grams": 0,
+   "worst_sentence_task": "h2-brew-2"
+  },
+  "benchmark_110": {
+   "reference_sops": 110,
+   "max_sop_jaccard": 0.5,
+   "max_sentence_ratio": 1.0,
+   "tasks_with_sentence_ratio_ge_0.75": 57,
+   "max_shared_8grams": 18,
+   "worst_sentence_task": "h2-brew-1"
+  },
+  "heldout_v1_30": {
+   "reference_sops": 30,
+   "max_sop_jaccard": 0.365,
+   "max_sentence_ratio": 1.0,
+   "tasks_with_sentence_ratio_ge_0.75": 53,
+   "max_shared_8grams": 11,
+   "worst_sentence_task": "h2-brew-1"
+  }
+ }
+}
