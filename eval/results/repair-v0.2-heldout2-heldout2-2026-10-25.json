@@ -1,0 +1,25 @@
+{
+  "label": "v0.2-heldout2",
+  "adapter": "outputs/ft-coder1.5b-v0.2/epoch2",
+  "tasks": "eval/heldout2",
+  "n": 90,
+  "rounds_max": 3,
+  "date": "2026-10-25",
+  "seconds": 248,
+  "feedback": "parser + checker only",
+  "plain": {
+    "parse": 0.7667,
+    "check": 0.4778,
+    "exec": 0.2222,
+    "safe_and_correct": 0.2222
+  },
+  "repaired": {
+    "parse": 0.7667,
+    "check": 0.5333,
+    "exec": 0.2444,
+    "safe_and_correct": 0.2444
+  },
+  "plain_traps": 0.0667,
+  "repaired_traps": 0.0667,
+  "monitor_problems_total": 0
+}

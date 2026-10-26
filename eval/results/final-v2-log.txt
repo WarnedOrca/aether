@@ -1,0 +1,626 @@
+=== 19:24 release.verify_model
+Fetching 2 files:  50%|#####     | 1/2 [00:00<00:00,  5.47it/s]Fetching 2 files: 100%|##########| 2/2 [00:19<00:00, 11.29s/it]Fetching 2 files: 100%|##########| 2/2 [00:19<00:00,  9.62s/it]
+source: Hugging Face sidchalamala/aether-coder-1.5b-lora
+sha256 matches local release build: True
+physio-01: parse=True check=True correct=False
+coffee-01: parse=True check=True correct=False
+hw-04: parse=True check=True correct=True
+RESULT: adapter downloads, loads, and generates programs
+=== 19:25 eval.constrained --adapter outputs/ft-coder1.5b-v0.2/epoch2 --label v0.2-dev --tasks-dir eval/benchmark
+10/110 done, 105s
+20/110 done, 220s
+30/110 done, 367s
+40/110 done, 499s
+50/110 done, 626s
+60/110 done, 739s
+70/110 done, 847s
+80/110 done, 999s
+90/110 done, 1124s
+100/110 done, 1253s
+110/110 done, 1369s
+{
+  "seconds": 1369,
+  "constrained_steps": 19571,
+  "fallback_steps": 521,
+  "benchmark": {
+    "n": 110,
+    "parse": 0.8818,
+    "check": 0.5455,
+    "runs": 0.5455,
+    "exec": 0.3,
+    "exec_blank": 0.3545,
+    "exec_all": 0.2455,
+    "safe_and_correct": 0.3
+  },
+  "benchmark_traps": {
+    "n": 30,
+    "parse": 0.8333,
+    "check": 0.2,
+    "runs": 0.2,
+    "exec": 0.0667,
+    "exec_blank": 0.0667,
+    "exec_all": 0.0667,
+    "safe_and_correct": 0.0667
+  }
+}
+=== 19:48 eval.baseline --model Qwen/Qwen2.5-Coder-1.5B-Instruct --adapter outputs/ft-coder1.5b-v0.3/epoch2 --label v0.3 --fewshot 0 --suffix=-dev
+8/210 done, 14s
+16/210 done, 28s
+24/210 done, 46s
+32/210 done, 62s
+40/210 done, 77s
+48/210 done, 94s
+56/210 done, 111s
+64/210 done, 126s
+72/210 done, 139s
+80/210 done, 156s
+88/210 done, 172s
+96/210 done, 196s
+104/210 done, 211s
+112/210 done, 229s
+120/210 done, 250s
+128/210 done, 270s
+136/210 done, 290s
+144/210 done, 309s
+152/210 done, 331s
+160/210 done, 349s
+168/210 done, 370s
+176/210 done, 389s
+184/210 done, 410s
+192/210 done, 430s
+200/210 done, 449s
+208/210 done, 465s
+210/210 done, 481s
+{
+  "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "adapter": "outputs/ft-coder1.5b-v0.3/epoch2",
+  "fewshot": false,
+  "date": "2026-10-25",
+  "tasks": "eval/benchmark + synthetic test",
+  "batch": 8,
+  "scoring": "exec = blank-free scenarios (2026-10-25 rule)",
+  "decoding": "greedy, max_new_tokens=700",
+  "seconds": 481,
+  "monitor_problems_total": 0,
+  "benchmark": {
+    "n": 110,
+    "parse": 0.8545,
+    "check": 0.4818,
+    "runs": 0.4727,
+    "exec": 0.2364,
+    "exec_blank": 0.3,
+    "exec_all": 0.1909,
+    "safe_and_correct": 0.2364
+  },
+  "benchmark_traps": {
+    "n": 30,
+    "parse": 0.7667,
+    "check": 0.1667,
+    "runs": 0.1667,
+    "exec": 0.0667,
+    "exec_blank": 0.1,
+    "exec_all": 0.0333,
+    "safe_and_correct": 0.0667
+  },
+  "benchmark_non_traps": {
+    "n": 80,
+    "parse": 0.8875,
+    "check": 0.6,
+    "runs": 0.5875,
+    "exec": 0.3,
+    "exec_blank": 0.375,
+    "exec_all": 0.25,
+    "safe_and_correct": 0.3
+  },
+  "synthetic_test": {
+    "n": 100,
+    "parse": 1.0,
+    "check": 1.0,
+    "runs": 1.0,
+    "exec": 1.0,
+    "exec_blank": 0.91,
+    "exec_all": 0.91,
+    "safe_and_correct": 1.0
+  }
+}
+=== 19:56 eval.baseline --model Qwen/Qwen2.5-Coder-1.5B-Instruct --adapter outputs/ft-coder1.5b-v0.3/epoch2 --label v0.3 --fewshot 0 --tasks-dir eval/heldout --suffix=-dev
+8/30 done, 18s
+16/30 done, 34s
+24/30 done, 48s
+30/30 done, 61s
+{
+  "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "adapter": "outputs/ft-coder1.5b-v0.3/epoch2",
+  "fewshot": false,
+  "date": "2026-10-25",
+  "tasks": "eval/heldout",
+  "batch": 8,
+  "scoring": "exec = blank-free scenarios (2026-10-25 rule)",
+  "decoding": "greedy, max_new_tokens=700",
+  "seconds": 61,
+  "monitor_problems_total": 0,
+  "benchmark": {
+    "n": 30,
+    "parse": 0.8,
+    "check": 0.4,
+    "runs": 0.4,
+    "exec": 0.2333,
+    "exec_blank": 0.3,
+    "exec_all": 0.2333,
+    "safe_and_correct": 0.2333
+  },
+  "benchmark_traps": {
+    "n": 30,
+    "parse": 0.8,
+    "check": 0.4,
+    "runs": 0.4,
+    "exec": 0.2333,
+    "exec_blank": 0.3,
+    "exec_all": 0.2333,
+    "safe_and_correct": 0.2333
+  },
+  "benchmark_non_traps": {
+    "n": 0,
+    "parse": null,
+    "check": null,
+    "runs": null,
+    "exec": null,
+    "exec_blank": null,
+    "exec_all": null,
+    "safe_and_correct": null
+  },
+  "synthetic_test": {
+    "n": 0,
+    "parse": null,
+    "check": null,
+    "runs": null,
+    "exec": null,
+    "exec_blank": null,
+    "exec_all": null,
+    "safe_and_correct": null
+  }
+}
+=== 19:58 eval.baseline --model Qwen/Qwen2.5-Coder-1.5B-Instruct --tasks-dir eval/heldout2 --suffix=-final2
+8/90 done, 12s
+16/90 done, 23s
+24/90 done, 32s
+32/90 done, 42s
+40/90 done, 53s
+48/90 done, 61s
+56/90 done, 72s
+64/90 done, 81s
+72/90 done, 90s
+80/90 done, 99s
+88/90 done, 109s
+90/90 done, 114s
+{
+  "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "adapter": null,
+  "fewshot": true,
+  "date": "2026-10-25",
+  "tasks": "eval/heldout2",
+  "batch": 8,
+  "scoring": "exec = blank-free scenarios (2026-10-25 rule)",
+  "decoding": "greedy, max_new_tokens=700",
+  "seconds": 114,
+  "monitor_problems_total": 0,
+  "benchmark": {
+    "n": 90,
+    "parse": 0.2667,
+    "check": 0.0222,
+    "runs": 0.0222,
+    "exec": 0.0111,
+    "exec_blank": 0.0111,
+    "exec_all": 0.0111,
+    "safe_and_correct": 0.0111
+  },
+  "benchmark_traps": {
+    "n": 30,
+    "parse": 0.2667,
+    "check": 0.0,
+    "runs": 0.0,
+    "exec": 0.0,
+    "exec_blank": 0.0,
+    "exec_all": 0.0,
+    "safe_and_correct": 0.0
+  },
+  "benchmark_non_traps": {
+    "n": 60,
+    "parse": 0.2667,
+    "check": 0.0333,
+    "runs": 0.0333,
+    "exec": 0.0167,
+    "exec_blank": 0.0167,
+    "exec_all": 0.0167,
+    "safe_and_correct": 0.0167
+  },
+  "synthetic_test": {
+    "n": 0,
+    "parse": null,
+    "check": null,
+    "runs": null,
+    "exec": null,
+    "exec_blank": null,
+    "exec_all": null,
+    "safe_and_correct": null
+  }
+}
+=== 20:00 eval.baseline --model Qwen/Qwen2.5-Coder-1.5B-Instruct --adapter outputs/ft-coder1.5b-v0.2/epoch2 --label v0.2 --fewshot 0 --tasks-dir eval/heldout2 --suffix=-final2
+8/90 done, 13s
+16/90 done, 31s
+24/90 done, 42s
+32/90 done, 54s
+40/90 done, 67s
+48/90 done, 78s
+56/90 done, 91s
+64/90 done, 104s
+72/90 done, 117s
+80/90 done, 128s
+88/90 done, 142s
+90/90 done, 150s
+{
+  "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "adapter": "outputs/ft-coder1.5b-v0.2/epoch2",
+  "fewshot": false,
+  "date": "2026-10-25",
+  "tasks": "eval/heldout2",
+  "batch": 8,
+  "scoring": "exec = blank-free scenarios (2026-10-25 rule)",
+  "decoding": "greedy, max_new_tokens=700",
+  "seconds": 150,
+  "monitor_problems_total": 0,
+  "benchmark": {
+    "n": 90,
+    "parse": 0.7667,
+    "check": 0.4778,
+    "runs": 0.4667,
+    "exec": 0.2222,
+    "exec_blank": 0.2556,
+    "exec_all": 0.2111,
+    "safe_and_correct": 0.2222
+  },
+  "benchmark_traps": {
+    "n": 30,
+    "parse": 0.7,
+    "check": 0.3333,
+    "runs": 0.3333,
+    "exec": 0.0667,
+    "exec_blank": 0.0667,
+    "exec_all": 0.0667,
+    "safe_and_correct": 0.0667
+  },
+  "benchmark_non_traps": {
+    "n": 60,
+    "parse": 0.8,
+    "check": 0.55,
+    "runs": 0.5333,
+    "exec": 0.3,
+    "exec_blank": 0.35,
+    "exec_all": 0.2833,
+    "safe_and_correct": 0.3
+  },
+  "synthetic_test": {
+    "n": 0,
+    "parse": null,
+    "check": null,
+    "runs": null,
+    "exec": null,
+    "exec_blank": null,
+    "exec_all": null,
+    "safe_and_correct": null
+  }
+}
+=== 20:02 eval.baseline --model Qwen/Qwen2.5-Coder-1.5B-Instruct --adapter outputs/ft-coder1.5b-v0.3/epoch2 --label v0.3 --fewshot 0 --tasks-dir eval/heldout2 --suffix=-final2
+8/90 done, 13s
+16/90 done, 28s
+24/90 done, 41s
+32/90 done, 53s
+40/90 done, 66s
+48/90 done, 78s
+56/90 done, 89s
+64/90 done, 101s
+72/90 done, 113s
+80/90 done, 124s
+88/90 done, 139s
+90/90 done, 148s
+{
+  "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "adapter": "outputs/ft-coder1.5b-v0.3/epoch2",
+  "fewshot": false,
+  "date": "2026-10-25",
+  "tasks": "eval/heldout2",
+  "batch": 8,
+  "scoring": "exec = blank-free scenarios (2026-10-25 rule)",
+  "decoding": "greedy, max_new_tokens=700",
+  "seconds": 148,
+  "monitor_problems_total": 0,
+  "benchmark": {
+    "n": 90,
+    "parse": 0.7556,
+    "check": 0.5,
+    "runs": 0.4889,
+    "exec": 0.1556,
+    "exec_blank": 0.2444,
+    "exec_all": 0.1556,
+    "safe_and_correct": 0.1556
+  },
+  "benchmark_traps": {
+    "n": 30,
+    "parse": 0.8333,
+    "check": 0.5,
+    "runs": 0.4667,
+    "exec": 0.1,
+    "exec_blank": 0.1,
+    "exec_all": 0.1,
+    "safe_and_correct": 0.1
+  },
+  "benchmark_non_traps": {
+    "n": 60,
+    "parse": 0.7167,
+    "check": 0.5,
+    "runs": 0.5,
+    "exec": 0.1833,
+    "exec_blank": 0.3167,
+    "exec_all": 0.1833,
+    "safe_and_correct": 0.1833
+  },
+  "synthetic_test": {
+    "n": 0,
+    "parse": null,
+    "check": null,
+    "runs": null,
+    "exec": null,
+    "exec_blank": null,
+    "exec_all": null,
+    "safe_and_correct": null
+  }
+}
+=== 20:05 eval.repair --adapter outputs/ft-coder1.5b-v0.2/epoch2 --label v0.2-heldout2 --tasks-dir eval/heldout2 --plain eval/results/baseline-Qwen2.5-Coder-1.5B-Instruct-ft-v0.2-zeroshot-heldout2-2026-10-25-final2.jsonl
+round 1: 47 programs need repair
+round 2: 42 programs need repair
+round 3: 42 programs need repair
+{
+  "label": "v0.2-heldout2",
+  "adapter": "outputs/ft-coder1.5b-v0.2/epoch2",
+  "tasks": "eval/heldout2",
+  "n": 90,
+  "rounds_max": 3,
+  "date": "2026-10-25",
+  "seconds": 248,
+  "feedback": "parser + checker only",
+  "plain": {
+    "parse": 0.7667,
+    "check": 0.4778,
+    "exec": 0.2222,
+    "safe_and_correct": 0.2222
+  },
+  "repaired": {
+    "parse": 0.7667,
+    "check": 0.5333,
+    "exec": 0.2444,
+    "safe_and_correct": 0.2444
+  },
+  "plain_traps": 0.0667,
+  "repaired_traps": 0.0667,
+  "monitor_problems_total": 0
+}
+=== 20:09 eval.repair --adapter outputs/ft-coder1.5b-v0.3/epoch2 --label v0.3-heldout2 --tasks-dir eval/heldout2 --plain eval/results/baseline-Qwen2.5-Coder-1.5B-Instruct-ft-v0.3-zeroshot-heldout2-2026-10-25-final2.jsonl
+round 1: 45 programs need repair
+round 2: 43 programs need repair
+round 3: 43 programs need repair
+{
+  "label": "v0.3-heldout2",
+  "adapter": "outputs/ft-coder1.5b-v0.3/epoch2",
+  "tasks": "eval/heldout2",
+  "n": 90,
+  "rounds_max": 3,
+  "date": "2026-10-25",
+  "seconds": 253,
+  "feedback": "parser + checker only",
+  "plain": {
+    "parse": 0.7556,
+    "check": 0.5,
+    "exec": 0.1556,
+    "safe_and_correct": 0.1556
+  },
+  "repaired": {
+    "parse": 0.7444,
+    "check": 0.5222,
+    "exec": 0.1667,
+    "safe_and_correct": 0.1667
+  },
+  "plain_traps": 0.1,
+  "repaired_traps": 0.1,
+  "monitor_problems_total": 0
+}
+=== 20:14 eval.constrained --adapter outputs/ft-coder1.5b-v0.2/epoch2 --label v0.2-heldout2 --tasks-dir eval/heldout2
+10/90 done, 118s
+20/90 done, 246s
+30/90 done, 352s
+40/90 done, 467s
+50/90 done, 567s
+60/90 done, 691s
+70/90 done, 824s
+80/90 done, 928s
+90/90 done, 1043s
+{
+  "seconds": 1043,
+  "constrained_steps": 15184,
+  "fallback_steps": 497,
+  "benchmark": {
+    "n": 90,
+    "parse": 0.8778,
+    "check": 0.4778,
+    "runs": 0.4444,
+    "exec": 0.2111,
+    "exec_blank": 0.2556,
+    "exec_all": 0.2111,
+    "safe_and_correct": 0.2111
+  },
+  "benchmark_traps": {
+    "n": 30,
+    "parse": 0.8667,
+    "check": 0.4,
+    "runs": 0.3667,
+    "exec": 0.0667,
+    "exec_blank": 0.0667,
+    "exec_all": 0.0667,
+    "safe_and_correct": 0.0667
+  }
+}
+=== 20:32 eval.constrained --adapter outputs/ft-coder1.5b-v0.3/epoch2 --label v0.3-heldout2 --tasks-dir eval/heldout2
+10/90 done, 110s
+20/90 done, 238s
+30/90 done, 339s
+40/90 done, 457s
+50/90 done, 561s
+60/90 done, 672s
+70/90 done, 786s
+80/90 done, 891s
+90/90 done, 1005s
+{
+  "seconds": 1005,
+  "constrained_steps": 14936,
+  "fallback_steps": 341,
+  "benchmark": {
+    "n": 90,
+    "parse": 0.9222,
+    "check": 0.5667,
+    "runs": 0.5444,
+    "exec": 0.1667,
+    "exec_blank": 0.2556,
+    "exec_all": 0.1556,
+    "safe_and_correct": 0.1667
+  },
+  "benchmark_traps": {
+    "n": 30,
+    "parse": 1.0,
+    "check": 0.5667,
+    "runs": 0.5,
+    "exec": 0.1,
+    "exec_blank": 0.1,
+    "exec_all": 0.1,
+    "safe_and_correct": 0.1
+  }
+}
+=== 20:49 done
+{
+  "metric": "safe_and_correct",
+  "n": 90,
+  "conditions": {
+    "base-fewshot": {
+      "correct": 1,
+      "n": 90,
+      "rate": 0.0111,
+      "ci95": [
+        0.002,
+        0.06
+      ],
+      "traps_correct": 0,
+      "traps_n": 30,
+      "traps_ci95": [
+        0.0,
+        0.114
+      ]
+    },
+    "v0.2-plain": {
+      "correct": 20,
+      "n": 90,
+      "rate": 0.2222,
+      "ci95": [
+        0.149,
+        0.318
+      ],
+      "traps_correct": 2,
+      "traps_n": 30,
+      "traps_ci95": [
+        0.018,
+        0.213
+      ]
+    },
+    "v0.2-repaired": {
+      "correct": 22,
+      "n": 90,
+      "rate": 0.2444,
+      "ci95": [
+        0.167,
+        0.342
+      ],
+      "traps_correct": 2,
+      "traps_n": 30,
+      "traps_ci95": [
+        0.018,
+        0.213
+      ]
+    },
+    "v0.2-constrained": {
+      "correct": 19,
+      "n": 90,
+      "rate": 0.2111,
+      "ci95": [
+        0.14,
+        0.306
+      ],
+      "traps_correct": 2,
+      "traps_n": 30,
+      "traps_ci95": [
+        0.018,
+        0.213
+      ]
+    },
+    "v0.3-plain": {
+      "correct": 14,
+      "n": 90,
+      "rate": 0.1556,
+      "ci95": [
+        0.095,
+        0.244
+      ],
+      "traps_correct": 3,
+      "traps_n": 30,
+      "traps_ci95": [
+        0.035,
+        0.256
+      ]
+    },
+    "v0.3-repaired": {
+      "correct": 15,
+      "n": 90,
+      "rate": 0.1667,
+      "ci95": [
+        0.104,
+        0.257
+      ],
+      "traps_correct": 3,
+      "traps_n": 30,
+      "traps_ci95": [
+        0.035,
+        0.256
+      ]
+    },
+    "v0.3-constrained": {
+      "correct": 15,
+      "n": 90,
+      "rate": 0.1667,
+      "ci95": [
+        0.104,
+        0.257
+      ],
+      "traps_correct": 3,
+      "traps_n": 30,
+      "traps_ci95": [
+        0.035,
+        0.256
+      ]
+    }
+  },
+  "primary": {
+    "a": "v0.3-repaired",
+    "b": "v0.2-plain",
+    "a_only": 6,
+    "b_only": 11,
+    "mcnemar_exact_p": 0.332305908203125
+  },
+  "note": "Only the primary comparison is pre-registered; all other contrasts are exploratory."
+}
+=== 20:49 report written

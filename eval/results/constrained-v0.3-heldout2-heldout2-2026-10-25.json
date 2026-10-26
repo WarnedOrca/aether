@@ -1,0 +1,51 @@
+{
+  "label": "v0.3-heldout2",
+  "adapter": "outputs/ft-coder1.5b-v0.3/epoch2",
+  "tasks": "eval/heldout2",
+  "k": 8,
+  "decoding": "greedy + grammar prefix constraint",
+  "seconds": 1005,
+  "constrained_steps": 14936,
+  "fallback_steps": 341,
+  "monitor_problems_total": 0,
+  "benchmark": {
+    "n": 90,
+    "parse": 0.9222,
+    "check": 0.5667,
+    "runs": 0.5444,
+    "exec": 0.1667,
+    "exec_blank": 0.2556,
+    "exec_all": 0.1556,
+    "safe_and_correct": 0.1667
+  },
+  "benchmark_traps": {
+    "n": 30,
+    "parse": 1.0,
+    "check": 0.5667,
+    "runs": 0.5,
+    "exec": 0.1,
+    "exec_blank": 0.1,
+    "exec_all": 0.1,
+    "safe_and_correct": 0.1
+  },
+  "benchmark_non_traps": {
+    "n": 60,
+    "parse": 0.8833,
+    "check": 0.5667,
+    "runs": 0.5667,
+    "exec": 0.2,
+    "exec_blank": 0.3333,
+    "exec_all": 0.1833,
+    "safe_and_correct": 0.2
+  },
+  "synthetic_test": {
+    "n": 0,
+    "parse": null,
+    "check": null,
+    "runs": null,
+    "exec": null,
+    "exec_blank": null,
+    "exec_all": null,
+    "safe_and_correct": null
+  }
+}

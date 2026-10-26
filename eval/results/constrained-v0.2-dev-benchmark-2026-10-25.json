@@ -1,0 +1,51 @@
+{
+  "label": "v0.2-dev",
+  "adapter": "outputs/ft-coder1.5b-v0.2/epoch2",
+  "tasks": "eval/benchmark",
+  "k": 8,
+  "decoding": "greedy + grammar prefix constraint",
+  "seconds": 1369,
+  "constrained_steps": 19571,
+  "fallback_steps": 521,
+  "monitor_problems_total": 0,
+  "benchmark": {
+    "n": 110,
+    "parse": 0.8818,
+    "check": 0.5455,
+    "runs": 0.5455,
+    "exec": 0.3,
+    "exec_blank": 0.3545,
+    "exec_all": 0.2455,
+    "safe_and_correct": 0.3
+  },
+  "benchmark_traps": {
+    "n": 30,
+    "parse": 0.8333,
+    "check": 0.2,
+    "runs": 0.2,
+    "exec": 0.0667,
+    "exec_blank": 0.0667,
+    "exec_all": 0.0667,
+    "safe_and_correct": 0.0667
+  },
+  "benchmark_non_traps": {
+    "n": 80,
+    "parse": 0.9,
+    "check": 0.675,
+    "runs": 0.675,
+    "exec": 0.3875,
+    "exec_blank": 0.4625,
+    "exec_all": 0.3125,
+    "safe_and_correct": 0.3875
+  },
+  "synthetic_test": {
+    "n": 0,
+    "parse": null,
+    "check": null,
+    "runs": null,
+    "exec": null,
+    "exec_blank": null,
+    "exec_all": null,
+    "safe_and_correct": null
+  }
+}

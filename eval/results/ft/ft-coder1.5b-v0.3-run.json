@@ -1,0 +1,35 @@
+{
+  "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "out": "outputs/ft-coder1.5b-v0.3",
+  "epochs": 2,
+  "lr": 0.0002,
+  "micro": 1,
+  "accum": 16,
+  "rank": 16,
+  "max_len": 3072,
+  "seed": 42,
+  "limit": 0,
+  "with_traps": true,
+  "extra": [
+    "data/synthetic_v3"
+  ],
+  "trainable_params": 18464768,
+  "train_examples": 3294,
+  "valid_examples": 250,
+  "dropped_too_long": 0,
+  "torch": "2.11.0+cu128",
+  "gpu": "NVIDIA GeForce RTX 4070",
+  "history": [
+    {
+      "epoch": 1,
+      "valid_loss": 0.00876,
+      "elapsed_s": 3593
+    },
+    {
+      "epoch": 2,
+      "valid_loss": 0.00858,
+      "elapsed_s": 6164
+    }
+  ],
+  "seconds": 6165
+}

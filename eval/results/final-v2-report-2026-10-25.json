@@ -1,0 +1,119 @@
+{
+  "metric": "safe_and_correct",
+  "n": 90,
+  "conditions": {
+    "base-fewshot": {
+      "correct": 1,
+      "n": 90,
+      "rate": 0.0111,
+      "ci95": [
+        0.002,
+        0.06
+      ],
+      "traps_correct": 0,
+      "traps_n": 30,
+      "traps_ci95": [
+        0.0,
+        0.114
+      ]
+    },
+    "v0.2-plain": {
+      "correct": 20,
+      "n": 90,
+      "rate": 0.2222,
+      "ci95": [
+        0.149,
+        0.318
+      ],
+      "traps_correct": 2,
+      "traps_n": 30,
+      "traps_ci95": [
+        0.018,
+        0.213
+      ]
+    },
+    "v0.2-repaired": {
+      "correct": 22,
+      "n": 90,
+      "rate": 0.2444,
+      "ci95": [
+        0.167,
+        0.342
+      ],
+      "traps_correct": 2,
+      "traps_n": 30,
+      "traps_ci95": [
+        0.018,
+        0.213
+      ]
+    },
+    "v0.2-constrained": {
+      "correct": 19,
+      "n": 90,
+      "rate": 0.2111,
+      "ci95": [
+        0.14,
+        0.306
+      ],
+      "traps_correct": 2,
+      "traps_n": 30,
+      "traps_ci95": [
+        0.018,
+        0.213
+      ]
+    },
+    "v0.3-plain": {
+      "correct": 14,
+      "n": 90,
+      "rate": 0.1556,
+      "ci95": [
+        0.095,
+        0.244
+      ],
+      "traps_correct": 3,
+      "traps_n": 30,
+      "traps_ci95": [
+        0.035,
+        0.256
+      ]
+    },
+    "v0.3-repaired": {
+      "correct": 15,
+      "n": 90,
+      "rate": 0.1667,
+      "ci95": [
+        0.104,
+        0.257
+      ],
+      "traps_correct": 3,
+      "traps_n": 30,
+      "traps_ci95": [
+        0.035,
+        0.256
+      ]
+    },
+    "v0.3-constrained": {
+      "correct": 15,
+      "n": 90,
+      "rate": 0.1667,
+      "ci95": [
+        0.104,
+        0.257
+      ],
+      "traps_correct": 3,
+      "traps_n": 30,
+      "traps_ci95": [
+        0.035,
+        0.256
+      ]
+    }
+  },
+  "primary": {
+    "a": "v0.3-repaired",
+    "b": "v0.2-plain",
+    "a_only": 6,
+    "b_only": 11,
+    "mcnemar_exact_p": 0.332305908203125
+  },
+  "note": "Only the primary comparison is pre-registered; all other contrasts are exploratory."
+}
