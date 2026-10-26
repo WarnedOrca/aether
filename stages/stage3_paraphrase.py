@@ -44,15 +44,15 @@ TRAP_HINTS = {  # the owner's request must contain the unsafe or impossible ask;
 }
 # Loose keywords the owner's wording must contain for trap kinds with a clear wording; other kinds are not checked.
 TRAP_KEYWORDS = {
-    "unsupported-post": r"post|social|instagram|facebook|shout|tiktok|twitter",
-    "unsupported-channel": r"call|phone|ring|social|post|instagram|facebook|whatsapp|dm\b",
-    "unsupported-charge": r"charg|card|bill|debit",
-    "unsupported-payment": r"pay|transfer|venmo|zelle|paypal|reimburs|refund|deposit|send (them )?money",
-    "skip-approval": r"without|no need|don.t|do not|skip|not (to )?(ask|wait|bother|need)|just send|go ahead",
-    "order-skip-approval": r"without|no need|don.t|do not|skip|not (to )?(ask|wait|bother|need)|just (place|order|go)|go ahead",
-    "over-limit": r"regardless|no matter|any (amount|cost|price|total)|whatever|even if|no (limit|cap)|without (a )?(limit|cap)|bigger|more than",
-    "send-on-timeout": r"anyway|even if|regardless|if i (haven|don|did)|not (approved|respond|reply|answer)|no (reply|answer|response)|hasn.t|haven.t|otherwise",
-    "unbounded": r"everyone|every|all of|no (limit|cap)|without (a )?(limit|cap)|everybody|whole",
+    "unsupported-post": r"\bpost(ing|ed)?\b|social|instagram|facebook|shout|tiktok|twitter",
+    "unsupported-channel": r"phone call|\bcall(s|ed|ing)? (them|each|every|the|him|her|our)|give (them |him |her )?a (call|ring)|social media|instagram|facebook|whatsapp|tiktok|\bdm\b",
+    "unsupported-charge": r"\bcharg(e|es|ed|ing)\b|\bcards?\b|\bbill(ed|ing)?\b|debit",
+    "unsupported-payment": r"\bpay\b|\bpaying\b|\bpayouts?\b|transfer|venmo|zelle|paypal|reimburs|refund|deposit|send (them )?money",
+    "skip-approval": r"without (asking|approval|my approval|confirm|checking|waiting)|no need (to|for)|don.t (need|bother|ask|wait)|do not (ask|bother|wait|need)|skip (the )?approval|not (to )?(ask|wait|bother)|just send|go ahead and send",
+    "order-skip-approval": r"without (asking|approval|my approval|confirm|checking|waiting|needing)|no need (to|for)|don.t (need|bother|ask|wait)|do not (ask|bother|wait|need)|skip (the )?approval|not (to )?(ask|wait|bother)|just (place|order)|go ahead and (place|order)",
+    "over-limit": r"regardless|no matter|any (amount|cost|price|total)|whatever|even if|no (limit|cap)|without (a )?(limit|cap)|ignore (the )?(limit|cap)|override",
+    "send-on-timeout": r"send (it |them )?anyway|go ahead and send|even if|regardless|sent automatically|automatically sent|if i (haven.t|don.t|do not|didn.t)|no (reply|response)",
+    "unbounded": r"everyone|everybody|no (limit|cap)|without (a )?(limit|cap)|unlimited|all of (them|our)",
 }
 CODE = re.compile(r"procedure |policy \w+ \{|let \w+ =|\{[a-z_]+\.|```|fetch |summarize ")
 
@@ -261,7 +261,7 @@ def run(args):
             key = r["reject_reason"].split(" [")[0].split(":")[0]
             reasons[key] = reasons.get(key, 0) + 1
     summary = {"stage": 3, "finished": True, "model": args.model, "revision": rev, "license": lic,
-               "seed_programs": len(seeds), "records": len(ck.records), "accepted": len(kept),
+               "seed_programs": len(seeds), "programs_attempted": len({r["seed_id"] for r in ck.records}), "records": len(ck.records), "accepted": len(kept),
                "train": len(rows["train"]), "valid": len(rows["valid"]), "rejected_by_reason": reasons,
                "seconds": round(time.time() - started), "stopped_by_time": stopped_by_time, "sources": args.sources, "hosted_ai_text_used": False}
     write_json(out / "summary.json", summary)

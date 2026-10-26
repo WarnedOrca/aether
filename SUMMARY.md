@@ -18,7 +18,7 @@ Tests: 319 pass. No guard (GPU lock, licence, frozen hashes) was weakened.
 
 ## Needs you
 1. Decide whether to spend the one-time held-out v3 run on this candidate. Dev suggests a null or negative result.
-2. Read about 30 of the new wordings (`data/synthetic_v4/train.jsonl`, field `sop`). The automatic gate is shallow: in my hand check, 3 of 15 trap wordings did not clearly contain the unsafe ask.
+2. Read about 30 of the new wordings (`data/synthetic_v4/train.jsonl`, field `sop`). The automatic gate is shallow and partly circular (code review): its keyword check for the unsafe ask let through about 16% of accepted trap wordings (28 of 180), which a tightened filter now flags. The adapter was trained with those rows, so the trap training data is partly mislabelled. Details and the list of row keys: `HANDOFF.md`.
 3. Stage 5 also needs owner-reviewed `models.lock.json` entries for the older 1.5B and 0.5B base models.
 
 The GPU is idle. Left alone: `pyproject.toml`, `uv.lock`, the old `data/synthetic_v4_smoke/`. Nothing was pushed, uploaded, installed, bought or signed in to. Evidence and exact commands: `HANDOFF.md` (top section) and `eval/results/` (files dated 2026-10-26, plus `eval/results/ft/qlora-7b-v1-*`).

@@ -1,0 +1,71 @@
+{
+  "attempts": 1545,
+  "accepted": 965,
+  "rejected_by_reason": {
+    "missing numbers": 181,
+    "length": 292,
+    "invented numbers": 75,
+    "code in text": 25,
+    "trap ask missing": 7
+  },
+  "checks": {
+    "acceptance_rate": {
+      "value": 0.625,
+      "pass": true
+    },
+    "no_code": {
+      "violations": [],
+      "pass": true
+    },
+    "states_every_amount_cap_time": {
+      "violations": [],
+      "pass": true
+    },
+    "no_invented_numbers": {
+      "violations": [],
+      "pass": true
+    },
+    "trap_ask_present": {
+      "violations": [
+        "trap-train-00299#2",
+        "trap-train-00251#1",
+        "trap-train-00398#0",
+        "trap-train-00224#2",
+        "trap-train-00017#2",
+        "v3-train-00257#2",
+        "trap-train-00345#0",
+        "v3-train-01089#1",
+        "v3-train-00909#0",
+        "v3-train-01056#2",
+        "trap-train-00314#2",
+        "v3-train-00229#2",
+        "v3-train-00281#1",
+        "v3-train-00174#1",
+        "v3-train-00174#2",
+        "trap-train-00289#1",
+        "trap-train-00245#0",
+        "trap-train-00245#2",
+        "trap-train-00387#0",
+        "trap-train-00392#1",
+        "trap-train-00392#2",
+        "v3-train-01173#1",
+        "trap-train-00010#1",
+        "trap-train-00010#2",
+        "trap-train-00347#2",
+        "trap-train-00107#1",
+        "v3-train-00309#2",
+        "trap-train-00150#1"
+      ],
+      "pass": false
+    },
+    "not_near_copies": {
+      "near_copies": [],
+      "max_similarity": 0.203,
+      "mean_similarity": 0.097,
+      "pass": true
+    }
+  },
+  "passed": false,
+  "data_dir": "data/synthetic_v4",
+  "first": 0
+}
