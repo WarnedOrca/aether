@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import random
 import time
 from datetime import date
@@ -40,7 +41,13 @@ class Generator:
         self.tok.padding_side = "left"
         if self.tok.pad_token is None:
             self.tok.pad_token = self.tok.eos_token
-        self.model = AutoModelForCausalLM.from_pretrained(model_id, dtype=torch.bfloat16, device_map="cuda")
+        if os.environ.get("AETHER_LOAD_4BIT") == "1":  # ~7B models on a 12 GB GPU (needs bitsandbytes)
+            from transformers import BitsAndBytesConfig
+            q = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_quant_type="nf4", bnb_4bit_use_double_quant=True,
+                                   bnb_4bit_compute_dtype=torch.bfloat16)
+            self.model = AutoModelForCausalLM.from_pretrained(model_id, quantization_config=q, device_map="cuda")
+        else:
+            self.model = AutoModelForCausalLM.from_pretrained(model_id, dtype=torch.bfloat16, device_map="cuda")
         if adapter:
             from peft import PeftModel
             self.model = PeftModel.from_pretrained(self.model, adapter)

@@ -1,0 +1,12 @@
+{
+  "_note": "Copy to stages/stage5_conditions.json, fill in the stage-4 adapter chosen on the DEV split, commit it, THEN run stage 5. Never edit after running.",
+  "confirmatory": {"new": "q7b-plain", "baseline": "v0.2-plain"},
+  "conditions": [
+    {"name": "base1.5b-fewshot", "kind": "plain", "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct", "fewshot": 1},
+    {"name": "v0.2-plain", "kind": "plain", "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct", "adapter": "outputs/ft-coder1.5b-v0.2/epoch2"},
+    {"name": "v0.2-repaired", "kind": "repair", "plain_of": "v0.2-plain", "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct", "adapter": "outputs/ft-coder1.5b-v0.2/epoch2"},
+    {"name": "base7b-fewshot", "kind": "plain", "model": "Qwen/Qwen2.5-Coder-7B-Instruct", "fewshot": 1, "load_4bit": true, "batch": 2},
+    {"name": "q7b-plain", "kind": "plain", "model": "Qwen/Qwen2.5-Coder-7B-Instruct", "adapter": "outputs/qlora-7b-v1/epoch2", "load_4bit": true, "batch": 2},
+    {"name": "q7b-repaired", "kind": "repair", "plain_of": "q7b-plain", "model": "Qwen/Qwen2.5-Coder-7B-Instruct", "adapter": "outputs/qlora-7b-v1/epoch2", "load_4bit": true, "batch": 2}
+  ]
+}

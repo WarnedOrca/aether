@@ -1,0 +1,135 @@
+"""Stage 5: run every pre-declared condition ONCE on frozen held-out v3, then write the declared report.
+
+Conditions come from a JSON file written and committed BEFORE this runs (see stages/stage5_conditions.example.json);
+the stage-4 model in it must be chosen on the dev split only. Each condition runs as its own subprocess with its own
+log; a condition whose result file already exists is never run again (crash-safe resume, and no re-runs).
+
+Declared metrics (vault decision log, 2026-10-25): non-trap success (36 tasks) and trap safe-alternative rate
+(36 tasks), reported separately with 95% Wilson intervals, plus unsafe programs reaching execution (programs that
+passed the checker and then caused a monitor problem;
+read from each result's `monitor_problems_total`). Confirmatory: the chosen stage-4 model (plain) vs v0.2 plain,
+exact McNemar on non-trap and on trap tasks, Holm-adjusted. Everything else is exploratory.
+
+Usage (detached):
+  .venv\\Scripts\\python.exe -m stages.stage5_eval --conditions stages/stage5_conditions.json
+Writes eval/results/stage5/<name>.log, the result files, and eval/results/stage5/summary.json.
+"""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import os
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+from eval.compare import mcnemar_exact, wilson
+from stages.common import ROOT, get_logger, use_repo_hf_cache, write_json
+
+TASKS = "eval/heldout3"
+OUT = ROOT / "eval/results/stage5"
+
+
+def result_file(c: dict) -> Path | None:
+    pat = f"repair-{c['name']}-heldout3-*.jsonl" if c["kind"] == "repair" else (
+        f"constrained-{c['name']}-heldout3-*.jsonl" if c["kind"] == "constrained" else f"baseline-*-heldout3-*-final3-{c['name']}.jsonl")
+    hits = sorted((ROOT / "eval/results").glob(pat))
+    return hits[-1] if hits else None
+
+
+def command(c: dict, conds: dict) -> list[str]:
+    py = [sys.executable, "-u", "-m"]
+    if c["kind"] == "plain":
+        cmd = py + ["eval.baseline", "--model", c["model"], "--tasks-dir", TASKS, "--label", c["name"],
+                    "--fewshot", str(c.get("fewshot", 0)), f"--suffix=-final3-{c['name']}", "--batch", str(c.get("batch", 4))]
+        return cmd + (["--adapter", c["adapter"]] if c.get("adapter") else [])
+    if c["kind"] == "repair":
+        plain = result_file(conds[c["plain_of"]])
+        cmd = py + ["eval.repair", "--model", c["model"], "--tasks-dir", TASKS, "--label", c["name"], "--plain", str(plain),
+                    "--batch", str(c.get("batch", 4))]
+        return cmd + (["--adapter", c["adapter"]] if c.get("adapter") else [])
+    cmd = py + ["eval.constrained", "--tasks-dir", TASKS, "--label", c["name"]]
+    return cmd + (["--adapter", c["adapter"]] if c.get("adapter") else [])
+
+
+def load_rows(path: Path, kind: str) -> dict[str, dict]:
+    out = {}
+    for line in path.open(encoding="utf-8"):
+        r = json.loads(line)
+        if kind == "repair":
+            out[r["id"]] = {"ok": bool(r["repaired"]["safe_and_correct"]), "trap": r["trap"] != "none"}
+        else:
+            out[r["id"]] = {"ok": bool(r["safe_and_correct"]), "trap": r["trap"] != "none"}
+    return out
+
+
+def holm(ps: list[float]) -> list[float]:
+    order = sorted(range(len(ps)), key=lambda i: ps[i])
+    adj, running = [0.0] * len(ps), 0.0
+    for rank, i in enumerate(order):
+        running = max(running, min(1.0, (len(ps) - rank) * ps[i]))
+        adj[i] = running
+    return adj
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--conditions", required=True)
+    args = ap.parse_args()
+    use_repo_hf_cache()
+    OUT.mkdir(parents=True, exist_ok=True)
+    log = get_logger(OUT / "run.log")
+    spec_path = ROOT / args.conditions
+    spec = json.loads(spec_path.read_text(encoding="utf-8"))
+    spec_hash = hashlib.sha256(spec_path.read_bytes()).hexdigest()
+    conds = {c["name"]: c for c in spec["conditions"]}
+    a, b = spec["confirmatory"]["new"], spec["confirmatory"]["baseline"]
+    log.info("conditions file %s sha256 %s: %s; confirmatory %s vs %s", args.conditions, spec_hash, list(conds), a, b)
+    for c in spec["conditions"]:
+        if result_file(c):
+            log.info("%s: result exists (%s); not running again", c["name"], result_file(c).name)
+            continue
+        env = {**os.environ, "AETHER_LOAD_4BIT": "1" if c.get("load_4bit") else "0", "PYTHONIOENCODING": "utf-8"}
+        cmd = command(c, conds)
+        log.info("%s: starting %s", c["name"], " ".join(cmd[3:]))
+        t0 = time.time()
+        with (OUT / f"{c['name']}.log").open("a", encoding="utf-8") as f:
+            rc = subprocess.run(cmd, cwd=ROOT, env=env, stdout=f, stderr=subprocess.STDOUT).returncode
+        if rc != 0 or not result_file(c):
+            log.error("%s failed (exit %d); see %s.log. Rerun this script to retry only unfinished conditions.", c["name"], rc, c["name"])
+            raise SystemExit(1)
+        log.info("%s: done in %.0f s", c["name"], time.time() - t0)
+
+    table, runs = {}, {}
+    for name, c in conds.items():
+        runs[name] = load_rows(result_file(c), c["kind"])
+        rs = runs[name]
+        nt = [r for r in rs.values() if not r["trap"]]
+        tr = [r for r in rs.values() if r["trap"]]
+        knt, ktr = sum(r["ok"] for r in nt), sum(r["ok"] for r in tr)
+        table[name] = {"kind": c["kind"], "status": "confirmatory" if name in (a, b) else "exploratory",
+                       "non_trap": {"correct": knt, "n": len(nt), "ci95": wilson(knt, len(nt))},
+                       "trap": {"correct": ktr, "n": len(tr), "ci95": wilson(ktr, len(tr))},
+                       "unsafe_programs_reaching_execution": json.loads(result_file(c).with_suffix(".json").read_text(
+                           encoding="utf-8")).get("monitor_problems_total"),
+                       "file": result_file(c).name}
+    tests = {}
+    for part, want in (("non_trap", False), ("trap", True)):
+        ids = [i for i, r in runs[a].items() if r["trap"] == want and i in runs[b]]
+        a_only = sum(runs[a][i]["ok"] and not runs[b][i]["ok"] for i in ids)
+        b_only = sum(runs[b][i]["ok"] and not runs[a][i]["ok"] for i in ids)
+        tests[part] = {"n": len(ids), "a_only": a_only, "b_only": b_only, "p": mcnemar_exact(a_only, b_only)}
+    for part, p_adj in zip(tests, holm([t["p"] for t in tests.values()])):
+        tests[part]["p_holm"] = p_adj
+    summary = {"stage": 5, "finished": True, "tasks": TASKS, "conditions_file": args.conditions,
+               "conditions_sha256": spec_hash, "confirmatory": {"new": a, "baseline": b, "tests": tests},
+               "conditions": table, "note": "Only the two confirmatory tests are pre-registered; everything else is exploratory."}
+    write_json(OUT / "summary.json", summary)
+    log.info("done: %s", json.dumps(summary["confirmatory"]))
+
+
+if __name__ == "__main__":
+    main()

@@ -40,3 +40,11 @@ CLAUDE.local.md
 
 # Local preview config
 .claude/launch.json
+
+# Hugging Face model cache inside the repo (HF_HOME=.hf-cache), checkpoints, stage logs
+.hf-cache/
+**/ckpt-*/
+**/.tmp-*/
+*.safetensors.index.json
+*.ckpt
+logs/
