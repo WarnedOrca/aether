@@ -27,6 +27,7 @@ from pathlib import Path
 from stages.common import ROOT, model_load_kwargs, JsonlCheckpoint, check_license, get_logger, model_revision, use_repo_hf_cache, write_json
 
 PROMPT_VERSION = "p2"
+FILTER_VERSION = "f2-tight-trap"  # TRAP_KEYWORDS below: word boundaries, generic words removed (2026-10-26 code review)
 TRAP_HINTS = {  # the owner's request must contain the unsafe or impossible ask; the program is the safe answer
     "reveal-private": "The owner also asks to include the private field in the message.",
     "skip-approval": "The owner says not to bother asking for approval before sending.",
@@ -83,12 +84,67 @@ def invented_numbers(source: str, text: str) -> list[str]:
     return sorted({t for t in re.findall(r"\d+", text) if t not in allowed and str(int(t)) not in allowed})
 
 
-def select_seeds(seeds: list[dict], shuffle_seed: int, limit: int) -> list[dict]:
+def select_seeds(seeds: list[dict], shuffle_seed: int, limit: int, trap_share: float = 0.0, fixed_prefix: int = 0) -> list[dict]:
     """First `limit` programs. With a nonzero shuffle_seed the order is shuffled deterministically first, so a
-    limited run mixes all sources (the files are ordered: plain programs first, trap programs last)."""
+    limited run mixes all sources (the files are ordered: plain programs first, trap programs last).
+    With trap_share > 0 the programs after the first `fixed_prefix` (already done in an earlier run) are interleaved
+    so that traps stay near that share of ALL programs so far (the prefix counts); when traps run out only plain ones follow."""
     if shuffle_seed:
         seeds = random.Random(shuffle_seed).sample(seeds, len(seeds))
+    if trap_share > 0:
+        head = list(seeds[:fixed_prefix])
+        plain = [s for s in seeds[fixed_prefix:] if s["trap"] == "none"]
+        traps = [s for s in seeds[fixed_prefix:] if s["trap"] != "none"]
+        n_trap = sum(s["trap"] != "none" for s in head)
+        while plain or traps:
+            if traps and (not plain or n_trap < trap_share * (len(head) + 1)):
+                head.append(traps.pop(0))
+                n_trap += 1
+            else:
+                head.append(plain.pop(0))
+        seeds = head
     return seeds[:limit] if limit else seeds
+
+
+SELECTION_KEYS = ("limit_programs", "seeds_sha256", "trap_share", "fixed_prefix", "selection")
+
+
+def seeds_digest(seeds: list[dict]) -> str:
+    return hashlib.sha256(json.dumps(seeds, sort_keys=True).encode()).hexdigest()
+
+
+def config_compatible(old: dict, new: dict, shuffled_pool: list[dict]) -> bool:
+    """May a run with config `new` resume a directory written with config `old`?
+    Everything that shapes a wording (model, prompt, sampling, sources, shuffle seed) must be identical. How many programs
+    to attempt and in what order (limit, trap share) may change, so a run can be extended. Configs written before those
+    options existed hold a hash of the first `limit_programs` shuffled programs; it must match the same pool."""
+    old = dict(old)
+    if "pool_sha256" not in old:
+        limit = old.get("limit_programs", 0)
+        if old.get("seeds_sha256") != seeds_digest(shuffled_pool[:limit] if limit else shuffled_pool):
+            return False
+        old["pool_sha256"] = new["pool_sha256"]
+    strip = lambda c: {k: v for k, v in c.items() if k not in SELECTION_KEYS}
+    return strip(old) == strip(new)
+
+
+def build_splits(records: list[dict]) -> dict[str, list[dict]]:
+    """Accepted records -> train/valid rows. Split by seed program, so all wordings of one program land in the same split."""
+    rows = {"train": [], "valid": []}
+    for r in records:
+        if not r["accepted"]:
+            continue
+        split = "valid" if int(hashlib.sha256(r["seed_id"].encode()).hexdigest(), 16) % 100 < 8 else "train"
+        rows[split].append({"id": r["key"], "sop": r["sop"], "policy": r["policy"], "sheets": r["sheets"],
+                            "program": r["program"], "trap": r["trap"], "provenance": r["provenance"]})
+    return rows
+
+
+def write_splits(out: Path, rows: dict[str, list[dict]]) -> None:
+    for split, rs in rows.items():
+        with (out / f"{split}.jsonl").open("w", encoding="utf-8", newline="\n") as f:
+            for r in rs:
+                f.write(json.dumps(r) + "\n")
 
 
 def numbers_needed(program: str) -> set[str]:
@@ -140,6 +196,8 @@ def main() -> None:
     ap.add_argument("--generation-timeout", type=float, default=180)
     ap.add_argument("--limit-programs", type=int, default=0, help="first N programs only (smoke test)")
     ap.add_argument("--shuffle-seed", type=int, default=0, help="nonzero: shuffle programs before --limit-programs so a limited run mixes plain and trap programs")
+    ap.add_argument("--trap-share", type=float, default=0.0, help="nonzero: keep trap programs near this share of all programs (needs --shuffle-seed)")
+    ap.add_argument("--fixed-prefix", type=int, default=0, help="with --trap-share: programs at the start of the shuffled order that were already done and keep their place")
     ap.add_argument("--temperature", type=float, default=0.9)
     ap.add_argument("--max-new-tokens", type=int, default=220)
     ap.add_argument("--seed", type=int, default=7)
@@ -169,14 +227,18 @@ def run(args):
     from data.generate_traps import OverlapChecker
     from eval.bench import load_tasks
 
-    seeds = load_seeds(args.sources)
-    seeds = select_seeds(seeds, args.shuffle_seed, args.limit_programs)
+    pool = load_seeds(args.sources)
+    if args.trap_share and not args.shuffle_seed:
+        raise ValueError("--trap-share needs --shuffle-seed")
+    shuffled = select_seeds(pool, args.shuffle_seed, 0)
+    seeds = select_seeds(pool, args.shuffle_seed, args.limit_programs, args.trap_share, args.fixed_prefix)
     eval_sops = [t.sop for d in ("eval/benchmark", "eval/heldout", "eval/heldout2", "eval/heldout3") for t in load_tasks(ROOT / d)]
     overlap = OverlapChecker(eval_sops)
-    config = {**{k: v for k, v in vars(args).items() if k != "max_seconds"}, "revision": rev, "prompt_version": PROMPT_VERSION}
-    config["seeds_sha256"] = hashlib.sha256(json.dumps(seeds, sort_keys=True).encode()).hexdigest()
+    selection = {k: getattr(args, k) for k in ("limit_programs", "trap_share", "fixed_prefix")}
+    config = {**{k: v for k, v in vars(args).items() if k not in ("max_seconds", *SELECTION_KEYS)}, "revision": rev,
+              "prompt_version": PROMPT_VERSION, "pool_sha256": seeds_digest(shuffled), "selection": selection}
     config_path = out / "run_config.json"
-    if config_path.exists() and json.loads(config_path.read_text()) != config:
+    if config_path.exists() and not config_compatible(json.loads(config_path.read_text()), config, shuffled):
         raise ValueError("Resume settings changed; choose a new output directory")
     write_json(config_path, config)
     ck = JsonlCheckpoint(out / "records.jsonl")
@@ -235,7 +297,7 @@ def run(args):
                         "provenance": {"source": "local open-weight model", "model": args.model, "revision": rev,
                                        "license": lic, "prompt_version": PROMPT_VERSION, "seed_program": seed["source"],
                                        "temperature": args.temperature, "top_p": 0.95, "gen_seed": args.seed,
-                                       "hosted_ai_text": False}})
+                                       "acceptance_filter": FILTER_VERSION, "hosted_ai_text": False}})
             ck.add(rec)
             log.info("wording %s: %s", key, reason or "accepted")
             if not reason:
@@ -246,15 +308,8 @@ def run(args):
     ck.close()
 
     kept = [r for r in ck.records if r["accepted"]]
-    rows = {"train": [], "valid": []}
-    for r in kept:  # split by seed program, so all wordings of one program land in the same split
-        split = "valid" if int(hashlib.sha256(r["seed_id"].encode()).hexdigest(), 16) % 100 < 8 else "train"
-        rows[split].append({"id": r["key"], "sop": r["sop"], "policy": r["policy"], "sheets": r["sheets"],
-                            "program": r["program"], "trap": r["trap"], "provenance": r["provenance"]})
-    for split, rs in rows.items():
-        with (out / f"{split}.jsonl").open("w", encoding="utf-8", newline="\n") as f:
-            for r in rs:
-                f.write(json.dumps(r) + "\n")
+    rows = build_splits(ck.records)
+    write_splits(out, rows)
     reasons: dict[str, int] = {}
     for r in ck.records:
         if not r["accepted"]:

@@ -78,14 +78,16 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("data_dir")
     ap.add_argument("--first", type=int, default=0, help="only the first N attempts (0 = all)")
+    ap.add_argument("--skip", type=int, default=0, help="ignore the first N attempts (measure only the part added by a later resume)")
     ap.add_argument("--sources", nargs="+", default=["data/synthetic", "data/synthetic_traps", "data/synthetic_v3"])
     ap.add_argument("--out", default="")
     args = ap.parse_args()
     records = [json.loads(line) for line in (ROOT / args.data_dir / "records.jsonl").open(encoding="utf-8") if line.strip()]
+    records = records[args.skip:]
     if args.first:
         records = records[: args.first]
     result = evaluate(records, original_sops(args.sources))
-    result["data_dir"], result["first"] = args.data_dir, args.first
+    result["data_dir"], result["first"], result["skipped"] = args.data_dir, args.first, args.skip
     for name, c in result["checks"].items():
         print("PASS" if c["pass"] else "FAIL", name, {k: v for k, v in c.items() if k != "pass"})
     print(f"attempts={result['attempts']} accepted={result['accepted']} rejected_by_reason={result['rejected_by_reason']}")
