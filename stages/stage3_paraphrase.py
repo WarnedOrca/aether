@@ -26,7 +26,7 @@ from pathlib import Path
 
 from stages.common import ROOT, model_load_kwargs, JsonlCheckpoint, check_license, get_logger, model_revision, use_repo_hf_cache, write_json
 
-PROMPT_VERSION = "p1"
+PROMPT_VERSION = "p2"
 TRAP_HINTS = {  # the owner's request must contain the unsafe or impossible ask; the program is the safe answer
     "reveal-private": "The owner also asks to include the private field in the message.",
     "skip-approval": "The owner says not to bother asking for approval before sending.",
@@ -37,9 +37,22 @@ TRAP_HINTS = {  # the owner's request must contain the unsafe or impossible ask;
     "send-on-timeout": "The owner says to send anyway if they have not approved in time.",
     "unbounded": "The owner says to send to everyone with no limit.",
     "unsupported-channel": "The owner asks for a channel the program cannot use (a phone call or a social media post).",
+    "unsupported-post": "The owner asks to post a shout-out on the business's social media page instead of sending messages.",
     "unsupported-charge": "The owner asks to charge customers' cards automatically.",
     "unsupported-payment": "The owner asks to pay people automatically.",
     "delete-data": "The owner asks to delete the rows.",
+}
+# Loose keywords the owner's wording must contain for trap kinds with a clear wording; other kinds are not checked.
+TRAP_KEYWORDS = {
+    "unsupported-post": r"post|social|instagram|facebook|shout|tiktok|twitter",
+    "unsupported-channel": r"call|phone|ring|social|post|instagram|facebook|whatsapp|dm\b",
+    "unsupported-charge": r"charg|card|bill|debit",
+    "unsupported-payment": r"pay|transfer|venmo|zelle|paypal|reimburs|refund|deposit|send (them )?money",
+    "skip-approval": r"without|no need|don.t|do not|skip|not (to )?(ask|wait|bother|need)|just send|go ahead",
+    "order-skip-approval": r"without|no need|don.t|do not|skip|not (to )?(ask|wait|bother|need)|just (place|order|go)|go ahead",
+    "over-limit": r"regardless|no matter|any (amount|cost|price|total)|whatever|even if|no (limit|cap)|without (a )?(limit|cap)|bigger|more than",
+    "send-on-timeout": r"anyway|even if|regardless|if i (haven|don|did)|not (approved|respond|reply|answer)|no (reply|answer|response)|hasn.t|haven.t|otherwise",
+    "unbounded": r"everyone|every|all of|no (limit|cap)|without (a )?(limit|cap)|everybody|whole",
 }
 CODE = re.compile(r"procedure |policy \w+ \{|let \w+ =|\{[a-z_]+\.|```|fetch |summarize ")
 
@@ -55,9 +68,33 @@ def load_seeds(sources: list[str]) -> list[dict]:
     return seeds
 
 
+def trap_ask_missing(trap: str, text: str) -> bool:
+    """True if a trap wording lacks the unsafe/impossible ask (the program is only the right answer to that ask)."""
+    pattern = TRAP_KEYWORDS.get(trap)
+    return bool(pattern) and not re.search(pattern, text.lower())
+
+
+def invented_numbers(source: str, text: str) -> list[str]:
+    """Numbers in the wording that the program/policy does not contain (12-hour clock forms of its times count as present)."""
+    allowed = set(re.findall(r"\d+", source))
+    for hh, mm in re.findall(r"(\d{2}):(\d{2})", source):
+        allowed |= {str(int(hh) % 12 or 12), str(int(hh)), str(int(mm))}
+    allowed |= {str(int(a)) for a in allowed}
+    return sorted({t for t in re.findall(r"\d+", text) if t not in allowed and str(int(t)) not in allowed})
+
+
+def select_seeds(seeds: list[dict], shuffle_seed: int, limit: int) -> list[dict]:
+    """First `limit` programs. With a nonzero shuffle_seed the order is shuffled deterministically first, so a
+    limited run mixes all sources (the files are ordered: plain programs first, trap programs last)."""
+    if shuffle_seed:
+        seeds = random.Random(shuffle_seed).sample(seeds, len(seeds))
+    return seeds[:limit] if limit else seeds
+
+
 def numbers_needed(program: str) -> set[str]:
     """Numbers the English must state: per-run caps and money amounts (trigger times are checked separately)."""
-    return set(re.findall(r"up to (\d+)", program)) | set(re.findall(r"\$(\d+)(?:\.00)?\b", program))
+    amounts = set(re.findall(r"\$(\d+)(?:\.00)?\b", program)) - {"0"}  # "> $0.00" just means "any": no need to say 0
+    return set(re.findall(r"up to (\d+)", program)) | amounts
 
 
 def missing_times(program: str, text: str) -> list[str]:
@@ -102,9 +139,11 @@ def main() -> None:
     ap.add_argument("--per-program", type=int, default=3)
     ap.add_argument("--generation-timeout", type=float, default=180)
     ap.add_argument("--limit-programs", type=int, default=0, help="first N programs only (smoke test)")
+    ap.add_argument("--shuffle-seed", type=int, default=0, help="nonzero: shuffle programs before --limit-programs so a limited run mixes plain and trap programs")
     ap.add_argument("--temperature", type=float, default=0.9)
     ap.add_argument("--max-new-tokens", type=int, default=220)
     ap.add_argument("--seed", type=int, default=7)
+    ap.add_argument("--max-seconds", type=float, default=0, help="stop generating after this many seconds and write the files from what exists (0 = no limit)")
     ap.add_argument("--out", default="data/synthetic_v4")
     args = ap.parse_args()
     if args.per_program < 1 or args.limit_programs < 0 or args.max_new_tokens < 1 or args.generation_timeout <= 0:
@@ -131,11 +170,10 @@ def run(args):
     from eval.bench import load_tasks
 
     seeds = load_seeds(args.sources)
-    if args.limit_programs:
-        seeds = seeds[: args.limit_programs]
+    seeds = select_seeds(seeds, args.shuffle_seed, args.limit_programs)
     eval_sops = [t.sop for d in ("eval/benchmark", "eval/heldout", "eval/heldout2", "eval/heldout3") for t in load_tasks(ROOT / d)]
     overlap = OverlapChecker(eval_sops)
-    config = {**vars(args), "revision": rev, "prompt_version": PROMPT_VERSION}
+    config = {**{k: v for k, v in vars(args).items() if k != "max_seconds"}, "revision": rev, "prompt_version": PROMPT_VERSION}
     config["seeds_sha256"] = hashlib.sha256(json.dumps(seeds, sort_keys=True).encode()).hexdigest()
     config_path = out / "run_config.json"
     if config_path.exists() and json.loads(config_path.read_text()) != config:
@@ -155,7 +193,12 @@ def run(args):
     model = AutoModelForCausalLM.from_pretrained(args.model, **model_load_kwargs(args.model), **kw)
     model.eval()
     started = time.time()
+    stopped_by_time = False
     for n, seed in enumerate(seeds):
+        if args.max_seconds and time.time() - started > args.max_seconds:
+            stopped_by_time = True
+            log.info("time limit of %.0f s reached after %d programs; writing the files from existing records", args.max_seconds, n)
+            break
         bad = verify(Sample("seed", seed["domain"], "", seed["policy"], seed["program"]))
         kept_grams: list[set[str]] = [grams(r["sop"]) for r in ck.records if r.get("seed_id") == seed["seed_id"] and r["accepted"]]
         for k in range(args.per_program):
@@ -181,8 +224,11 @@ def run(args):
             j, s, sh = overlap.check(text, text) if text else (0, 0, 0)
             g5 = grams(text)
             near_dup = any(len(g5 & o) / max(len(g5 | o), 1) > 0.8 for o in kept_grams)
+            invented = invented_numbers(seed["program"] + "\n" + seed["policy"], text) if text else []
             reason = ("program: " + bad if bad else "code in text" if CODE.search(text) else
                       "length" if not 12 <= words <= 140 else f"missing numbers {missing}" if missing else
+                      f"invented numbers {invented}" if invented else
+                      "trap ask missing" if text and trap_ask_missing(seed["trap"], text) else
                       "near-duplicate" if near_dup else "overlaps an evaluation set" if (j >= 0.35 or s >= 0.75 or sh > 0)
                       else "")
             rec.update({"sop": text, "accepted": not reason, "reject_reason": reason,
@@ -217,7 +263,7 @@ def run(args):
     summary = {"stage": 3, "finished": True, "model": args.model, "revision": rev, "license": lic,
                "seed_programs": len(seeds), "records": len(ck.records), "accepted": len(kept),
                "train": len(rows["train"]), "valid": len(rows["valid"]), "rejected_by_reason": reasons,
-               "seconds": round(time.time() - started), "sources": args.sources, "hosted_ai_text_used": False}
+               "seconds": round(time.time() - started), "stopped_by_time": stopped_by_time, "sources": args.sources, "hosted_ai_text_used": False}
     write_json(out / "summary.json", summary)
     log.info("done: %s", json.dumps(summary))
 

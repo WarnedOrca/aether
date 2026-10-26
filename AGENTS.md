@@ -32,7 +32,7 @@ Read first: this file, `HANDOFF.md` (current state and next steps), `README.md`,
 - Released model: **v0.2** (LoRA on Qwen2.5-Coder-1.5B-Instruct), on Hugging Face `sidchalamala/aether-coder-1.5b-lora`. v0.3 is an unreleased negative result.
 - Held-out v2 (90 tasks): base 1/90, v0.2 plain 20/90, v0.3 plain 14/90; the pre-registered comparison (v0.3 with checker feedback vs v0.2 plain) was a null result (p = 0.33). In every evaluation the checker blocked every program that broke a rule, and accepted programs had 0 monitor violations.
 - Stage 1 diagnosis (dev only): `eval/results/diagnosis-v0.2-dev-2026-10-25.json`. Stage 2: held-out v3 frozen (72 tasks, 36 traps) in commit `bae67f7`, with metrics declared before any run (see `HANDOFF.md`).
-- Stages 3-5 are prepared as scripts in `stages/` but **not run**. Nothing has been generated or trained for them.
+- Stages 3-4 were run on 2026-10-26 (`data/synthetic_v4`: 898 train rows; adapter `outputs/qlora-7b-v1/epoch2`, local only). On the dev split it did **not** beat v0.2 (30/110 vs 34/110, p = 0.60). **Stage 5 has not been run and held-out v3 has not been evaluated.** The candidate is in `stages/stage5_conditions.json`; see `HANDOFF.md` ("Unattended session") before running anything.
 
 ## Exact commands to resume
 ```powershell

@@ -1,0 +1,136 @@
+{
+  "run": "baseline-Qwen2.5-Coder-7B-Instruct-ft-q7b-v1-epoch2-zeroshot-benchmark-2026-10-26-dev.jsonl",
+  "non_trap_tasks": 80,
+  "solved": 26,
+  "failed": 54,
+  "classes": {
+    "parse": {
+      "description": "does not parse",
+      "count": 2,
+      "unfamiliar_business": 2,
+      "examples": [
+        {
+          "id": "escape-01",
+          "detail": "parse: line 8: Unexpected token Token('COLON', ':') at line 8, column 87."
+        },
+        {
+          "id": "optom-04",
+          "detail": "parse: line 11: Unexpected token Token('NAME', 'ordered') at line 11, column 27."
+        }
+      ],
+      "unexpected_tokens": [
+        [
+          "COLON",
+          1
+        ],
+        [
+          "NAME",
+          1
+        ]
+      ]
+    },
+    "type": {
+      "description": "type or name error (E5xx, E601)",
+      "count": 5,
+      "unfamiliar_business": 5,
+      "examples": [
+        {
+          "id": "drive-03",
+          "detail": "check: line 8: E601 type or name error: 'learner' is both a column and a variable"
+        },
+        {
+          "id": "tattoo-03",
+          "detail": "check: line 9: E601 type or name error: 'first' is not a row"
+        },
+        {
+          "id": "wash-05",
+          "detail": "check: line 8: E601 type or name error: 'plan' is both a column and a variable"
+        }
+      ],
+      "codes": [
+        [
+          "E601",
+          5
+        ]
+      ]
+    },
+    "column": {
+      "description": "reads a sheet or column the policy does not allow (E401)",
+      "count": 15,
+      "unfamiliar_business": 15,
+      "examples": [
+        {
+          "id": "coffee-01",
+          "detail": "check: line 15: E401 sheet or column not allowed by the policy: reads Beans.roster"
+        },
+        {
+          "id": "coffee-04",
+          "detail": "check: line 8: E401 sheet or column not allowed by the policy: reads LoyaltyMembers.status"
+        },
+        {
+          "id": "coffee-05",
+          "detail": "check: line 8: E401 sheet or column not allowed by the policy: reads Beans.reorder_at"
+        }
+      ]
+    },
+    "rule": {
+      "description": "other checker rule (approval, caps, batch mode, policy form)",
+      "count": 0,
+      "unfamiliar_business": 0,
+      "examples": [],
+      "codes": []
+    },
+    "effect": {
+      "description": "passes the checker but has different effects from the reference",
+      "count": 32,
+      "unfamiliar_business": 32,
+      "examples": [
+        {
+          "id": "physio-04",
+          "detail": "run 22: error line 8: empty value used in a calculation or comparison"
+        },
+        {
+          "id": "physio-05",
+          "detail": "scenario 11/approve: differs in ['notes']; scenario 33/approve: differs in ['notes']; scenario 66/approve: differs in ['notes']; scenario 77/approve: differs in ['notes']"
+        },
+        {
+          "id": "drive-02",
+          "detail": "scenario 11/approve: differs in ['deliveries']; scenario 33/approve: differs in ['deliveries']; scenario 55/approve (blank cells): differs in ['deliveries']; scenario 66/approve: differs in ['deliveries']"
+        }
+      ],
+      "blank_cells_only": 2,
+      "differs_in": [
+        [
+          "notes",
+          29
+        ],
+        [
+          "deliveries",
+          13
+        ],
+        [
+          "sheets",
+          10
+        ],
+        [
+          "money",
+          4
+        ],
+        [
+          "status",
+          2
+        ],
+        [
+          "calendar",
+          1
+        ]
+      ]
+    }
+  },
+  "by_business": {
+    "familiar_n": 0,
+    "familiar_solved": 0,
+    "unfamiliar_n": 80,
+    "unfamiliar_solved": 26
+  }
+}

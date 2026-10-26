@@ -1,0 +1,21 @@
+{
+  "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+  "data": [
+    "data/synthetic_v4"
+  ],
+  "out": "outputs/qlora-7b-v1",
+  "epochs": 2,
+  "lr": 0.0002,
+  "micro": 1,
+  "accum": 16,
+  "rank": 16,
+  "max_len": 2048,
+  "save_every": 25,
+  "seed": 42,
+  "limit": 0,
+  "revision": "c03e6d3582",
+  "data_sha256": {
+    "train": "f53ea92ac2376778343c7e2fa0481596e35dc3d8e7ad0f1e3cf6ceaab181d8ee",
+    "valid": "9dcd399a533b69934f6735359c58b74907a03775008b82cc41e36c0f11d5bff3"
+  }
+}

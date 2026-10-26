@@ -1,22 +1,24 @@
-# Aether morning session — 2026-10-26
+# Aether unattended session: 2026-10-26 (08:45 to about 14:00)
 
-**Outcome: stopped at the required offline pre-flight.** No model load, data generation, training, or evaluation was started. All changes in this session are unreviewed local documentation and evidence.
+**Outcome: stages 3 and 4 ran to completion, but the new model did not beat v0.2 on the dev split. Stage 5 (held-out v3) was not run.** Nothing here is reviewed, and nothing says the model is safe: the only claim is what the checker verified.
 
-The command was:
-```powershell
-$env:HF_HOME = "$PWD\.hf-cache"
-$env:HF_HUB_OFFLINE = '1'
-.venv\Scripts\python.exe -u -m stages.preflight --out eval/results/morning-preflight-2026-10-26.json
-```
+## What happened
+- **Snapshots fixed.** Both Qwen 7B snapshots were completed from huggingface.co (no token), and offline preflight passed. Load probes: 5.69 GB peak GPU memory each (4-bit, inference).
+- **Stage 3 data** (`data/synthetic_v4`): local Qwen2.5-7B-Instruct wrote 1,545 wordings over 515 seed programs. 965 were accepted (62.5%), giving 898 train and 67 valid rows (725 plain, 173 trap). The quality gate that replaces your review passed on the smoke run, the first 200 attempts, and the full run (`eval/results/stage3-quality-gate-*.json`).
+- **Stage 4** (`outputs/qlora-7b-v1`, Qwen2.5-Coder-7B-Instruct QLoRA): 2 epochs, 114 steps, 76 minutes, no crash. Valid loss 0.0219 then 0.0173.
+- **Dev comparison** (110 benchmark tasks, `safe_and_correct`): v0.2 34, new epoch 1 26, new epoch 2 **30** (27.3%). Paired McNemar vs v0.2: p = 0.23 and p = 0.60, so no significant difference, and the point estimate favours v0.2. The new adapter parses far more often (98% vs 78%) but gets effects wrong, and reads disallowed columns 15 times (v0.2: once). The checker blocked every rule-breaking program, and accepted programs had 0 monitor problems.
+- **Candidate** (`outputs/qlora-7b-v1/epoch2`, chosen on dev over epoch 1) is written into `stages/stage5_conditions.json` and committed. Stage 5 was not run, and held-out v3 was not evaluated or opened.
 
-Both cached Qwen snapshots failed because the installed Hub client reports missing `.gitattributes`, `LICENSE`, and `README.md`. The exact errors are under **Needs the owner** in `HANDOFF.md` and in the pre-flight result file. The previous download filter omitted these metadata files. I did not download files or bypass the check.
+## Problems I found and fixed (all logged with reasons in `HANDOFF.md`)
+1. **Stage 3 seed order:** `--limit-programs 1000` would have used only plain programs (no traps, no v3). Added opt-in `--shuffle-seed`.
+2. **Stage 3 prompt and filters:** `unsupported-post` had no hint. Wordings with invented numbers were being accepted. Added a hint and two stricter checks (invented numbers, missing trap ask). A `$0.00` threshold no longer demands the literal "0".
+3. **Stage 4 slowdown:** step 2 of the first smoke took 707 s (GPU memory full, Windows spilled to system RAM). The loss now runs the output head on answer tokens only. It is the same loss: unit-tested, and the real step-1 loss matches to 5 decimals. Steps now take ~37 s.
+4. **A CUDA "unknown error" crashed stage 3 once** at 10:34. I resumed it with the same command and lost no records.
+Tests: 319 pass. No guard (GPU lock, licence, frozen hashes) was weakened.
 
-GPU memory passed: **11,318 MiB free**, above the **10,240 MiB** requirement. Licence/revision lock metadata, bitsandbytes native CUDA, disk space, frozen hashes, and absence of another Aether GPU job also passed. Desktop processes produced warnings. Since this was a cache failure rather than a free-memory failure, the memory-only retry rule did not apply.
+## Needs you
+1. Decide whether to spend the one-time held-out v3 run on this candidate. Dev suggests a null or negative result.
+2. Read about 30 of the new wordings (`data/synthetic_v4/train.jsonl`, field `sop`). The automatic gate is shallow, and a few trap wordings I read were loose.
+3. Stage 5 also needs owner-reviewed `models.lock.json` entries for the older 1.5B and 0.5B base models.
 
-Following the explicit stop rule, I did not run the load probes or stage 3 smoke. **Neither model has a measured GPU-memory result from this session.** The quality gate, generation, stage 4, and dev adapter comparison remain pending. No candidate conditions file was written. Stage 5 was not run; held-out v3 was only covered by pre-flight's read-only frozen-hash tests.
-
-No Aether GPU job was launched or left running. Final GPU/lock evidence and preserved-file hashes are in `eval/results/morning-session-2026-10-26.json`. Existing owner edits to `pyproject.toml` and `uv.lock`, and the older failed smoke directory, were left untouched. No packages were installed; no push, upload, publication, purchase, account, or secret was involved.
-
-**Next:** complete the missing snapshot metadata outside this offline session, then rerun pre-flight and resume the requested detached probe/smoke/gate sequence. The request still contains the literal `[RETURN TIME]`; an actual return time is needed to enforce a later training deadline. No action is waiting on a reply in this session.
-
-Evidence: `eval/results/morning-preflight-2026-10-26.json` and `eval/results/morning-session-2026-10-26.json`. Detailed commands, decisions, exact failures, and next steps are in `HANDOFF.md`. These files are committed locally only; published results are unchanged.
+The GPU is idle. Left alone: `pyproject.toml`, `uv.lock`, the old `data/synthetic_v4_smoke/`. Nothing was pushed, uploaded, installed, bought or signed in to. Evidence and exact commands: `HANDOFF.md` (top section) and `eval/results/` (files dated 2026-10-26, plus `eval/results/ft/qlora-7b-v1-*`).

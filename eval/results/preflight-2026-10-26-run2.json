@@ -1,0 +1,65 @@
+{
+  "checks": [
+    {
+      "check": "lock file",
+      "passed": true,
+      "detail": {
+        "Qwen/Qwen2.5-7B-Instruct": {
+          "revision": "a09a35458c",
+          "license": "apache-2.0"
+        },
+        "Qwen/Qwen2.5-Coder-7B-Instruct": {
+          "revision": "c03e6d3582",
+          "license": "apache-2.0"
+        }
+      }
+    },
+    {
+      "check": "Qwen/Qwen2.5-7B-Instruct",
+      "passed": true,
+      "detail": "<repo>\\.hf-cache\\hub\\models--Qwen--Qwen2.5-7B-Instruct\\snapshots\\a09a35458c702b33eeacc393d103063234e8bc28"
+    },
+    {
+      "check": "Qwen/Qwen2.5-Coder-7B-Instruct",
+      "passed": true,
+      "detail": "<repo>\\.hf-cache\\hub\\models--Qwen--Qwen2.5-Coder-7B-Instruct\\snapshots\\c03e6d358207e414f1eca0bb1891e29f1db0e242"
+    },
+    {
+      "check": "bitsandbytes",
+      "passed": true,
+      "detail": "0.50.2"
+    },
+    {
+      "check": "GPU memory",
+      "passed": true,
+      "detail": {
+        "free_mib": [
+          11268
+        ],
+        "minimum_mib": 10240
+      }
+    },
+    {
+      "check": "disk space",
+      "passed": true,
+      "detail": {
+        "free_bytes": 212587474944,
+        "minimum_gib": 50
+      }
+    },
+    {
+      "check": "held-out frozen hashes",
+      "passed": true,
+      "detail": "Frozen hash tests passed"
+    },
+    {
+      "check": "no other GPU job",
+      "passed": true,
+      "detail": "No live Aether GPU lock (dead PIDs ignored)"
+    }
+  ],
+  "warnings": [
+    "GPU processes may include Windows desktop or unreadable apps; informational only:\n[desktop process list removed before publishing]"
+  ],
+  "passed": true
+}

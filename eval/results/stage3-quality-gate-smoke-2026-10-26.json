@@ -1,0 +1,40 @@
+{
+  "attempts": 9,
+  "accepted": 5,
+  "rejected_by_reason": {
+    "missing numbers": 2,
+    "length": 1,
+    "invented numbers": 1
+  },
+  "checks": {
+    "acceptance_rate": {
+      "value": 0.556,
+      "pass": true
+    },
+    "no_code": {
+      "violations": [],
+      "pass": true
+    },
+    "states_every_amount_cap_time": {
+      "violations": [],
+      "pass": true
+    },
+    "no_invented_numbers": {
+      "violations": [],
+      "pass": true
+    },
+    "trap_ask_present": {
+      "violations": [],
+      "pass": true
+    },
+    "not_near_copies": {
+      "near_copies": [],
+      "max_similarity": 0.169,
+      "mean_similarity": 0.123,
+      "pass": true
+    }
+  },
+  "passed": true,
+  "data_dir": "data/synthetic_v4_smoke_ready",
+  "first": 0
+}

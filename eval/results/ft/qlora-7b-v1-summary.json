@@ -1,0 +1,38 @@
+{
+  "stage": 4,
+  "finished": true,
+  "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+  "data": [
+    "data/synthetic_v4"
+  ],
+  "out": "outputs/qlora-7b-v1",
+  "epochs": 2,
+  "lr": 0.0002,
+  "micro": 1,
+  "accum": 16,
+  "rank": 16,
+  "max_len": 2048,
+  "save_every": 25,
+  "seed": 42,
+  "limit": 0,
+  "license": "apache-2.0",
+  "revision": "c03e6d3582",
+  "train_examples": 898,
+  "valid_examples": 67,
+  "steps": 114,
+  "history": [
+    {
+      "epoch": 1,
+      "valid_loss": 0.02188,
+      "elapsed_s": 2307
+    },
+    {
+      "epoch": 2,
+      "valid_loss": 0.01725,
+      "elapsed_s": 4533
+    }
+  ],
+  "seconds": 4534,
+  "torch": "2.11.0+cu128",
+  "gpu": "NVIDIA GeForce RTX 4070"
+}

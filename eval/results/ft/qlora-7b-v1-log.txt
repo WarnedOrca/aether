@@ -1,0 +1,16 @@
+2026-10-26 11:51:20 INFO offline model Qwen/Qwen2.5-Coder-7B-Instruct: apache-2.0 at c03e6d3582 (owner-reviewed lock)
+2026-10-26 11:51:48 INFO model Qwen/Qwen2.5-Coder-7B-Instruct (apache-2.0), 898 train / 67 valid examples, 114 optimizer steps total
+2026-10-26 11:58:02 INFO {'step': 10, 'epoch': 1, 'loss': 0.38233, 'lr': 0.00019896341474445525, 'elapsed_s': 374}
+2026-10-26 12:04:15 INFO {'step': 20, 'epoch': 1, 'loss': 0.11628, 'lr': 0.0001907992282510675, 'elapsed_s': 747}
+2026-10-26 12:10:28 INFO {'step': 30, 'epoch': 1, 'loss': 0.00914, 'lr': 0.0001751443762949772, 'elapsed_s': 1120}
+2026-10-26 12:16:40 INFO {'step': 40, 'epoch': 1, 'loss': 0.00523, 'lr': 0.00015329033746173975, 'elapsed_s': 1492}
+2026-10-26 12:22:52 INFO {'step': 50, 'epoch': 1, 'loss': 0.00073, 'lr': 0.0001270400047611508, 'elapsed_s': 1864}
+2026-10-26 12:30:15 INFO epoch 1 valid loss 0.02188
+2026-10-26 12:32:07 INFO {'step': 60, 'epoch': 2, 'loss': 0.01373, 'lr': 9.85589523322443e-05, 'elapsed_s': 2419}
+2026-10-26 12:38:21 INFO {'step': 70, 'epoch': 2, 'loss': 0.00014, 'lr': 7.019678203706163e-05, 'elapsed_s': 2794}
+2026-10-26 12:44:34 INFO {'step': 80, 'epoch': 2, 'loss': 0.0011, 'lr': 4.4293288316255653e-05, 'elapsed_s': 3166}
+2026-10-26 12:50:46 INFO {'step': 90, 'epoch': 2, 'loss': 0.01101, 'lr': 2.2985432127701946e-05, 'elapsed_s': 3538}
+2026-10-26 12:57:01 INFO {'step': 100, 'epoch': 2, 'loss': 0.01471, 'lr': 8.031048042356392e-06, 'elapsed_s': 3913}
+2026-10-26 13:03:15 INFO {'step': 110, 'epoch': 2, 'loss': 0.01573, 'lr': 6.638281360408339e-07, 'elapsed_s': 4287}
+2026-10-26 13:07:20 INFO epoch 2 valid loss 0.01725
+2026-10-26 13:07:21 INFO done: {"stage": 4, "finished": true, "model": "Qwen/Qwen2.5-Coder-7B-Instruct", "data": ["data/synthetic_v4"], "out": "outputs/qlora-7b-v1", "epochs": 2, "lr": 0.0002, "micro": 1, "accum": 16, "rank": 16, "max_len": 2048, "save_every": 25, "seed": 42, "limit": 0, "license": "apache-2.0", "revision": "c03e6d3582", "train_examples": 898, "valid_examples": 67, "steps": 114, "history": [{"epoch": 1, "valid_loss": 0.02188, "elapsed_s": 2307}, {"epoch": 2, "valid_loss": 0.01725, "elapsed_s": 4533}], "seconds": 4534, "torch": "2.11.0+cu128", "gpu": "NVIDIA GeForce RTX 4070"}

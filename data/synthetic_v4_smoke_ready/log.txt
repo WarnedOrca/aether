@@ -1,0 +1,12 @@
+2026-10-26 08:56:37 INFO offline model Qwen/Qwen2.5-7B-Instruct: apache-2.0 at a09a35458c (owner-reviewed lock)
+2026-10-26 08:56:42 INFO 3 seed programs x 3 wordings; 0 records already done
+2026-10-26 08:57:07 INFO wording trap-train-00203#0: missing numbers ['20']
+2026-10-26 08:57:10 INFO wording trap-train-00203#1: accepted
+2026-10-26 08:57:13 INFO wording trap-train-00203#2: accepted
+2026-10-26 08:57:20 INFO wording v3-train-00230#0: length
+2026-10-26 08:57:25 INFO wording v3-train-00230#1: invented numbers ['30']
+2026-10-26 08:57:29 INFO wording v3-train-00230#2: missing numbers ['50']
+2026-10-26 08:57:32 INFO wording v3-train-01137#0: accepted
+2026-10-26 08:57:36 INFO wording v3-train-01137#1: accepted
+2026-10-26 08:57:39 INFO wording v3-train-01137#2: accepted
+2026-10-26 08:57:39 INFO done: {"stage": 3, "finished": true, "model": "Qwen/Qwen2.5-7B-Instruct", "revision": "a09a35458c", "license": "apache-2.0", "seed_programs": 3, "records": 9, "accepted": 5, "train": 5, "valid": 0, "rejected_by_reason": {"missing numbers": 2, "length": 1, "invented numbers": 1}, "seconds": 37, "stopped_by_time": false, "sources": ["data/synthetic", "data/synthetic_traps", "data/synthetic_v3"], "hosted_ai_text_used": false}

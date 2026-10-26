@@ -1,0 +1,1604 @@
+2026-10-26 08:58:14 INFO offline model Qwen/Qwen2.5-7B-Instruct: apache-2.0 at a09a35458c (owner-reviewed lock)
+2026-10-26 08:58:19 INFO 1000 seed programs x 3 wordings; 0 records already done
+2026-10-26 08:58:45 INFO wording trap-train-00203#0: missing numbers ['20']
+2026-10-26 08:58:48 INFO wording trap-train-00203#1: accepted
+2026-10-26 08:58:52 INFO wording trap-train-00203#2: accepted
+2026-10-26 08:59:00 INFO wording v3-train-00230#0: length
+2026-10-26 08:59:06 INFO wording v3-train-00230#1: invented numbers ['30']
+2026-10-26 08:59:11 INFO wording v3-train-00230#2: missing numbers ['50']
+2026-10-26 08:59:14 INFO wording v3-train-01137#0: accepted
+2026-10-26 08:59:18 INFO wording v3-train-01137#1: accepted
+2026-10-26 08:59:21 INFO wording v3-train-01137#2: accepted
+2026-10-26 08:59:25 INFO wording trap-train-00258#0: missing numbers ['10']
+2026-10-26 08:59:28 INFO wording trap-train-00258#1: invented numbers ['50']
+2026-10-26 08:59:31 INFO wording trap-train-00258#2: missing numbers ['10']
+2026-10-26 08:59:37 INFO wording trap-train-00201#0: accepted
+2026-10-26 08:59:41 INFO wording trap-train-00201#1: accepted
+2026-10-26 08:59:46 INFO wording trap-train-00201#2: accepted
+2026-10-26 08:59:54 INFO wording v3-train-00018#0: length
+2026-10-26 09:00:02 INFO wording v3-train-00018#1: invented numbers ['4', '5', '7', '8']
+2026-10-26 09:00:11 INFO wording v3-train-00018#2: length
+2026-10-26 09:00:16 INFO wording v3-train-00343#0: accepted
+2026-10-26 09:00:23 INFO wording v3-train-00343#1: accepted
+2026-10-26 09:00:31 INFO wording v3-train-00343#2: length
+2026-10-26 09:00:36 INFO wording train-00777#0: accepted
+2026-10-26 09:00:39 INFO wording train-00777#1: accepted
+2026-10-26 09:00:43 INFO wording train-00777#2: accepted
+2026-10-26 09:00:48 INFO wording train-00756#0: missing numbers ['20']
+2026-10-26 09:00:55 INFO wording train-00756#1: length
+2026-10-26 09:00:58 INFO wording train-00756#2: missing numbers ['20']
+2026-10-26 09:01:02 INFO wording v3-train-00034#0: accepted
+2026-10-26 09:01:07 INFO wording v3-train-00034#1: accepted
+2026-10-26 09:01:11 INFO wording v3-train-00034#2: accepted
+2026-10-26 09:01:17 INFO wording trap-train-00299#0: code in text
+2026-10-26 09:01:21 INFO wording trap-train-00299#1: trap ask missing
+2026-10-26 09:01:27 INFO wording trap-train-00299#2: accepted
+2026-10-26 09:01:32 INFO wording v3-train-00517#0: accepted
+2026-10-26 09:01:38 INFO wording v3-train-00517#1: accepted
+2026-10-26 09:01:43 INFO wording v3-train-00517#2: accepted
+2026-10-26 09:01:49 INFO wording v3-train-00452#0: accepted
+2026-10-26 09:01:55 INFO wording v3-train-00452#1: accepted
+2026-10-26 09:02:02 INFO wording v3-train-00452#2: length
+2026-10-26 09:02:06 INFO wording v3-train-01186#0: missing numbers ['2']
+2026-10-26 09:02:11 INFO wording v3-train-01186#1: accepted
+2026-10-26 09:02:15 INFO wording v3-train-01186#2: accepted
+2026-10-26 09:02:21 INFO wording train-00762#0: accepted
+2026-10-26 09:02:27 INFO wording train-00762#1: accepted
+2026-10-26 09:02:34 INFO wording train-00762#2: accepted
+2026-10-26 09:02:40 INFO wording train-00385#0: accepted
+2026-10-26 09:02:46 INFO wording train-00385#1: accepted
+2026-10-26 09:02:50 INFO wording train-00385#2: code in text
+2026-10-26 09:02:56 INFO wording trap-train-00180#0: missing numbers ['20']
+2026-10-26 09:03:04 INFO wording trap-train-00180#1: length
+2026-10-26 09:03:13 INFO wording trap-train-00180#2: length
+2026-10-26 09:03:17 INFO wording train-01242#0: missing numbers ['5']
+2026-10-26 09:03:22 INFO wording train-01242#1: accepted
+2026-10-26 09:03:27 INFO wording train-01242#2: missing numbers ['5']
+2026-10-26 09:03:33 INFO wording train-00580#0: invented numbers ['24']
+2026-10-26 09:03:39 INFO wording train-00580#1: accepted
+2026-10-26 09:03:43 INFO wording train-00580#2: accepted
+2026-10-26 09:03:50 INFO wording train-00371#0: accepted
+2026-10-26 09:03:55 INFO wording train-00371#1: accepted
+2026-10-26 09:04:01 INFO wording train-00371#2: accepted
+2026-10-26 09:04:08 INFO wording v3-train-00144#0: accepted
+2026-10-26 09:04:16 INFO wording v3-train-00144#1: length
+2026-10-26 09:04:23 INFO wording v3-train-00144#2: invented numbers ['3', '4']
+2026-10-26 09:04:27 INFO wording v3-train-00778#0: accepted
+2026-10-26 09:04:31 INFO wording v3-train-00778#1: accepted
+2026-10-26 09:04:38 INFO wording v3-train-00778#2: accepted
+2026-10-26 09:04:45 INFO wording v3-train-00536#0: invented numbers ['4', '5', '7', '8']
+2026-10-26 09:04:51 INFO wording v3-train-00536#1: invented numbers ['4', '5', '7', '8']
+2026-10-26 09:04:58 INFO wording v3-train-00536#2: length
+2026-10-26 09:05:02 INFO wording train-00171#0: missing numbers ['50']
+2026-10-26 09:05:07 INFO wording train-00171#1: invented numbers ['3']
+2026-10-26 09:05:13 INFO wording train-00171#2: accepted
+2026-10-26 09:05:17 INFO wording v3-train-00376#0: missing numbers ['20']
+2026-10-26 09:05:21 INFO wording v3-train-00376#1: accepted
+2026-10-26 09:05:29 INFO wording v3-train-00376#2: length
+2026-10-26 09:05:29 INFO 25/1000 programs, 75 records, 41 accepted, 410 s
+2026-10-26 09:05:36 INFO wording train-01622#0: length
+2026-10-26 09:05:41 INFO wording train-01622#1: accepted
+2026-10-26 09:05:45 INFO wording train-01622#2: code in text
+2026-10-26 09:05:53 INFO wording trap-train-00206#0: length
+2026-10-26 09:05:59 INFO wording trap-train-00206#1: accepted
+2026-10-26 09:06:07 INFO wording trap-train-00206#2: length
+2026-10-26 09:06:13 INFO wording v3-train-00616#0: accepted
+2026-10-26 09:06:19 INFO wording v3-train-00616#1: accepted
+2026-10-26 09:06:26 INFO wording v3-train-00616#2: accepted
+2026-10-26 09:06:30 INFO wording v3-train-00964#0: accepted
+2026-10-26 09:06:33 INFO wording v3-train-00964#1: accepted
+2026-10-26 09:06:37 INFO wording v3-train-00964#2: accepted
+2026-10-26 09:06:42 INFO wording v3-train-00459#0: missing numbers ['2']
+2026-10-26 09:06:48 INFO wording v3-train-00459#1: missing numbers ['2']
+2026-10-26 09:06:53 INFO wording v3-train-00459#2: missing numbers ['2']
+2026-10-26 09:06:57 INFO wording v3-train-00600#0: accepted
+2026-10-26 09:07:03 INFO wording v3-train-00600#1: accepted
+2026-10-26 09:07:08 INFO wording v3-train-00600#2: accepted
+2026-10-26 09:07:14 INFO wording train-00645#0: accepted
+2026-10-26 09:07:18 INFO wording train-00645#1: accepted
+2026-10-26 09:07:23 INFO wording train-00645#2: accepted
+2026-10-26 09:07:27 INFO wording v3-train-00490#0: accepted
+2026-10-26 09:07:31 INFO wording v3-train-00490#1: accepted
+2026-10-26 09:07:37 INFO wording v3-train-00490#2: accepted
+2026-10-26 09:07:42 INFO wording train-00061#0: invented numbers ['1', '3', '4', '5', '6']
+2026-10-26 09:07:47 INFO wording train-00061#1: accepted
+2026-10-26 09:07:52 INFO wording train-00061#2: accepted
+2026-10-26 09:07:57 INFO wording v3-train-00102#0: accepted
+2026-10-26 09:08:05 INFO wording v3-train-00102#1: length
+2026-10-26 09:08:11 INFO wording v3-train-00102#2: accepted
+2026-10-26 09:08:16 INFO wording train-00258#0: accepted
+2026-10-26 09:08:25 INFO wording train-00258#1: length
+2026-10-26 09:08:31 INFO wording train-00258#2: accepted
+2026-10-26 09:08:40 INFO wording train-00243#0: length
+2026-10-26 09:08:48 INFO wording train-00243#1: length
+2026-10-26 09:08:53 INFO wording train-00243#2: accepted
+2026-10-26 09:08:59 INFO wording train-00146#0: accepted
+2026-10-26 09:09:05 INFO wording train-00146#1: accepted
+2026-10-26 09:09:13 INFO wording train-00146#2: invented numbers ['1', '3', '4', '5', '6', '7', '8']
+2026-10-26 09:09:16 INFO wording train-00779#0: accepted
+2026-10-26 09:09:20 INFO wording train-00779#1: accepted
+2026-10-26 09:09:24 INFO wording train-00779#2: accepted
+2026-10-26 09:09:31 INFO wording train-00990#0: length
+2026-10-26 09:09:37 INFO wording train-00990#1: accepted
+2026-10-26 09:09:43 INFO wording train-00990#2: accepted
+2026-10-26 09:09:48 INFO wording v3-train-00394#0: accepted
+2026-10-26 09:09:53 INFO wording v3-train-00394#1: accepted
+2026-10-26 09:10:00 INFO wording v3-train-00394#2: invented numbers ['1', '2', '3', '4', '5', '7', '8']
+2026-10-26 09:10:06 INFO wording train-00123#0: accepted
+2026-10-26 09:10:12 INFO wording train-00123#1: accepted
+2026-10-26 09:10:18 INFO wording train-00123#2: accepted
+2026-10-26 09:10:27 INFO wording v3-train-01125#0: length
+2026-10-26 09:10:30 INFO wording v3-train-01125#1: accepted
+2026-10-26 09:10:38 INFO wording v3-train-01125#2: length
+2026-10-26 09:10:41 INFO wording trap-train-00251#0: accepted
+2026-10-26 09:10:44 INFO wording trap-train-00251#1: accepted
+2026-10-26 09:10:47 INFO wording trap-train-00251#2: accepted
+2026-10-26 09:10:52 INFO wording train-01336#0: accepted
+2026-10-26 09:10:57 INFO wording train-01336#1: accepted
+2026-10-26 09:11:01 INFO wording train-01336#2: accepted
+2026-10-26 09:11:07 INFO wording trap-train-00155#0: accepted
+2026-10-26 09:11:13 INFO wording trap-train-00155#1: missing numbers ['200']
+2026-10-26 09:11:20 INFO wording trap-train-00155#2: length
+2026-10-26 09:11:25 INFO wording v3-train-00358#0: trap ask missing
+2026-10-26 09:11:30 INFO wording v3-train-00358#1: missing numbers ['20']
+2026-10-26 09:11:37 INFO wording v3-train-00358#2: length
+2026-10-26 09:11:43 INFO wording train-00800#0: accepted
+2026-10-26 09:11:51 INFO wording train-00800#1: length
+2026-10-26 09:11:57 INFO wording train-00800#2: accepted
+2026-10-26 09:12:01 INFO wording v3-train-00064#0: missing numbers ['100']
+2026-10-26 09:12:07 INFO wording v3-train-00064#1: accepted
+2026-10-26 09:12:12 INFO wording v3-train-00064#2: missing numbers ['100']
+2026-10-26 09:12:19 INFO wording train-00957#0: accepted
+2026-10-26 09:12:26 INFO wording train-00957#1: length
+2026-10-26 09:12:31 INFO wording train-00957#2: accepted
+2026-10-26 09:12:31 INFO 50/1000 programs, 150 records, 90 accepted, 832 s
+2026-10-26 09:12:39 INFO wording v3-train-00560#0: length
+2026-10-26 09:12:48 INFO wording v3-train-00560#1: length
+2026-10-26 09:12:55 INFO wording v3-train-00560#2: accepted
+2026-10-26 09:13:01 INFO wording train-01204#0: accepted
+2026-10-26 09:13:09 INFO wording train-01204#1: length
+2026-10-26 09:13:14 INFO wording train-01204#2: accepted
+2026-10-26 09:13:17 INFO wording trap-train-00398#0: accepted
+2026-10-26 09:13:20 INFO wording trap-train-00398#1: accepted
+2026-10-26 09:13:23 INFO wording trap-train-00398#2: accepted
+2026-10-26 09:13:29 INFO wording train-00018#0: accepted
+2026-10-26 09:13:34 INFO wording train-00018#1: invented numbers ['24']
+2026-10-26 09:13:39 INFO wording train-00018#2: missing numbers ['40']
+2026-10-26 09:13:47 INFO wording v3-train-00651#0: length
+2026-10-26 09:13:52 INFO wording v3-train-00651#1: accepted
+2026-10-26 09:13:59 INFO wording v3-train-00651#2: length
+2026-10-26 09:14:04 INFO wording train-00348#0: accepted
+2026-10-26 09:14:11 INFO wording train-00348#1: accepted
+2026-10-26 09:14:18 INFO wording train-00348#2: accepted
+2026-10-26 09:14:25 INFO wording trap-train-00224#0: accepted
+2026-10-26 09:14:32 INFO wording trap-train-00224#1: accepted
+2026-10-26 09:14:39 INFO wording trap-train-00224#2: accepted
+2026-10-26 09:14:43 INFO wording v3-train-00620#0: missing numbers ['20']
+2026-10-26 09:14:49 INFO wording v3-train-00620#1: accepted
+2026-10-26 09:14:55 INFO wording v3-train-00620#2: missing numbers ['20']
+2026-10-26 09:15:03 INFO wording train-01139#0: accepted
+2026-10-26 09:15:13 INFO wording train-01139#1: length
+2026-10-26 09:15:19 INFO wording train-01139#2: accepted
+2026-10-26 09:15:23 INFO wording trap-train-00017#0: trap ask missing
+2026-10-26 09:15:28 INFO wording trap-train-00017#1: accepted
+2026-10-26 09:15:33 INFO wording trap-train-00017#2: accepted
+2026-10-26 09:15:38 INFO wording v3-train-00195#0: missing numbers ['30']
+2026-10-26 09:15:43 INFO wording v3-train-00195#1: missing numbers ['30']
+2026-10-26 09:15:50 INFO wording v3-train-00195#2: accepted
+2026-10-26 09:15:56 INFO wording train-00340#0: invented numbers ['7']
+2026-10-26 09:16:02 INFO wording train-00340#1: accepted
+2026-10-26 09:16:09 INFO wording train-00340#2: missing numbers ['50']
+2026-10-26 09:16:16 INFO wording v3-train-00837#0: accepted
+2026-10-26 09:16:23 INFO wording v3-train-00837#1: accepted
+2026-10-26 09:16:29 INFO wording v3-train-00837#2: invented numbers ['7']
+2026-10-26 09:16:36 INFO wording train-01040#0: accepted
+2026-10-26 09:16:42 INFO wording train-01040#1: accepted
+2026-10-26 09:16:49 INFO wording train-01040#2: accepted
+2026-10-26 09:16:57 INFO wording train-01291#0: length
+2026-10-26 09:17:03 INFO wording train-01291#1: accepted
+2026-10-26 09:17:08 INFO wording train-01291#2: missing numbers ['20']
+2026-10-26 09:17:15 INFO wording v3-train-01042#0: accepted
+2026-10-26 09:17:23 INFO wording v3-train-01042#1: length
+2026-10-26 09:17:29 INFO wording v3-train-01042#2: accepted
+2026-10-26 09:17:35 INFO wording train-00940#0: accepted
+2026-10-26 09:17:42 INFO wording train-00940#1: accepted
+2026-10-26 09:17:49 INFO wording train-00940#2: length
+2026-10-26 09:17:55 INFO wording v3-train-00038#0: accepted
+2026-10-26 09:18:04 INFO wording v3-train-00038#1: length
+2026-10-26 09:18:10 INFO wording v3-train-00038#2: accepted
+2026-10-26 09:18:15 INFO wording train-01183#0: accepted
+2026-10-26 09:18:21 INFO wording train-01183#1: accepted
+2026-10-26 09:18:28 INFO wording train-01183#2: missing numbers ['20']
+2026-10-26 09:18:34 INFO wording train-00121#0: accepted
+2026-10-26 09:18:42 INFO wording train-00121#1: length
+2026-10-26 09:18:48 INFO wording train-00121#2: accepted
+2026-10-26 09:18:51 INFO wording train-00287#0: missing numbers ['20']
+2026-10-26 09:18:57 INFO wording train-00287#1: accepted
+2026-10-26 09:19:03 INFO wording train-00287#2: accepted
+2026-10-26 09:19:09 INFO wording v3-train-00244#0: accepted
+2026-10-26 09:19:13 INFO wording v3-train-00244#1: accepted
+2026-10-26 09:19:19 INFO wording v3-train-00244#2: accepted
+2026-10-26 09:19:27 INFO wording v3-train-01076#0: length
+2026-10-26 09:19:33 INFO wording v3-train-01076#1: invented numbers ['3', '4', '5', '6']
+2026-10-26 09:19:37 INFO wording v3-train-01076#2: accepted
+2026-10-26 09:19:44 INFO wording train-00442#0: missing numbers ['100']
+2026-10-26 09:19:50 INFO wording train-00442#1: accepted
+2026-10-26 09:19:58 INFO wording train-00442#2: length
+2026-10-26 09:20:03 INFO wording train-01640#0: accepted
+2026-10-26 09:20:07 INFO wording train-01640#1: invented numbers ['30']
+2026-10-26 09:20:14 INFO wording train-01640#2: invented numbers ['30']
+2026-10-26 09:20:14 INFO 75/1000 programs, 225 records, 135 accepted, 1295 s
+2026-10-26 09:20:18 INFO wording train-00441#0: accepted
+2026-10-26 09:20:23 INFO wording train-00441#1: accepted
+2026-10-26 09:20:27 INFO wording train-00441#2: accepted
+2026-10-26 09:20:33 INFO wording train-01191#0: accepted
+2026-10-26 09:20:41 INFO wording train-01191#1: length
+2026-10-26 09:20:48 INFO wording train-01191#2: length
+2026-10-26 09:20:55 INFO wording train-01583#0: length
+2026-10-26 09:21:02 INFO wording train-01583#1: length
+2026-10-26 09:21:11 INFO wording train-01583#2: length
+2026-10-26 09:21:17 INFO wording train-00273#0: code in text
+2026-10-26 09:21:24 INFO wording train-00273#1: length
+2026-10-26 09:21:29 INFO wording train-00273#2: accepted
+2026-10-26 09:21:34 INFO wording train-00069#0: accepted
+2026-10-26 09:21:40 INFO wording train-00069#1: accepted
+2026-10-26 09:21:46 INFO wording train-00069#2: accepted
+2026-10-26 09:21:50 INFO wording v3-train-00743#0: accepted
+2026-10-26 09:21:57 INFO wording v3-train-00743#1: length
+2026-10-26 09:22:03 INFO wording v3-train-00743#2: accepted
+2026-10-26 09:22:08 INFO wording train-00002#0: accepted
+2026-10-26 09:22:14 INFO wording train-00002#1: accepted
+2026-10-26 09:22:21 INFO wording train-00002#2: accepted
+2026-10-26 09:22:24 INFO wording train-00874#0: accepted
+2026-10-26 09:22:29 INFO wording train-00874#1: accepted
+2026-10-26 09:22:33 INFO wording train-00874#2: accepted
+2026-10-26 09:22:39 INFO wording train-00859#0: accepted
+2026-10-26 09:22:46 INFO wording train-00859#1: accepted
+2026-10-26 09:22:54 INFO wording train-00859#2: accepted
+2026-10-26 09:23:01 INFO wording train-00214#0: missing numbers ['10']
+2026-10-26 09:23:07 INFO wording train-00214#1: accepted
+2026-10-26 09:23:14 INFO wording train-00214#2: accepted
+2026-10-26 09:23:18 INFO wording trap-train-00276#0: accepted
+2026-10-26 09:23:23 INFO wording trap-train-00276#1: accepted
+2026-10-26 09:23:27 INFO wording trap-train-00276#2: invented numbers ['50']
+2026-10-26 09:23:32 INFO wording train-01537#0: accepted
+2026-10-26 09:23:37 INFO wording train-01537#1: accepted
+2026-10-26 09:23:44 INFO wording train-01537#2: invented numbers ['3', '4', '6']
+2026-10-26 09:23:48 INFO wording v3-train-00841#0: accepted
+2026-10-26 09:23:55 INFO wording v3-train-00841#1: accepted
+2026-10-26 09:24:02 INFO wording v3-train-00841#2: invented numbers ['1', '3', '4', '7']
+2026-10-26 09:24:11 INFO wording train-01627#0: length
+2026-10-26 09:24:15 INFO wording train-01627#1: accepted
+2026-10-26 09:24:22 INFO wording train-01627#2: missing numbers ['20']
+2026-10-26 09:24:25 INFO wording trap-train-00070#0: accepted
+2026-10-26 09:24:28 INFO wording trap-train-00070#1: missing numbers ['20']
+2026-10-26 09:24:32 INFO wording trap-train-00070#2: accepted
+2026-10-26 09:24:38 INFO wording train-00299#0: accepted
+2026-10-26 09:24:46 INFO wording train-00299#1: length
+2026-10-26 09:24:53 INFO wording train-00299#2: accepted
+2026-10-26 09:24:56 INFO wording v3-train-00257#0: accepted
+2026-10-26 09:24:59 INFO wording v3-train-00257#1: accepted
+2026-10-26 09:25:03 INFO wording v3-train-00257#2: accepted
+2026-10-26 09:25:12 INFO wording v3-train-00516#0: length
+2026-10-26 09:25:20 INFO wording v3-train-00516#1: length
+2026-10-26 09:25:27 INFO wording v3-train-00516#2: accepted
+2026-10-26 09:25:32 INFO wording train-00813#0: accepted
+2026-10-26 09:25:38 INFO wording train-00813#1: accepted
+2026-10-26 09:25:45 INFO wording train-00813#2: length
+2026-10-26 09:25:51 INFO wording v3-train-01126#0: accepted
+2026-10-26 09:26:00 INFO wording v3-train-01126#1: length
+2026-10-26 09:26:07 INFO wording v3-train-01126#2: accepted
+2026-10-26 09:26:11 INFO wording v3-train-00702#0: accepted
+2026-10-26 09:26:19 INFO wording v3-train-00702#1: length
+2026-10-26 09:26:24 INFO wording v3-train-00702#2: accepted
+2026-10-26 09:26:29 INFO wording train-01105#0: accepted
+2026-10-26 09:26:37 INFO wording train-01105#1: accepted
+2026-10-26 09:26:44 INFO wording train-01105#2: accepted
+2026-10-26 09:26:50 INFO wording train-01379#0: accepted
+2026-10-26 09:26:58 INFO wording train-01379#1: length
+2026-10-26 09:27:06 INFO wording train-01379#2: length
+2026-10-26 09:27:12 INFO wording train-00356#0: accepted
+2026-10-26 09:27:19 INFO wording train-00356#1: accepted
+2026-10-26 09:27:23 INFO wording train-00356#2: missing numbers ['20']
+2026-10-26 09:27:31 INFO wording train-01274#0: length
+2026-10-26 09:27:36 INFO wording train-01274#1: accepted
+2026-10-26 09:27:41 INFO wording train-01274#2: accepted
+2026-10-26 09:27:41 INFO 100/1000 programs, 300 records, 185 accepted, 1742 s
+2026-10-26 09:27:45 INFO wording train-01362#0: missing numbers ['50']
+2026-10-26 09:27:51 INFO wording train-01362#1: accepted
+2026-10-26 09:27:56 INFO wording train-01362#2: missing numbers ['50']
+2026-10-26 09:28:02 INFO wording train-00062#0: accepted
+2026-10-26 09:28:06 INFO wording train-00062#1: accepted
+2026-10-26 09:28:13 INFO wording train-00062#2: accepted
+2026-10-26 09:28:19 INFO wording trap-train-00030#0: accepted
+2026-10-26 09:28:26 INFO wording trap-train-00030#1: accepted
+2026-10-26 09:28:32 INFO wording trap-train-00030#2: accepted
+2026-10-26 09:28:40 INFO wording v3-train-01166#0: length
+2026-10-26 09:28:49 INFO wording v3-train-01166#1: length
+2026-10-26 09:28:56 INFO wording v3-train-01166#2: length
+2026-10-26 09:29:01 INFO wording train-00483#0: missing numbers ['08:00']
+2026-10-26 09:29:06 INFO wording train-00483#1: missing numbers ['08:00']
+2026-10-26 09:29:11 INFO wording train-00483#2: accepted
+2026-10-26 09:29:16 INFO wording train-00551#0: accepted
+2026-10-26 09:29:20 INFO wording train-00551#1: accepted
+2026-10-26 09:29:26 INFO wording train-00551#2: accepted
+2026-10-26 09:29:31 INFO wording train-01009#0: accepted
+2026-10-26 09:29:37 INFO wording train-01009#1: accepted
+2026-10-26 09:29:42 INFO wording train-01009#2: accepted
+2026-10-26 09:29:49 INFO wording v3-train-00833#0: length
+2026-10-26 09:29:54 INFO wording v3-train-00833#1: invented numbers ['7']
+2026-10-26 09:29:59 INFO wording v3-train-00833#2: accepted
+2026-10-26 09:30:04 INFO wording train-00413#0: missing numbers ['5']
+2026-10-26 09:30:08 INFO wording train-00413#1: accepted
+2026-10-26 09:30:13 INFO wording train-00413#2: missing numbers ['5']
+2026-10-26 09:30:18 INFO wording train-00044#0: accepted
+2026-10-26 09:30:22 INFO wording train-00044#1: accepted
+2026-10-26 09:30:26 INFO wording train-00044#2: accepted
+2026-10-26 09:30:36 INFO wording train-00245#0: length
+2026-10-26 09:30:40 INFO wording train-00245#1: code in text
+2026-10-26 09:30:49 INFO wording train-00245#2: invented numbers ['3', '4', '5']
+2026-10-26 09:30:59 INFO wording trap-train-00255#0: length
+2026-10-26 09:31:09 INFO wording trap-train-00255#1: length
+2026-10-26 09:31:17 INFO wording trap-train-00255#2: length
+2026-10-26 09:31:24 INFO wording trap-train-00345#0: accepted
+2026-10-26 09:31:31 INFO wording trap-train-00345#1: length
+2026-10-26 09:31:38 INFO wording trap-train-00345#2: length
+2026-10-26 09:31:45 INFO wording train-00727#0: accepted
+2026-10-26 09:31:49 INFO wording train-00727#1: accepted
+2026-10-26 09:31:54 INFO wording train-00727#2: accepted
+2026-10-26 09:32:00 INFO wording v3-train-00731#0: accepted
+2026-10-26 09:32:06 INFO wording v3-train-00731#1: accepted
+2026-10-26 09:32:12 INFO wording v3-train-00731#2: accepted
+2026-10-26 09:32:19 INFO wording v3-train-00228#0: accepted
+2026-10-26 09:32:26 INFO wording v3-train-00228#1: length
+2026-10-26 09:32:34 INFO wording v3-train-00228#2: length
+2026-10-26 09:32:42 INFO wording train-00771#0: length
+2026-10-26 09:32:50 INFO wording train-00771#1: length
+2026-10-26 09:32:57 INFO wording train-00771#2: accepted
+2026-10-26 09:33:01 INFO wording trap-train-00183#0: missing numbers ['10']
+2026-10-26 09:33:05 INFO wording trap-train-00183#1: accepted
+2026-10-26 09:33:09 INFO wording trap-train-00183#2: accepted
+2026-10-26 09:33:14 INFO wording v3-train-00022#0: accepted
+2026-10-26 09:33:21 INFO wording v3-train-00022#1: missing numbers ['18:00']
+2026-10-26 09:33:26 INFO wording v3-train-00022#2: accepted
+2026-10-26 09:33:31 INFO wording train-00781#0: accepted
+2026-10-26 09:33:37 INFO wording train-00781#1: accepted
+2026-10-26 09:33:41 INFO wording train-00781#2: accepted
+2026-10-26 09:33:48 INFO wording v3-train-00935#0: accepted
+2026-10-26 09:33:53 INFO wording v3-train-00935#1: accepted
+2026-10-26 09:33:58 INFO wording v3-train-00935#2: accepted
+2026-10-26 09:34:06 INFO wording v3-train-01089#0: length
+2026-10-26 09:34:10 INFO wording v3-train-01089#1: accepted
+2026-10-26 09:34:12 INFO wording v3-train-01089#2: missing numbers ['100']
+2026-10-26 09:34:18 INFO wording train-00536#0: missing numbers ['50']
+2026-10-26 09:34:25 INFO wording train-00536#1: accepted
+2026-10-26 09:34:31 INFO wording train-00536#2: accepted
+2026-10-26 09:34:33 INFO wording trap-train-00068#0: missing numbers ['10']
+2026-10-26 09:34:36 INFO wording trap-train-00068#1: missing numbers ['10']
+2026-10-26 09:34:40 INFO wording trap-train-00068#2: missing numbers ['10']
+2026-10-26 09:34:44 INFO wording v3-train-00574#0: accepted
+2026-10-26 09:34:48 INFO wording v3-train-00574#1: accepted
+2026-10-26 09:34:52 INFO wording v3-train-00574#2: accepted
+2026-10-26 09:34:52 INFO 125/1000 programs, 375 records, 229 accepted, 2173 s
+2026-10-26 09:35:01 INFO wording train-01571#0: length
+2026-10-26 09:35:08 INFO wording train-01571#1: accepted
+2026-10-26 09:35:17 INFO wording train-01571#2: length
+2026-10-26 09:35:25 INFO wording train-00477#0: length
+2026-10-26 09:35:33 INFO wording train-00477#1: length
+2026-10-26 09:35:38 INFO wording train-00477#2: accepted
+2026-10-26 09:35:45 INFO wording train-01617#0: accepted
+2026-10-26 09:35:51 INFO wording train-01617#1: accepted
+2026-10-26 09:35:57 INFO wording train-01617#2: accepted
+2026-10-26 09:36:00 INFO wording trap-train-00074#0: accepted
+2026-10-26 09:36:03 INFO wording trap-train-00074#1: accepted
+2026-10-26 09:36:06 INFO wording trap-train-00074#2: accepted
+2026-10-26 09:36:10 INFO wording train-00871#0: accepted
+2026-10-26 09:36:15 INFO wording train-00871#1: accepted
+2026-10-26 09:36:18 INFO wording train-00871#2: accepted
+2026-10-26 09:36:23 INFO wording train-00001#0: missing numbers ['08:30']
+2026-10-26 09:36:31 INFO wording train-00001#1: length
+2026-10-26 09:36:34 INFO wording train-00001#2: missing numbers ['30', '08:30']
+2026-10-26 09:36:41 INFO wording v3-train-01135#0: accepted
+2026-10-26 09:36:49 INFO wording v3-train-01135#1: length
+2026-10-26 09:36:55 INFO wording v3-train-01135#2: accepted
+2026-10-26 09:37:03 INFO wording v3-train-00365#0: length
+2026-10-26 09:37:09 INFO wording v3-train-00365#1: accepted
+2026-10-26 09:37:14 INFO wording v3-train-00365#2: missing numbers ['30']
+2026-10-26 09:37:18 INFO wording train-01245#0: accepted
+2026-10-26 09:37:24 INFO wording train-01245#1: accepted
+2026-10-26 09:37:30 INFO wording train-01245#2: accepted
+2026-10-26 09:37:37 INFO wording train-00080#0: length
+2026-10-26 09:37:43 INFO wording train-00080#1: accepted
+2026-10-26 09:37:48 INFO wording train-00080#2: accepted
+2026-10-26 09:37:54 INFO wording train-00863#0: accepted
+2026-10-26 09:37:58 INFO wording train-00863#1: accepted
+2026-10-26 09:38:04 INFO wording train-00863#2: accepted
+2026-10-26 09:38:08 INFO wording train-00767#0: missing numbers ['11:00']
+2026-10-26 09:38:17 INFO wording train-00767#1: length
+2026-10-26 09:38:26 INFO wording train-00767#2: length
+2026-10-26 09:38:31 INFO wording train-01614#0: accepted
+2026-10-26 09:38:37 INFO wording train-01614#1: accepted
+2026-10-26 09:38:42 INFO wording train-01614#2: accepted
+2026-10-26 09:38:51 INFO wording v3-train-00403#0: length
+2026-10-26 09:38:59 INFO wording v3-train-00403#1: length
+2026-10-26 09:39:05 INFO wording v3-train-00403#2: missing numbers ['50']
+2026-10-26 09:39:09 INFO wording v3-train-00566#0: accepted
+2026-10-26 09:39:12 INFO wording v3-train-00566#1: accepted
+2026-10-26 09:39:16 INFO wording v3-train-00566#2: accepted
+2026-10-26 09:39:21 INFO wording v3-train-00301#0: accepted
+2026-10-26 09:39:25 INFO wording v3-train-00301#1: accepted
+2026-10-26 09:39:29 INFO wording v3-train-00301#2: accepted
+2026-10-26 09:39:33 INFO wording train-00410#0: code in text
+2026-10-26 09:39:37 INFO wording train-00410#1: accepted
+2026-10-26 09:39:43 INFO wording train-00410#2: invented numbers ['1', '3', '4', '5']
+2026-10-26 09:39:48 INFO wording train-00172#0: accepted
+2026-10-26 09:39:54 INFO wording train-00172#1: accepted
+2026-10-26 09:40:02 INFO wording train-00172#2: length
+2026-10-26 09:40:07 INFO wording train-00599#0: accepted
+2026-10-26 09:40:15 INFO wording train-00599#1: length
+2026-10-26 09:40:23 INFO wording train-00599#2: length
+2026-10-26 09:40:27 INFO wording train-00873#0: accepted
+2026-10-26 09:40:31 INFO wording train-00873#1: accepted
+2026-10-26 09:40:36 INFO wording train-00873#2: accepted
+2026-10-26 09:40:41 INFO wording trap-train-00159#0: code in text
+2026-10-26 09:40:46 INFO wording trap-train-00159#1: accepted
+2026-10-26 09:40:48 INFO wording trap-train-00159#2: missing numbers ['30', '08:30']
+2026-10-26 09:40:54 INFO wording train-01057#0: accepted
+2026-10-26 09:40:59 INFO wording train-01057#1: accepted
+2026-10-26 09:41:04 INFO wording train-01057#2: missing numbers ['3']
+2026-10-26 09:41:10 INFO wording train-00039#0: accepted
+2026-10-26 09:41:15 INFO wording train-00039#1: accepted
+2026-10-26 09:41:24 INFO wording train-00039#2: length
+2026-10-26 09:41:28 INFO wording v3-train-00437#0: accepted
+2026-10-26 09:41:35 INFO wording v3-train-00437#1: length
+2026-10-26 09:41:40 INFO wording v3-train-00437#2: accepted
+2026-10-26 09:41:49 INFO wording train-01347#0: length
+2026-10-26 09:41:57 INFO wording train-01347#1: length
+2026-10-26 09:42:04 INFO wording train-01347#2: length
+2026-10-26 09:42:04 INFO 150/1000 programs, 450 records, 274 accepted, 2605 s
+2026-10-26 09:42:08 INFO wording train-01213#0: accepted
+2026-10-26 09:42:15 INFO wording train-01213#1: accepted
+2026-10-26 09:42:19 INFO wording train-01213#2: accepted
+2026-10-26 09:42:27 INFO wording train-01581#0: length
+2026-10-26 09:42:36 INFO wording train-01581#1: length
+2026-10-26 09:42:42 INFO wording train-01581#2: accepted
+2026-10-26 09:42:46 INFO wording train-00300#0: accepted
+2026-10-26 09:42:49 INFO wording train-00300#1: accepted
+2026-10-26 09:42:53 INFO wording train-00300#2: accepted
+2026-10-26 09:42:56 INFO wording train-00304#0: missing numbers ['11:00']
+2026-10-26 09:43:00 INFO wording train-00304#1: accepted
+2026-10-26 09:43:05 INFO wording train-00304#2: accepted
+2026-10-26 09:43:14 INFO wording train-00369#0: length
+2026-10-26 09:43:21 INFO wording train-00369#1: accepted
+2026-10-26 09:43:27 INFO wording train-00369#2: accepted
+2026-10-26 09:43:30 INFO wording train-00854#0: accepted
+2026-10-26 09:43:37 INFO wording train-00854#1: missing numbers ['15']
+2026-10-26 09:43:41 INFO wording train-00854#2: accepted
+2026-10-26 09:43:48 INFO wording v3-train-00324#0: accepted
+2026-10-26 09:43:56 INFO wording v3-train-00324#1: length
+2026-10-26 09:44:03 INFO wording v3-train-00324#2: accepted
+2026-10-26 09:44:07 INFO wording v3-train-00545#0: accepted
+2026-10-26 09:44:14 INFO wording v3-train-00545#1: invented numbers ['7']
+2026-10-26 09:44:19 INFO wording v3-train-00545#2: accepted
+2026-10-26 09:44:27 INFO wording train-00995#0: length
+2026-10-26 09:44:33 INFO wording train-00995#1: invented numbers ['7']
+2026-10-26 09:44:38 INFO wording train-00995#2: accepted
+2026-10-26 09:44:43 INFO wording train-00063#0: accepted
+2026-10-26 09:44:49 INFO wording train-00063#1: accepted
+2026-10-26 09:44:52 INFO wording train-00063#2: accepted
+2026-10-26 09:44:58 INFO wording v3-train-00400#0: missing numbers ['50']
+2026-10-26 09:45:03 INFO wording v3-train-00400#1: missing numbers ['50']
+2026-10-26 09:45:08 INFO wording v3-train-00400#2: accepted
+2026-10-26 09:45:12 INFO wording train-01510#0: accepted
+2026-10-26 09:45:16 INFO wording train-01510#1: accepted
+2026-10-26 09:45:19 INFO wording train-01510#2: accepted
+2026-10-26 09:45:24 INFO wording train-01522#0: accepted
+2026-10-26 09:45:30 INFO wording train-01522#1: accepted
+2026-10-26 09:45:35 INFO wording train-01522#2: accepted
+2026-10-26 09:45:42 INFO wording v3-train-00486#0: missing numbers ['100']
+2026-10-26 09:45:47 INFO wording v3-train-00486#1: accepted
+2026-10-26 09:45:55 INFO wording v3-train-00486#2: length
+2026-10-26 09:45:59 INFO wording trap-train-00207#0: accepted
+2026-10-26 09:46:07 INFO wording trap-train-00207#1: length
+2026-10-26 09:46:14 INFO wording trap-train-00207#2: accepted
+2026-10-26 09:46:20 INFO wording train-00521#0: accepted
+2026-10-26 09:46:28 INFO wording train-00521#1: length
+2026-10-26 09:46:34 INFO wording train-00521#2: accepted
+2026-10-26 09:46:38 INFO wording v3-train-01225#0: accepted
+2026-10-26 09:46:42 INFO wording v3-train-01225#1: accepted
+2026-10-26 09:46:47 INFO wording v3-train-01225#2: accepted
+2026-10-26 09:46:50 INFO wording trap-train-00332#0: missing numbers ['10']
+2026-10-26 09:46:55 INFO wording trap-train-00332#1: missing numbers ['10']
+2026-10-26 09:46:58 INFO wording trap-train-00332#2: missing numbers ['10']
+2026-10-26 09:47:02 INFO wording v3-train-00291#0: accepted
+2026-10-26 09:47:07 INFO wording v3-train-00291#1: accepted
+2026-10-26 09:47:12 INFO wording v3-train-00291#2: accepted
+2026-10-26 09:47:18 INFO wording train-00555#0: code in text
+2026-10-26 09:47:23 INFO wording train-00555#1: accepted
+2026-10-26 09:47:30 INFO wording train-00555#2: accepted
+2026-10-26 09:47:37 INFO wording v3-train-01080#0: length
+2026-10-26 09:47:45 INFO wording v3-train-01080#1: length
+2026-10-26 09:47:53 INFO wording v3-train-01080#2: code in text
+2026-10-26 09:48:03 INFO wording train-00748#0: length
+2026-10-26 09:48:12 INFO wording train-00748#1: length
+2026-10-26 09:48:18 INFO wording train-00748#2: accepted
+2026-10-26 09:48:26 INFO wording v3-train-00507#0: length
+2026-10-26 09:48:33 INFO wording v3-train-00507#1: invented numbers ['24']
+2026-10-26 09:48:39 INFO wording v3-train-00507#2: accepted
+2026-10-26 09:48:45 INFO wording train-00631#0: accepted
+2026-10-26 09:48:53 INFO wording train-00631#1: length
+2026-10-26 09:49:00 INFO wording train-00631#2: length
+2026-10-26 09:49:07 INFO wording train-01273#0: length
+2026-10-26 09:49:15 INFO wording train-01273#1: length
+2026-10-26 09:49:20 INFO wording train-01273#2: accepted
+2026-10-26 09:49:20 INFO 175/1000 programs, 525 records, 319 accepted, 3040 s
+2026-10-26 09:49:25 INFO wording train-00935#0: accepted
+2026-10-26 09:49:30 INFO wording train-00935#1: accepted
+2026-10-26 09:49:35 INFO wording train-00935#2: accepted
+2026-10-26 09:49:39 INFO wording v3-train-00438#0: accepted
+2026-10-26 09:49:43 INFO wording v3-train-00438#1: accepted
+2026-10-26 09:49:47 INFO wording v3-train-00438#2: accepted
+2026-10-26 09:49:55 INFO wording train-01021#0: length
+2026-10-26 09:50:03 INFO wording train-01021#1: length
+2026-10-26 09:50:08 INFO wording train-01021#2: accepted
+2026-10-26 09:50:12 INFO wording v3-train-00909#0: accepted
+2026-10-26 09:50:16 INFO wording v3-train-00909#1: accepted
+2026-10-26 09:50:20 INFO wording v3-train-00909#2: invented numbers ['50']
+2026-10-26 09:50:22 INFO wording v3-train-01224#0: missing numbers ['10']
+2026-10-26 09:50:25 INFO wording v3-train-01224#1: missing numbers ['10']
+2026-10-26 09:50:28 INFO wording v3-train-01224#2: missing numbers ['10']
+2026-10-26 09:50:36 INFO wording train-00649#0: length
+2026-10-26 09:50:42 INFO wording train-00649#1: accepted
+2026-10-26 09:50:47 INFO wording train-00649#2: accepted
+2026-10-26 09:50:51 INFO wording v3-train-00966#0: accepted
+2026-10-26 09:50:55 INFO wording v3-train-00966#1: accepted
+2026-10-26 09:51:00 INFO wording v3-train-00966#2: accepted
+2026-10-26 09:51:05 INFO wording v3-train-00514#0: invented numbers ['3', '4']
+2026-10-26 09:51:14 INFO wording v3-train-00514#1: length
+2026-10-26 09:51:22 INFO wording v3-train-00514#2: length
+2026-10-26 09:51:27 INFO wording v3-train-00206#0: accepted
+2026-10-26 09:51:33 INFO wording v3-train-00206#1: missing numbers ['08:30']
+2026-10-26 09:51:39 INFO wording v3-train-00206#2: accepted
+2026-10-26 09:51:44 INFO wording train-00805#0: accepted
+2026-10-26 09:51:50 INFO wording train-00805#1: accepted
+2026-10-26 09:51:57 INFO wording train-00805#2: accepted
+2026-10-26 09:52:02 INFO wording v3-train-00751#0: missing numbers ['10:00']
+2026-10-26 09:52:07 INFO wording v3-train-00751#1: accepted
+2026-10-26 09:52:15 INFO wording v3-train-00751#2: missing numbers ['10:00']
+2026-10-26 09:52:21 INFO wording train-01590#0: accepted
+2026-10-26 09:52:28 INFO wording train-01590#1: accepted
+2026-10-26 09:52:34 INFO wording train-01590#2: accepted
+2026-10-26 09:52:36 INFO wording trap-train-00327#0: missing numbers ['20']
+2026-10-26 09:52:40 INFO wording trap-train-00327#1: accepted
+2026-10-26 09:52:44 INFO wording trap-train-00327#2: missing numbers ['08:00']
+2026-10-26 09:52:50 INFO wording v3-train-00410#0: accepted
+2026-10-26 09:52:56 INFO wording v3-train-00410#1: invented numbers ['30', '7']
+2026-10-26 09:53:03 INFO wording v3-train-00410#2: accepted
+2026-10-26 09:53:09 INFO wording train-00321#0: accepted
+2026-10-26 09:53:14 INFO wording train-00321#1: accepted
+2026-10-26 09:53:22 INFO wording train-00321#2: length
+2026-10-26 09:53:25 INFO wording trap-train-00077#0: accepted
+2026-10-26 09:53:28 INFO wording trap-train-00077#1: accepted
+2026-10-26 09:53:31 INFO wording trap-train-00077#2: accepted
+2026-10-26 09:53:36 INFO wording train-00194#0: accepted
+2026-10-26 09:53:41 INFO wording train-00194#1: missing numbers ['30']
+2026-10-26 09:53:48 INFO wording train-00194#2: accepted
+2026-10-26 09:53:54 INFO wording train-00425#0: accepted
+2026-10-26 09:54:00 INFO wording train-00425#1: length
+2026-10-26 09:54:05 INFO wording train-00425#2: accepted
+2026-10-26 09:54:10 INFO wording train-00446#0: accepted
+2026-10-26 09:54:17 INFO wording train-00446#1: invented numbers ['7']
+2026-10-26 09:54:21 INFO wording train-00446#2: accepted
+2026-10-26 09:54:30 INFO wording train-00158#0: length
+2026-10-26 09:54:40 INFO wording train-00158#1: length
+2026-10-26 09:54:50 INFO wording train-00158#2: length
+2026-10-26 09:54:56 INFO wording v3-train-00036#0: accepted
+2026-10-26 09:55:03 INFO wording v3-train-00036#1: accepted
+2026-10-26 09:55:12 INFO wording v3-train-00036#2: length
+2026-10-26 09:55:20 INFO wording train-01045#0: accepted
+2026-10-26 09:55:26 INFO wording train-01045#1: accepted
+2026-10-26 09:55:33 INFO wording train-01045#2: accepted
+2026-10-26 09:55:41 INFO wording train-00976#0: length
+2026-10-26 09:55:49 INFO wording train-00976#1: length
+2026-10-26 09:55:54 INFO wording train-00976#2: accepted
+2026-10-26 09:56:00 INFO wording v3-train-00968#0: accepted
+2026-10-26 09:56:05 INFO wording v3-train-00968#1: accepted
+2026-10-26 09:56:11 INFO wording v3-train-00968#2: accepted
+2026-10-26 09:56:19 INFO wording v3-train-00823#0: length
+2026-10-26 09:56:27 INFO wording v3-train-00823#1: length
+2026-10-26 09:56:34 INFO wording v3-train-00823#2: accepted
+2026-10-26 09:56:34 INFO 200/1000 programs, 600 records, 366 accepted, 3475 s
+2026-10-26 09:56:38 INFO wording train-01604#0: accepted
+2026-10-26 09:56:42 INFO wording train-01604#1: accepted
+2026-10-26 09:56:46 INFO wording train-01604#2: accepted
+2026-10-26 09:56:51 INFO wording train-01052#0: accepted
+2026-10-26 09:56:56 INFO wording train-01052#1: accepted
+2026-10-26 09:57:00 INFO wording train-01052#2: accepted
+2026-10-26 09:57:07 INFO wording v3-train-01103#0: length
+2026-10-26 09:57:14 INFO wording v3-train-01103#1: accepted
+2026-10-26 09:57:20 INFO wording v3-train-01103#2: accepted
+2026-10-26 09:57:27 INFO wording v3-train-00381#0: accepted
+2026-10-26 09:57:33 INFO wording v3-train-00381#1: accepted
+2026-10-26 09:57:40 INFO wording v3-train-00381#2: length
+2026-10-26 09:57:46 INFO wording trap-train-00362#0: accepted
+2026-10-26 09:57:53 INFO wording trap-train-00362#1: length
+2026-10-26 09:57:59 INFO wording trap-train-00362#2: invented numbers ['1234', '555']
+2026-10-26 09:58:04 INFO wording train-01201#0: accepted
+2026-10-26 09:58:11 INFO wording train-01201#1: length
+2026-10-26 09:58:17 INFO wording train-01201#2: invented numbers ['2', '3', '4', '5']
+2026-10-26 09:58:23 INFO wording v3-train-00068#0: invented numbers ['1', '2', '3', '4', '5']
+2026-10-26 09:58:30 INFO wording v3-train-00068#1: invented numbers ['1', '2', '3', '4', '5']
+2026-10-26 09:58:36 INFO wording v3-train-00068#2: accepted
+2026-10-26 09:58:40 INFO wording train-00718#0: accepted
+2026-10-26 09:58:47 INFO wording train-00718#1: accepted
+2026-10-26 09:58:52 INFO wording train-00718#2: accepted
+2026-10-26 09:58:56 INFO wording v3-train-00888#0: accepted
+2026-10-26 09:58:59 INFO wording v3-train-00888#1: accepted
+2026-10-26 09:59:03 INFO wording v3-train-00888#2: accepted
+2026-10-26 09:59:10 INFO wording train-00281#0: accepted
+2026-10-26 09:59:17 INFO wording train-00281#1: accepted
+2026-10-26 09:59:23 INFO wording train-00281#2: invented numbers ['24']
+2026-10-26 09:59:30 INFO wording train-00517#0: accepted
+2026-10-26 09:59:37 INFO wording train-00517#1: length
+2026-10-26 09:59:45 INFO wording train-00517#2: invented numbers ['3', '4', '5', '7']
+2026-10-26 09:59:52 INFO wording v3-train-01056#0: length
+2026-10-26 09:59:58 INFO wording v3-train-01056#1: accepted
+2026-10-26 10:00:03 INFO wording v3-train-01056#2: accepted
+2026-10-26 10:00:06 INFO wording trap-train-00314#0: accepted
+2026-10-26 10:00:08 INFO wording trap-train-00314#1: accepted
+2026-10-26 10:00:12 INFO wording trap-train-00314#2: accepted
+2026-10-26 10:00:16 INFO wording v3-train-00229#0: invented numbers ['50']
+2026-10-26 10:00:19 INFO wording v3-train-00229#1: missing numbers ['20']
+2026-10-26 10:00:22 INFO wording v3-train-00229#2: accepted
+2026-10-26 10:00:28 INFO wording v3-train-00614#0: missing numbers ['30']
+2026-10-26 10:00:37 INFO wording v3-train-00614#1: length
+2026-10-26 10:00:46 INFO wording v3-train-00614#2: length
+2026-10-26 10:00:49 INFO wording v3-train-00460#0: accepted
+2026-10-26 10:00:53 INFO wording v3-train-00460#1: accepted
+2026-10-26 10:00:57 INFO wording v3-train-00460#2: accepted
+2026-10-26 10:01:02 INFO wording v3-train-00454#0: accepted
+2026-10-26 10:01:08 INFO wording v3-train-00454#1: accepted
+2026-10-26 10:01:14 INFO wording v3-train-00454#2: accepted
+2026-10-26 10:01:17 INFO wording train-00303#0: accepted
+2026-10-26 10:01:21 INFO wording train-00303#1: accepted
+2026-10-26 10:01:24 INFO wording train-00303#2: accepted
+2026-10-26 10:01:30 INFO wording train-01147#0: accepted
+2026-10-26 10:01:36 INFO wording train-01147#1: accepted
+2026-10-26 10:01:41 INFO wording train-01147#2: accepted
+2026-10-26 10:01:48 INFO wording train-00869#0: length
+2026-10-26 10:01:54 INFO wording train-00869#1: accepted
+2026-10-26 10:02:00 INFO wording train-00869#2: accepted
+2026-10-26 10:02:08 INFO wording train-00835#0: length
+2026-10-26 10:02:15 INFO wording train-00835#1: length
+2026-10-26 10:02:21 INFO wording train-00835#2: accepted
+2026-10-26 10:02:30 INFO wording v3-train-01005#0: length
+2026-10-26 10:02:37 INFO wording v3-train-01005#1: accepted
+2026-10-26 10:02:43 INFO wording v3-train-01005#2: missing numbers ['16:00']
+2026-10-26 10:02:50 INFO wording train-00067#0: accepted
+2026-10-26 10:03:00 INFO wording train-00067#1: length
+2026-10-26 10:03:05 INFO wording train-00067#2: accepted
+2026-10-26 10:03:14 INFO wording train-00283#0: length
+2026-10-26 10:03:20 INFO wording train-00283#1: accepted
+2026-10-26 10:03:27 INFO wording train-00283#2: accepted
+2026-10-26 10:03:33 INFO wording train-01102#0: accepted
+2026-10-26 10:03:40 INFO wording train-01102#1: length
+2026-10-26 10:03:46 INFO wording train-01102#2: accepted
+2026-10-26 10:03:46 INFO 225/1000 programs, 675 records, 416 accepted, 3907 s
+2026-10-26 10:03:55 INFO wording trap-train-00036#0: length
+2026-10-26 10:04:02 INFO wording trap-train-00036#1: length
+2026-10-26 10:04:09 INFO wording trap-train-00036#2: accepted
+2026-10-26 10:04:14 INFO wording trap-train-00176#0: accepted
+2026-10-26 10:04:23 INFO wording trap-train-00176#1: length
+2026-10-26 10:04:32 INFO wording trap-train-00176#2: length
+2026-10-26 10:04:40 INFO wording train-01020#0: length
+2026-10-26 10:04:46 INFO wording train-01020#1: missing numbers ['18:00']
+2026-10-26 10:04:52 INFO wording train-01020#2: accepted
+2026-10-26 10:04:59 INFO wording train-00247#0: missing numbers ['100']
+2026-10-26 10:05:04 INFO wording train-00247#1: accepted
+2026-10-26 10:05:09 INFO wording train-00247#2: missing numbers ['100']
+2026-10-26 10:05:17 INFO wording train-00190#0: length
+2026-10-26 10:05:22 INFO wording train-00190#1: accepted
+2026-10-26 10:05:27 INFO wording train-00190#2: accepted
+2026-10-26 10:05:33 INFO wording train-00721#0: accepted
+2026-10-26 10:05:35 INFO wording train-00721#1: accepted
+2026-10-26 10:05:39 INFO wording train-00721#2: missing numbers ['50']
+2026-10-26 10:05:44 INFO wording train-01154#0: invented numbers ['1', '3', '4', '5']
+2026-10-26 10:05:48 INFO wording train-01154#1: accepted
+2026-10-26 10:05:52 INFO wording train-01154#2: accepted
+2026-10-26 10:05:56 INFO wording v3-train-01070#0: accepted
+2026-10-26 10:06:00 INFO wording v3-train-01070#1: accepted
+2026-10-26 10:06:02 INFO wording v3-train-01070#2: missing numbers ['30']
+2026-10-26 10:06:10 INFO wording v3-train-00112#0: length
+2026-10-26 10:06:17 INFO wording v3-train-00112#1: length
+2026-10-26 10:06:25 INFO wording v3-train-00112#2: accepted
+2026-10-26 10:06:29 INFO wording v3-train-00281#0: missing numbers ['20']
+2026-10-26 10:06:36 INFO wording v3-train-00281#1: accepted
+2026-10-26 10:06:40 INFO wording v3-train-00281#2: missing numbers ['20']
+2026-10-26 10:06:48 INFO wording train-00538#0: length
+2026-10-26 10:06:57 INFO wording train-00538#1: length
+2026-10-26 10:07:03 INFO wording train-00538#2: accepted
+2026-10-26 10:07:10 INFO wording train-00377#0: accepted
+2026-10-26 10:07:19 INFO wording train-00377#1: length
+2026-10-26 10:07:27 INFO wording train-00377#2: length
+2026-10-26 10:07:35 INFO wording train-01483#0: length
+2026-10-26 10:07:42 INFO wording train-01483#1: invented numbers ['24']
+2026-10-26 10:07:48 INFO wording train-01483#2: accepted
+2026-10-26 10:07:56 INFO wording train-00566#0: length
+2026-10-26 10:08:04 INFO wording train-00566#1: code in text
+2026-10-26 10:08:12 INFO wording train-00566#2: length
+2026-10-26 10:08:15 INFO wording trap-train-00195#0: accepted
+2026-10-26 10:08:18 INFO wording trap-train-00195#1: accepted
+2026-10-26 10:08:23 INFO wording trap-train-00195#2: accepted
+2026-10-26 10:08:29 INFO wording train-01355#0: missing numbers ['20']
+2026-10-26 10:08:36 INFO wording train-01355#1: missing numbers ['20']
+2026-10-26 10:08:42 INFO wording train-01355#2: missing numbers ['20']
+2026-10-26 10:08:45 INFO wording v3-train-00628#0: accepted
+2026-10-26 10:08:50 INFO wording v3-train-00628#1: accepted
+2026-10-26 10:08:54 INFO wording v3-train-00628#2: accepted
+2026-10-26 10:09:01 INFO wording v3-train-00939#0: accepted
+2026-10-26 10:09:07 INFO wording v3-train-00939#1: accepted
+2026-10-26 10:09:11 INFO wording v3-train-00939#2: accepted
+2026-10-26 10:09:17 INFO wording v3-train-00769#0: accepted
+2026-10-26 10:09:23 INFO wording v3-train-00769#1: accepted
+2026-10-26 10:09:28 INFO wording v3-train-00769#2: accepted
+2026-10-26 10:09:34 INFO wording v3-train-00075#0: accepted
+2026-10-26 10:09:39 INFO wording v3-train-00075#1: accepted
+2026-10-26 10:09:44 INFO wording v3-train-00075#2: accepted
+2026-10-26 10:09:49 INFO wording v3-train-00331#0: accepted
+2026-10-26 10:09:55 INFO wording v3-train-00331#1: length
+2026-10-26 10:10:00 INFO wording v3-train-00331#2: accepted
+2026-10-26 10:10:05 INFO wording train-00574#0: accepted
+2026-10-26 10:10:09 INFO wording train-00574#1: accepted
+2026-10-26 10:10:16 INFO wording train-00574#2: accepted
+2026-10-26 10:10:20 INFO wording v3-train-00354#0: accepted
+2026-10-26 10:10:23 INFO wording v3-train-00354#1: accepted
+2026-10-26 10:10:28 INFO wording v3-train-00354#2: accepted
+2026-10-26 10:10:35 INFO wording train-00143#0: accepted
+2026-10-26 10:10:40 INFO wording train-00143#1: accepted
+2026-10-26 10:10:44 INFO wording train-00143#2: accepted
+2026-10-26 10:10:53 INFO wording train-00073#0: accepted
+2026-10-26 10:11:01 INFO wording train-00073#1: accepted
+2026-10-26 10:11:08 INFO wording train-00073#2: accepted
+2026-10-26 10:11:08 INFO 250/1000 programs, 750 records, 462 accepted, 4349 s
+2026-10-26 10:11:13 INFO wording trap-train-00295#0: accepted
+2026-10-26 10:11:17 INFO wording trap-train-00295#1: accepted
+2026-10-26 10:11:20 INFO wording trap-train-00295#2: accepted
+2026-10-26 10:11:25 INFO wording train-01464#0: missing numbers ['100']
+2026-10-26 10:11:32 INFO wording train-01464#1: accepted
+2026-10-26 10:11:36 INFO wording train-01464#2: missing numbers ['100']
+2026-10-26 10:11:43 INFO wording v3-train-00809#0: code in text
+2026-10-26 10:11:51 INFO wording v3-train-00809#1: code in text
+2026-10-26 10:11:56 INFO wording v3-train-00809#2: accepted
+2026-10-26 10:12:02 INFO wording train-01277#0: accepted
+2026-10-26 10:12:07 INFO wording train-01277#1: accepted
+2026-10-26 10:12:13 INFO wording train-01277#2: accepted
+2026-10-26 10:12:17 INFO wording train-00137#0: accepted
+2026-10-26 10:12:22 INFO wording train-00137#1: accepted
+2026-10-26 10:12:27 INFO wording train-00137#2: accepted
+2026-10-26 10:12:33 INFO wording train-00087#0: missing numbers ['20']
+2026-10-26 10:12:39 INFO wording train-00087#1: missing numbers ['16:00']
+2026-10-26 10:12:45 INFO wording train-00087#2: accepted
+2026-10-26 10:12:48 INFO wording v3-train-00388#0: missing numbers ['20']
+2026-10-26 10:12:51 INFO wording v3-train-00388#1: accepted
+2026-10-26 10:12:53 INFO wording v3-train-00388#2: missing numbers ['20']
+2026-10-26 10:12:59 INFO wording v3-train-00543#0: accepted
+2026-10-26 10:13:05 INFO wording v3-train-00543#1: accepted
+2026-10-26 10:13:12 INFO wording v3-train-00543#2: accepted
+2026-10-26 10:13:16 INFO wording train-00306#0: accepted
+2026-10-26 10:13:21 INFO wording train-00306#1: accepted
+2026-10-26 10:13:26 INFO wording train-00306#2: accepted
+2026-10-26 10:13:32 INFO wording trap-train-00326#0: accepted
+2026-10-26 10:13:38 INFO wording trap-train-00326#1: accepted
+2026-10-26 10:13:45 INFO wording trap-train-00326#2: accepted
+2026-10-26 10:13:53 INFO wording train-00275#0: length
+2026-10-26 10:13:58 INFO wording train-00275#1: missing numbers ['30']
+2026-10-26 10:14:05 INFO wording train-00275#2: accepted
+2026-10-26 10:14:09 INFO wording v3-train-00930#0: trap ask missing
+2026-10-26 10:14:14 INFO wording v3-train-00930#1: accepted
+2026-10-26 10:14:17 INFO wording v3-train-00930#2: trap ask missing
+2026-10-26 10:14:22 INFO wording v3-train-01132#0: accepted
+2026-10-26 10:14:30 INFO wording v3-train-01132#1: length
+2026-10-26 10:14:34 INFO wording v3-train-01132#2: missing numbers ['10']
+2026-10-26 10:14:43 INFO wording train-01306#0: length
+2026-10-26 10:14:50 INFO wording train-01306#1: accepted
+2026-10-26 10:14:58 INFO wording train-01306#2: length
+2026-10-26 10:15:05 INFO wording train-00559#0: length
+2026-10-26 10:15:11 INFO wording train-00559#1: accepted
+2026-10-26 10:15:16 INFO wording train-00559#2: accepted
+2026-10-26 10:15:23 INFO wording train-00296#0: accepted
+2026-10-26 10:15:30 INFO wording train-00296#1: invented numbers ['24']
+2026-10-26 10:15:37 INFO wording train-00296#2: accepted
+2026-10-26 10:15:41 INFO wording train-00308#0: accepted
+2026-10-26 10:15:46 INFO wording train-00308#1: accepted
+2026-10-26 10:15:50 INFO wording train-00308#2: accepted
+2026-10-26 10:15:58 INFO wording v3-train-01205#0: length
+2026-10-26 10:16:04 INFO wording v3-train-01205#1: accepted
+2026-10-26 10:16:12 INFO wording v3-train-01205#2: length
+2026-10-26 10:16:16 INFO wording v3-train-00174#0: accepted
+2026-10-26 10:16:19 INFO wording v3-train-00174#1: accepted
+2026-10-26 10:16:24 INFO wording v3-train-00174#2: accepted
+2026-10-26 10:16:33 INFO wording train-01506#0: length
+2026-10-26 10:16:38 INFO wording train-01506#1: accepted
+2026-10-26 10:16:44 INFO wording train-01506#2: accepted
+2026-10-26 10:16:51 INFO wording v3-train-00956#0: invented numbers ['3', '4', '5', '6', '9']
+2026-10-26 10:16:57 INFO wording v3-train-00956#1: invented numbers ['3', '4', '5']
+2026-10-26 10:17:03 INFO wording v3-train-00956#2: accepted
+2026-10-26 10:17:08 INFO wording train-00182#0: accepted
+2026-10-26 10:17:14 INFO wording train-00182#1: missing numbers ['10:00']
+2026-10-26 10:17:21 INFO wording train-00182#2: accepted
+2026-10-26 10:17:26 INFO wording v3-train-00957#0: accepted
+2026-10-26 10:17:31 INFO wording v3-train-00957#1: accepted
+2026-10-26 10:17:36 INFO wording v3-train-00957#2: accepted
+2026-10-26 10:17:41 INFO wording v3-train-00959#0: accepted
+2026-10-26 10:17:47 INFO wording v3-train-00959#1: accepted
+2026-10-26 10:17:53 INFO wording v3-train-00959#2: accepted
+2026-10-26 10:18:00 INFO wording v3-train-00820#0: accepted
+2026-10-26 10:18:08 INFO wording v3-train-00820#1: length
+2026-10-26 10:18:17 INFO wording v3-train-00820#2: length
+2026-10-26 10:18:17 INFO 275/1000 programs, 825 records, 511 accepted, 4778 s
+2026-10-26 10:18:25 INFO wording train-00530#0: missing numbers ['50']
+2026-10-26 10:18:33 INFO wording train-00530#1: length
+2026-10-26 10:18:39 INFO wording train-00530#2: invented numbers ['7']
+2026-10-26 10:18:47 INFO wording train-01399#0: length
+2026-10-26 10:18:56 INFO wording train-01399#1: length
+2026-10-26 10:19:04 INFO wording train-01399#2: accepted
+2026-10-26 10:19:13 INFO wording train-01441#0: length
+2026-10-26 10:19:19 INFO wording train-01441#1: invented numbers ['2']
+2026-10-26 10:19:26 INFO wording train-01441#2: length
+2026-10-26 10:19:35 INFO wording train-00347#0: length
+2026-10-26 10:19:41 INFO wording train-00347#1: accepted
+2026-10-26 10:19:47 INFO wording train-00347#2: accepted
+2026-10-26 10:19:54 INFO wording v3-train-00744#0: accepted
+2026-10-26 10:19:59 INFO wording v3-train-00744#1: missing numbers ['20']
+2026-10-26 10:20:06 INFO wording v3-train-00744#2: accepted
+2026-10-26 10:20:10 INFO wording trap-train-00289#0: accepted
+2026-10-26 10:20:14 INFO wording trap-train-00289#1: accepted
+2026-10-26 10:20:17 INFO wording trap-train-00289#2: accepted
+2026-10-26 10:20:23 INFO wording train-00318#0: accepted
+2026-10-26 10:20:29 INFO wording train-00318#1: accepted
+2026-10-26 10:20:34 INFO wording train-00318#2: accepted
+2026-10-26 10:20:37 INFO wording trap-train-00059#0: accepted
+2026-10-26 10:20:41 INFO wording trap-train-00059#1: missing numbers ['30']
+2026-10-26 10:20:44 INFO wording trap-train-00059#2: missing numbers ['30']
+2026-10-26 10:20:51 INFO wording v3-train-01190#0: missing numbers ['20']
+2026-10-26 10:20:56 INFO wording v3-train-01190#1: missing numbers ['20']
+2026-10-26 10:21:02 INFO wording v3-train-01190#2: accepted
+2026-10-26 10:21:10 INFO wording v3-train-01179#0: length
+2026-10-26 10:21:16 INFO wording v3-train-01179#1: missing numbers ['17:30']
+2026-10-26 10:21:23 INFO wording v3-train-01179#2: invented numbers ['24']
+2026-10-26 10:21:29 INFO wording v3-train-00284#0: accepted
+2026-10-26 10:21:37 INFO wording v3-train-00284#1: code in text
+2026-10-26 10:21:43 INFO wording v3-train-00284#2: invented numbers ['3', '4', '5', '6', '7']
+2026-10-26 10:21:47 INFO wording train-00059#0: accepted
+2026-10-26 10:21:51 INFO wording train-00059#1: accepted
+2026-10-26 10:21:59 INFO wording train-00059#2: length
+2026-10-26 10:22:03 INFO wording v3-train-00497#0: accepted
+2026-10-26 10:22:12 INFO wording v3-train-00497#1: length
+2026-10-26 10:22:17 INFO wording v3-train-00497#2: missing numbers ['15']
+2026-10-26 10:22:21 INFO wording v3-train-00650#0: accepted
+2026-10-26 10:22:24 INFO wording v3-train-00650#1: accepted
+2026-10-26 10:22:28 INFO wording v3-train-00650#2: accepted
+2026-10-26 10:22:35 INFO wording train-01566#0: accepted
+2026-10-26 10:22:41 INFO wording train-01566#1: accepted
+2026-10-26 10:22:47 INFO wording train-01566#2: accepted
+2026-10-26 10:22:51 INFO wording train-01553#0: accepted
+2026-10-26 10:22:57 INFO wording train-01553#1: accepted
+2026-10-26 10:23:01 INFO wording train-01553#2: accepted
+2026-10-26 10:23:08 INFO wording v3-train-01075#0: length
+2026-10-26 10:23:13 INFO wording v3-train-01075#1: accepted
+2026-10-26 10:23:20 INFO wording v3-train-01075#2: length
+2026-10-26 10:23:24 INFO wording train-00050#0: accepted
+2026-10-26 10:23:28 INFO wording train-00050#1: accepted
+2026-10-26 10:23:32 INFO wording train-00050#2: accepted
+2026-10-26 10:23:38 INFO wording v3-train-00431#0: accepted
+2026-10-26 10:23:46 INFO wording v3-train-00431#1: length
+2026-10-26 10:23:52 INFO wording v3-train-00431#2: accepted
+2026-10-26 10:23:57 INFO wording train-00295#0: accepted
+2026-10-26 10:24:03 INFO wording train-00295#1: accepted
+2026-10-26 10:24:08 INFO wording train-00295#2: accepted
+2026-10-26 10:24:14 INFO wording train-00328#0: accepted
+2026-10-26 10:24:19 INFO wording train-00328#1: accepted
+2026-10-26 10:24:25 INFO wording train-00328#2: accepted
+2026-10-26 10:24:29 INFO wording v3-train-01212#0: accepted
+2026-10-26 10:24:33 INFO wording v3-train-01212#1: accepted
+2026-10-26 10:24:37 INFO wording v3-train-01212#2: accepted
+2026-10-26 10:24:40 INFO wording v3-train-00557#0: accepted
+2026-10-26 10:24:43 INFO wording v3-train-00557#1: accepted
+2026-10-26 10:24:47 INFO wording v3-train-00557#2: accepted
+2026-10-26 10:24:55 INFO wording train-00473#0: length
+2026-10-26 10:25:00 INFO wording train-00473#1: accepted
+2026-10-26 10:25:06 INFO wording train-00473#2: accepted
+2026-10-26 10:25:10 INFO wording train-01053#0: accepted
+2026-10-26 10:25:14 INFO wording train-01053#1: accepted
+2026-10-26 10:25:18 INFO wording train-01053#2: accepted
+2026-10-26 10:25:18 INFO 300/1000 programs, 900 records, 560 accepted, 5199 s
+2026-10-26 10:25:24 INFO wording trap-train-00055#0: accepted
+2026-10-26 10:25:29 INFO wording trap-train-00055#1: accepted
+2026-10-26 10:25:35 INFO wording trap-train-00055#2: accepted
+2026-10-26 10:25:41 INFO wording v3-train-00920#0: accepted
+2026-10-26 10:25:46 INFO wording v3-train-00920#1: missing numbers ['16:00']
+2026-10-26 10:25:52 INFO wording v3-train-00920#2: accepted
+2026-10-26 10:25:58 INFO wording train-01352#0: accepted
+2026-10-26 10:26:05 INFO wording train-01352#1: missing numbers ['40']
+2026-10-26 10:26:12 INFO wording train-01352#2: length
+2026-10-26 10:26:17 INFO wording train-01591#0: accepted
+2026-10-26 10:26:26 INFO wording train-01591#1: length
+2026-10-26 10:26:33 INFO wording train-01591#2: accepted
+2026-10-26 10:26:37 INFO wording v3-train-00781#0: missing numbers ['50']
+2026-10-26 10:26:41 INFO wording v3-train-00781#1: invented numbers ['7']
+2026-10-26 10:26:46 INFO wording v3-train-00781#2: accepted
+2026-10-26 10:26:52 INFO wording v3-train-00317#0: accepted
+2026-10-26 10:26:57 INFO wording v3-train-00317#1: accepted
+2026-10-26 10:27:03 INFO wording v3-train-00317#2: accepted
+2026-10-26 10:27:06 INFO wording trap-train-00225#0: accepted
+2026-10-26 10:27:09 INFO wording trap-train-00225#1: accepted
+2026-10-26 10:27:12 INFO wording trap-train-00225#2: accepted
+2026-10-26 10:27:18 INFO wording v3-train-01218#0: accepted
+2026-10-26 10:27:26 INFO wording v3-train-01218#1: length
+2026-10-26 10:27:34 INFO wording v3-train-01218#2: length
+2026-10-26 10:27:38 INFO wording trap-train-00245#0: accepted
+2026-10-26 10:27:41 INFO wording trap-train-00245#1: accepted
+2026-10-26 10:27:44 INFO wording trap-train-00245#2: accepted
+2026-10-26 10:27:53 INFO wording v3-train-00154#0: length
+2026-10-26 10:28:01 INFO wording v3-train-00154#1: accepted
+2026-10-26 10:28:10 INFO wording v3-train-00154#2: length
+2026-10-26 10:28:15 INFO wording train-00343#0: accepted
+2026-10-26 10:28:21 INFO wording train-00343#1: missing numbers ['100']
+2026-10-26 10:28:27 INFO wording train-00343#2: accepted
+2026-10-26 10:28:34 INFO wording v3-train-00062#0: length
+2026-10-26 10:28:40 INFO wording v3-train-00062#1: accepted
+2026-10-26 10:28:47 INFO wording v3-train-00062#2: accepted
+2026-10-26 10:28:53 INFO wording v3-train-00045#0: accepted
+2026-10-26 10:29:00 INFO wording v3-train-00045#1: accepted
+2026-10-26 10:29:08 INFO wording v3-train-00045#2: accepted
+2026-10-26 10:29:12 INFO wording train-00122#0: accepted
+2026-10-26 10:29:18 INFO wording train-00122#1: accepted
+2026-10-26 10:29:25 INFO wording train-00122#2: missing numbers ['10']
+2026-10-26 10:29:29 INFO wording train-01270#0: accepted
+2026-10-26 10:29:34 INFO wording train-01270#1: accepted
+2026-10-26 10:29:41 INFO wording train-01270#2: missing numbers ['50']
+2026-10-26 10:29:46 INFO wording v3-train-01071#0: accepted
+2026-10-26 10:29:52 INFO wording v3-train-01071#1: accepted
+2026-10-26 10:29:58 INFO wording v3-train-01071#2: accepted
+2026-10-26 10:30:03 INFO wording train-00359#0: missing numbers ['08:00']
+2026-10-26 10:30:07 INFO wording train-00359#1: accepted
+2026-10-26 10:30:12 INFO wording train-00359#2: missing numbers ['08:00']
+2026-10-26 10:30:15 INFO wording trap-train-00320#0: missing numbers ['20']
+2026-10-26 10:30:19 INFO wording trap-train-00320#1: accepted
+2026-10-26 10:30:23 INFO wording trap-train-00320#2: accepted
+2026-10-26 10:30:31 INFO wording train-00091#0: accepted
+2026-10-26 10:30:35 INFO wording train-00091#1: missing numbers ['17:30']
+2026-10-26 10:30:42 INFO wording train-00091#2: accepted
+2026-10-26 10:30:49 INFO wording train-00942#0: accepted
+2026-10-26 10:30:56 INFO wording train-00942#1: length
+2026-10-26 10:31:04 INFO wording train-00942#2: length
+2026-10-26 10:31:12 INFO wording v3-train-00798#0: length
+2026-10-26 10:31:16 INFO wording v3-train-00798#1: accepted
+2026-10-26 10:31:20 INFO wording v3-train-00798#2: accepted
+2026-10-26 10:31:25 INFO wording train-00462#0: accepted
+2026-10-26 10:31:31 INFO wording train-00462#1: accepted
+2026-10-26 10:31:38 INFO wording train-00462#2: length
+2026-10-26 10:31:42 INFO wording trap-train-00387#0: accepted
+2026-10-26 10:31:46 INFO wording trap-train-00387#1: accepted
+2026-10-26 10:31:50 INFO wording trap-train-00387#2: invented numbers ['50']
+2026-10-26 10:31:54 INFO wording v3-train-00455#0: accepted
+2026-10-26 10:31:59 INFO wording v3-train-00455#1: accepted
+2026-10-26 10:32:02 INFO wording v3-train-00455#2: accepted
+2026-10-26 10:32:09 INFO wording v3-train-00641#0: accepted
+2026-10-26 10:32:17 INFO wording v3-train-00641#1: length
+2026-10-26 10:32:24 INFO wording v3-train-00641#2: length
+2026-10-26 10:32:24 INFO 325/1000 programs, 975 records, 610 accepted, 5625 s
+2026-10-26 10:32:33 INFO wording trap-train-00342#0: length
+2026-10-26 10:32:42 INFO wording trap-train-00342#1: code in text
+2026-10-26 10:32:48 INFO wording trap-train-00342#2: missing numbers ['20']
+2026-10-26 10:32:57 INFO wording train-01047#0: length
+2026-10-26 10:33:04 INFO wording train-01047#1: accepted
+2026-10-26 10:33:09 INFO wording train-01047#2: accepted
+2026-10-26 10:33:13 INFO wording train-00046#0: accepted
+2026-10-26 10:33:18 INFO wording train-00046#1: accepted
+2026-10-26 10:33:22 INFO wording train-00046#2: accepted
+2026-10-26 10:33:27 INFO wording train-01507#0: accepted
+2026-10-26 10:33:32 INFO wording train-01507#1: accepted
+2026-10-26 10:33:38 INFO wording train-01507#2: accepted
+2026-10-26 10:33:42 INFO wording train-01233#0: accepted
+2026-10-26 10:33:46 INFO wording train-01233#1: accepted
+2026-10-26 10:33:51 INFO wording train-01233#2: accepted
+2026-10-26 10:33:57 INFO wording train-00586#0: accepted
+2026-10-26 10:34:04 INFO wording train-00586#1: accepted
+2026-10-26 10:39:10 INFO offline model Qwen/Qwen2.5-7B-Instruct: apache-2.0 at a09a35458c (owner-reviewed lock)
+2026-10-26 10:39:16 INFO 1000 seed programs x 3 wordings; 992 records already done
+2026-10-26 10:39:35 INFO 25/1000 programs, 992 records, 623 accepted, 0 s
+2026-10-26 10:39:35 INFO 50/1000 programs, 992 records, 623 accepted, 0 s
+2026-10-26 10:39:35 INFO 75/1000 programs, 992 records, 623 accepted, 0 s
+2026-10-26 10:39:35 INFO 100/1000 programs, 992 records, 623 accepted, 0 s
+2026-10-26 10:39:35 INFO 125/1000 programs, 992 records, 623 accepted, 0 s
+2026-10-26 10:39:35 INFO 150/1000 programs, 992 records, 623 accepted, 0 s
+2026-10-26 10:39:36 INFO 175/1000 programs, 992 records, 623 accepted, 0 s
+2026-10-26 10:39:36 INFO 200/1000 programs, 992 records, 623 accepted, 0 s
+2026-10-26 10:39:36 INFO 225/1000 programs, 992 records, 623 accepted, 1 s
+2026-10-26 10:39:36 INFO 250/1000 programs, 992 records, 623 accepted, 1 s
+2026-10-26 10:39:36 INFO 275/1000 programs, 992 records, 623 accepted, 1 s
+2026-10-26 10:39:36 INFO 300/1000 programs, 992 records, 623 accepted, 1 s
+2026-10-26 10:39:36 INFO 325/1000 programs, 992 records, 623 accepted, 1 s
+2026-10-26 10:39:45 INFO wording train-00586#2: code in text
+2026-10-26 10:39:53 INFO wording v3-train-00715#0: length
+2026-10-26 10:39:58 INFO wording v3-train-00715#1: accepted
+2026-10-26 10:40:04 INFO wording v3-train-00715#2: accepted
+2026-10-26 10:40:06 INFO wording v3-train-00443#0: missing numbers ['30']
+2026-10-26 10:40:09 INFO wording v3-train-00443#1: missing numbers ['30']
+2026-10-26 10:40:12 INFO wording v3-train-00443#2: missing numbers ['30']
+2026-10-26 10:40:19 INFO wording train-00829#0: missing numbers ['30']
+2026-10-26 10:40:25 INFO wording train-00829#1: accepted
+2026-10-26 10:40:32 INFO wording train-00829#2: missing numbers ['30']
+2026-10-26 10:40:38 INFO wording v3-train-00061#0: accepted
+2026-10-26 10:40:45 INFO wording v3-train-00061#1: length
+2026-10-26 10:40:51 INFO wording v3-train-00061#2: accepted
+2026-10-26 10:40:56 INFO wording train-00694#0: accepted
+2026-10-26 10:41:03 INFO wording train-00694#1: accepted
+2026-10-26 10:41:08 INFO wording train-00694#2: accepted
+2026-10-26 10:41:15 INFO wording train-01402#0: accepted
+2026-10-26 10:41:23 INFO wording train-01402#1: length
+2026-10-26 10:41:30 INFO wording train-01402#2: accepted
+2026-10-26 10:41:34 INFO wording v3-train-00907#0: accepted
+2026-10-26 10:41:38 INFO wording v3-train-00907#1: missing numbers ['20']
+2026-10-26 10:41:42 INFO wording v3-train-00907#2: missing numbers ['11:00']
+2026-10-26 10:41:46 INFO wording trap-train-00161#0: accepted
+2026-10-26 10:41:50 INFO wording trap-train-00161#1: missing numbers ['10']
+2026-10-26 10:41:53 INFO wording trap-train-00161#2: missing numbers ['10']
+2026-10-26 10:41:58 INFO wording trap-train-00392#0: accepted
+2026-10-26 10:42:02 INFO wording trap-train-00392#1: accepted
+2026-10-26 10:42:09 INFO wording trap-train-00392#2: accepted
+2026-10-26 10:42:17 INFO wording train-00989#0: length
+2026-10-26 10:42:22 INFO wording train-00989#1: accepted
+2026-10-26 10:42:28 INFO wording train-00989#2: accepted
+2026-10-26 10:42:33 INFO wording train-01339#0: accepted
+2026-10-26 10:42:39 INFO wording train-01339#1: accepted
+2026-10-26 10:42:44 INFO wording train-01339#2: accepted
+2026-10-26 10:42:48 INFO wording trap-train-00008#0: missing numbers ['30']
+2026-10-26 10:42:52 INFO wording trap-train-00008#1: accepted
+2026-10-26 10:42:55 INFO wording trap-train-00008#2: accepted
+2026-10-26 10:43:03 INFO wording v3-train-00665#0: length
+2026-10-26 10:43:09 INFO wording v3-train-00665#1: missing numbers ['50']
+2026-10-26 10:43:16 INFO wording v3-train-00665#2: length
+2026-10-26 10:43:22 INFO wording train-01026#0: accepted
+2026-10-26 10:43:30 INFO wording train-01026#1: length
+2026-10-26 10:43:38 INFO wording train-01026#2: length
+2026-10-26 10:43:44 INFO wording v3-train-01138#0: accepted
+2026-10-26 10:43:48 INFO wording v3-train-01138#1: accepted
+2026-10-26 10:43:52 INFO wording v3-train-01138#2: accepted
+2026-10-26 10:44:00 INFO wording v3-train-00535#0: length
+2026-10-26 10:44:05 INFO wording v3-train-00535#1: accepted
+2026-10-26 10:44:10 INFO wording v3-train-00535#2: accepted
+2026-10-26 10:44:14 INFO wording trap-train-00115#0: accepted
+2026-10-26 10:44:16 INFO wording trap-train-00115#1: accepted
+2026-10-26 10:44:19 INFO wording trap-train-00115#2: accepted
+2026-10-26 10:44:27 INFO wording train-00820#0: length
+2026-10-26 10:44:33 INFO wording train-00820#1: accepted
+2026-10-26 10:44:37 INFO wording train-00820#2: accepted
+2026-10-26 10:44:42 INFO wording train-00877#0: accepted
+2026-10-26 10:44:48 INFO wording train-00877#1: accepted
+2026-10-26 10:44:55 INFO wording train-00877#2: length
+2026-10-26 10:44:55 INFO 350/1000 programs, 1050 records, 658 accepted, 320 s
+2026-10-26 10:45:01 INFO wording train-01574#0: accepted
+2026-10-26 10:45:08 INFO wording train-01574#1: length
+2026-10-26 10:45:13 INFO wording train-01574#2: invented numbers ['24']
+2026-10-26 10:45:19 INFO wording train-00899#0: invented numbers ['7']
+2026-10-26 10:45:24 INFO wording train-00899#1: invented numbers ['7']
+2026-10-26 10:45:30 INFO wording train-00899#2: accepted
+2026-10-26 10:45:34 INFO wording v3-train-00326#0: invented numbers ['24']
+2026-10-26 10:45:42 INFO wording v3-train-00326#1: length
+2026-10-26 10:45:47 INFO wording v3-train-00326#2: invented numbers ['3', '4', '5', '6']
+2026-10-26 10:45:53 INFO wording train-01296#0: accepted
+2026-10-26 10:46:01 INFO wording train-01296#1: length
+2026-10-26 10:46:08 INFO wording train-01296#2: accepted
+2026-10-26 10:46:16 INFO wording v3-train-01148#0: length
+2026-10-26 10:46:22 INFO wording v3-train-01148#1: accepted
+2026-10-26 10:46:29 INFO wording v3-train-01148#2: accepted
+2026-10-26 10:46:37 INFO wording train-00557#0: length
+2026-10-26 10:46:46 INFO wording train-00557#1: length
+2026-10-26 10:46:54 INFO wording train-00557#2: length
+2026-10-26 10:46:58 INFO wording v3-train-01229#0: accepted
+2026-10-26 10:47:05 INFO wording v3-train-01229#1: accepted
+2026-10-26 10:47:09 INFO wording v3-train-01229#2: missing numbers ['09:00']
+2026-10-26 10:47:16 INFO wording trap-train-00384#0: missing numbers ['20']
+2026-10-26 10:47:22 INFO wording trap-train-00384#1: missing numbers ['20', '09:00']
+2026-10-26 10:47:28 INFO wording trap-train-00384#2: accepted
+2026-10-26 10:47:34 INFO wording train-01436#0: invented numbers ['4', '5', '8']
+2026-10-26 10:47:41 INFO wording train-01436#1: accepted
+2026-10-26 10:47:48 INFO wording train-01436#2: accepted
+2026-10-26 10:47:56 INFO wording train-00166#0: length
+2026-10-26 10:48:01 INFO wording train-00166#1: invented numbers ['7']
+2026-10-26 10:48:05 INFO wording train-00166#2: accepted
+2026-10-26 10:48:13 INFO wording v3-train-00851#0: length
+2026-10-26 10:48:20 INFO wording v3-train-00851#1: accepted
+2026-10-26 10:48:29 INFO wording v3-train-00851#2: length
+2026-10-26 10:48:35 INFO wording train-00262#0: accepted
+2026-10-26 10:48:40 INFO wording train-00262#1: accepted
+2026-10-26 10:48:45 INFO wording train-00262#2: accepted
+2026-10-26 10:48:50 INFO wording train-01133#0: accepted
+2026-10-26 10:48:58 INFO wording train-01133#1: length
+2026-10-26 10:49:03 INFO wording train-01133#2: missing numbers ['08:30']
+2026-10-26 10:49:10 INFO wording train-00692#0: accepted
+2026-10-26 10:49:18 INFO wording train-00692#1: length
+2026-10-26 10:49:25 INFO wording train-00692#2: accepted
+2026-10-26 10:49:29 INFO wording v3-train-00910#0: accepted
+2026-10-26 10:49:36 INFO wording v3-train-00910#1: accepted
+2026-10-26 10:49:42 INFO wording v3-train-00910#2: accepted
+2026-10-26 10:49:47 INFO wording trap-train-00196#0: accepted
+2026-10-26 10:49:51 INFO wording trap-train-00196#1: accepted
+2026-10-26 10:49:56 INFO wording trap-train-00196#2: accepted
+2026-10-26 10:50:00 INFO wording trap-train-00281#0: accepted
+2026-10-26 10:50:04 INFO wording trap-train-00281#1: accepted
+2026-10-26 10:50:09 INFO wording trap-train-00281#2: accepted
+2026-10-26 10:50:15 INFO wording train-01127#0: accepted
+2026-10-26 10:50:22 INFO wording train-01127#1: accepted
+2026-10-26 10:50:28 INFO wording train-01127#2: accepted
+2026-10-26 10:50:32 INFO wording train-00876#0: accepted
+2026-10-26 10:50:35 INFO wording train-00876#1: accepted
+2026-10-26 10:50:39 INFO wording train-00876#2: accepted
+2026-10-26 10:50:43 INFO wording trap-train-00046#0: accepted
+2026-10-26 10:50:48 INFO wording trap-train-00046#1: accepted
+2026-10-26 10:50:53 INFO wording trap-train-00046#2: accepted
+2026-10-26 10:50:57 INFO wording v3-train-00942#0: accepted
+2026-10-26 10:51:01 INFO wording v3-train-00942#1: missing numbers ['2']
+2026-10-26 10:51:05 INFO wording v3-train-00942#2: accepted
+2026-10-26 10:51:12 INFO wording v3-train-00501#0: accepted
+2026-10-26 10:51:19 INFO wording v3-train-00501#1: accepted
+2026-10-26 10:51:26 INFO wording v3-train-00501#2: invented numbers ['2', '3', '4', '5', '6', '7']
+2026-10-26 10:51:32 INFO wording v3-train-00067#0: accepted
+2026-10-26 10:51:38 INFO wording v3-train-00067#1: accepted
+2026-10-26 10:51:43 INFO wording v3-train-00067#2: accepted
+2026-10-26 10:51:45 INFO wording trap-train-00373#0: missing numbers ['20']
+2026-10-26 10:51:48 INFO wording trap-train-00373#1: accepted
+2026-10-26 10:51:51 INFO wording trap-train-00373#2: missing numbers ['20']
+2026-10-26 10:51:57 INFO wording v3-train-00691#0: accepted
+2026-10-26 10:52:02 INFO wording v3-train-00691#1: missing numbers ['10']
+2026-10-26 10:52:09 INFO wording v3-train-00691#2: accepted
+2026-10-26 10:52:09 INFO 375/1000 programs, 1125 records, 705 accepted, 754 s
+2026-10-26 10:52:12 INFO wording v3-train-01167#0: accepted
+2026-10-26 10:52:14 INFO wording v3-train-01167#1: accepted
+2026-10-26 10:52:18 INFO wording v3-train-01167#2: missing numbers ['20']
+2026-10-26 10:52:25 INFO wording v3-train-00944#0: length
+2026-10-26 10:52:34 INFO wording v3-train-00944#1: length
+2026-10-26 10:52:40 INFO wording v3-train-00944#2: accepted
+2026-10-26 10:52:44 INFO wording trap-train-00204#0: accepted
+2026-10-26 10:52:47 INFO wording trap-train-00204#1: missing numbers ['10']
+2026-10-26 10:52:50 INFO wording trap-train-00204#2: missing numbers ['10']
+2026-10-26 10:52:56 INFO wording train-01312#0: accepted
+2026-10-26 10:53:01 INFO wording train-01312#1: accepted
+2026-10-26 10:53:08 INFO wording train-01312#2: code in text
+2026-10-26 10:53:12 INFO wording train-00305#0: accepted
+2026-10-26 10:53:17 INFO wording train-00305#1: accepted
+2026-10-26 10:53:22 INFO wording train-00305#2: accepted
+2026-10-26 10:53:29 INFO wording train-00128#0: accepted
+2026-10-26 10:53:37 INFO wording train-00128#1: length
+2026-10-26 10:53:43 INFO wording train-00128#2: accepted
+2026-10-26 10:53:47 INFO wording v3-train-01173#0: accepted
+2026-10-26 10:53:55 INFO wording v3-train-01173#1: accepted
+2026-10-26 10:53:59 INFO wording v3-train-01173#2: accepted
+2026-10-26 10:54:03 INFO wording v3-train-00426#0: accepted
+2026-10-26 10:54:10 INFO wording v3-train-00426#1: accepted
+2026-10-26 10:54:14 INFO wording v3-train-00426#2: accepted
+2026-10-26 10:54:21 INFO wording train-00169#0: accepted
+2026-10-26 10:54:27 INFO wording train-00169#1: accepted
+2026-10-26 10:54:34 INFO wording train-00169#2: accepted
+2026-10-26 10:54:39 INFO wording v3-train-00716#0: accepted
+2026-10-26 10:54:43 INFO wording v3-train-00716#1: accepted
+2026-10-26 10:54:48 INFO wording v3-train-00716#2: accepted
+2026-10-26 10:54:57 INFO wording v3-train-00840#0: length
+2026-10-26 10:55:04 INFO wording v3-train-00840#1: length
+2026-10-26 10:55:11 INFO wording v3-train-00840#2: accepted
+2026-10-26 10:55:16 INFO wording train-01151#0: accepted
+2026-10-26 10:55:22 INFO wording train-01151#1: accepted
+2026-10-26 10:55:28 INFO wording train-01151#2: accepted
+2026-10-26 10:55:33 INFO wording v3-train-00275#0: missing numbers ['40', '18:00']
+2026-10-26 10:55:42 INFO wording v3-train-00275#1: length
+2026-10-26 10:55:47 INFO wording v3-train-00275#2: missing numbers ['40']
+2026-10-26 10:55:53 INFO wording train-01450#0: accepted
+2026-10-26 10:55:57 INFO wording train-01450#1: accepted
+2026-10-26 10:56:01 INFO wording train-01450#2: accepted
+2026-10-26 10:56:07 INFO wording train-01265#0: missing numbers ['100']
+2026-10-26 10:56:15 INFO wording train-01265#1: length
+2026-10-26 10:56:23 INFO wording train-01265#2: accepted
+2026-10-26 10:56:29 INFO wording v3-train-00597#0: accepted
+2026-10-26 10:56:37 INFO wording v3-train-00597#1: length
+2026-10-26 10:56:43 INFO wording v3-train-00597#2: accepted
+2026-10-26 10:56:46 INFO wording v3-train-00248#0: accepted
+2026-10-26 10:56:49 INFO wording v3-train-00248#1: accepted
+2026-10-26 10:56:52 INFO wording v3-train-00248#2: accepted
+2026-10-26 10:56:57 INFO wording train-00078#0: accepted
+2026-10-26 10:57:04 INFO wording train-00078#1: accepted
+2026-10-26 10:57:08 INFO wording train-00078#2: accepted
+2026-10-26 10:57:15 INFO wording v3-train-00563#0: accepted
+2026-10-26 10:57:22 INFO wording v3-train-00563#1: accepted
+2026-10-26 10:57:28 INFO wording v3-train-00563#2: accepted
+2026-10-26 10:57:36 INFO wording train-00556#0: code in text
+2026-10-26 10:57:41 INFO wording train-00556#1: accepted
+2026-10-26 10:57:50 INFO wording train-00556#2: length
+2026-10-26 10:57:57 INFO wording trap-train-00010#0: trap ask missing
+2026-10-26 10:58:03 INFO wording trap-train-00010#1: accepted
+2026-10-26 10:58:10 INFO wording trap-train-00010#2: accepted
+2026-10-26 10:58:18 INFO wording trap-train-00213#0: length
+2026-10-26 10:58:24 INFO wording trap-train-00213#1: missing numbers ['30']
+2026-10-26 10:58:30 INFO wording trap-train-00213#2: accepted
+2026-10-26 10:58:37 INFO wording v3-train-01052#0: length
+2026-10-26 10:58:43 INFO wording v3-train-01052#1: accepted
+2026-10-26 10:58:49 INFO wording v3-train-01052#2: accepted
+2026-10-26 10:58:56 INFO wording train-00101#0: accepted
+2026-10-26 10:59:02 INFO wording train-00101#1: accepted
+2026-10-26 10:59:09 INFO wording train-00101#2: length
+2026-10-26 10:59:15 INFO wording train-01091#0: accepted
+2026-10-26 10:59:22 INFO wording train-01091#1: accepted
+2026-10-26 10:59:28 INFO wording train-01091#2: accepted
+2026-10-26 10:59:28 INFO 400/1000 programs, 1200 records, 758 accepted, 1193 s
+2026-10-26 10:59:34 INFO wording train-00972#0: accepted
+2026-10-26 10:59:38 INFO wording train-00972#1: invented numbers ['2', '3', '4', '5']
+2026-10-26 10:59:45 INFO wording train-00972#2: invented numbers ['2', '3', '4', '5', '6', '7', '9']
+2026-10-26 10:59:50 INFO wording train-00577#0: missing numbers ['10:00']
+2026-10-26 10:59:58 INFO wording train-00577#1: length
+2026-10-26 11:00:06 INFO wording train-00577#2: length
+2026-10-26 11:00:10 INFO wording train-00192#0: accepted
+2026-10-26 11:00:16 INFO wording train-00192#1: accepted
+2026-10-26 11:00:21 INFO wording train-00192#2: accepted
+2026-10-26 11:00:28 INFO wording v3-train-00515#0: accepted
+2026-10-26 11:00:36 INFO wording v3-train-00515#1: length
+2026-10-26 11:00:42 INFO wording v3-train-00515#2: accepted
+2026-10-26 11:00:50 INFO wording train-00472#0: length
+2026-10-26 11:00:58 INFO wording train-00472#1: length
+2026-10-26 11:01:04 INFO wording train-00472#2: accepted
+2026-10-26 11:01:11 INFO wording trap-train-00179#0: length
+2026-10-26 11:01:16 INFO wording trap-train-00179#1: accepted
+2026-10-26 11:01:24 INFO wording trap-train-00179#2: length
+2026-10-26 11:01:28 INFO wording v3-train-01038#0: accepted
+2026-10-26 11:01:33 INFO wording v3-train-01038#1: accepted
+2026-10-26 11:01:37 INFO wording v3-train-01038#2: missing numbers ['4']
+2026-10-26 11:01:44 INFO wording v3-train-00518#0: accepted
+2026-10-26 11:01:52 INFO wording v3-train-00518#1: length
+2026-10-26 11:01:58 INFO wording v3-train-00518#2: accepted
+2026-10-26 11:02:05 INFO wording v3-train-00130#0: accepted
+2026-10-26 11:02:12 INFO wording v3-train-00130#1: accepted
+2026-10-26 11:02:20 INFO wording v3-train-00130#2: length
+2026-10-26 11:02:27 INFO wording v3-train-00621#0: length
+2026-10-26 11:02:35 INFO wording v3-train-00621#1: length
+2026-10-26 11:02:41 INFO wording v3-train-00621#2: accepted
+2026-10-26 11:02:50 INFO wording v3-train-00559#0: length
+2026-10-26 11:02:58 INFO wording v3-train-00559#1: length
+2026-10-26 11:03:03 INFO wording v3-train-00559#2: accepted
+2026-10-26 11:03:10 INFO wording v3-train-00999#0: code in text
+2026-10-26 11:03:15 INFO wording v3-train-00999#1: accepted
+2026-10-26 11:03:22 INFO wording v3-train-00999#2: accepted
+2026-10-26 11:03:28 INFO wording train-00319#0: accepted
+2026-10-26 11:03:33 INFO wording train-00319#1: accepted
+2026-10-26 11:03:39 INFO wording train-00319#2: accepted
+2026-10-26 11:03:44 INFO wording v3-train-00741#0: missing numbers ['100']
+2026-10-26 11:03:50 INFO wording v3-train-00741#1: accepted
+2026-10-26 11:03:57 INFO wording v3-train-00741#2: accepted
+2026-10-26 11:04:03 INFO wording train-00811#0: accepted
+2026-10-26 11:04:10 INFO wording train-00811#1: accepted
+2026-10-26 11:04:15 INFO wording train-00811#2: invented numbers ['7']
+2026-10-26 11:04:21 INFO wording train-00816#0: missing numbers ['100']
+2026-10-26 11:04:27 INFO wording train-00816#1: invented numbers ['5']
+2026-10-26 11:04:32 INFO wording train-00816#2: missing numbers ['100']
+2026-10-26 11:04:37 INFO wording trap-train-00297#0: accepted
+2026-10-26 11:04:45 INFO wording trap-train-00297#1: code in text
+2026-10-26 11:04:53 INFO wording trap-train-00297#2: length
+2026-10-26 11:04:53 INFO time limit of 1500 s reached after 417 programs; writing the files from existing records
+2026-10-26 11:04:53 INFO done: {"stage": 3, "finished": true, "model": "Qwen/Qwen2.5-7B-Instruct", "revision": "a09a35458c", "license": "apache-2.0", "seed_programs": 1000, "records": 1251, "accepted": 784, "train": 734, "valid": 50, "rejected_by_reason": {"missing numbers": 142, "length": 240, "invented numbers": 60, "code in text": 19, "trap ask missing": 6}, "seconds": 1518, "stopped_by_time": true, "sources": ["data/synthetic", "data/synthetic_traps", "data/synthetic_v3"], "hosted_ai_text_used": false}
+2026-10-26 11:22:48 INFO offline model Qwen/Qwen2.5-7B-Instruct: apache-2.0 at a09a35458c (owner-reviewed lock)
+2026-10-26 11:22:54 INFO 1000 seed programs x 3 wordings; 1251 records already done
+2026-10-26 11:23:15 INFO 25/1000 programs, 1251 records, 784 accepted, 0 s
+2026-10-26 11:23:15 INFO 50/1000 programs, 1251 records, 784 accepted, 0 s
+2026-10-26 11:23:15 INFO 75/1000 programs, 1251 records, 784 accepted, 0 s
+2026-10-26 11:23:15 INFO 100/1000 programs, 1251 records, 784 accepted, 0 s
+2026-10-26 11:23:15 INFO 125/1000 programs, 1251 records, 784 accepted, 0 s
+2026-10-26 11:23:15 INFO 150/1000 programs, 1251 records, 784 accepted, 0 s
+2026-10-26 11:23:15 INFO 175/1000 programs, 1251 records, 784 accepted, 0 s
+2026-10-26 11:23:15 INFO 200/1000 programs, 1251 records, 784 accepted, 0 s
+2026-10-26 11:23:15 INFO 225/1000 programs, 1251 records, 784 accepted, 1 s
+2026-10-26 11:23:15 INFO 250/1000 programs, 1251 records, 784 accepted, 1 s
+2026-10-26 11:23:15 INFO 275/1000 programs, 1251 records, 784 accepted, 1 s
+2026-10-26 11:23:15 INFO 300/1000 programs, 1251 records, 784 accepted, 1 s
+2026-10-26 11:23:15 INFO 325/1000 programs, 1251 records, 784 accepted, 1 s
+2026-10-26 11:23:15 INFO 350/1000 programs, 1251 records, 784 accepted, 1 s
+2026-10-26 11:23:15 INFO 375/1000 programs, 1251 records, 784 accepted, 1 s
+2026-10-26 11:23:15 INFO 400/1000 programs, 1251 records, 784 accepted, 1 s
+2026-10-26 11:23:20 INFO wording train-01048#0: accepted
+2026-10-26 11:23:24 INFO wording train-01048#1: accepted
+2026-10-26 11:23:28 INFO wording train-01048#2: accepted
+2026-10-26 11:23:35 INFO wording train-00731#0: length
+2026-10-26 11:23:41 INFO wording train-00731#1: accepted
+2026-10-26 11:23:47 INFO wording train-00731#2: accepted
+2026-10-26 11:23:55 INFO wording v3-train-01122#0: length
+2026-10-26 11:24:02 INFO wording v3-train-01122#1: code in text
+2026-10-26 11:24:09 INFO wording v3-train-01122#2: accepted
+2026-10-26 11:24:13 INFO wording trap-train-00285#0: accepted
+2026-10-26 11:24:16 INFO wording trap-train-00285#1: accepted
+2026-10-26 11:24:20 INFO wording trap-train-00285#2: accepted
+2026-10-26 11:24:28 INFO wording v3-train-00128#0: length
+2026-10-26 11:24:34 INFO wording v3-train-00128#1: accepted
+2026-10-26 11:24:39 INFO wording v3-train-00128#2: invented numbers ['7']
+2026-10-26 11:24:43 INFO wording train-00148#0: accepted
+2026-10-26 11:24:49 INFO wording train-00148#1: invented numbers ['1', '3', '4', '5', '6', '7']
+2026-10-26 11:24:54 INFO wording train-00148#2: invented numbers ['1', '3', '4', '5', '6']
+2026-10-26 11:24:59 INFO wording train-00733#0: accepted
+2026-10-26 11:25:04 INFO wording train-00733#1: accepted
+2026-10-26 11:25:11 INFO wording train-00733#2: length
+2026-10-26 11:25:16 INFO wording train-00927#0: accepted
+2026-10-26 11:25:24 INFO wording train-00927#1: length
+2026-10-26 11:25:31 INFO wording train-00927#2: accepted
+2026-10-26 11:25:31 INFO 425/1000 programs, 1275 records, 799 accepted, 136 s
+2026-10-26 11:25:35 INFO wording train-01115#0: missing numbers ['10:00']
+2026-10-26 11:25:40 INFO wording train-01115#1: missing numbers ['10:00']
+2026-10-26 11:25:46 INFO wording train-01115#2: accepted
+2026-10-26 11:25:52 INFO wording train-01416#0: accepted
+2026-10-26 11:25:55 INFO wording train-01416#1: accepted
+2026-10-26 11:26:02 INFO wording train-01416#2: accepted
+2026-10-26 11:26:07 INFO wording v3-train-00148#0: missing numbers ['15']
+2026-10-26 11:26:14 INFO wording v3-train-00148#1: accepted
+2026-10-26 11:26:22 INFO wording v3-train-00148#2: length
+2026-10-26 11:26:28 INFO wording v3-train-00794#0: accepted
+2026-10-26 11:26:34 INFO wording v3-train-00794#1: missing numbers ['30']
+2026-10-26 11:26:39 INFO wording v3-train-00794#2: missing numbers ['30']
+2026-10-26 11:26:44 INFO wording v3-train-00069#0: accepted
+2026-10-26 11:26:51 INFO wording v3-train-00069#1: accepted
+2026-10-26 11:26:55 INFO wording v3-train-00069#2: accepted
+2026-10-26 11:27:01 INFO wording trap-train-00400#0: invented numbers ['3', '4', '5', '7']
+2026-10-26 11:27:06 INFO wording trap-train-00400#1: invented numbers ['3', '4', '5']
+2026-10-26 11:27:15 INFO wording trap-train-00400#2: length
+2026-10-26 11:27:24 INFO wording v3-train-01015#0: length
+2026-10-26 11:27:32 INFO wording v3-train-01015#1: length
+2026-10-26 11:27:40 INFO wording v3-train-01015#2: accepted
+2026-10-26 11:27:45 INFO wording train-00652#0: accepted
+2026-10-26 11:27:51 INFO wording train-00652#1: accepted
+2026-10-26 11:28:00 INFO wording train-00652#2: length
+2026-10-26 11:28:03 INFO wording train-01611#0: accepted
+2026-10-26 11:28:08 INFO wording train-01611#1: accepted
+2026-10-26 11:28:12 INFO wording train-01611#2: accepted
+2026-10-26 11:28:20 INFO wording train-00917#0: length
+2026-10-26 11:28:25 INFO wording train-00917#1: accepted
+2026-10-26 11:28:30 INFO wording train-00917#2: accepted
+2026-10-26 11:28:36 INFO wording train-00357#0: accepted
+2026-10-26 11:28:42 INFO wording train-00357#1: missing numbers ['100']
+2026-10-26 11:28:46 INFO wording train-00357#2: accepted
+2026-10-26 11:28:52 INFO wording trap-train-00032#0: accepted
+2026-10-26 11:28:56 INFO wording trap-train-00032#1: missing numbers ['50']
+2026-10-26 11:29:03 INFO wording trap-train-00032#2: length
+2026-10-26 11:29:08 INFO wording train-01589#0: accepted
+2026-10-26 11:29:15 INFO wording train-01589#1: accepted
+2026-10-26 11:29:20 INFO wording train-01589#2: accepted
+2026-10-26 11:29:24 INFO wording train-00532#0: missing numbers ['100']
+2026-10-26 11:29:29 INFO wording train-00532#1: invented numbers ['7']
+2026-10-26 11:29:36 INFO wording train-00532#2: length
+2026-10-26 11:29:40 INFO wording v3-train-00866#0: accepted
+2026-10-26 11:29:44 INFO wording v3-train-00866#1: accepted
+2026-10-26 11:29:48 INFO wording v3-train-00866#2: accepted
+2026-10-26 11:29:53 INFO wording trap-train-00208#0: accepted
+2026-10-26 11:29:57 INFO wording trap-train-00208#1: accepted
+2026-10-26 11:30:04 INFO wording trap-train-00208#2: accepted
+2026-10-26 11:30:10 INFO wording train-00806#0: accepted
+2026-10-26 11:30:16 INFO wording train-00806#1: accepted
+2026-10-26 11:30:23 INFO wording train-00806#2: length
+2026-10-26 11:30:31 INFO wording v3-train-00500#0: length
+2026-10-26 11:30:37 INFO wording v3-train-00500#1: accepted
+2026-10-26 11:30:44 INFO wording v3-train-00500#2: accepted
+2026-10-26 11:30:51 INFO wording train-00027#0: accepted
+2026-10-26 11:30:59 INFO wording train-00027#1: length
+2026-10-26 11:31:06 INFO wording train-00027#2: invented numbers ['1', '3', '4', '7']
+2026-10-26 11:31:11 INFO wording train-01543#0: accepted
+2026-10-26 11:31:15 INFO wording train-01543#1: accepted
+2026-10-26 11:31:20 INFO wording train-01543#2: accepted
+2026-10-26 11:31:28 INFO wording v3-train-00190#0: length
+2026-10-26 11:31:33 INFO wording v3-train-00190#1: code in text
+2026-10-26 11:31:41 INFO wording v3-train-00190#2: length
+2026-10-26 11:31:47 INFO wording v3-train-00267#0: accepted
+2026-10-26 11:31:52 INFO wording v3-train-00267#1: missing numbers ['11:00']
+2026-10-26 11:31:58 INFO wording v3-train-00267#2: missing numbers ['11:00']
+2026-10-26 11:32:04 INFO wording v3-train-00611#0: accepted
+2026-10-26 11:32:13 INFO wording v3-train-00611#1: length
+2026-10-26 11:32:18 INFO wording v3-train-00611#2: accepted
+2026-10-26 11:32:22 INFO wording trap-train-00409#0: accepted
+2026-10-26 11:32:24 INFO wording trap-train-00409#1: missing numbers ['10']
+2026-10-26 11:32:27 INFO wording trap-train-00409#2: missing numbers ['10']
+2026-10-26 11:32:31 INFO wording train-01405#0: missing numbers ['16:00']
+2026-10-26 11:32:37 INFO wording train-01405#1: accepted
+2026-10-26 11:32:42 INFO wording train-01405#2: accepted
+2026-10-26 11:32:42 INFO 450/1000 programs, 1350 records, 842 accepted, 568 s
+2026-10-26 11:32:46 INFO wording trap-train-00250#0: accepted
+2026-10-26 11:32:49 INFO wording trap-train-00250#1: missing numbers ['20']
+2026-10-26 11:32:54 INFO wording trap-train-00250#2: accepted
+2026-10-26 11:32:57 INFO wording train-01337#0: missing numbers ['3']
+2026-10-26 11:33:02 INFO wording train-01337#1: accepted
+2026-10-26 11:33:07 INFO wording train-01337#2: accepted
+2026-10-26 11:33:11 INFO wording v3-train-00605#0: accepted
+2026-10-26 11:33:17 INFO wording v3-train-00605#1: accepted
+2026-10-26 11:33:23 INFO wording v3-train-00605#2: accepted
+2026-10-26 11:33:29 INFO wording train-00839#0: missing numbers ['100']
+2026-10-26 11:33:35 INFO wording train-00839#1: accepted
+2026-10-26 11:33:43 INFO wording train-00839#2: length
+2026-10-26 11:33:47 INFO wording train-00405#0: accepted
+2026-10-26 11:33:51 INFO wording train-00405#1: accepted
+2026-10-26 11:33:55 INFO wording train-00405#2: accepted
+2026-10-26 11:34:01 INFO wording v3-train-01092#0: accepted
+2026-10-26 11:34:08 INFO wording v3-train-01092#1: accepted
+2026-10-26 11:34:14 INFO wording v3-train-01092#2: accepted
+2026-10-26 11:34:20 INFO wording train-00505#0: accepted
+2026-10-26 11:34:25 INFO wording train-00505#1: accepted
+2026-10-26 11:34:28 INFO wording train-00505#2: accepted
+2026-10-26 11:34:36 INFO wording v3-train-01087#0: length
+2026-10-26 11:34:40 INFO wording v3-train-01087#1: accepted
+2026-10-26 11:34:46 INFO wording v3-train-01087#2: invented numbers ['30']
+2026-10-26 11:34:50 INFO wording train-00992#0: accepted
+2026-10-26 11:34:57 INFO wording train-00992#1: accepted
+2026-10-26 11:35:04 INFO wording train-00992#2: length
+2026-10-26 11:35:08 INFO wording train-01598#0: accepted
+2026-10-26 11:35:12 INFO wording train-01598#1: accepted
+2026-10-26 11:35:16 INFO wording train-01598#2: accepted
+2026-10-26 11:35:20 INFO wording v3-train-00915#0: accepted
+2026-10-26 11:35:24 INFO wording v3-train-00915#1: accepted
+2026-10-26 11:35:28 INFO wording v3-train-00915#2: accepted
+2026-10-26 11:35:33 INFO wording train-01269#0: accepted
+2026-10-26 11:35:41 INFO wording train-01269#1: length
+2026-10-26 11:35:47 INFO wording train-01269#2: accepted
+2026-10-26 11:35:53 INFO wording v3-train-00137#0: accepted
+2026-10-26 11:36:00 INFO wording v3-train-00137#1: accepted
+2026-10-26 11:36:07 INFO wording v3-train-00137#2: accepted
+2026-10-26 11:36:12 INFO wording v3-train-00853#0: accepted
+2026-10-26 11:36:16 INFO wording v3-train-00853#1: accepted
+2026-10-26 11:36:20 INFO wording v3-train-00853#2: accepted
+2026-10-26 11:36:27 INFO wording train-01072#0: accepted
+2026-10-26 11:36:35 INFO wording train-01072#1: length
+2026-10-26 11:36:43 INFO wording train-01072#2: length
+2026-10-26 11:36:47 INFO wording train-00064#0: accepted
+2026-10-26 11:36:52 INFO wording train-00064#1: accepted
+2026-10-26 11:36:55 INFO wording train-00064#2: accepted
+2026-10-26 11:37:02 INFO wording train-01427#0: invented numbers ['24']
+2026-10-26 11:37:07 INFO wording train-01427#1: accepted
+2026-10-26 11:37:13 INFO wording train-01427#2: accepted
+2026-10-26 11:37:19 INFO wording v3-train-00005#0: accepted
+2026-10-26 11:37:25 INFO wording v3-train-00005#1: missing numbers ['40']
+2026-10-26 11:37:32 INFO wording v3-train-00005#2: length
+2026-10-26 11:37:36 INFO wording train-00339#0: missing numbers ['50']
+2026-10-26 11:37:43 INFO wording train-00339#1: invented numbers ['30']
+2026-10-26 11:37:50 INFO wording train-00339#2: accepted
+2026-10-26 11:37:55 INFO wording train-00152#0: accepted
+2026-10-26 11:38:05 INFO wording train-00152#1: length
+2026-10-26 11:38:10 INFO wording train-00152#2: accepted
+2026-10-26 11:38:13 INFO wording trap-train-00156#0: accepted
+2026-10-26 11:38:18 INFO wording trap-train-00156#1: accepted
+2026-10-26 11:38:21 INFO wording trap-train-00156#2: accepted
+2026-10-26 11:38:27 INFO wording train-01401#0: accepted
+2026-10-26 11:38:34 INFO wording train-01401#1: length
+2026-10-26 11:38:40 INFO wording train-01401#2: missing numbers ['15']
+2026-10-26 11:38:45 INFO wording v3-train-00192#0: code in text
+2026-10-26 11:38:54 INFO wording v3-train-00192#1: length
+2026-10-26 11:39:01 INFO wording v3-train-00192#2: accepted
+2026-10-26 11:39:05 INFO wording v3-train-01041#0: accepted
+2026-10-26 11:39:09 INFO wording v3-train-01041#1: accepted
+2026-10-26 11:39:14 INFO wording v3-train-01041#2: accepted
+2026-10-26 11:39:20 INFO wording v3-train-00864#0: missing numbers ['50']
+2026-10-26 11:39:26 INFO wording v3-train-00864#1: missing numbers ['50']
+2026-10-26 11:39:30 INFO wording v3-train-00864#2: missing numbers ['50']
+2026-10-26 11:39:30 INFO 475/1000 programs, 1425 records, 894 accepted, 976 s
+2026-10-26 11:39:34 INFO wording trap-train-00347#0: accepted
+2026-10-26 11:39:37 INFO wording trap-train-00347#1: accepted
+2026-10-26 11:39:40 INFO wording trap-train-00347#2: accepted
+2026-10-26 11:39:46 INFO wording train-00116#0: accepted
+2026-10-26 11:39:55 INFO wording train-00116#1: length
+2026-10-26 11:40:02 INFO wording train-00116#2: length
+2026-10-26 11:40:08 INFO wording train-00894#0: missing numbers ['30']
+2026-10-26 11:40:15 INFO wording train-00894#1: missing numbers ['30']
+2026-10-26 11:40:20 INFO wording train-00894#2: missing numbers ['30']
+2026-10-26 11:40:25 INFO wording v3-train-00870#0: invented numbers ['7']
+2026-10-26 11:40:31 INFO wording v3-train-00870#1: missing numbers ['100']
+2026-10-26 11:40:34 INFO wording v3-train-00870#2: accepted
+2026-10-26 11:40:40 INFO wording trap-train-00107#0: code in text
+2026-10-26 11:40:45 INFO wording trap-train-00107#1: accepted
+2026-10-26 11:40:49 INFO wording trap-train-00107#2: trap ask missing
+2026-10-26 11:40:56 INFO wording v3-train-00983#0: accepted
+2026-10-26 11:41:02 INFO wording v3-train-00983#1: invented numbers ['1', '3', '4', '5', '6', '7']
+2026-10-26 11:41:07 INFO wording v3-train-00983#2: accepted
+2026-10-26 11:41:12 INFO wording train-00708#0: invented numbers ['4', '5']
+2026-10-26 11:41:16 INFO wording train-00708#1: accepted
+2026-10-26 11:41:21 INFO wording train-00708#2: accepted
+2026-10-26 11:41:27 INFO wording v3-train-00121#0: accepted
+2026-10-26 11:41:33 INFO wording v3-train-00121#1: accepted
+2026-10-26 11:41:42 INFO wording v3-train-00121#2: length
+2026-10-26 11:41:48 INFO wording train-01372#0: missing numbers ['30']
+2026-10-26 11:41:52 INFO wording train-01372#1: missing numbers ['30', '09:00']
+2026-10-26 11:41:57 INFO wording train-01372#2: missing numbers ['30']
+2026-10-26 11:42:04 INFO wording train-00575#0: missing numbers ['20']
+2026-10-26 11:42:11 INFO wording train-00575#1: accepted
+2026-10-26 11:42:16 INFO wording train-00575#2: accepted
+2026-10-26 11:42:18 INFO wording trap-train-00278#0: missing numbers ['30']
+2026-10-26 11:42:22 INFO wording trap-train-00278#1: accepted
+2026-10-26 11:42:26 INFO wording trap-train-00278#2: accepted
+2026-10-26 11:42:32 INFO wording train-00608#0: code in text
+2026-10-26 11:42:39 INFO wording train-00608#1: length
+2026-10-26 11:42:45 INFO wording train-00608#2: code in text
+2026-10-26 11:42:52 INFO wording v3-train-00053#0: accepted
+2026-10-26 11:43:00 INFO wording v3-train-00053#1: length
+2026-10-26 11:43:08 INFO wording v3-train-00053#2: length
+2026-10-26 11:43:14 INFO wording v3-train-00060#0: accepted
+2026-10-26 11:43:21 INFO wording v3-train-00060#1: length
+2026-10-26 11:43:28 INFO wording v3-train-00060#2: accepted
+2026-10-26 11:43:31 INFO wording v3-train-00714#0: accepted
+2026-10-26 11:43:35 INFO wording v3-train-00714#1: accepted
+2026-10-26 11:43:40 INFO wording v3-train-00714#2: accepted
+2026-10-26 11:43:47 INFO wording trap-train-00153#0: accepted
+2026-10-26 11:43:52 INFO wording trap-train-00153#1: accepted
+2026-10-26 11:44:00 INFO wording trap-train-00153#2: length
+2026-10-26 11:44:08 INFO wording trap-train-00368#0: length
+2026-10-26 11:44:15 INFO wording trap-train-00368#1: invented numbers ['4', '5', '6']
+2026-10-26 11:44:23 INFO wording trap-train-00368#2: length
+2026-10-26 11:44:27 INFO wording v3-train-00309#0: accepted
+2026-10-26 11:44:30 INFO wording v3-train-00309#1: accepted
+2026-10-26 11:44:34 INFO wording v3-train-00309#2: accepted
+2026-10-26 11:44:38 INFO wording train-00352#0: accepted
+2026-10-26 11:44:44 INFO wording train-00352#1: accepted
+2026-10-26 11:44:48 INFO wording train-00352#2: accepted
+2026-10-26 11:44:53 INFO wording train-00906#0: accepted
+2026-10-26 11:44:58 INFO wording train-00906#1: invented numbers ['7']
+2026-10-26 11:45:04 INFO wording train-00906#2: accepted
+2026-10-26 11:45:08 INFO wording trap-train-00150#0: accepted
+2026-10-26 11:45:11 INFO wording trap-train-00150#1: accepted
+2026-10-26 11:45:14 INFO wording trap-train-00150#2: accepted
+2026-10-26 11:45:20 INFO wording v3-train-00095#0: accepted
+2026-10-26 11:45:27 INFO wording v3-train-00095#1: accepted
+2026-10-26 11:45:35 INFO wording v3-train-00095#2: length
+2026-10-26 11:45:44 INFO wording v3-train-00226#0: length
+2026-10-26 11:45:50 INFO wording v3-train-00226#1: accepted
+2026-10-26 11:45:57 INFO wording v3-train-00226#2: accepted
+2026-10-26 11:46:03 INFO wording train-01188#0: missing numbers ['30']
+2026-10-26 11:46:10 INFO wording train-01188#1: missing numbers ['30']
+2026-10-26 11:46:17 INFO wording train-01188#2: missing numbers ['30']
+2026-10-26 11:46:22 INFO wording v3-train-00238#0: accepted
+2026-10-26 11:46:27 INFO wording v3-train-00238#1: accepted
+2026-10-26 11:46:34 INFO wording v3-train-00238#2: length
+2026-10-26 11:46:34 INFO 500/1000 programs, 1500 records, 935 accepted, 1400 s
+2026-10-26 11:46:41 INFO wording v3-train-00554#0: length
+2026-10-26 11:46:45 INFO wording v3-train-00554#1: accepted
+2026-10-26 11:46:50 INFO wording v3-train-00554#2: accepted
+2026-10-26 11:46:55 INFO wording train-00673#0: missing numbers ['09:00']
+2026-10-26 11:47:03 INFO wording train-00673#1: length
+2026-10-26 11:47:08 INFO wording train-00673#2: accepted
+2026-10-26 11:47:12 INFO wording v3-train-00079#0: missing numbers ['50']
+2026-10-26 11:47:16 INFO wording v3-train-00079#1: accepted
+2026-10-26 11:47:22 INFO wording v3-train-00079#2: accepted
+2026-10-26 11:47:27 INFO wording v3-train-00044#0: missing numbers ['17:30']
+2026-10-26 11:47:31 INFO wording v3-train-00044#1: missing numbers ['20']
+2026-10-26 11:47:36 INFO wording v3-train-00044#2: accepted
+2026-10-26 11:47:43 INFO wording v3-train-00231#0: length
+2026-10-26 11:47:49 INFO wording v3-train-00231#1: missing numbers ['30']
+2026-10-26 11:47:55 INFO wording v3-train-00231#2: accepted
+2026-10-26 11:47:59 INFO wording train-01050#0: accepted
+2026-10-26 11:48:03 INFO wording train-01050#1: accepted
+2026-10-26 11:48:06 INFO wording train-01050#2: accepted
+2026-10-26 11:48:11 INFO wording train-01276#0: accepted
+2026-10-26 11:48:16 INFO wording train-01276#1: accepted
+2026-10-26 11:48:25 INFO wording train-01276#2: length
+2026-10-26 11:48:31 INFO wording v3-train-00687#0: accepted
+2026-10-26 11:48:39 INFO wording v3-train-00687#1: length
+2026-10-26 11:48:44 INFO wording v3-train-00687#2: accepted
+2026-10-26 11:48:49 INFO wording train-01561#0: accepted
+2026-10-26 11:48:53 INFO wording train-01561#1: accepted
+2026-10-26 11:48:57 INFO wording train-01561#2: accepted
+2026-10-26 11:49:05 INFO wording v3-train-00434#0: length
+2026-10-26 11:49:10 INFO wording v3-train-00434#1: accepted
+2026-10-26 11:49:16 INFO wording v3-train-00434#2: accepted
+2026-10-26 11:49:23 INFO wording train-00852#0: accepted
+2026-10-26 11:49:30 INFO wording train-00852#1: accepted
+2026-10-26 11:49:37 INFO wording train-00852#2: accepted
+2026-10-26 11:49:45 INFO wording train-01247#0: length
+2026-10-26 11:49:51 INFO wording train-01247#1: accepted
+2026-10-26 11:49:57 INFO wording train-01247#2: accepted
+2026-10-26 11:50:06 INFO wording train-00578#0: length
+2026-10-26 11:50:12 INFO wording train-00578#1: accepted
+2026-10-26 11:50:18 INFO wording train-00578#2: accepted
+2026-10-26 11:50:23 INFO wording v3-train-00169#0: accepted
+2026-10-26 11:50:29 INFO wording v3-train-00169#1: accepted
+2026-10-26 11:50:36 INFO wording v3-train-00169#2: length
+2026-10-26 11:50:41 INFO wording v3-train-00085#0: accepted
+2026-10-26 11:50:47 INFO wording v3-train-00085#1: accepted
+2026-10-26 11:50:55 INFO wording v3-train-00085#2: length
+2026-10-26 11:50:55 INFO time limit of 1650 s reached after 515 programs; writing the files from existing records
+2026-10-26 11:50:55 INFO done: {"stage": 3, "finished": true, "model": "Qwen/Qwen2.5-7B-Instruct", "revision": "a09a35458c", "license": "apache-2.0", "seed_programs": 1000, "records": 1545, "accepted": 965, "train": 898, "valid": 67, "rejected_by_reason": {"missing numbers": 181, "length": 292, "invented numbers": 75, "code in text": 25, "trap ask missing": 7}, "seconds": 1660, "stopped_by_time": true, "sources": ["data/synthetic", "data/synthetic_traps", "data/synthetic_v3"], "hosted_ai_text_used": false}

@@ -1,0 +1,27 @@
+{
+  "stage": 3,
+  "finished": true,
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "revision": "a09a35458c",
+  "license": "apache-2.0",
+  "seed_programs": 1000,
+  "records": 1545,
+  "accepted": 965,
+  "train": 898,
+  "valid": 67,
+  "rejected_by_reason": {
+    "missing numbers": 181,
+    "length": 292,
+    "invented numbers": 75,
+    "code in text": 25,
+    "trap ask missing": 7
+  },
+  "seconds": 1660,
+  "stopped_by_time": true,
+  "sources": [
+    "data/synthetic",
+    "data/synthetic_traps",
+    "data/synthetic_v3"
+  ],
+  "hosted_ai_text_used": false
+}

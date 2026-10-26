@@ -37,6 +37,20 @@ def latest_checkpoint(out: Path) -> Path | None:
     return next((c for c in reversed(cks) if (c / "state.json").exists()), None)  # state.json is written last
 
 
+def answer_only_loss(model, ids, labels, mask):
+    """Same value as model(..., labels=labels).loss, but the output head only runs on the answer tokens.
+    The prompt is ~1000 of ~1350 tokens and is masked, and full-vocabulary logits for it overflow a 12 GB GPU
+    (Windows then spills to system memory and training slows ~17x)."""
+    import torch
+
+    n = ids.shape[1]
+    first = int((labels != -100).any(dim=0).nonzero()[0])  # first position holding an answer token in any row
+    keep = n - first + 1  # logits for positions first-1 .. n-1; the last one predicts nothing
+    logits = model(input_ids=ids, attention_mask=mask, logits_to_keep=keep).logits[:, :-1].float()
+    targets = labels[:, n - keep + 1:]
+    return torch.nn.functional.cross_entropy(logits.reshape(-1, logits.shape[-1]), targets.reshape(-1), ignore_index=-100)
+
+
 def accumulation_size(k: int, total_batches: int, accum: int) -> int:
     return min(accum, total_batches - (k // accum) * accum)
 
@@ -151,7 +165,7 @@ def run(args):
             if k < state["micro_in_epoch"]:
                 continue
             group_size = accumulation_size(k, total_batches, args.accum)
-            loss = model(input_ids=ids.cuda(), attention_mask=mask.cuda(), labels=labels.cuda()).loss / group_size
+            loss = answer_only_loss(model, ids.cuda(), labels.cuda(), mask.cuda()) / group_size
             loss.backward()
             if (k + 1) % args.accum and k + 1 != total_batches:
                 continue
@@ -159,6 +173,7 @@ def run(args):
             opt.step()
             sched.step()
             opt.zero_grad()
+            torch.cuda.empty_cache()  # keep the allocator from growing into Windows shared memory
             state.update(step=state["step"] + 1, epoch=epoch, micro_in_epoch=k + 1, elapsed_s=round(time.time() - started))
             rec = {"step": state["step"], "epoch": epoch, "loss": round(float(loss) * group_size, 5),
                    "lr": sched.get_last_lr()[0], "elapsed_s": state["elapsed_s"]}
@@ -168,7 +183,9 @@ def run(args):
                 log.info("%s", rec)
             if state["step"] % args.save_every == 0:
                 save("step")
+        torch.cuda.empty_cache()
         val = evaluate(model, valid, args.micro, pad_id, torch)
+        torch.cuda.empty_cache()
         state["history"].append({"epoch": epoch, "valid_loss": round(val, 5), "elapsed_s": round(time.time() - started)})
         log.info("epoch %d valid loss %.5f", epoch, val)
         model.save_pretrained(out / f"epoch{epoch}")

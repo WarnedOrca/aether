@@ -1,0 +1,25 @@
+{
+  "stage": 3,
+  "finished": true,
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "revision": "a09a35458c",
+  "license": "apache-2.0",
+  "seed_programs": 3,
+  "records": 9,
+  "accepted": 5,
+  "train": 5,
+  "valid": 0,
+  "rejected_by_reason": {
+    "missing numbers": 2,
+    "length": 1,
+    "invented numbers": 1
+  },
+  "seconds": 37,
+  "stopped_by_time": false,
+  "sources": [
+    "data/synthetic",
+    "data/synthetic_traps",
+    "data/synthetic_v3"
+  ],
+  "hosted_ai_text_used": false
+}

@@ -1,0 +1,20 @@
+{
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "load_4bit": true,
+  "sources": [
+    "data/synthetic",
+    "data/synthetic_traps",
+    "data/synthetic_v3"
+  ],
+  "per_program": 3,
+  "generation_timeout": 180,
+  "limit_programs": 3,
+  "shuffle_seed": 11,
+  "temperature": 0.9,
+  "max_new_tokens": 220,
+  "seed": 7,
+  "out": "data/synthetic_v4_smoke_ready",
+  "revision": "a09a35458c",
+  "prompt_version": "p2",
+  "seeds_sha256": "e968de6297d34caea16932b0614257f82cf28e8104d5bedc4e8d27a5506ea14d"
+}
