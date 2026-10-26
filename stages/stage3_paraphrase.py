@@ -24,7 +24,7 @@ import re
 import time
 from pathlib import Path
 
-from stages.common import ROOT, JsonlCheckpoint, check_license, get_logger, model_revision, use_repo_hf_cache, write_json
+from stages.common import ROOT, model_load_kwargs, JsonlCheckpoint, check_license, get_logger, model_revision, use_repo_hf_cache, write_json
 
 PROMPT_VERSION = "p1"
 TRAP_HINTS = {  # the owner's request must contain the unsafe or impossible ask; the program is the safe answer
@@ -66,8 +66,10 @@ def missing_times(program: str, text: str) -> list[str]:
     for hh, mm in re.findall(r"at (\d{2}):(\d{2})", program):
         h = int(hh)
         h12 = h % 12 or 12
+        meridiem = r"(?:am|a\.m\.)" if h < 12 else r"(?:pm|p\.m\.)"
+        minute = rf":{mm}" if mm != "00" else rf"(?::{mm})?"
         word = {12: "noon", 0: "midnight"}.get(h, "~")
-        ok = (re.search(rf"\b{h}:{mm}\b", low) or re.search(rf"\b{h12}(:{mm})?\s*(am|pm|a\.m\.|p\.m\.|o'clock)", low)
+        ok = (re.search(rf"\b{hh}:{mm}\b", low) or re.search(rf"\b{h12}{minute}\s*{meridiem}", low)
               or (mm == "00" and word in low))
         if not ok:
             miss.append(f"{hh}:{mm}")
@@ -97,13 +99,16 @@ def main() -> None:
     ap.add_argument("--model", default="Qwen/Qwen2.5-7B-Instruct")
     ap.add_argument("--load-4bit", action="store_true", help="needs bitsandbytes (QLoRA-style loading for a 7B model)")
     ap.add_argument("--sources", nargs="+", default=["data/synthetic", "data/synthetic_traps", "data/synthetic_v3"])
-    ap.add_argument("--per-program", type=int, default=4)
+    ap.add_argument("--per-program", type=int, default=3)
+    ap.add_argument("--generation-timeout", type=float, default=180)
     ap.add_argument("--limit-programs", type=int, default=0, help="first N programs only (smoke test)")
     ap.add_argument("--temperature", type=float, default=0.9)
     ap.add_argument("--max-new-tokens", type=int, default=220)
     ap.add_argument("--seed", type=int, default=7)
     ap.add_argument("--out", default="data/synthetic_v4")
     args = ap.parse_args()
+    if args.per_program < 1 or args.limit_programs < 0 or args.max_new_tokens < 1 or args.generation_timeout <= 0:
+        ap.error("counts and timeout must be positive (limit-programs may be zero)")
 
     use_repo_hf_cache()
     out = ROOT / args.out
@@ -124,10 +129,16 @@ def main() -> None:
         seeds = seeds[: args.limit_programs]
     eval_sops = [t.sop for d in ("eval/benchmark", "eval/heldout", "eval/heldout2", "eval/heldout3") for t in load_tasks(ROOT / d)]
     overlap = OverlapChecker(eval_sops)
+    config = {**vars(args), "revision": rev, "prompt_version": PROMPT_VERSION}
+    config["seeds_sha256"] = hashlib.sha256(json.dumps(seeds, sort_keys=True).encode()).hexdigest()
+    config_path = out / "run_config.json"
+    if config_path.exists() and json.loads(config_path.read_text()) != config:
+        raise ValueError("Resume settings changed; choose a new output directory")
+    write_json(config_path, config)
     ck = JsonlCheckpoint(out / "records.jsonl")
     log.info("%d seed programs x %d wordings; %d records already done", len(seeds), args.per_program, len(ck.done))
 
-    tok = AutoTokenizer.from_pretrained(args.model)
+    tok = AutoTokenizer.from_pretrained(args.model, **model_load_kwargs(args.model))
     kw = {"device_map": "cuda"}
     if args.load_4bit:
         from transformers import BitsAndBytesConfig
@@ -135,7 +146,8 @@ def main() -> None:
                                                        bnb_4bit_compute_dtype=torch.bfloat16)
     else:
         kw["dtype"] = torch.bfloat16
-    model = AutoModelForCausalLM.from_pretrained(args.model, **kw)
+    model = AutoModelForCausalLM.from_pretrained(args.model, **model_load_kwargs(args.model), **kw)
+    model.eval()
     started = time.time()
     for n, seed in enumerate(seeds):
         bad = verify(Sample("seed", seed["domain"], "", seed["policy"], seed["program"]))
@@ -152,8 +164,10 @@ def main() -> None:
                 g = int(hashlib.sha256(f"{args.seed}:{key}".encode()).hexdigest()[:8], 16)
                 torch.manual_seed(g)
                 enc = tok([prompt], return_tensors="pt").to("cuda")
-                gen = model.generate(**enc, do_sample=True, temperature=args.temperature, top_p=0.95,
-                                     max_new_tokens=args.max_new_tokens, pad_token_id=tok.eos_token_id)
+                with torch.inference_mode():
+                    gen = model.generate(**enc, do_sample=True, temperature=args.temperature, top_p=0.95,
+                                         max_time=args.generation_timeout,
+                                         max_new_tokens=args.max_new_tokens, pad_token_id=tok.eos_token_id)
                 text = tok.decode(gen[0, enc["input_ids"].shape[1]:], skip_special_tokens=True).strip().strip('"')
             words = len(text.split())
             missing = [x for x in numbers_needed(seed["program"]) if not re.search(rf"\b{x}\b", text)]
@@ -171,6 +185,7 @@ def main() -> None:
                                        "temperature": args.temperature, "top_p": 0.95, "gen_seed": args.seed,
                                        "hosted_ai_text": False}})
             ck.add(rec)
+            log.info("wording %s: %s", key, reason or "accepted")
             if not reason:
                 kept_grams.append(g5)
         if (n + 1) % 25 == 0:

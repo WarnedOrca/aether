@@ -1,0 +1,59 @@
+{
+  "preflight": {
+    "command": [
+      "<repo>\\.venv\\Scripts\\python.exe",
+      "-u",
+      "-m",
+      "stages.preflight"
+    ],
+    "exit_code": 1,
+    "stdout": "PASS lock file: {'Qwen/Qwen2.5-7B-Instruct': {'revision': 'a09a35458c', 'license': 'apache-2.0'}, 'Qwen/Qwen2.5-Coder-7B-Instruct': {'revision': 'c03e6d3582', 'license': 'apache-2.0'}}\nFAIL Qwen/Qwen2.5-7B-Instruct: The cached snapshot for 'Qwen/Qwen2.5-7B-Instruct' (revision 'a09a35458c', commit a09a35458c702b33eeacc393d103063234e8bc28) is incomplete: 11 file(s) are missing (.gitattributes, LICENSE, README.md, ... (8 more)). Outgoing traffic is disabled ('local_files_only=True'). Re-run the download with network access to complete the snapshot.\nFAIL Qwen/Qwen2.5-Coder-7B-Instruct: The cached snapshot for 'Qwen/Qwen2.5-Coder-7B-Instruct' (revision 'c03e6d3582', commit c03e6d358207e414f1eca0bb1891e29f1db0e242) is incomplete: 11 file(s) are missing (.gitattributes, LICENSE, README.md, ... (8 more)). Outgoing traffic is disabled ('local_files_only=True'). Re-run the download with network access to complete the snapshot.\nPASS bitsandbytes: 0.50.2\nPASS GPU memory: {'free_mib': [10337]}\nPASS disk space: {'free_bytes': 238307708928, 'minimum_gib': 50}\nPASS held-out frozen hashes: Frozen hash tests passed\nFAIL no other GPU job: Compute processes already running: [desktop process list removed before publishing]\n",
+    "stderr": "W1025 22:16:06.920000 47212 .venv\\Lib\\site-packages\\torch\\utils\\flop_counter.py:29] triton not found; flop counting will not work for triton kernels\n"
+  },
+  "pytest": {
+    "command": [
+      "<repo>\\.venv\\Scripts\\python.exe",
+      "-m",
+      "pytest",
+      "-q",
+      "-o",
+      "addopts="
+    ],
+    "exit_code": 0,
+    "stdout": "........................................................................ [ 23%]\n........................................................................ [ 47%]\n........................................................................ [ 71%]\n........................................................................ [ 94%]\n................                                                         [100%]\n============================== warnings summary ===============================\n.venv\\Lib\\site-packages\\_pytest\\cacheprovider.py:469\n  <repo>\\.venv\\Lib\\site-packages\\_pytest\\cacheprovider.py:469: PytestCacheWarning: could not create cache path <repo>\\.pytest_cache\\v\\cache\\nodeids: [WinError 5] Access is denied: '<repo>\\\\.pytest_cache\\\\v\\\\cache'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n304 passed, 1 warning in 7.41s\n",
+    "stderr": ""
+  },
+  "heldout_validation": {
+    "command": [
+      "<repo>\\.venv\\Scripts\\python.exe",
+      "-m",
+      "eval.validate_tasks",
+      "eval/heldout3"
+    ],
+    "exit_code": 0,
+    "stdout": "72 tasks, 36 traps, 18 businesses; problems: 0\n",
+    "stderr": ""
+  },
+  "setup-load-general": {
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"<repo>\\stages\\load_smoke.py\", line 42, in <module>\n    main()\n  File \"<repo>\\stages\\load_smoke.py\", line 17, in main\n    gpu_idle()\n  File \"<repo>\\stages\\preflight.py\", line 44, in gpu_idle\n    raise ValueError(f\"Compute processes already running: {jobs}\")\nValueError: Compute processes already running: [desktop process list removed before publishing]\n"
+  },
+  "setup-load-coder": {
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"<repo>\\stages\\load_smoke.py\", line 42, in <module>\n    main()\n  File \"<repo>\\stages\\load_smoke.py\", line 17, in main\n    gpu_idle()\n  File \"<repo>\\stages\\preflight.py\", line 44, in gpu_idle\n    raise ValueError(f\"Compute processes already running: {jobs}\")\nValueError: Compute processes already running: [desktop process list removed before publishing]\n"
+  },
+  "setup-stage3": {
+    "stdout": "2026-10-25 22:12:58 INFO offline model Qwen/Qwen2.5-7B-Instruct: apache-2.0 at a09a35458c (owner-reviewed lock)\n2026-10-25 22:13:16 INFO 3 seed programs x 3 wordings; 0 records already done\n",
+    "stderr": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"<repo>\\stages\\stage3_paraphrase.py\", line 219, in <module>\n    main()\n  File \"<repo>\\stages\\stage3_paraphrase.py\", line 140, in main\n    tok = AutoTokenizer.from_pretrained(args.model, **model_load_kwargs(args.model))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>\\.venv\\Lib\\site-packages\\transformers\\models\\auto\\tokenization_auto.py\", line 984, in from_pretrained\n    return tokenizer_class.from_pretrained(pretrained_model_name_or_path, *inputs, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>\\.venv\\Lib\\site-packages\\transformers\\tokenization_utils_base.py\", line 1750, in from_pretrained\n    return cls._from_pretrained(\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>\\.venv\\Lib\\site-packages\\transformers\\tokenization_utils_base.py\", line 1944, in _from_pretrained\n    tokenizer = cls(*init_inputs, **init_kwargs)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>\\.venv\\Lib\\site-packages\\transformers\\models\\qwen2\\tokenization_qwen2.py\", line 62, in __init__\n    BPE(\nValueError: `vocab` and `merges` must be both be from memory or both filenames\n"
+  },
+  "setup-download": {
+    "stdout": "FAILED Qwen/Qwen2.5-7B-Instruct: RuntimeError; see HANDOFF.md for owner download command\nFAILED Qwen/Qwen2.5-Coder-7B-Instruct: RuntimeError; see HANDOFF.md for owner download command\n",
+    "stderr": "\nFetching 11 files:   0%|          | 0/11 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n\nFetching 11 files:  18%|#8        | 2/11 [00:00<00:00, 19.53it/s]\nFetching 11 files:  27%|##7       | 3/11 [00:00<00:00,  9.06it/s]\n\nFetching 11 files:   0%|          | 0/11 [00:00<?, ?it/s]\nFetching 11 files:  27%|##7       | 3/11 [00:00<00:00, 17.78it/s]\nFetching 11 files:  27%|##7       | 3/11 [00:00<00:00, 10.39it/s]\n"
+  },
+  "final_gpu_process_check": {
+    "exit_code": 0,
+    "stdout": "[desktop process list removed before publishing]\n",
+    "stderr": "",
+    "note": "No Aether or Python GPU process appears; WDDM desktop/unknown processes prevent proving global GPU idle."
+  }
+}

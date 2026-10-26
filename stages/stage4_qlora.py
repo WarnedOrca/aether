@@ -1,4 +1,4 @@
-"""Stage 4: QLoRA fine-tuning of a ~7B code model on a 12 GB GPU, safe to run unattended.
+"""Stage 4: QLoRA fine-tuning of a ~7B code model on a 12 GB GPU, with resumable checkpoints.
 
 - Checks the model licence on its Hugging Face page first and stops unless it is Apache-2.0 or MIT.
 - Loads the base model in 4-bit (bitsandbytes NF4), trains a LoRA adapter, same prompt and masking as training/finetune.py.
@@ -21,7 +21,7 @@ import shutil
 import time
 from pathlib import Path
 
-from stages.common import ROOT, check_license, get_logger, model_revision, use_repo_hf_cache, write_json
+from stages.common import ROOT, model_load_kwargs, check_license, get_logger, model_revision, use_repo_hf_cache, write_json
 from training.finetune import batches, encode, evaluate, set_seed
 
 
@@ -35,6 +35,10 @@ def load_rows(folders: list[str], split: str) -> list[dict]:
 def latest_checkpoint(out: Path) -> Path | None:
     cks = sorted(out.glob("ckpt-*"), key=lambda p: int(p.name.split("-")[1]))
     return next((c for c in reversed(cks) if (c / "state.json").exists()), None)  # state.json is written last
+
+
+def accumulation_size(k: int, total_batches: int, accum: int) -> int:
+    return min(accum, total_batches - (k // accum) * accum)
 
 
 def main() -> None:
@@ -52,6 +56,10 @@ def main() -> None:
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--limit", type=int, default=0, help="train on N samples only (smoke test)")
     args = ap.parse_args()
+    if args.data != ["data/synthetic_v4"]:
+        ap.error("Owner decision: stage 4 trains only on data/synthetic_v4")
+    if min(args.epochs, args.micro, args.accum, args.save_every, args.max_len, args.rank) < 1:
+        ap.error("training counts must be positive")
 
     use_repo_hf_cache()
     out = ROOT / args.out
@@ -59,23 +67,35 @@ def main() -> None:
     log = get_logger(out / "log.txt")
     lic = check_license(args.model, log)
     rev = model_revision(args.model)
+    config = {**vars(args), "revision": rev}
+    config["data_sha256"] = {}
+    import hashlib
+    for split in ("train", "valid"):
+        path = ROOT / args.data[0] / f"{split}.jsonl"
+        config["data_sha256"][split] = hashlib.sha256(path.read_bytes()).hexdigest()
+    config_path = out / "run_config.json"
+    if config_path.exists() and json.loads(config_path.read_text()) != config:
+        raise ValueError("Resume data/settings changed; choose a new output directory")
+    write_json(config_path, config)
 
     import torch
     from peft import LoraConfig, PeftModel, get_peft_model, prepare_model_for_kbit_training
     from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig, get_cosine_schedule_with_warmup
 
     set_seed(args.seed)
-    tok = AutoTokenizer.from_pretrained(args.model)
+    tok = AutoTokenizer.from_pretrained(args.model, **model_load_kwargs(args.model))
     pad_id = tok.pad_token_id if tok.pad_token_id is not None else tok.eos_token_id
     train_rows, valid_rows = load_rows(args.data, "train"), load_rows(args.data, "valid")
     if args.limit:
         train_rows, valid_rows = train_rows[: args.limit], valid_rows[: max(8, args.limit // 10)]
     train = [x for x in (encode(tok, r, args.max_len) for r in train_rows) if x]
     valid = [x for x in (encode(tok, r, args.max_len) for r in valid_rows) if x]
+    if not train or not valid:
+        raise ValueError("No usable train or validation examples; stopping before model load")
 
     bnb = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_quant_type="nf4", bnb_4bit_use_double_quant=True,
                              bnb_4bit_compute_dtype=torch.bfloat16)
-    model = AutoModelForCausalLM.from_pretrained(args.model, quantization_config=bnb, device_map="cuda")
+    model = AutoModelForCausalLM.from_pretrained(args.model, **model_load_kwargs(args.model), quantization_config=bnb, device_map="cuda")
     model = prepare_model_for_kbit_training(model, use_gradient_checkpointing=True)
     ck = latest_checkpoint(out)
     if ck:
@@ -96,6 +116,7 @@ def main() -> None:
         opt.load_state_dict(torch.load(ck / "optimizer.pt", weights_only=False))
         sched.load_state_dict(torch.load(ck / "scheduler.pt", weights_only=False))
         torch.set_rng_state(torch.load(ck / "rng_cpu.pt", weights_only=False))
+        torch.cuda.set_rng_state_all(torch.load(ck / "rng_cuda.pt", weights_only=False))
         log.info("resumed from %s at step %d (epoch %d)", ck.name, state["step"], state["epoch"])
     log.info("model %s (%s), %d train / %d valid examples, %d optimizer steps total", args.model, lic, len(train), len(valid), total)
 
@@ -107,6 +128,7 @@ def main() -> None:
         torch.save(opt.state_dict(), tmp / "optimizer.pt")
         torch.save(sched.state_dict(), tmp / "scheduler.pt")
         torch.save(torch.get_rng_state(), tmp / "rng_cpu.pt")
+        torch.save(torch.cuda.get_rng_state_all(), tmp / "rng_cuda.pt")
         write_json(tmp / "state.json", state)
         shutil.rmtree(d, ignore_errors=True)
         tmp.rename(d)
@@ -116,21 +138,23 @@ def main() -> None:
     started = time.time() - state["elapsed_s"]
     tlog = (out / "train_log.jsonl").open("a", encoding="utf-8")
     model.train()
+    total_batches = math.ceil(len(train) / args.micro)
     for epoch in range(state["epoch"], args.epochs + 1):
         rng = random.Random(args.seed * 1000 + epoch)  # same order for an epoch after a resume
         for k, (ids, labels, mask) in enumerate(batches(train, args.micro, pad_id, True, rng)):
             if k < state["micro_in_epoch"]:
                 continue
-            loss = model(input_ids=ids.cuda(), attention_mask=mask.cuda(), labels=labels.cuda()).loss / args.accum
+            group_size = accumulation_size(k, total_batches, args.accum)
+            loss = model(input_ids=ids.cuda(), attention_mask=mask.cuda(), labels=labels.cuda()).loss / group_size
             loss.backward()
-            if (k + 1) % args.accum:
+            if (k + 1) % args.accum and k + 1 != total_batches:
                 continue
             torch.nn.utils.clip_grad_norm_(params, 1.0)
             opt.step()
             sched.step()
             opt.zero_grad()
             state.update(step=state["step"] + 1, epoch=epoch, micro_in_epoch=k + 1, elapsed_s=round(time.time() - started))
-            rec = {"step": state["step"], "epoch": epoch, "loss": round(float(loss) * args.accum, 5),
+            rec = {"step": state["step"], "epoch": epoch, "loss": round(float(loss) * group_size, 5),
                    "lr": sched.get_last_lr()[0], "elapsed_s": state["elapsed_s"]}
             tlog.write(json.dumps(rec) + "\n")
             tlog.flush()

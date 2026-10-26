@@ -1,0 +1,6 @@
+{
+  "models": {
+    "Qwen/Qwen2.5-7B-Instruct": {"revision": "a09a35458c", "license": "apache-2.0"},
+    "Qwen/Qwen2.5-Coder-7B-Instruct": {"revision": "c03e6d3582", "license": "apache-2.0"}
+  }
+}

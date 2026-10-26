@@ -12,6 +12,20 @@ ROOT = Path(__file__).resolve().parent.parent
 ALLOWED_LICENSES = ("apache-2.0", "mit")
 
 
+def locked_model(model_id: str) -> dict:
+    """Only owner-reviewed metadata is trusted when disconnected."""
+    entry = json.loads((ROOT / "models.lock.json").read_text(encoding="utf-8"))["models"][model_id]
+    if entry.get("license", "").lower() not in ALLOWED_LICENSES or not entry.get("revision"):
+        raise ValueError(f"Unapproved or incomplete model lock: {model_id}")
+    return entry
+
+
+def model_load_kwargs(model_id: str) -> dict:
+    if os.environ.get("HF_HUB_OFFLINE") == "1":
+        return {"revision": locked_model(model_id)["revision"], "local_files_only": True}
+    return {}
+
+
 def use_repo_hf_cache() -> None:
     """Keep model downloads inside the repo (gitignored) unless HF_HOME is already set."""
     os.environ.setdefault("HF_HOME", str(ROOT / ".hf-cache"))
@@ -43,12 +57,17 @@ class JsonlCheckpoint:
         path.parent.mkdir(parents=True, exist_ok=True)
         self.records: list[dict] = []
         if path.exists():
-            for line in path.read_text(encoding="utf-8").splitlines():
+            lines = path.read_text(encoding="utf-8").splitlines()
+            for n, line in enumerate(lines):
                 try:
                     self.records.append(json.loads(line))
-                except json.JSONDecodeError:  # a line cut off by a crash: ignore it, it will be redone
+                except json.JSONDecodeError:
+                    if n != len(lines) - 1:
+                        raise ValueError("Corrupt checkpoint before last line; refusing to discard completed work")
                     break
         self.done = {r["key"] for r in self.records}
+        if len(self.done) != len(self.records):
+            raise ValueError("Duplicate checkpoint keys; owner review required")
         self._f = path.open("w", encoding="utf-8", newline="\n")
         for r in self.records:  # rewrite without any trailing partial line
             self._f.write(json.dumps(r) + "\n")
@@ -67,6 +86,10 @@ class JsonlCheckpoint:
 
 def check_license(model_id: str, log: logging.Logger) -> str:
     """Read the licence from the model's Hugging Face page metadata; stop unless it is Apache-2.0 or MIT."""
+    if os.environ.get("HF_HUB_OFFLINE") == "1":
+        entry = locked_model(model_id)
+        log.info("offline model %s: %s at %s (owner-reviewed lock)", model_id, entry["license"], entry["revision"])
+        return entry["license"].lower()
     from huggingface_hub import model_info
 
     info = model_info(model_id)
@@ -79,6 +102,8 @@ def check_license(model_id: str, log: logging.Logger) -> str:
 
 
 def model_revision(model_id: str) -> str:
+    if os.environ.get("HF_HUB_OFFLINE") == "1":
+        return locked_model(model_id)["revision"]
     from huggingface_hub import model_info
 
     return model_info(model_id).sha or "unknown"

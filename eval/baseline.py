@@ -36,8 +36,14 @@ class Generator:
         import torch
         from transformers import AutoModelForCausalLM, AutoTokenizer
 
+        from stages.common import model_load_kwargs, check_license, use_repo_hf_cache
+        import logging
+        use_repo_hf_cache()
+        if os.environ.get("HF_HUB_OFFLINE") == "1":
+            check_license(model_id, logging.getLogger(__name__))
+        load_kw = model_load_kwargs(model_id)
         self.torch = torch
-        self.tok = AutoTokenizer.from_pretrained(model_id)
+        self.tok = AutoTokenizer.from_pretrained(model_id, **load_kw)
         self.tok.padding_side = "left"
         if self.tok.pad_token is None:
             self.tok.pad_token = self.tok.eos_token
@@ -45,12 +51,15 @@ class Generator:
             from transformers import BitsAndBytesConfig
             q = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_quant_type="nf4", bnb_4bit_use_double_quant=True,
                                    bnb_4bit_compute_dtype=torch.bfloat16)
-            self.model = AutoModelForCausalLM.from_pretrained(model_id, quantization_config=q, device_map="cuda")
+            self.model = AutoModelForCausalLM.from_pretrained(model_id, **load_kw, quantization_config=q, device_map="cuda")
         else:
-            self.model = AutoModelForCausalLM.from_pretrained(model_id, dtype=torch.bfloat16, device_map="cuda")
+            self.model = AutoModelForCausalLM.from_pretrained(model_id, **load_kw, dtype=torch.bfloat16, device_map="cuda")
         if adapter:
             from peft import PeftModel
-            self.model = PeftModel.from_pretrained(self.model, adapter)
+            if os.environ.get("HF_HUB_OFFLINE") == "1" and not Path(adapter).is_dir():
+                raise ValueError("Offline evaluation requires a local adapter directory")
+            self.model = PeftModel.from_pretrained(self.model, adapter,
+                **({"local_files_only": True} if os.environ.get("HF_HUB_OFFLINE") == "1" else {}))
         self.model.eval()
 
     def prompt_text(self, messages: list[dict]) -> str:
@@ -64,7 +73,7 @@ class Generator:
         enc = self.tok(prompts, return_tensors="pt", padding=True).to("cuda")
         with self.torch.no_grad():
             out = self.model.generate(**enc, max_new_tokens=max_new_tokens, do_sample=False,
-                                      pad_token_id=self.tok.pad_token_id)
+                                      pad_token_id=self.tok.pad_token_id, max_time=180)
         new = out[:, enc["input_ids"].shape[1]:]
         return self.tok.batch_decode(new, skip_special_tokens=True)
 

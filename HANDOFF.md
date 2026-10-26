@@ -1,6 +1,6 @@
 # HANDOFF (repo copy, for Codex and other agents)
 
-Updated 2026-10-25 ~22:00 by Claude Code. Agents: update this file at the end of every session (see `AGENTS.md`).
+Updated 2026-10-25 tonight by Codex. The setup section below supersedes the earlier next steps and dependency status. Agents: update this file at the end of every session (see `AGENTS.md`).
 
 ## Current state
 - **Released:** v0.2 LoRA (Qwen2.5-Coder-1.5B-Instruct). **v0.3:** unreleased negative result. Model work for v0.x is closed.
@@ -37,3 +37,50 @@ Order: stage 3 smoke -> owner looks at 20 sample wordings -> stage 3 -> stage 4 
 
 ## Next steps
 1. Owner answers items 1-4. 2. Stage 3 smoke test and a look at the wordings. 3. Continue the table above.
+
+
+## Tonight: offline setup (2026-10-25)
+
+### Owner decisions
+- Stage 4 trains **only on `data/synthetic_v4`**. The script now rejects other data folders.
+- Stage 3 first pass: **1,000 seed programs x 3 wordings**. Do not start the full pass until the owner reviews local-model smoke wordings.
+- Downloads are authorized only to `huggingface.co`, inside this repo. No new dependencies, sign-in, uploads, publishing, or pushes are authorized.
+
+### What changed and why
+- Added `models.lock.json` using the owner's previously checked Apache-2.0 licences and revisions: Qwen2.5-7B-Instruct `a09a35458c`, Qwen2.5-Coder-7B-Instruct `c03e6d3582`. With `HF_HUB_OFFLINE=1`, stages use only this file for licence/revision and pass `local_files_only=True` and the revision to model/tokenizer loaders. A missing lock, missing model entry, or unapproved licence stops execution. Online metadata behavior is unchanged. Offline stage 5's older base models also need owner-reviewed lock entries before they can run; no revisions were guessed.
+- Added `stages.preflight`: reports each readiness check separately, exits nonzero if any fail, and saves the evidence. It verifies snapshot revision and required files/shards without downloading; checks bitsandbytes native CUDA support as well as import; requires GPU memory, disk headroom, frozen hashes, and no reported compute processes. Disk headroom is an engineering threshold, not a measured model requirement.
+- Fixed stage 4 dropping the final incomplete accumulation group. Added data/settings fingerprints and CUDA RNG checkpointing so resumed work cannot silently use changed inputs. Empty encoded datasets stop before loading weights. Memory exhaustion still exits explicitly with a traceback; it never silently skips samples or retries in a loop. Resume stages 3/4 from the last durable record/checkpoint, losing only work since that checkpoint.
+- Stage 3 now uses inference mode, logs every wording, limits generation time, and checks input/settings fingerprints on resume. Corrected clock checks so morning/evening and nonzero minutes cannot be confused. Checkpoint parsing refuses interior corruption instead of discarding all later work. Generation time limits are cooperative between decoding steps, not a guarantee against a hung CUDA driver.
+- Stage 5 verifies the conditions file is committed, freezes its hash, requires summary files before treating results as completed, and bounds each subprocess. A started-but-incomplete condition stops for owner review; no automatic re-evaluation of held-out v3. No final evaluation was run tonight.
+- Added offline load probe `stages.load_smoke` and an anonymous download helper with a strict host guard; download redirects outside the authorized host are rejected. No downloaded content was treated as instructions.
+- Added the older generator's AI-authored template provenance to `docs/RESULTS.md` and the local model-card template. No published files or numbers were uploaded or changed.
+
+### Commands and observed outcomes
+Evidence: `eval/results/setup-validation.json` (exact captured outputs), `eval/results/setup-preflight.json` (readiness checks). All numbers below come from those files.
+- `.venv\Scripts\python.exe -m pytest -q -o addopts=`: **304 passed**, one pytest cache permission warning. Frozen hash tests pass. `.venv\Scripts\python.exe -m eval.validate_tasks eval/heldout3`: **72 tasks, 36 traps, 18 businesses, 0 problems**. This validates structure/hashes, not model performance.
+- Requested elevated network permission and launched `.venv\Scripts\python.exe -u -m stages.download_models` detached, with `HF_HOME=$PWD\.hf-cache`, stdout/stderr in `logs/setup-download.*`. Approval succeeded. Initial attempt failed because this Hub build uses `httpx2` rather than `httpx`; helper now supports the installed client, with no installation. Retry reached the Hub, then its host guard rejected redirected storage requests. Both model snapshots remain incomplete. This was a domain restriction, not an automatic reviewer rejection.
+- `$env:HF_HUB_OFFLINE='1'; .venv\Scripts\python.exe -u -m stages.preflight`: **FAIL** overall. Lock, bitsandbytes native CUDA, memory, disk, and frozen hashes pass. Snapshot completeness and the compute-idle check fail. Windows WDDM reports desktop apps as compute processes and some process names are unreadable; this check deliberately refuses to claim idle when uncertain. Do not kill desktop processes automatically.
+- Detached offline probes: `.venv\Scripts\python.exe -u -m stages.load_smoke --model Qwen/Qwen2.5-7B-Instruct` and the same command with `Qwen/Qwen2.5-Coder-7B-Instruct`; logs in `logs/setup-load-general.*` / `logs/setup-load-coder.*`. Both stop at the conservative GPU-idle guard, before allocating weights. **No tokens or model GPU-memory measurements are available.** Preflight records free memory; it is not model memory usage.
+- Detached offline `.venv\Scripts\python.exe -u -m stages.stage3_paraphrase --limit-programs 3 --per-program 3 --load-4bit --out data/synthetic_v4_smoke`: failed at tokenizer construction because cache files are missing. No wordings generated, no training run. Logs in `logs/setup-stage3.*`; failed smoke directory is left untracked and must not be used as training data. Use the fresh smoke output path below after downloads, since resume fingerprints were strengthened after this attempt.
+- Final validation runner: `.venv\Scripts\python.exe -u logs/run-setup-validation.py` (detached, logs in `logs/setup-validation.*`). No dependency installer, push, upload, or paid service was used.
+
+### Needs the owner
+1. Complete the downloads in your terminal. This exact command allows Hugging Face's ordinary storage redirects; Codex did not authorize those extra hosts itself:
+```powershell
+cd <repo>
+$env:HF_HOME="$PWD\.hf-cache"
+$env:HF_HUB_DISABLE_IMPLICIT_TOKEN='1'
+Remove-Item Env:HF_HUB_OFFLINE -ErrorAction SilentlyContinue
+.venv\Scripts\python.exe -c "from huggingface_hub import snapshot_download; [snapshot_download(m,revision=r,token=False,max_workers=2,allow_patterns=['*.json','*.safetensors','*.txt','*.model','*.tiktoken']) for m,r in [('Qwen/Qwen2.5-7B-Instruct','a09a35458c'),('Qwen/Qwen2.5-Coder-7B-Instruct','c03e6d3582')]]"
+```
+Run detached with redirected logs if it will take a long time. If sign-in or another dependency is required, stop; do not install or sign in through Codex.
+2. Resolve/inspect the Windows GPU process reporting before allowing a load probe. Do not weaken the guard by ignoring unknown processes. No model/training GPU job launched by this session is left running.
+3. Older stage-5 model entries need an owner-reviewed licence and exact revision in the lock before an offline final evaluation. Stage 5 is not tonight's work.
+
+### Morning checklist
+- Complete downloads above, then set `$env:HF_HUB_OFFLINE='1'` and run `.venv\Scripts\python.exe -u -m stages.preflight`.
+- After all readiness checks pass, run each `stages.load_smoke --model ...` command separately, detached; confirm each exits before starting the next. Their result JSON files record generated token count and allocated/reserved/free GPU memory.
+- Run offline `.venv\Scripts\python.exe -u -m stages.stage3_paraphrase --limit-programs 3 --per-program 3 --load-4bit --out data/synthetic_v4_smoke_ready` detached. Owner reviews generated requests before scale-up.
+- First pass, only after review: `.venv\Scripts\python.exe -u -m stages.stage3_paraphrase --limit-programs 1000 --per-program 3 --load-4bit --out data/synthetic_v4` (offline, detached with logs).
+- Stage 4 smoke then training only on `data/synthetic_v4`; choose adapters on dev only. No held-out v3 evaluation until the final conditions file and all required locks are reviewed and committed.
+- Preserve the pre-existing owner edits in `pyproject.toml` and `uv.lock`; they were not included in Codex's commit. No environment was rebuilt.

@@ -89,3 +89,5 @@ These results support only this statement: the checker verifies core rules C1-C8
 - Small evaluation sets with wide intervals; one training seed per model.
 - Both held-out sets are now used (v1 once per model; v2 once per condition). Model work is stopped; any further model change needs a new held-out set.
 - All external actions are mocked. The checker's guarantees cover only rules C1-C8, under the trust assumptions in `spec/SPEC.md` section 5.
+
+Provenance clarification: the older rule-based generator's template sentences in `data/gen/*.py` were typed by Claude Code, an AI coding assistant. Script execution produced the older training examples, but their English templates were AI-authored. The owner has decided that stage 4 will train only on `data/synthetic_v4`, whose wordings come from a locally run open-weight model. This note changes no published results.

@@ -64,3 +64,5 @@ The v0.1 recipe (LoRA rank {rank}, learning rate {lr}, {epochs} epochs, seed 42;
 - Small evaluation sets with wide intervals; one training seed per model.
 - Aether's external actions (messages, money, calendars) are mocked. This is research software.
 - Do not describe this model, or Aether as a whole, as "safe". The narrow claim is that the checker verifies the named rules C1-C8 for Aether programs (see the specification).
+
+Provenance clarification: the older rule-based generator's template sentences in `data/gen/*.py` were typed by Claude Code, an AI coding assistant. Script execution produced the older training examples, but their English templates were AI-authored. The owner has decided that stage 4 will train only on `data/synthetic_v4`, whose wordings come from a locally run open-weight model. This note changes no published results.
