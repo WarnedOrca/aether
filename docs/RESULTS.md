@@ -29,6 +29,26 @@ Paired exact McNemar tests (`eval/results/ft/heldout-*.json`):
 
 **The checker blocked every program that broke a rule, and programs it accepted had 0 monitor violations.**
 
+## 1b. Held-out v2: 90 tasks (clean; plan pre-registered)
+
+90 tasks (30 traps, 60 general) in 15 business types not used anywhere else (`eval/heldout2/`, SHA-256 in `FROZEN.md`), drafted by Claude and frozen before any v0.3 training, tuning, or repair/decoding experiments. Before the run, one primary comparison was pre-registered (vault decision log, 2026-10-25): **v0.3 with checker feedback vs v0.2 plain** on `safe_and_correct`, exact McNemar, alpha 0.05. Every condition was run exactly once, in one script (`eval/run_final_v2.sh`, log `eval/results/final-v2-log.txt`). Report: `eval/results/final-v2-report-2026-10-25.json`.
+
+| System | correct (of 90) | 95% CI | traps (of 30) | status |
+|---|---|---|---|---|
+| Base model, reference card + 3 examples | 1 | 0.00-0.06 | 0 | exploratory |
+| **v0.2 plain (released)** | **20** | 0.15-0.32 | 2 | primary comparator |
+| v0.2 with checker feedback | 22 | 0.17-0.34 | 2 | exploratory |
+| v0.2 grammar-constrained | 19 | 0.14-0.31 | 2 | exploratory |
+| v0.3 plain (not released) | 14 | 0.10-0.24 | 3 | exploratory |
+| v0.3 with checker feedback (not released) | 15 | 0.10-0.26 | 3 | primary |
+| v0.3 grammar-constrained (not released) | 15 | 0.10-0.26 | 3 | exploratory |
+
+- **Primary result: null.** v0.3 with checker feedback 15 vs v0.2 plain 20; 6 tasks only v0.3 solved, 11 only v0.2 solved; exact McNemar p = 0.33. The new data plus checker feedback did not improve on the released model.
+- v0.2 plain vs base: 20 vs 1, p = 2.1e-5 (`eval/results/ft/heldout2-v0.2-vs-base.json`; not pre-registered).
+- **Conditions.** *Plain*: one greedy answer. *With checker feedback* (`eval/repair.py`): if the program fails to parse or fails the checker, the model gets the error messages and tries again, up to 3 times; nothing else is shown to it. Plain and checker-feedback results are separate rows, never blended. *Grammar-constrained* (`eval/constrained.py`): at each step, only the top-8 tokens that keep the output a valid Aether prefix are allowed (fallback to the unconstrained token when none is: 497 of 15,184 steps for v0.2, 341 of 14,936 for v0.3).
+- **v0.3** (`eval/results/ft/ft-coder1.5b-v0.3-run.json`): the v0.2 recipe plus 1,232 checker-verified samples from 30 new business types (`data/synthetic_v3/`), 3,294 training examples. Like v0.1 and v0.2, it scores 100/100 on its synthetic test split, but lower than v0.2 on held-out v2 and on the development benchmark (26/110 vs 34/110). Our reading (a hypothesis, not tested): the generated data teaches the generator's templates more than reading real SOPs. **v0.3 is not released.**
+- Development-only results that came before the held-out run: checker feedback on the 110-task benchmark, v0.2 34 -> 36; grammar-constrained, 33 (parse rate 0.78 -> 0.88).
+
 ## 2. Development benchmark: 110 tasks, used during development
 
 This benchmark was used to build and debug the scorer, the blank-cell rule, and the SOP wording, and to compare models during development. Treat it as a development set, not a clean test.
@@ -60,11 +80,12 @@ These results support only this statement: the checker verifies core rules C1-C8
 
 - Fine-tuning on checker-verified synthetic data takes a 1.5B model from 0 to a useful level on hand-written tasks (development: 30/110 vs 3/110; held-out traps: 6/30 vs 0/30).
 - **Adding trap-style synthetic data did not improve trap handling** (held-out: 6/30 for both v0.1 and v0.2). Most remaining failures are general robustness errors on new business types, not only trap-following. Fixing that probably needs more varied training language or a larger model, not more templated traps.
+- **More varied generated data, checker feedback, and grammar-constrained decoding did not measurably help on held-out v2** (pre-registered null, p = 0.33). A model that is perfect on its own synthetic test can still be worse on new SOPs.
 - **Blocking rule-breaking programs is the checker's job, not the model's.** In every evaluation, the checker blocked every program that broke a rule, and programs it accepted had 0 monitor violations. The model by itself solves 6/30 held-out traps.
 ## Limitations
 
 - All benchmark and held-out tasks were drafted by Claude (an AI assistant), not taken from real businesses.
 - The training English is templated (rule-based generator). Most held-out failures are general errors on unfamiliar businesses.
 - Small evaluation sets with wide intervals; one training seed per model.
-- The held-out set is now public and has been used once per model. Any future model change needs a new held-out set.
+- Both held-out sets are now used (v1 once per model; v2 once per condition). Model work is stopped; any further model change needs a new held-out set.
 - All external actions are mocked. The checker's guarantees cover only rules C1-C8, under the trust assumptions in `spec/SPEC.md` section 5.

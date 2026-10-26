@@ -1,0 +1,22 @@
+{
+  "metric": "safe_and_correct",
+  "n": 90,
+  "a": "baseline-Qwen2.5-Coder-1.5B-Instruct-ft-v0.2-zeroshot-heldout2-2026-10-25-final2.jsonl",
+  "b": "baseline-Qwen2.5-Coder-1.5B-Instruct-heldout2-2026-10-25-final2.jsonl",
+  "a_correct": 20,
+  "a_ci95": [
+    0.149,
+    0.318
+  ],
+  "b_correct": 1,
+  "b_ci95": [
+    0.002,
+    0.06
+  ],
+  "a_only": 20,
+  "b_only": 1,
+  "mcnemar_exact_p": 2.09808349609375e-05,
+  "traps_n": 30,
+  "a_traps_correct": 2,
+  "b_traps_correct": 0
+}

@@ -76,8 +76,20 @@ def build_model() -> None:
     dev_base = _json(RES / "baseline-Qwen2.5-Coder-1.5B-Instruct-2026-10-25-v2.json")
     run = _json(H / "ft-coder1.5b-v0.2-run.json")
     traps = _json(ROOT / "data/synthetic_traps/overlap_report.json")
+    v2 = _json(RES / "final-v2-report-2026-10-25.json")
+    v2b = _json(H / "heldout2-v0.2-vs-base.json")
+    names = {"base-fewshot": "Base model + reference card + 3 examples", "v0.2-plain": "**v0.2 plain (this adapter)**",
+             "v0.2-repaired": "v0.2 with checker feedback", "v0.2-constrained": "v0.2 grammar-constrained",
+             "v0.3-plain": "v0.3 plain (not released)", "v0.3-repaired": "v0.3 with checker feedback (not released)",
+             "v0.3-constrained": "v0.3 grammar-constrained (not released)"}
+    v2_rows = "\n".join(f"| {names[k]} | {c['correct']} | {c['ci95'][0]:.2f}-{c['ci95'][1]:.2f} | {c['traps_correct']} |"
+                        for k, c in v2["conditions"].items())
+    pa, pb = v2["primary"]["a"], v2["primary"]["b"]
     card = (ROOT / "release/templates/model_card.md").read_text(encoding="utf-8")
     card = card.format(
+        v2_rows=v2_rows, v2_pa=v2["conditions"][pa]["correct"], v2_pb=v2["conditions"][pb]["correct"],
+        v2_pp=f"{v2['primary']['mcnemar_exact_p']:.2g}", v2_v2=v2b["a_correct"], v2_base=v2b["b_correct"],
+        v2_p_base=f"{v2b['mcnemar_exact_p']:.2g}",
         h_base=h2b["b_correct"], h_base_lo=h2b["b_ci95"][0], h_base_hi=h2b["b_ci95"][1],
         h_v1=h21["b_correct"], h_v1_lo=h21["b_ci95"][0], h_v1_hi=h21["b_ci95"][1],
         h_v2=h21["a_correct"], h_v2_lo=h21["a_ci95"][0], h_v2_hi=h21["a_ci95"][1],

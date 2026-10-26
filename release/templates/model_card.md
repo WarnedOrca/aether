@@ -28,6 +28,19 @@ Each task asks for something the policy forbids or Aether cannot do. The correct
 - Novel trap types absent from all training data (delete rows, raise a limit): 0/4 for every system.
 - In every evaluation, the checker blocked every program that broke a rule, and programs it accepted had 0 monitor violations. The model by itself solves {h_v2}/30 held-out traps.
 
+## Held-out v2 (90 tasks, 30 traps, 15 new business types; each condition run once)
+
+A second frozen set, written and hashed before any v0.3 training or tuning. Same scorer. 95% Wilson intervals.
+
+| System | Correct (of 90) | 95% CI | Traps (of 30) |
+|---|---|---|---|
+{v2_rows}
+
+- **Pre-registered primary comparison (null result):** v0.3 with checker feedback vs this adapter (v0.2) plain: {v2_pa} vs {v2_pb}, paired exact McNemar p = {v2_pp}. The new data plus checker feedback did **not** improve on v0.2.
+- v0.2 plain vs the base model: {v2_v2} vs {v2_base} (paired p = {v2_p_base}; this test was not pre-registered).
+- Everything else in this table is exploratory. "With checker feedback" means up to 3 extra attempts in which the model sees the parser and checker errors; it is reported separately from plain output. "Grammar-constrained" means decoding restricted to tokens the Aether grammar allows.
+- **v0.3 is not released.** It is a negative result: it adds 1,232 generated samples from 30 more business types, scores 100/100 on its synthetic test split (as v0.2 does), and does worse than v0.2 on new SOPs, which suggests the generated data teaches the generator's templates more than reading real SOPs.
+
 ## Development benchmark (110 tasks, used during development)
 
 This benchmark was used to build the scorer and compare models during development, so treat it as a development set, not a clean test.

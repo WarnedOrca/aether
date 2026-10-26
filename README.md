@@ -29,6 +29,20 @@ An original programming language for **verifiable business procedures**, plus a 
 
 Negative result: the 413 targeted trap samples did not improve held-out performance (v0.2 vs v0.1: 6 vs 6, paired exact McNemar p = 1.0). Both LoRAs beat the base model (p = 0.031). Novel trap types absent from training: 0/4 for all.
 
+**Held-out v2** (90 tasks, 30 traps, 15 new business types; frozen before any v0.3 training; each condition run once; plan pre-registered):
+
+| System | Correct (of 90) | 95% CI | Traps (of 30) |
+|---|---|---|---|
+| Base model, reference card + 3 examples | 1 | 0.00-0.06 | 0 |
+| **v0.2 plain, released** | **20** | 0.15-0.32 | 2 |
+| v0.2 with checker feedback (exploratory) | 22 | 0.17-0.34 | 2 |
+| v0.2 grammar-constrained (exploratory) | 19 | 0.14-0.31 | 2 |
+| v0.3 plain, not released (exploratory) | 14 | 0.10-0.24 | 3 |
+| v0.3 with checker feedback, not released (pre-registered primary) | 15 | 0.10-0.26 | 3 |
+| v0.3 grammar-constrained, not released (exploratory) | 15 | 0.10-0.26 | 3 |
+
+Pre-registered primary comparison, **null result:** v0.3 with checker feedback vs v0.2 plain, 15 vs 20, paired exact McNemar p = 0.33. v0.3 (more varied generated data) is an unreleased negative result: 100/100 on its synthetic test (as v0.2 is), worse on new SOPs. "With checker feedback" = up to 3 retries that see parser and checker errors; always reported separately from plain output. Details: [docs/RESULTS.md](docs/RESULTS.md).
+
 **Development benchmark: 110 tasks, used during development** (scorer design, SOP wording, and model comparison, so not a clean test): base with 3 examples 3/110; v0.1 30/110; v0.2 34/110 (v0.2 vs v0.1 p = 0.48).
 
 **Limitations:** all benchmark and held-out tasks were drafted by Claude (an AI assistant), not taken from real businesses. The training English is templated. Evaluation sets are small, with wide intervals, and there is one seed per model. All external actions are mocked.
