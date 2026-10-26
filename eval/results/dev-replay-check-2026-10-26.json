@@ -1,0 +1,22 @@
+{
+  "new epoch2": {
+    "n": 110,
+    "about_in_v4_train": 31,
+    "about_in_any_train": 32,
+    "body_in_v4_train": 0,
+    "body_in_any_train": 0,
+    "checker_passed_but_wrong": 44,
+    "wrong_about_replayed": 14,
+    "wrong_body_replayed": 0
+  },
+  "v0.2": {
+    "n": 110,
+    "about_in_v4_train": 6,
+    "about_in_any_train": 6,
+    "body_in_v4_train": 0,
+    "body_in_any_train": 0,
+    "checker_passed_but_wrong": 26,
+    "wrong_about_replayed": 3,
+    "wrong_body_replayed": 0
+  }
+}
