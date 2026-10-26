@@ -61,6 +61,12 @@ def main() -> None:
     if min(args.epochs, args.micro, args.accum, args.save_every, args.max_len, args.rank) < 1:
         ap.error("training counts must be positive")
 
+    from stages.gpu import gpu_job
+    with gpu_job():
+        run(args)
+
+
+def run(args):
     use_repo_hf_cache()
     out = ROOT / args.out
     out.mkdir(parents=True, exist_ok=True)

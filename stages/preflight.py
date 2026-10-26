@@ -8,6 +8,7 @@ import sys
 from pathlib import Path
 
 from stages.common import ROOT, locked_model, use_repo_hf_cache, write_json
+from stages.gpu import gpu_free, gpu_idle, gpu_process_warnings
 
 MODELS = ("Qwen/Qwen2.5-7B-Instruct", "Qwen/Qwen2.5-Coder-7B-Instruct")
 
@@ -25,24 +26,6 @@ def snapshot(model):
         if not (path / name).is_file() or (path / name).stat().st_size == 0:
             raise ValueError(f"Missing/empty snapshot file: {name}")
     return str(path)
-
-
-def smi(*args):
-    return subprocess.check_output(["nvidia-smi", *args], text=True, timeout=20).strip()
-
-
-def gpu_free():
-    free = [int(x) for x in smi("--query-gpu=memory.free", "--format=csv,noheader,nounits").splitlines()]
-    if not free or free[0] < 10 * 1024:
-        raise ValueError(f"GPU 0 needs at least 10 GiB free; MiB free: {free}")
-    return {"free_mib": free}
-
-
-def gpu_idle():
-    jobs = smi("--query-compute-apps=pid,process_name", "--format=csv,noheader")
-    if jobs:
-        raise ValueError(f"Compute processes already running: {jobs}")
-    return "No compute processes"
 
 
 def disk():
@@ -85,7 +68,11 @@ def main():
             detail, passed = str(exc), False
         print(f"{'PASS' if passed else 'FAIL'} {name}: {detail}", flush=True)
         results.append({"check": name, "passed": passed, "detail": detail})
-    write_json(ROOT / args.out, {"checks": results, "passed": all(r["passed"] for r in results)})
+    warnings = gpu_process_warnings()
+    for warning in warnings:
+        print(f"WARNING {warning}", flush=True)
+    write_json(ROOT / args.out, {"checks": results, "warnings": warnings,
+                               "passed": all(r["passed"] for r in results)})
     raise SystemExit(0 if all(r["passed"] for r in results) else 1)
 
 

@@ -110,6 +110,12 @@ def main() -> None:
     if args.per_program < 1 or args.limit_programs < 0 or args.max_new_tokens < 1 or args.generation_timeout <= 0:
         ap.error("counts and timeout must be positive (limit-programs may be zero)")
 
+    from stages.gpu import gpu_job
+    with gpu_job():
+        run(args)
+
+
+def run(args):
     use_repo_hf_cache()
     out = ROOT / args.out
     log = get_logger(out / "log.txt")

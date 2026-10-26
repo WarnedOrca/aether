@@ -77,16 +77,6 @@ def test_checkpoint_does_not_discard_interior_corruption(tmp_path):
     assert p.read_text() == original
 
 
-def test_gpu_check_fails_on_existing_job_and_low_memory(monkeypatch):
-    from stages import preflight
-    monkeypatch.setattr(preflight, "smi", lambda *a: "9000")
-    with pytest.raises(ValueError, match="10 GiB"):
-        preflight.gpu_free()
-    monkeypatch.setattr(preflight, "smi", lambda *a: "123, python.exe")
-    with pytest.raises(ValueError, match="already running"):
-        preflight.gpu_idle()
-
-
 def test_wording_must_state_caps_amounts_and_times():
     prog = "trigger every day at 18:00\n for each x in y up to 15 {\n if cost > $200.00 {"
     assert numbers_needed(prog) == {"15", "200"}

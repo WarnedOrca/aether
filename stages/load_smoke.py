@@ -11,10 +11,14 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", required=True)
     args = ap.parse_args()
+    from stages.gpu import gpu_job
+    with gpu_job():
+        run(args)
+
+
+def run(args):
     os.environ["HF_HUB_OFFLINE"] = "1"
     use_repo_hf_cache()
-    from stages.preflight import gpu_idle
-    gpu_idle()
     check_license(args.model, logging.getLogger(__name__))
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig

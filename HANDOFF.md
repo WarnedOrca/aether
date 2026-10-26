@@ -74,7 +74,7 @@ Remove-Item Env:HF_HUB_OFFLINE -ErrorAction SilentlyContinue
 .venv\Scripts\python.exe -c "from huggingface_hub import snapshot_download; [snapshot_download(m,revision=r,token=False,max_workers=2,allow_patterns=['*.json','*.safetensors','*.txt','*.model','*.tiktoken']) for m,r in [('Qwen/Qwen2.5-7B-Instruct','a09a35458c'),('Qwen/Qwen2.5-Coder-7B-Instruct','c03e6d3582')]]"
 ```
 Run detached with redirected logs if it will take a long time. If sign-in or another dependency is required, stop; do not install or sign in through Codex.
-2. Resolve/inspect the Windows GPU process reporting before allowing a load probe. Do not weaken the guard by ignoring unknown processes. No model/training GPU job launched by this session is left running.
+2. Superseded by the owner's GPU-lock decision below: Windows desktop/unreadable GPU processes warn only. No model/training GPU job launched by this session is left running.
 3. Older stage-5 model entries need an owner-reviewed licence and exact revision in the lock before an offline final evaluation. Stage 5 is not tonight's work.
 
 ### Morning checklist
@@ -84,3 +84,20 @@ Run detached with redirected logs if it will take a long time. If sign-in or ano
 - First pass, only after review: `.venv\Scripts\python.exe -u -m stages.stage3_paraphrase --limit-programs 1000 --per-program 3 --load-4bit --out data/synthetic_v4` (offline, detached with logs).
 - Stage 4 smoke then training only on `data/synthetic_v4`; choose adapters on dev only. No held-out v3 evaluation until the final conditions file and all required locks are reviewed and committed.
 - Preserve the pre-existing owner edits in `pyproject.toml` and `uv.lock`; they were not included in Codex's commit. No environment was rebuilt.
+
+
+## GPU admission correction (2026-10-25)
+
+Owner decision: GPU admission passes when GPU memory meets the existing threshold and no other Aether GPU job holds a live PID in `logs/gpu.lock`. Desktop apps and unreadable process names must produce warnings, never a process-based failure. This supersedes the earlier conservative Windows process rule; historical setup results above are unchanged.
+
+Implemented in `stages/gpu.py`, shared by preflight, the load probe, and stage scripts. GPU memory remains a separate required check. The PID lock is acquired before work and removed on normal completion, Python exceptions, SystemExit, or keyboard interruption. A hard-killed job can leave a PID file, which is ignored/replaced when its PID is dead. Windows PID checks use a read-only process handle, never `os.kill` or process termination. No process names are used to decide whether an Aether job exists.
+
+A small OS-locked sidecar (`logs/gpu.lock.guard`) serializes PID-file creation, stale replacement, and removal. This prevents simultaneous starters from both replacing a stale PID file and entering. The sidecar remains on disk, but its OS lock is automatically released on a crash. Both files are already ignored by the existing `logs/` gitignore rule. A malformed PID file stops with an explicit inspection message rather than guessing who owns it.
+
+Stage 3, stage 4, and load-smoke entry points hold the lock around their work. Stage 5 starts each evaluator through `python -u -m stages.gpu eval.baseline` (or repair/constrained); the runner executes the evaluator in the same process whose PID is recorded. A parent orchestrator crash therefore cannot make a still-running evaluator look dead. Preflight does not reserve the GPU for a later job; each actual job performs its own atomic admission check. Scripts launched outside these guarded entry points do not participate in the PID protocol.
+
+Verification used no downloads, model loads, training, or held-out model evaluation. Tests fake GPU memory/process responses, verify threshold boundaries, stale/live PIDs, warnings, cleanup after errors, entry-point integration, and competing subprocesses. Full test command: `.venv\Scripts\python.exe -m pytest -q -o addopts= --basetemp=logs/pytest-gpu-full`; **316 passed**, one existing pytest cache permission warning. Exact output and the read-only live guard check are committed in `eval/results/gpu-lock-validation.json`; capture command: `.venv\Scripts\python.exe logs/validate-gpu-lock.py`. The live check passed the no-Aether-job check and reported desktop/unreadable GPU processes only as warnings. It failed memory admission correctly: **9,919 MiB free**, below the required **10 GiB**. No GPU job was launched or left running.
+
+Next steps / morning checklist: once enough GPU memory is available, rerun offline preflight, then resume the existing model-load and smoke checklist. The prior Windows process-reporting blocker is resolved. Existing incomplete snapshot/download and older stage-5 lock-entry issues remain as recorded above. No downloads were attempted this session.
+
+Needs the owner: free enough GPU memory before starting a model job; Codex did not close or kill desktop apps. No new dependency or data/language decision is needed for this fix. Pre-existing `pyproject.toml`, `uv.lock`, and the failed untracked smoke directory remain untouched. Commit locally only; no push or upload.

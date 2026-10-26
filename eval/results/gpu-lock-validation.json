@@ -1,0 +1,32 @@
+{
+  "command": [
+    "<repo>\\.venv\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "-o",
+    "addopts=",
+    "--basetemp=logs/pytest-gpu-full"
+  ],
+  "exit_code": 0,
+  "stdout": "........................................................................ [ 22%]\n........................................................................ [ 45%]\n........................................................................ [ 68%]\n........................................................................ [ 91%]\n............................                                             [100%]\n============================== warnings summary ===============================\n.venv\\Lib\\site-packages\\_pytest\\cacheprovider.py:469\n  <repo>\\.venv\\Lib\\site-packages\\_pytest\\cacheprovider.py:469: PytestCacheWarning: could not create cache path <repo>\\.pytest_cache\\v\\cache\\nodeids: [WinError 5] Access is denied: '<repo>\\\\.pytest_cache\\\\v\\\\cache'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n316 passed, 1 warning in 9.07s\n",
+  "stderr": "",
+  "gpu_guard": {
+    "checks": [
+      {
+        "check": "GPU memory",
+        "passed": false,
+        "detail": "GPU 0 needs at least 10 GiB free; MiB free: [9919]"
+      },
+      {
+        "check": "no other Aether GPU job",
+        "passed": true,
+        "detail": "No live Aether GPU lock (dead PIDs ignored)"
+      }
+    ],
+    "warnings": [
+      "GPU processes may include Windows desktop or unreadable apps; informational only:\n[desktop process list removed before publishing]"
+    ],
+    "passed": false
+  }
+}

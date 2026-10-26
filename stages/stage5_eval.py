@@ -41,7 +41,7 @@ def result_file(c: dict) -> Path | None:
 
 
 def command(c: dict, conds: dict) -> list[str]:
-    py = [sys.executable, "-u", "-m"]
+    py = [sys.executable, "-u", "-m", "stages.gpu"]
     if c["kind"] == "plain":
         cmd = py + ["eval.baseline", "--model", c["model"], "--tasks-dir", TASKS, "--label", c["name"],
                     "--fewshot", str(c.get("fewshot", 0)), f"--suffix=-final3-{c['name']}", "--batch", str(c.get("batch", 4))]
