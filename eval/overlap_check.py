@@ -20,13 +20,15 @@ ROOT = Path(__file__).resolve().parent.parent
 
 def reference_sops(exclude: Path) -> dict[str, list[str]]:
     groups: dict[str, list[str]] = {}
-    for name in ("synthetic", "synthetic_traps"):
+    for name in ("synthetic", "synthetic_traps", "synthetic_v3"):
         for split in ("train", "valid", "test"):
             f = ROOT / "data" / name / f"{split}.jsonl"
             if f.exists():
                 groups.setdefault(name, []).extend(json.loads(line)["sop"] for line in f.open(encoding="utf-8"))
     groups["benchmark_110"] = [t.sop for t in load_tasks()]
     groups["heldout_v1_30"] = [t.sop for t in load_tasks(ROOT / "eval/heldout")]
+    if (ROOT / "eval/heldout2").resolve() != exclude.resolve():
+        groups["heldout_v2_90"] = [t.sop for t in load_tasks(ROOT / "eval/heldout2")]
     return {k: v for k, v in groups.items() if v}
 
 

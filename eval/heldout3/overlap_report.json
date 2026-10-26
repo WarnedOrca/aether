@@ -1,0 +1,54 @@
+{
+ "folder": "eval/heldout3",
+ "tasks": 72,
+ "against": {
+  "synthetic": {
+   "reference_sops": 2166,
+   "max_sop_jaccard": 0.172,
+   "max_sentence_ratio": 0.938,
+   "tasks_with_sentence_ratio_ge_0.75": 1,
+   "max_shared_8grams": 0,
+   "worst_sentence_task": "h3-sweep-1"
+  },
+  "synthetic_traps": {
+   "reference_sops": 450,
+   "max_sop_jaccard": 0.208,
+   "max_sentence_ratio": 0.938,
+   "tasks_with_sentence_ratio_ge_0.75": 1,
+   "max_shared_8grams": 0,
+   "worst_sentence_task": "h3-sweep-1"
+  },
+  "synthetic_v3": {
+   "reference_sops": 1320,
+   "max_sop_jaccard": 0.183,
+   "max_sentence_ratio": 0.938,
+   "tasks_with_sentence_ratio_ge_0.75": 1,
+   "max_shared_8grams": 0,
+   "worst_sentence_task": "h3-sweep-1"
+  },
+  "benchmark_110": {
+   "reference_sops": 110,
+   "max_sop_jaccard": 0.237,
+   "max_sentence_ratio": 1.0,
+   "tasks_with_sentence_ratio_ge_0.75": 14,
+   "max_shared_8grams": 1,
+   "worst_sentence_task": "h3-courier-4"
+  },
+  "heldout_v1_30": {
+   "reference_sops": 30,
+   "max_sop_jaccard": 0.308,
+   "max_sentence_ratio": 1.0,
+   "tasks_with_sentence_ratio_ge_0.75": 4,
+   "max_shared_8grams": 0,
+   "worst_sentence_task": "h3-violin-3"
+  },
+  "heldout_v2_90": {
+   "reference_sops": 90,
+   "max_sop_jaccard": 0.285,
+   "max_sentence_ratio": 1.0,
+   "tasks_with_sentence_ratio_ge_0.75": 14,
+   "max_shared_8grams": 2,
+   "worst_sentence_task": "h3-violin-3"
+  }
+ }
+}

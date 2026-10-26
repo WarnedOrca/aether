@@ -1,0 +1,35 @@
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+  rec = {"step": step, "epoch": epoch, "loss": round(float(loss) * args.accum, 5),
+{'step': 10, 'epoch': 1, 'loss': 0.58583, 'lr': 0.0001, 'elapsed_s': 175}
+{'step': 20, 'epoch': 1, 'loss': 0.25199, 'lr': 0.0002, 'elapsed_s': 327}
+{'step': 30, 'epoch': 1, 'loss': 0.08127, 'lr': 0.00019967902947497156, 'elapsed_s': 482}
+{'step': 40, 'epoch': 1, 'loss': 0.02181, 'lr': 0.00019871817834144504, 'elapsed_s': 635}
+{'step': 50, 'epoch': 1, 'loss': 0.00071, 'lr': 0.0001971236146972764, 'elapsed_s': 774}
+{'step': 60, 'epoch': 1, 'loss': 0.01679, 'lr': 0.00019490557470106686, 'elapsed_s': 931}
+{'step': 70, 'epoch': 1, 'loss': 0.01252, 'lr': 0.00019207829686205882, 'elapsed_s': 1073}
+{'step': 80, 'epoch': 1, 'loss': 0.00431, 'lr': 0.00018865993063730004, 'elapsed_s': 1203}
+{'step': 90, 'epoch': 1, 'loss': 0.00909, 'lr': 0.00018467241992282843, 'elapsed_s': 1317}
+{'step': 100, 'epoch': 1, 'loss': 0.00932, 'lr': 0.00018014136218679567, 'elapsed_s': 1432}
+{'step': 110, 'epoch': 1, 'loss': 0.00648, 'lr': 0.00017509584414881113, 'elapsed_s': 1549}
+{'step': 120, 'epoch': 1, 'loss': 0.0001, 'lr': 0.00016956825506034867, 'elapsed_s': 1667}
+{'step': 130, 'epoch': 1, 'loss': 0.01163, 'lr': 0.00016359407878484552, 'elapsed_s': 1783}
+{'step': 140, 'epoch': 1, 'loss': 0.00725, 'lr': 0.00015721166601221698, 'elapsed_s': 1898}
+{'step': 150, 'epoch': 1, 'loss': 0.00604, 'lr': 0.0001504619880700346, 'elapsed_s': 2013}
+{'step': 160, 'epoch': 1, 'loss': 0.01378, 'lr': 0.00014338837391175582, 'elapsed_s': 2129}
+{'step': 170, 'epoch': 1, 'loss': 0.00746, 'lr': 0.00013603623197038536, 'elapsed_s': 2241}
+{'step': 180, 'epoch': 1, 'loss': 0.0071, 'lr': 0.00012845275866310324, 'elapsed_s': 2355}
+{'step': 190, 'epoch': 1, 'loss': 0.0103, 'lr': 0.00012068663541808909, 'elapsed_s': 2492}
+{'step': 200, 'epoch': 1, 'loss': 0.01031, 'lr': 0.00011278771616845061, 'elapsed_s': 2651}
+{'epoch': 1, 'valid_loss': 0.00876, 'elapsed_s': 2856}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "<repo>\training\finetune.py", line 175, in <module>
+    main()
+  File "<repo>\training\finetune.py", line 166, in main
+    model.save_pretrained(out / f"epoch{epoch}")
+  File "<repo>\.venv\Lib\site-packages\peft\peft_model.py", line 299, in save_pretrained
+  File "<repo>\.venv\Lib\site-packages\peft\peft_model.py", line 1713, in create_or_update_model_card
+  File "<repo>\.venv\Lib\site-packages\huggingface_hub\repocard.py", line 417, in from_template
+  File "<repo>\.venv\Lib\site-packages\huggingface_hub\repocard.py", line 319, in from_template
+ImportError: Using RepoCard.from_template requires Jinja2 to be installed. Please install it with `pip install Jinja2`.

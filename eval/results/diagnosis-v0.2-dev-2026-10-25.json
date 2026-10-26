@@ -1,0 +1,182 @@
+{
+  "run": "baseline-Qwen2.5-Coder-1.5B-Instruct-ft-v0.2-zeroshot-2026-10-25-final.jsonl",
+  "non_trap_tasks": 80,
+  "solved": 31,
+  "failed": 49,
+  "classes": {
+    "parse": {
+      "description": "does not parse",
+      "count": 16,
+      "unfamiliar_business": 16,
+      "examples": [
+        {
+          "id": "physio-03",
+          "detail": "parse: line 9: Unexpected token Token('WHERE', 'where') at line 9, column 40."
+        },
+        {
+          "id": "physio-05",
+          "detail": "parse: line 8: Unexpected token Token('DEFAULT', 'default') at line 8, column 42."
+        },
+        {
+          "id": "coffee-04",
+          "detail": "parse: line 9: Unexpected token Token('LPAR', '(') at line 9, column 39."
+        }
+      ],
+      "unexpected_tokens": [
+        [
+          "LPAR",
+          4
+        ],
+        [
+          "NAME",
+          3
+        ],
+        [
+          "WHERE",
+          2
+        ],
+        [
+          "STRING",
+          2
+        ],
+        [
+          "AT",
+          2
+        ],
+        [
+          "DEFAULT",
+          1
+        ],
+        [
+          "UP",
+          1
+        ],
+        [
+          "other",
+          1
+        ]
+      ]
+    },
+    "type": {
+      "description": "type or name error (E5xx, E601)",
+      "count": 8,
+      "unfamiliar_business": 8,
+      "examples": [
+        {
+          "id": "physio-04",
+          "detail": "check: line 10: E502 skip used outside a loop: 'skip' outside a loop"
+        },
+        {
+          "id": "dog-01",
+          "detail": "check: line 9: E601 type or name error: sms needs a Phone recipient, got Text"
+        },
+        {
+          "id": "wash-05",
+          "detail": "check: line 8: E601 type or name error: cannot compare Text == Money"
+        }
+      ],
+      "codes": [
+        [
+          "E601",
+          5
+        ],
+        [
+          "E502",
+          3
+        ]
+      ]
+    },
+    "column": {
+      "description": "reads a sheet or column the policy does not allow (E401)",
+      "count": 1,
+      "unfamiliar_business": 1,
+      "examples": [
+        {
+          "id": "dog-04",
+          "detail": "check: line 10: E401 sheet or column not allowed by the policy: reads Walks.owner"
+        }
+      ]
+    },
+    "rule": {
+      "description": "other checker rule (approval, caps, batch mode, policy form)",
+      "count": 3,
+      "unfamiliar_business": 3,
+      "examples": [
+        {
+          "id": "drive-03",
+          "detail": "check: E701 policy missing a required hard cap: needs 'limit sends N per day' (or per week)"
+        },
+        {
+          "id": "hw-03",
+          "detail": "check: line 19: E102 order or refund needs 'ask owner first': refund without approval not proven within the auto-refund threshold"
+        },
+        {
+          "id": "escape-01",
+          "detail": "check: line 9: E104 batch form used while the policy is in per_message mode: 'draft each' needs 'approval batch'"
+        }
+      ],
+      "codes": [
+        [
+          "E701",
+          1
+        ],
+        [
+          "E102",
+          1
+        ],
+        [
+          "E104",
+          1
+        ]
+      ]
+    },
+    "effect": {
+      "description": "passes the checker but has different effects from the reference",
+      "count": 21,
+      "unfamiliar_business": 21,
+      "examples": [
+        {
+          "id": "physio-01",
+          "detail": "scenario 11/approve: differs in ['deliveries', 'sheets']; scenario 22/approve (blank cells): differs in ['deliveries', 'sheets']; scenario 33/approve: differs in ['deliveries', 'sheets']; scenario 66/approve: differs in ['deliveries', 'shee"
+        },
+        {
+          "id": "drive-02",
+          "detail": "scenario 11/approve: differs in ['deliveries']; scenario 22/approve (blank cells): differs in ['deliveries']; scenario 33/approve: differs in ['deliveries']; scenario 55/approve (blank cells): differs in ['deliveries']; scenario 66/approve:"
+        },
+        {
+          "id": "coffee-01",
+          "detail": "scenario 55/approve (blank cells): differs in ['money']"
+        }
+      ],
+      "blank_cells_only": 2,
+      "differs_in": [
+        [
+          "deliveries",
+          13
+        ],
+        [
+          "notes",
+          9
+        ],
+        [
+          "sheets",
+          5
+        ],
+        [
+          "money",
+          2
+        ],
+        [
+          "status",
+          1
+        ]
+      ]
+    }
+  },
+  "by_business": {
+    "familiar_n": 0,
+    "familiar_solved": 0,
+    "unfamiliar_n": 80,
+    "unfamiliar_solved": 31
+  }
+}
