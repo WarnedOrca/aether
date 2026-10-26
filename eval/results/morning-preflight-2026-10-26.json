@@ -1,0 +1,65 @@
+{
+  "checks": [
+    {
+      "check": "lock file",
+      "passed": true,
+      "detail": {
+        "Qwen/Qwen2.5-7B-Instruct": {
+          "revision": "a09a35458c",
+          "license": "apache-2.0"
+        },
+        "Qwen/Qwen2.5-Coder-7B-Instruct": {
+          "revision": "c03e6d3582",
+          "license": "apache-2.0"
+        }
+      }
+    },
+    {
+      "check": "Qwen/Qwen2.5-7B-Instruct",
+      "passed": false,
+      "detail": "The cached snapshot for 'Qwen/Qwen2.5-7B-Instruct' (revision 'a09a35458c', commit a09a35458c702b33eeacc393d103063234e8bc28) is incomplete: 3 file(s) are missing (.gitattributes, LICENSE, README.md). Outgoing traffic is disabled ('local_files_only=True'). Re-run the download with network access to complete the snapshot."
+    },
+    {
+      "check": "Qwen/Qwen2.5-Coder-7B-Instruct",
+      "passed": false,
+      "detail": "The cached snapshot for 'Qwen/Qwen2.5-Coder-7B-Instruct' (revision 'c03e6d3582', commit c03e6d358207e414f1eca0bb1891e29f1db0e242) is incomplete: 3 file(s) are missing (.gitattributes, LICENSE, README.md). Outgoing traffic is disabled ('local_files_only=True'). Re-run the download with network access to complete the snapshot."
+    },
+    {
+      "check": "bitsandbytes",
+      "passed": true,
+      "detail": "0.50.2"
+    },
+    {
+      "check": "GPU memory",
+      "passed": true,
+      "detail": {
+        "free_mib": [
+          11318
+        ],
+        "minimum_mib": 10240
+      }
+    },
+    {
+      "check": "disk space",
+      "passed": true,
+      "detail": {
+        "free_bytes": 212573097984,
+        "minimum_gib": 50
+      }
+    },
+    {
+      "check": "held-out frozen hashes",
+      "passed": true,
+      "detail": "Frozen hash tests passed"
+    },
+    {
+      "check": "no other GPU job",
+      "passed": true,
+      "detail": "No live Aether GPU lock (dead PIDs ignored)"
+    }
+  ],
+  "warnings": [
+    "GPU processes may include Windows desktop or unreadable apps; informational only:\n[desktop process list removed before publishing]"
+  ],
+  "passed": false
+}

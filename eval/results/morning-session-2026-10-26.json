@@ -1,0 +1,28 @@
+{
+  "time_utc": "2026-10-26T13:31:22.729725+00:00",
+  "environment": {
+    "HF_HOME": "<repo>\\.hf-cache",
+    "HF_HUB_OFFLINE": "1"
+  },
+  "preflight_command": ".venv\\Scripts\\python.exe -u -m stages.preflight --out eval/results/morning-preflight-2026-10-26.json",
+  "preflight_exit_code": 1,
+  "preflight_result": "eval/results/morning-preflight-2026-10-26.json",
+  "decision": "Stop because required snapshot checks failed, not GPU memory; do not bypass or download.",
+  "return_time": "Unspecified: user message contained [RETURN TIME]; no deadline inferred.",
+  "gpu_lock_status": "No live Aether GPU lock (dead PIDs ignored)",
+  "gpu_status": "name, memory.used [MiB], memory.free [MiB], utilization.gpu [%]\nNVIDIA GeForce RTX 4070, 703 MiB, 11308 MiB, 1 %",
+  "preserved_file_sha256": {
+    "pyproject.toml": "c141311af94ec8424d02cb1d281d18aa928717505b6457b0536e5d11cb2cbc69",
+    "uv.lock": "474dfdf1ed04ba7d79d77afbaad90732ff03bd3c57065768f6d63bfac659a959"
+  },
+  "not_run": [
+    "load_smoke probes",
+    "stage 3 smoke",
+    "stage 3 full / quality gate",
+    "stage 4 smoke / full",
+    "dev adapter comparison",
+    "stage 5"
+  ],
+  "heldout_policy": "Only preflight frozen-hash tests; no held-out model evaluation or content inspection.",
+  "git_status": " M pyproject.toml\n M uv.lock\n?? data/synthetic_v4_smoke/\n?? eval/results/morning-preflight-2026-10-26.json\n"
+}

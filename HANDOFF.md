@@ -1,6 +1,43 @@
 # HANDOFF (repo copy, for Codex and other agents)
 
-Updated 2026-10-25 tonight by Codex. The setup section below supersedes the earlier next steps and dependency status. Agents: update this file at the end of every session (see `AGENTS.md`).
+Updated 2026-10-26 morning by Codex. The morning session below supersedes earlier readiness and review instructions. Historical results remain below. Agents: update this file at the end of every session (see `AGENTS.md`).
+
+## Morning session (2026-10-26): stopped at required pre-flight
+
+### Current state and decisions
+- Read `AGENTS.md`, this handoff including the morning checklist, `README.md`, `docs/RESULTS.md`, and specification sections 5 and 13. Worked alone.
+- The owner authorized offline work, replacing smoke owner review with a quality gate, then the requested generation, training, and dev comparison. Stage 4 may use only `data/synthetic_v4`. All outputs remain unreviewed. No stage 5 or held-out v3 model evaluation is authorized.
+- **Pre-flight failed on snapshot completeness.** GPU memory passed, so the special memory-only retry rule does not apply. The owner explicitly said to stop if a required step fails. I stopped the pipeline rather than changing pre-flight, weakening a check, downloading, or trying model loads anyway.
+- `stages.load_smoke` was not run for either model. **Measured model GPU memory is unavailable for both models.** Pre-flight free memory is not a model-memory measurement.
+- No stage 3 smoke, real generation, quality gate, training, or dev evaluation was run. No candidate adapter exists from this session, so `stages/stage5_conditions.json` was not created with an invented candidate. No new training text was produced.
+- The return time was literally `[RETURN TIME]` in the request and is absent from this handoff. No return deadline was guessed. This did not cause the stop; the failed pre-flight did.
+- Left the existing `pyproject.toml`, `uv.lock`, and failed untracked `data/synthetic_v4_smoke/` untouched. No installer, account, secret, network request, push, upload, or publication was used. No Aether GPU job was started; Windows desktop apps were left alone.
+
+### Commands and evidence
+Every shell command in this session began with:
+```powershell
+$env:HF_HOME = "$PWD\.hf-cache"
+$env:HF_HUB_OFFLINE = '1'
+```
+Read-only repository inspection included `git status --short`, `git log --oneline -5`, file reads, and `rg` searches. The required readiness command was:
+```powershell
+.venv\Scripts\python.exe -u -m stages.preflight --out eval/results/morning-preflight-2026-10-26.json
+```
+It exited with failure. Evidence is saved separately from earlier setup results in `eval/results/morning-preflight-2026-10-26.json`. Lock metadata, bitsandbytes native CUDA, GPU memory, disk space, frozen hashes, and absence of another Aether GPU job passed. GPU free memory was **11,318 MiB**, against the **10,240 MiB** threshold. Desktop/unreadable GPU processes produced informational warnings. The full test suite was not rerun after the required stop; pre-flight ran its frozen-hash tests. No held-out task content was inspected or changed.
+
+Final read-only GPU inspection used `stages.gpu.gpu_idle()` and `stages.gpu.smi('--query-gpu=name,memory.used,memory.free,utilization.gpu', '--format=csv')` through the project Python interpreter. `eval/results/morning-session-2026-10-26.json` records that output, command/exit status, skipped work, environment settings, and hashes of the preserved owner files. `SUMMARY.md` is the one-page session report. Only the report, handoff, and new evidence files are included in the local session commit.
+
+### Needs the owner
+Both cached snapshots fail the installed Hub client's offline completeness check. Exact errors:
+```text
+The cached snapshot for 'Qwen/Qwen2.5-7B-Instruct' (revision 'a09a35458c', commit a09a35458c702b33eeacc393d103063234e8bc28) is incomplete: 3 file(s) are missing (.gitattributes, LICENSE, README.md). Outgoing traffic is disabled ('local_files_only=True'). Re-run the download with network access to complete the snapshot.
+
+The cached snapshot for 'Qwen/Qwen2.5-Coder-7B-Instruct' (revision 'c03e6d3582', commit c03e6d358207e414f1eca0bb1891e29f1db0e242) is incomplete: 3 file(s) are missing (.gitattributes, LICENSE, README.md). Outgoing traffic is disabled ('local_files_only=True'). Re-run the download with network access to complete the snapshot.
+```
+The earlier download command allowed selected extensions and did not include these metadata files. That explains the mismatch between cached model files and snapshot completeness; it is not evidence that the weights can load. Complete the missing cache metadata outside this offline session, then rerun pre-flight. No installation is needed based on the checks that passed. Supply an actual return time before a later unattended training session so the training deadline can be enforced.
+
+### Next steps
+After the snapshots pass pre-flight, resume the owner's requested order: separate detached load probes, the fresh stage 3 smoke path, smoke/early-real-run quality checks, bounded generation, stage 4 smoke and training if enough time remains, then dev comparison and a candidate conditions file. Do not evaluate held-out v3. The quality gate and all downstream work remain pending; no approval or successful result is implied.
 
 ## Current state
 - **Released:** v0.2 LoRA (Qwen2.5-Coder-1.5B-Instruct). **v0.3:** unreleased negative result. Model work for v0.x is closed.
