@@ -8,7 +8,6 @@
   ],
   "per_program": 3,
   "generation_timeout": 180,
-  "limit_programs": 1000,
   "shuffle_seed": 11,
   "temperature": 0.9,
   "max_new_tokens": 220,
@@ -16,5 +15,10 @@
   "out": "data/synthetic_v4",
   "revision": "a09a35458c",
   "prompt_version": "p2",
-  "seeds_sha256": "7e2df12533e36d942ef561e035da4f46669369e5603a1962dc845c349c854d28"
+  "pool_sha256": "f448c07fe22349c8f70d9e5da7a9abc686344c032e66f6ba0ea45c0107fdaf93",
+  "selection": {
+    "limit_programs": 0,
+    "trap_share": 0.27,
+    "fixed_prefix": 515
+  }
 }

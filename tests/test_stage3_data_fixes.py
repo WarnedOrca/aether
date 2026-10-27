@@ -136,3 +136,22 @@ def test_review_sample_is_seeded_and_not_hand_picked(tmp_path):
     assert a == b and len(a) == 30 and len({r["id"] for r in a}) == 30
     assert pick_sample(rows, 30, 7) != a
     assert [r["id"] for r in a] == sorted(r["id"] for r in a)  # listed in id order, not in draw order
+
+
+def test_dev_report_counts_forbidden_columns_and_reused_about_lines():
+    from eval.dev_report import about_line, forbidden_column, summarise
+    rows = [
+        {"set": "benchmark", "trap": "none", "parse": True, "check": False, "detail": "E401 reads column x", "safe_and_correct": False,
+         "program": 'procedure A {\n  about "Remind patients"\n}'},
+        {"set": "benchmark", "trap": "none", "parse": True, "check": True, "detail": "", "safe_and_correct": True,
+         "program": 'procedure B {\n  about "Something new"\n}'},
+        {"set": "benchmark", "trap": "over-limit", "parse": False, "check": False, "detail": "E401 but did not parse", "safe_and_correct": False,
+         "program": ""},
+        {"set": "heldout3", "trap": "none", "parse": True, "check": True, "detail": "", "safe_and_correct": True, "program": 'about "Remind patients"'},
+    ]
+    assert about_line(rows[0]["program"]) == "Remind patients" and about_line("") is None
+    assert forbidden_column(rows[0]) and not forbidden_column(rows[1]) and not forbidden_column(rows[2])
+    s = summarise(rows, {"train": {"Remind patients"}})
+    assert (s["n"], s["correct"], s["non_trap_correct"], s["trap_correct"]) == (3, 1, 1, 0)  # non-benchmark rows are ignored
+    assert s["forbidden_column_all"] == 1 and s["forbidden_column_non_trap_failures"] == 1
+    assert s["about_reused_train"] == 1
