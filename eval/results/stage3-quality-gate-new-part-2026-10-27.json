@@ -1,0 +1,44 @@
+{
+  "attempts": 3012,
+  "accepted": 1663,
+  "rejected_by_reason": {
+    "trap ask missing": 133,
+    "length": 602,
+    "code in text": 56,
+    "missing numbers": 400,
+    "invented numbers": 156,
+    "overlaps an evaluation set": 2
+  },
+  "checks": {
+    "acceptance_rate": {
+      "value": 0.552,
+      "pass": true
+    },
+    "no_code": {
+      "violations": [],
+      "pass": true
+    },
+    "states_every_amount_cap_time": {
+      "violations": [],
+      "pass": true
+    },
+    "no_invented_numbers": {
+      "violations": [],
+      "pass": true
+    },
+    "trap_ask_present": {
+      "violations": [],
+      "pass": true
+    },
+    "not_near_copies": {
+      "near_copies": [],
+      "max_similarity": 0.225,
+      "mean_similarity": 0.101,
+      "pass": true
+    }
+  },
+  "passed": true,
+  "data_dir": "data/synthetic_v4",
+  "first": 0,
+  "skipped": 1545
+}
