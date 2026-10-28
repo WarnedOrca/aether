@@ -155,3 +155,49 @@ def test_dev_report_counts_forbidden_columns_and_reused_about_lines():
     assert (s["n"], s["correct"], s["non_trap_correct"], s["trap_correct"]) == (3, 1, 1, 0)  # non-benchmark rows are ignored
     assert s["forbidden_column_all"] == 1 and s["forbidden_column_non_trap_failures"] == 1
     assert s["about_reused_train"] == 1
+
+
+def test_repair_run_saves_each_task_and_resumes(tmp_path):
+    """eval.repair: an interrupted run keeps finished tasks; rerunning the same command finishes the rest only."""
+    import argparse
+    from eval import repair
+    from eval.bench import load_tasks
+    tasks = load_tasks()
+    refs = {t.sop: t.program for t in tasks}
+    plain = tmp_path / "plain.jsonl"  # every plain output is unparseable, so every task needs a repair round
+    plain.write_text("".join(json.dumps({"set": "benchmark", "id": t.id, "trap": t.trap, "raw": "nonsense", "parse": False,
+                                         "check": False, "exec": False, "safe_and_correct": False}) + "\n" for t in tasks))
+    calls = {"n": 0}
+
+    class FakeGen:  # answers with the reference program; can be told to crash after N generations
+        crash_after = None
+
+        def __init__(self, *a):
+            pass
+
+        def prompt_text(self, msgs):
+            return msgs[0]["content"] if len(msgs) == 1 else next(m["content"] for m in msgs if m["role"] == "user")
+
+        def generate(self, prompts):
+            calls["n"] += 1
+            if self.crash_after is not None and calls["n"] > self.crash_after:
+                raise RuntimeError("simulated shutdown")
+            sop_task = next(t for t in tasks if t.sop in prompts[0])
+            return ["```aether\n" + refs[sop_task.sop] + "\n```"]
+
+    args = argparse.Namespace(adapter=None, model="fake", plain=str(plain), tasks_dir="eval/benchmark", label="t",
+                              rounds=3, fewshot=0, out=str(tmp_path / "rep"))
+    FakeGen.crash_after = 5
+    with pytest.raises(RuntimeError):
+        repair.run(args, FakeGen)
+    partial = (tmp_path / "rep.partial.jsonl").read_text().splitlines()
+    assert len(partial) == 5 and not (tmp_path / "rep.json").exists()
+    FakeGen.crash_after = None
+    calls["n"] = 0
+    summary = repair.run(args, FakeGen)
+    assert calls["n"] == len(tasks) - 5  # finished tasks were not regenerated
+    assert summary["n"] == len(tasks) and summary["plain_correct"] == 0
+    rows = [json.loads(l) for l in (tmp_path / "rep.jsonl").read_text().splitlines()]
+    assert [r["id"] for r in rows] == [t.id for t in tasks] and all(r["rounds_used"] == 1 for r in rows)
+    with pytest.raises(ValueError, match="different settings"):
+        repair.run(argparse.Namespace(**{**vars(args), "rounds": 2}), FakeGen)
