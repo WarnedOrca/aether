@@ -22,7 +22,7 @@ import time
 from pathlib import Path
 
 from stages.common import ROOT, model_load_kwargs, check_license, get_logger, model_revision, use_repo_hf_cache, write_json
-from training.finetune import batches, encode, evaluate, set_seed
+from training.finetune import batches, encode, set_seed
 
 
 def load_rows(folders: list[str], split: str) -> list[dict]:
@@ -49,6 +49,24 @@ def answer_only_loss(model, ids, labels, mask):
     logits = model(input_ids=ids, attention_mask=mask, logits_to_keep=keep).logits[:, :-1].float()
     targets = labels[:, n - keep + 1:]
     return torch.nn.functional.cross_entropy(logits.reshape(-1, logits.shape[-1]), targets.reshape(-1), ignore_index=-100)
+
+
+def answer_only_valid_loss(model, items, micro: int, pad_id: int) -> float:
+    """Same value as training.finetune.evaluate (token-weighted mean loss over answer tokens), but through
+    answer_only_loss, so validation never builds full-vocabulary logits for the prompt (that spilled a 12 GB GPU
+    into Windows shared memory on 2026-10-27 and stalled validation for 30+ minutes)."""
+    import torch
+
+    model.eval()
+    total, count = 0.0, 0
+    with torch.no_grad():
+        for ids, labels, mask in batches(items, micro, pad_id, False, random.Random(0)):
+            tokens = int((labels != -100).sum())
+            total += float(answer_only_loss(model, ids.cuda(), labels.cuda(), mask.cuda())) * tokens
+            count += tokens
+            torch.cuda.empty_cache()
+    model.train()
+    return total / max(count, 1)
 
 
 def accumulation_size(k: int, total_batches: int, accum: int) -> int:
@@ -184,7 +202,7 @@ def run(args):
             if state["step"] % args.save_every == 0:
                 save("step")
         torch.cuda.empty_cache()
-        val = evaluate(model, valid, args.micro, pad_id, torch)
+        val = answer_only_valid_loss(model, valid, args.micro, pad_id)
         torch.cuda.empty_cache()
         state["history"].append({"epoch": epoch, "valid_loss": round(val, 5), "elapsed_s": round(time.time() - started)})
         log.info("epoch %d valid loss %.5f", epoch, val)

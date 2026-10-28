@@ -151,3 +151,22 @@ def test_answer_only_loss_matches_full_loss():
     fast = answer_only_loss(model, ids, labels, mask)
     assert torch.allclose(full, fast, atol=1e-5)
     fast.backward()  # gradients flow
+
+
+def test_answer_only_valid_loss_matches_finetune_evaluate(monkeypatch):
+    torch = pytest.importorskip("torch")
+    from transformers import Qwen2Config, Qwen2ForCausalLM
+    from stages import stage4_qlora
+    from training.finetune import evaluate
+    monkeypatch.setattr(torch.Tensor, "cuda", lambda self, *a, **k: self)  # CPU-only test
+    monkeypatch.setattr(torch.cuda, "empty_cache", lambda: None)
+    torch.manual_seed(0)
+    model = Qwen2ForCausalLM(Qwen2Config(vocab_size=64, hidden_size=32, intermediate_size=64, num_hidden_layers=2,
+                                         num_attention_heads=2, num_key_value_heads=2, max_position_embeddings=64))
+    items = []
+    for n, k in ((12, 5), (18, 9), (9, 3)):  # (length, prompt tokens): different answer lengths weight differently
+        ids = torch.randint(0, 64, (n,)).tolist()
+        items.append({"input_ids": ids, "labels": [-100] * k + ids[k:]})
+    expected = evaluate(model, items, 2, 0, torch)
+    got = stage4_qlora.answer_only_valid_loss(model, items, 2, 0)
+    assert abs(expected - got) < 1e-5
