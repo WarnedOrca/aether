@@ -6,8 +6,8 @@ Updated 2026-10-26 afternoon by Claude Code (unattended session below). That ses
 
 ### If interrupted (computer shut down)
 Each step below is committed as soon as it finishes. GPU jobs save one row per task to `<out>.partial.jsonl` and skip finished tasks when rerun; the summary `.json`/`.jsonl` appear only when all 110 tasks are done. To continue, from the repo root in Git Bash, ONE at a time (check `nvidia-smi` first; only one GPU job):
-1. q7b-v2 epoch 2 with checker feedback: `bash logs/run-repair-q7b-v2-epoch2.sh` (progress: `wc -l eval/results/repair-q7b-v2-epoch2-dev-benchmark.partial.jsonl`; done when `eval/results/repair-q7b-v2-epoch2-dev-benchmark.json` exists).
-2. Then v0.2 with checker feedback: `bash logs/run-repair-v0.2.sh` (same pattern, files `eval/results/repair-v0.2-dev-rerun-benchmark.*`).
+1. q7b-v2 epoch 2 with checker feedback: `bash eval/run_dev_repair_q7b_v2.sh` (progress: `wc -l eval/results/repair-q7b-v2-epoch2-dev-benchmark.partial.jsonl`; done when `eval/results/repair-q7b-v2-epoch2-dev-benchmark.json` exists).
+2. Then v0.2 with checker feedback: `bash eval/run_dev_repair_v0.2.sh` (same pattern, files `eval/results/repair-v0.2-dev-rerun-benchmark.*`).
 3. Then the comparison (CPU): `python -m eval.compare` is not used here because repair rows are nested; see step 4 notes below once written.
 Steps 1-2 of the owner's list (CPU diagnosis, memorisation) are already done and committed (`eval/results/dev-failure-diagnosis-2026-10-28.json`, `eval/results/dev-memorisation-2026-10-28.json`).
 
