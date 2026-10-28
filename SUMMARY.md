@@ -1,24 +1,24 @@
-# Aether unattended session: 2026-10-26 (08:45 to 16:00)
+# Aether unattended session 2: 2026-10-26 evening to 2026-10-27 22:55
 
-**Outcome: stages 3 and 4 ran to completion, but the new model did not beat v0.2 on the dev split. Stage 5 (held-out v3) was not run.** Nothing here is reviewed, and nothing says the model is safe: the only claim is what the checker verified.
+**Outcome: the data is cleaner and almost three times bigger, and a new 7B adapter is trained. Its dev evaluation has NOT been run yet** (you needed to shut the computer down just as it started). So there is no new dev table, and nothing yet says whether the new adapter beats v0.2. Nothing here is reviewed, and nothing says the model is safe: the only claim is what the checker verifies.
 
-## What happened
-- **Snapshots fixed.** Both Qwen 7B snapshots were completed from huggingface.co (no token), and offline preflight passed. Load probes: 5.69 GB peak GPU memory each (4-bit, inference).
-- **Stage 3 data** (`data/synthetic_v4`): local Qwen2.5-7B-Instruct wrote 1,545 wordings over 515 seed programs. 965 were accepted (62.5%), giving 898 train and 67 valid rows (725 plain, 173 trap). The quality gate that replaces your review passed on the smoke run, the first 200 attempts, and the full run (`eval/results/stage3-quality-gate-*.json`).
-- **Stage 4** (`outputs/qlora-7b-v1`, Qwen2.5-Coder-7B-Instruct QLoRA): 2 epochs, 114 steps, 76 minutes, no crash. Valid loss 0.0219 then 0.0173.
-- **Dev comparison** (110 benchmark tasks, `safe_and_correct`): v0.2 34, new epoch 1 26, new epoch 2 **30** (27.3%). Paired McNemar vs v0.2: p = 0.23 and p = 0.60, so no significant difference, and the point estimate favours v0.2. The new adapter parses far more often (98% vs 78%) but gets effects wrong, and reads disallowed columns 15 times (v0.2: once). The checker blocked every rule-breaking program, and accepted programs had 0 monitor problems. A dev-only follow-up suggests why: the new adapter reuses a training program's `about` line in 31 of 110 outputs (v0.2: 6 of 110), so it partly recalls the 515 seed programs instead of following the request. That is a correlation, not a tested cause.
-- **Candidate** (`outputs/qlora-7b-v1/epoch2`, chosen on dev over epoch 1) is written into `stages/stage5_conditions.json` and committed. Stage 5 was not run, and held-out v3 was not evaluated or opened.
+## What was done
+1. **Mislabelled trap rows removed.** The tightened trap-ask filter was already the acceptance filter in the code; the old data had been built before it. A script (`stages/apply_trap_filter.py`) removed exactly the 28 flagged rows (27 train, 1 valid) and kept their full records and provenance in `data/synthetic_v4/removed_rows.jsonl`. A test checks the real data.
+2. **Review sample for you:** `docs/review/wordings-sample-2026-10-27.md`, 30 wordings picked by a fixed random seed (not by hand), with their program ids. Please read them: the automatic checks only look at structure, not meaning.
+3. **More data.** The local Qwen2.5-7B model wrote wordings for more seed programs: **1,519 programs** now (was 515), with traps at 27% of programs, like the benchmark. Accepted wordings: **2,401 train + 199 valid** (was 898 + 67). On the new part, 55% of attempts were accepted, and no wording was a near-copy of the generator's English (highest similarity 0.225; the limit is 0.6). Result file: `eval/results/stage3-quality-gate-new-part-2026-10-27.json`.
+4. **Training** with the same recipe as last time (only the data changed): 2 epochs, 302 steps, about 3.3 hours of training. Validation loss 0.00919 after epoch 1 and 0.00814 after epoch 2. Training loss again gets very small, so memorisation is still possible; only the dev run can tell.
 
-## Problems I found and fixed (all logged with reasons in `HANDOFF.md`)
-1. **Stage 3 seed order:** `--limit-programs 1000` would have used only plain programs (no traps, no v3). Added opt-in `--shuffle-seed`.
-2. **Stage 3 prompt and filters:** `unsupported-post` had no hint. Wordings with invented numbers were being accepted. Added a hint and two stricter checks (invented numbers, missing trap ask). A `$0.00` threshold no longer demands the literal "0".
-3. **Stage 4 slowdown:** step 2 of the first smoke took 707 s (GPU memory full, Windows spilled to system RAM). The loss now runs the output head on answer tokens only. It is the same loss: unit-tested, and the real step-1 loss matches to 5 decimals. Steps now take ~37 s.
-4. **A CUDA "unknown error" crashed stage 3 once** at 10:34. I resumed it with the same command and lost no records.
-Tests: 319 pass. No guard (GPU lock, licence, frozen hashes) was weakened.
+## Problems found and fixed
+- **Validation stalled for 30+ minutes** at the end of epoch 1 (GPU memory full, Windows spilled to system RAM: the same problem as the earlier 707 s training step). Validation still used the old full-vocabulary loss. It now uses the same answer-only loss as training: same number (unit-tested), about 2 minutes instead of a stall. Training resumed from the step-150 checkpoint.
+- Stage 3 can now be extended (more programs, a set trap share) without changing anything that shapes a wording. The resume check still refuses changed model, prompt or sampling settings.
+- Tests: 329 pass. No guard (GPU lock, licence, frozen hashes) was weakened.
+
+## Next (about 30 minutes of GPU time)
+Run `bash logs/run-chain2-2026-10-27.sh` from the repo, or the three commands at the top of `HANDOFF.md`. It evaluates both epochs on the 110 dev tasks and writes `eval/results/dev-report-q7b-v2-2026-10-27.json` with correct / non-trap / trap / parse rate / McNemar p vs v0.2 / reused training `about` lines / forbidden-column count. Stage 5 and held-out v3 stay untouched until you decide.
 
 ## Needs you
-1. ~~Decide whether to spend the one-time held-out v3 run on this candidate.~~ Decided by you: no. The v3 run is saved for a better candidate.
-2. Read about 30 of the new wordings (`data/synthetic_v4/train.jsonl`, field `sop`). The automatic gate is shallow and partly circular (code review): its keyword check for the unsafe ask let through about 16% of accepted trap wordings (28 of 180), which a tightened filter now flags. The adapter was trained with those rows, so the trap training data is partly mislabelled. Details and the list of row keys: `HANDOFF.md`.
-3. Stage 5 also needs owner-reviewed `models.lock.json` entries for the older 1.5B and 0.5B base models.
+1. Read the 30 sample wordings.
+2. Run the dev evaluation (above), or ask an agent to.
+3. Stage 5 still needs owner-reviewed `models.lock.json` entries for the older 1.5B and 0.5B base models.
 
-The GPU is idle. Left alone: `pyproject.toml`, `uv.lock`, the old `data/synthetic_v4_smoke/`. Nothing was pushed, uploaded, installed, bought or signed in to. Evidence and exact commands: `HANDOFF.md` (top section) and `eval/results/` (files dated 2026-10-26, plus `eval/results/ft/qlora-7b-v1-*`).
+The GPU is idle. Left alone: `pyproject.toml`, `uv.lock`, `data/synthetic_v4_smoke/`. Nothing was pushed, uploaded, installed, bought or signed in to.
