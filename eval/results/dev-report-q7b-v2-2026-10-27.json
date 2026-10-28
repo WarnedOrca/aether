@@ -1,0 +1,81 @@
+{
+  "reference": "eval/results/baseline-Qwen2.5-Coder-1.5B-Instruct-ft-v0.2-zeroshot-2026-10-25-final-rescored.jsonl",
+  "training_data": "data/synthetic_v4",
+  "split": "eval/benchmark (dev) only",
+  "runs": {
+    "q7b-v1-epoch2": {
+      "file": "eval/results/baseline-Qwen2.5-Coder-7B-Instruct-ft-q7b-v1-epoch2-zeroshot-benchmark-2026-10-26-dev.jsonl",
+      "n": 110,
+      "correct": 30,
+      "non_trap_correct": 26,
+      "non_trap_n": 80,
+      "trap_correct": 4,
+      "trap_n": 30,
+      "parse_rate": 0.9818,
+      "checker_pass_rate": 0.6727,
+      "forbidden_column_all": 21,
+      "forbidden_column_non_trap_failures": 15,
+      "about_reused_in_this_training_set": 32,
+      "about_reused_in_older_template_sets": 32,
+      "vs_reference": {
+        "reference_only_correct": 18,
+        "run_only_correct": 14,
+        "mcnemar_exact_p": 0.5966
+      }
+    },
+    "q7b-v2-epoch1": {
+      "file": "eval/results/baseline-Qwen2.5-Coder-7B-Instruct-ft-q7b-v2-epoch1-zeroshot-benchmark-2026-10-28-dev.jsonl",
+      "n": 110,
+      "correct": 32,
+      "non_trap_correct": 28,
+      "non_trap_n": 80,
+      "trap_correct": 4,
+      "trap_n": 30,
+      "parse_rate": 0.9727,
+      "checker_pass_rate": 0.6364,
+      "forbidden_column_all": 22,
+      "forbidden_column_non_trap_failures": 10,
+      "about_reused_in_this_training_set": 28,
+      "about_reused_in_older_template_sets": 29,
+      "vs_reference": {
+        "reference_only_correct": 17,
+        "run_only_correct": 15,
+        "mcnemar_exact_p": 0.8601
+      }
+    },
+    "q7b-v2-epoch2": {
+      "file": "eval/results/baseline-Qwen2.5-Coder-7B-Instruct-ft-q7b-v2-epoch2-zeroshot-benchmark-2026-10-28-dev.jsonl",
+      "n": 110,
+      "correct": 32,
+      "non_trap_correct": 28,
+      "non_trap_n": 80,
+      "trap_correct": 4,
+      "trap_n": 30,
+      "parse_rate": 0.9818,
+      "checker_pass_rate": 0.6273,
+      "forbidden_column_all": 25,
+      "forbidden_column_non_trap_failures": 13,
+      "about_reused_in_this_training_set": 26,
+      "about_reused_in_older_template_sets": 27,
+      "vs_reference": {
+        "reference_only_correct": 15,
+        "run_only_correct": 13,
+        "mcnemar_exact_p": 0.8506
+      }
+    }
+  },
+  "reference_summary": {
+    "n": 110,
+    "correct": 34,
+    "non_trap_correct": 31,
+    "non_trap_n": 80,
+    "trap_correct": 3,
+    "trap_n": 30,
+    "parse_rate": 0.7818,
+    "checker_pass_rate": 0.5455,
+    "forbidden_column_all": 3,
+    "forbidden_column_non_trap_failures": 1,
+    "about_reused_in_this_training_set": 6,
+    "about_reused_in_older_template_sets": 6
+  }
+}
