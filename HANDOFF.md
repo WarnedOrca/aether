@@ -13,7 +13,30 @@ Steps 1-2 of the owner's list (CPU diagnosis, memorisation) are already done and
 
 ### Decisions (with reasons)
 - `eval/repair.py` saved nothing until all tasks were done; it now repairs one task at a time (all its rounds), saves its row, and resumes (tested with a simulated crash; 330 tests pass). The feedback itself is unchanged (parser + checker errors only, up to 3 rounds, greedy decoding). Only the batching changed (one task at a time instead of 8 together); left-padded batches can change greedy outputs slightly, so the v0.2 rerun may differ a little from its 2026-10-25 feedback run. `--batch` is still accepted so `stages/stage5_eval.py` keeps working (stage 5 was not run).
+- The two run scripts were briefly force-added under `logs/` (against the "never force-add logs/" rule); they were untracked again in the next commit and live in `eval/run_dev_repair_*.sh`. They contain no secrets.
 - **v0.2 runs in normal (not offline) mode** from the default Hugging Face cache, as all v0.2 evaluations did on 2026-10-25, because its 1.5B base model has no owner-reviewed `models.lock.json` entry and adding one is the owner's call. Only metadata requests go to huggingface.co; nothing is downloaded if the cache is complete, and nothing is uploaded. If that fails, the existing committed v0.2 feedback run on the same 110 tasks (`eval/results/repair-v0.2-dev-benchmark-2026-10-25.json`) is used instead and labelled as such.
+
+### Findings, steps 1-2 (dev split only; from saved outputs, no model was run)
+Files: `eval/results/dev-failure-diagnosis-2026-10-28.json` (script `eval/dev_failure_analysis.py`), `eval/results/dev-memorisation-2026-10-28.json` (script `eval/dev_memorisation_check.py`). Runs: v0.2 (rescored 2026-10-25 outputs), q7b-v2 epoch 1 and 2 (2026-10-28 dev outputs).
+
+**1. Where the failures are (110 tasks).**
+
+| Outcome | v0.2 | q7b-v2 e1 | q7b-v2 e2 |
+|---|---|---|---|
+| correct | 34 | 32 | 32 |
+| passes checker, wrong effects | 26 | 36 | 36 |
+| does not parse | 24 | 3 | 2 |
+| E401 forbidden sheet/column | 3 | 22 | 25 |
+| E601 | 10 | 11 | 11 |
+| E502 | 6 | 0 | 0 |
+| other (E701, E301, E104, E102, E201, runtime) | 7 | 6 | 4 |
+
+Trap tasks (30): v0.2 fails mostly by not parsing (8); q7b-v2 fails mostly with E401 (12 of 30 trap tasks at both epochs). Business types: every type has only 5 tasks, so per-type counts are too small to mean much; the types where q7b-v2 epoch 2 failed all 5 are event venue and thrift store (v0.2: escape room, kids' summer camp, physiotherapy clinic).
+
+**E401 gap: known.** It is the same 110 tasks for both models, and on the 25 tasks where epoch 2 hits E401, v0.2 hits E401 on only 1 (v0.2 is correct on 7 of them, e.g. coffee-05, hw-01, tattoo-05, cater-04, optom-02). So the tasks do not force the error. In all 25 cases (and all 22 at epoch 1) the program names the policy it was given, but then reads (21) or writes (4) a column that policy does not allow. So the model keeps the policy line and ignores the policy's allow-list. In 24 of 25 cases the column exists in the task's sheet but the owner's request does not mention it by name (examples: coffee-04, coffee-05, hw-01, tattoo-02, tattoo-03); in 1 the request mentions it (move-03). The word match cannot see synonyms, so "not mentioned" is approximate.
+**E401 cause: partly a guess.** The most common forbidden column is `status` (8 of 25); `status` appears in a filter/where/set line of 2,254 of the 2,401 training programs, so a trained habit of filtering on `status` is a likely reason for those 8. But 12 of the 25 columns (`plan`, `last_exam`, `reorder_at`, ...) appear in no training program at all (counts in the same file), so the habit explanation does not cover them; the model seems to pick the column that sounds right for the request even when the policy only allows a different one. That second part is a guess, not tested.
+
+**2. Memorisation: weaker evidence than the session-2 note suggested.** Epoch 2 reuses a training `about` line in 26 outputs (epoch 1: 28, v0.2: 6). Those outputs are **not** more often wrong: 10 of 26 correct (38%) vs 22 of 84 (26%) for outputs without a reused line (epoch 1: 12/28 vs 20/82; v0.2: 2/6 vs 32/104). By statement skeleton (names, strings and numbers removed), 19 of the 26 are at least 90% similar to the training program with that `about` line, but they are almost as similar to the task's own reference program (median 0.939 vs 0.904), because most Aether programs share one shape. So: known that the model reuses `about` wording; not shown that it copies whole programs or that reuse causes failures. Examples of a copied skeleton that is wrong: physio-02, hw-01, hw-02, tattoo-02, tattoo-05.
 
 ## Unattended session 2 (2026-10-26 evening to 2026-10-28, Claude Code): cleaner, bigger data, retrain, dev evaluation done; the new adapter does NOT clearly beat v0.2
 
