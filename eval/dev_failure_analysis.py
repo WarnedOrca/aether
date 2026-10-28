@@ -120,8 +120,7 @@ def main() -> None:
     cols = sorted({e["column"].split(".")[1] for r in result["runs"].values() for e in r["e401"]["all"]})
     result["training_programs_using_column"] = {  # base rate: how many training programs filter/where/set on each column
         "n": len(train_programs), "note": "programs with the column name in a filter/where/set line",
-        "counts": {c: sum(bool(re.search(rf"(filter|where|set)[^
-]*{c}", p)) for p in train_programs) for c in cols}}
+        "counts": {c: sum(bool(re.search(rf"(filter|where|set)[^\n]*\b{c}\b", p)) for p in train_programs) for c in cols}}
     Path(args.out).write_text(json.dumps(result, indent=2), encoding="utf-8")
     for label, r in result["runs"].items():
         print(label, "correct", r["correct"], "| stages", r["failures_by_stage"])

@@ -1007,5 +1007,33 @@
         }
       }
     }
+  },
+  "training_programs_using_column": {
+    "n": 2401,
+    "note": "programs with the column name in a filter/where/set line",
+    "counts": {
+      "allergies": 0,
+      "artist": 0,
+      "bags": 4,
+      "classes_attended": 0,
+      "deposit": 29,
+      "dropped_on": 19,
+      "fee": 32,
+      "forms_in": 0,
+      "guests": 0,
+      "last_exam": 0,
+      "lesson_day": 0,
+      "on_hand": 21,
+      "opened": 0,
+      "ordered_on": 65,
+      "owner": 0,
+      "patient": 0,
+      "plan": 0,
+      "price": 65,
+      "reorder_at": 0,
+      "reorder_tubs": 0,
+      "status": 2254,
+      "white": 0
+    }
   }
 }
