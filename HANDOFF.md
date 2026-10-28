@@ -2,6 +2,19 @@
 
 Updated 2026-10-26 afternoon by Claude Code (unattended session below). That session supersedes the Codex morning notes: the snapshot blocker is fixed and stages 3-4 and the dev comparison were run. Historical results remain below. Agents: update this file at the end of every session (see `AGENTS.md`).
 
+## Session 3 (2026-10-28, Claude Code): dev-only diagnosis and exploratory checker-feedback runs (IN PROGRESS)
+
+### If interrupted (computer shut down)
+Each step below is committed as soon as it finishes. GPU jobs save one row per task to `<out>.partial.jsonl` and skip finished tasks when rerun; the summary `.json`/`.jsonl` appear only when all 110 tasks are done. To continue, from the repo root in Git Bash, ONE at a time (check `nvidia-smi` first; only one GPU job):
+1. q7b-v2 epoch 2 with checker feedback: `bash logs/run-repair-q7b-v2-epoch2.sh` (progress: `wc -l eval/results/repair-q7b-v2-epoch2-dev-benchmark.partial.jsonl`; done when `eval/results/repair-q7b-v2-epoch2-dev-benchmark.json` exists).
+2. Then v0.2 with checker feedback: `bash logs/run-repair-v0.2.sh` (same pattern, files `eval/results/repair-v0.2-dev-rerun-benchmark.*`).
+3. Then the comparison (CPU): `python -m eval.compare` is not used here because repair rows are nested; see step 4 notes below once written.
+Steps 1-2 of the owner's list (CPU diagnosis, memorisation) are already done and committed (`eval/results/dev-failure-diagnosis-2026-10-28.json`, `eval/results/dev-memorisation-2026-10-28.json`).
+
+### Decisions (with reasons)
+- `eval/repair.py` saved nothing until all tasks were done; it now repairs one task at a time (all its rounds), saves its row, and resumes (tested with a simulated crash; 330 tests pass). The feedback itself is unchanged (parser + checker errors only, up to 3 rounds, greedy decoding). Only the batching changed (one task at a time instead of 8 together); left-padded batches can change greedy outputs slightly, so the v0.2 rerun may differ a little from its 2026-10-25 feedback run. `--batch` is still accepted so `stages/stage5_eval.py` keeps working (stage 5 was not run).
+- **v0.2 runs in normal (not offline) mode** from the default Hugging Face cache, as all v0.2 evaluations did on 2026-10-25, because its 1.5B base model has no owner-reviewed `models.lock.json` entry and adding one is the owner's call. Only metadata requests go to huggingface.co; nothing is downloaded if the cache is complete, and nothing is uploaded. If that fails, the existing committed v0.2 feedback run on the same 110 tasks (`eval/results/repair-v0.2-dev-benchmark-2026-10-25.json`) is used instead and labelled as such.
+
 ## Unattended session 2 (2026-10-26 evening to 2026-10-28, Claude Code): cleaner, bigger data, retrain, dev evaluation done; the new adapter does NOT clearly beat v0.2
 
 ### Where it stands (read this first)
