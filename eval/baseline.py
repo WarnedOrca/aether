@@ -111,6 +111,8 @@ def main() -> None:
     ap.add_argument("--suffix", default="", help="appended to output file names, e.g. -v2")
     ap.add_argument("--tasks-dir", default="", help="score on another task folder (e.g. eval/heldout); skips synthetic")
     ap.add_argument("--label", default="", help="file label for the model, e.g. v0.1")
+    ap.add_argument("--out", default="", help="fixed output path without extension: rows are saved after every batch to "
+                    "<out>.partial.jsonl and a rerun of the same command skips finished tasks")
     args = ap.parse_args()
 
     if args.tasks_dir:
@@ -119,21 +121,40 @@ def main() -> None:
         items = [("benchmark", t) for t in load_tasks()] + [("synthetic", t) for t in synthetic_tasks(args.synthetic)]
     if args.limit:
         items = [x for x in items if x[0] == "benchmark"][: args.limit] + [x for x in items if x[0] == "synthetic"][: args.limit]
-    gen = Generator(args.model, args.adapter)
     tag = (args.model.split("/")[-1] + ("-ft" if args.adapter else "") + (f"-{args.label}" if args.label else "")
            + ("" if args.fewshot else "-zeroshot") + ("-" + Path(args.tasks_dir).name if args.tasks_dir else ""))
     stamp = date.today().isoformat()
     RESULTS.mkdir(parents=True, exist_ok=True)
+    base = Path(args.out) if args.out else RESULTS / f"baseline-{tag}-{stamp}{args.suffix}{'-smoke' if args.limit else ''}"
+    ck = None
+    if args.out:  # resumable mode
+        from stages.common import JsonlCheckpoint, write_json
+        config = {k: getattr(args, k) for k in ("model", "adapter", "fewshot", "limit", "synthetic", "batch", "tasks_dir")}
+        cfg_path = Path(f"{base}.config.json")
+        if cfg_path.exists() and json.loads(cfg_path.read_text(encoding="utf-8")) != config:
+            raise ValueError(f"{cfg_path} holds different settings; choose another --out")
+        write_json(cfg_path, config)
+        ck = JsonlCheckpoint(Path(f"{base}.partial.jsonl"))
+    done = ck.done if ck else set()
+    todo = [x for x in items if f"{x[0]}:{x[1].id}" not in done]
+    print(f"{len(items) - len(todo)} of {len(items)} already done", flush=True)
     rows: list[dict] = []
     started = time.time()
-    for i in range(0, len(items), args.batch):
-        chunk = items[i:i + args.batch]
+    gen = Generator(args.model, args.adapter) if todo else None
+    for i in range(0, len(todo), args.batch):
+        chunk = todo[i:i + args.batch]
         prompts = [gen.prompt_text(chat_messages(t.policy, t.sheets, t.sop, fewshot=bool(args.fewshot))) for _, t in chunk]
         outputs = gen.generate(prompts)
         for (which, t), raw in zip(chunk, outputs):
-            rows.append(score_row(which, t, raw, extract_program(raw)))
-        print(f"{len(rows)}/{len(items)} done, {time.time() - started:.0f}s", flush=True)
-    base = RESULTS / f"baseline-{tag}-{stamp}{args.suffix}{'-smoke' if args.limit else ''}"
+            row = score_row(which, t, raw, extract_program(raw))
+            rows.append(row)
+            if ck:
+                ck.add({"key": f"{which}:{t.id}", **row})
+        print(f"{len(rows)}/{len(todo)} done, {time.time() - started:.0f}s", flush=True)
+    if ck:
+        ck.close()
+        by_key = {r["key"]: {k: v for k, v in r.items() if k != "key"} for r in ck.records}
+        rows = [by_key[f"{w}:{t.id}"] for w, t in items]
     with open(f"{base}.jsonl", "w", encoding="utf-8", newline="\n") as f:
         for r in rows:
             f.write(json.dumps(r) + "\n")

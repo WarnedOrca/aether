@@ -89,3 +89,38 @@ def test_merge_keeps_old_rows_and_adds_new_ones_idempotently(tmp_path):
     assert all(r["provenance"]["counterfactual"]["column_not_allowed"] == "status" for r in rows if r["id"].startswith("cf-"))
     merge(v4, cf, seeds)
     assert {s: (v4 / f"{s}.jsonl").read_text() for s in ("train", "valid")} == first
+
+
+def test_baseline_out_mode_saves_and_resumes(tmp_path, monkeypatch):
+    import sys
+    from eval import baseline
+    from eval.bench import load_tasks
+    tasks = load_tasks()
+    calls = {"n": 0, "crash_after": 4}
+
+    class FakeGen:
+        def __init__(self, *a):
+            pass
+
+        def prompt_text(self, msgs):
+            return next(m["content"] for m in msgs if m["role"] == "user")
+
+        def generate(self, prompts):
+            calls["n"] += 1
+            if calls["crash_after"] is not None and calls["n"] > calls["crash_after"]:
+                raise RuntimeError("simulated shutdown")
+            return ["```aether\n" + next(t.program for t in tasks if t.sop in p) + "\n```" for p in prompts]
+
+    monkeypatch.setattr(baseline, "Generator", FakeGen)
+    argv = ["baseline", "--model", "m", "--fewshot", "0", "--tasks-dir", "eval/benchmark", "--batch", "2", "--out", str(tmp_path / "b")]
+    monkeypatch.setattr(sys, "argv", argv)
+    with pytest.raises(RuntimeError):
+        baseline.main()
+    assert len((tmp_path / "b.partial.jsonl").read_text().splitlines()) == 8 and not (tmp_path / "b.json").exists()
+    calls.update(n=0, crash_after=None)
+    baseline.main()
+    assert calls["n"] == (len(tasks) - 8 + 1) // 2  # finished tasks were not regenerated
+    rows = [json.loads(l) for l in (tmp_path / "b.jsonl").read_text().splitlines()]
+    assert [r["id"] for r in rows] == [t.id for t in tasks] and "key" not in rows[0]
+    summary = json.loads((tmp_path / "b.json").read_text())
+    assert summary["benchmark"]["n"] == len(tasks)
