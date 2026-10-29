@@ -1,0 +1,9 @@
+{
+  "adapter": "outputs/ft-coder1.5b-v0.2/epoch2",
+  "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "plain": "eval/results/baseline-Qwen2.5-Coder-1.5B-Instruct-ft-v0.2-zeroshot-2026-10-25-final-rescored.jsonl",
+  "tasks_dir": "eval/benchmark",
+  "label": "v0.2-dev-rerun",
+  "rounds": 3,
+  "fewshot": 0
+}

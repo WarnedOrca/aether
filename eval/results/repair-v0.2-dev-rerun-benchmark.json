@@ -1,0 +1,29 @@
+{
+  "label": "v0.2-dev-rerun",
+  "adapter": "outputs/ft-coder1.5b-v0.2/epoch2",
+  "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "tasks": "eval/benchmark",
+  "n": 110,
+  "rounds_max": 3,
+  "date": "2026-10-28",
+  "seconds": 1652,
+  "feedback": "parser + checker only",
+  "order": "one task at a time (all rounds), saved after each task",
+  "plain": {
+    "parse": 0.7818,
+    "check": 0.5455,
+    "exec": 0.3091,
+    "safe_and_correct": 0.3091
+  },
+  "repaired": {
+    "parse": 0.7545,
+    "check": 0.5727,
+    "exec": 0.3273,
+    "safe_and_correct": 0.3273
+  },
+  "plain_correct": 34,
+  "repaired_correct": 36,
+  "plain_traps": 0.1,
+  "repaired_traps": 0.1333,
+  "monitor_problems_total": 0
+}
