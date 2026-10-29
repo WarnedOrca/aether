@@ -2,6 +2,20 @@
 
 Updated 2026-10-26 afternoon by Claude Code (unattended session below). That session supersedes the Codex morning notes: the snapshot blocker is fixed and stages 3-4 and the dev comparison were run. Historical results remain below. Agents: update this file at the end of every session (see `AGENTS.md`).
 
+## Session 4 (2026-10-28 evening, Claude Code): counterfactual "forbidden column" data, retrain, dev eval (IN PROGRESS)
+
+Goal (owner): test whether the E401 (forbidden column) errors come from training data where the obvious column is always allowed. Dev split only; stage 5 not run; held-out sets and `stages/stage5_conditions.json` untouched.
+
+### If interrupted (computer shut down)
+Every step is committed when it finishes. Resume from the first unfinished step (check `git log --oneline -10` and `nvidia-smi`; one GPU job at a time):
+1. Counterfactual programs: DONE (`data/synthetic_cf`, commit after this note).
+(further steps are added below as they start)
+
+### Decisions (with reasons)
+- **How the counterfactual programs are made (step 1):** `data/generate_counterfactual.py` transforms existing seed programs mechanically, so no new English is written by me (or any hosted AI): it drops one filter condition on a column C that the program reads nowhere else, removes C from the policy's `allow read` list for that sheet (write permission is kept), and leaves C in the sheet declaration as the tempting column. Each result passes parse + checker + 3 monitored runs; a test also checks that putting the dropped condition back makes the checker reject it with E401, so the counterfactual really forbids the column the program would naturally use. Nothing equals a dev or held-out program, sheet declaration or `about` line (checked by reading those task files only). Result: 1017 verified candidates, **534 selected**, round-robin over columns with `status` capped at 300: **20 distinct columns** (status 300, ready_on 30, renews_on 26, expires_on 22, ordered_on 21, held_until 20, due_date 18, sent_on 16, ...), 199 of them trap programs, 201 derived from seed programs whose original (column allowed) version is already in the training data (a deliberate contrast pair).
+- **Limit: no truly new columns.** Only columns that the seed programs filter on can be transformed, and all 20 already appear in the training text (of the 174 seed columns, only `cans` and `series` never do, and neither can be transformed). Columns that never appear in the training set would need new column names, which I would have to invent; that would be hosted-AI-written training text, so I did not. See "Needs the owner".
+- `status` is still the largest group (300 of 534) because only 1017 candidates exist and most non-`status` columns have few; the cap keeps it at about 56%.
+
 ## Session 3 (2026-10-28, Claude Code): dev-only diagnosis and exploratory checker-feedback runs (DONE)
 
 **Short version:** the E401 gap is the model ignoring the policy's allow-list (same tasks, same policy name, forbidden column); reusing training `about` lines does not make outputs fail more; with checker feedback q7b-v2 epoch 2 gets 35/110 and v0.2 36/110 (exploratory, p = 1.0). Nothing here changes the earlier decision: no candidate is worth the held-out v3 run. All results: `eval/results/session3-findings-2026-10-28.json` and the files it lists. GPU idle; stage 5 not run; held-out sets untouched; `stages/stage5_conditions.json` untouched.
