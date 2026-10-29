@@ -1,0 +1,1626 @@
+2026-10-28 20:29:20 INFO offline model Qwen/Qwen2.5-7B-Instruct: apache-2.0 at a09a35458c (owner-reviewed lock)
+2026-10-28 20:29:24 INFO 534 seed programs x 3 wordings; 0 records already done
+2026-10-28 20:29:59 INFO wording cf-v3-train-00697-status#0: trap ask missing
+2026-10-28 20:30:03 INFO wording cf-v3-train-00697-status#1: trap ask missing
+2026-10-28 20:30:05 INFO wording cf-v3-train-00697-status#2: missing numbers ['10']
+2026-10-28 20:30:12 INFO wording cf-train-01012-status#0: missing numbers ['09:00']
+2026-10-28 20:30:21 INFO wording cf-train-01012-status#1: length
+2026-10-28 20:30:27 INFO wording cf-train-01012-status#2: accepted
+2026-10-28 20:30:36 INFO wording cf-train-00269-status#0: length
+2026-10-28 20:30:42 INFO wording cf-train-00269-status#1: accepted
+2026-10-28 20:30:48 INFO wording cf-train-00269-status#2: accepted
+2026-10-28 20:30:52 INFO wording cf-trap-train-00072-status#0: accepted
+2026-10-28 20:30:55 INFO wording cf-trap-train-00072-status#1: accepted
+2026-10-28 20:30:59 INFO wording cf-trap-train-00072-status#2: accepted
+2026-10-28 20:31:07 INFO wording cf-train-00839-sent_on#0: length
+2026-10-28 20:31:16 INFO wording cf-train-00839-sent_on#1: length
+2026-10-28 20:31:21 INFO wording cf-train-00839-sent_on#2: accepted
+2026-10-28 20:31:28 INFO wording cf-train-01376-expires_on#0: length
+2026-10-28 20:31:32 INFO wording cf-train-01376-expires_on#1: accepted
+2026-10-28 20:31:35 INFO wording cf-train-01376-expires_on#2: accepted
+2026-10-28 20:31:39 INFO wording cf-v3-train-00252-status#0: accepted
+2026-10-28 20:31:42 INFO wording cf-v3-train-00252-status#1: invented numbers ['50']
+2026-10-28 20:31:46 INFO wording cf-v3-train-00252-status#2: accepted
+2026-10-28 20:31:49 INFO wording cf-trap-train-00257-status#0: missing numbers ['10']
+2026-10-28 20:31:53 INFO wording cf-trap-train-00257-status#1: accepted
+2026-10-28 20:31:55 INFO wording cf-trap-train-00257-status#2: missing numbers ['10']
+2026-10-28 20:32:01 INFO wording cf-train-00548-renews_on#0: accepted
+2026-10-28 20:32:05 INFO wording cf-train-00548-renews_on#1: accepted
+2026-10-28 20:32:10 INFO wording cf-train-00548-renews_on#2: invented numbers ['24']
+2026-10-28 20:32:16 INFO wording cf-v3-train-00517-arrives_on#0: accepted
+2026-10-28 20:32:21 INFO wording cf-v3-train-00517-arrives_on#1: accepted
+2026-10-28 20:32:27 INFO wording cf-v3-train-00517-arrives_on#2: accepted
+2026-10-28 20:32:30 INFO wording cf-trap-train-00191-status#0: accepted
+2026-10-28 20:32:34 INFO wording cf-trap-train-00191-status#1: accepted
+2026-10-28 20:32:38 INFO wording cf-trap-train-00191-status#2: trap ask missing
+2026-10-28 20:32:44 INFO wording cf-v3-train-00610-status#0: missing numbers ['30']
+2026-10-28 20:32:49 INFO wording cf-v3-train-00610-status#1: missing numbers ['30']
+2026-10-28 20:32:55 INFO wording cf-v3-train-00610-status#2: missing numbers ['30']
+2026-10-28 20:33:02 INFO wording cf-train-00542-renews_on#0: accepted
+2026-10-28 20:33:10 INFO wording cf-train-00542-renews_on#1: accepted
+2026-10-28 20:33:15 INFO wording cf-train-00542-renews_on#2: accepted
+2026-10-28 20:33:21 INFO wording cf-v3-train-00634-dropped_on#0: missing numbers ['30']
+2026-10-28 20:33:27 INFO wording cf-v3-train-00634-dropped_on#1: length
+2026-10-28 20:33:31 INFO wording cf-v3-train-00634-dropped_on#2: accepted
+2026-10-28 20:33:37 INFO wording cf-v3-train-01195-install_on#0: invented numbers ['2']
+2026-10-28 20:33:42 INFO wording cf-v3-train-01195-install_on#1: accepted
+2026-10-28 20:33:46 INFO wording cf-v3-train-01195-install_on#2: trap ask missing
+2026-10-28 20:33:49 INFO wording cf-v3-train-00978-status#0: missing numbers ['10']
+2026-10-28 20:33:52 INFO wording cf-v3-train-00978-status#1: accepted
+2026-10-28 20:33:56 INFO wording cf-v3-train-00978-status#2: accepted
+2026-10-28 20:34:00 INFO wording cf-trap-train-00376-status#0: accepted
+2026-10-28 20:34:04 INFO wording cf-trap-train-00376-status#1: accepted
+2026-10-28 20:34:08 INFO wording cf-trap-train-00376-status#2: accepted
+2026-10-28 20:34:13 INFO wording cf-train-00457-status#0: accepted
+2026-10-28 20:34:20 INFO wording cf-train-00457-status#1: length
+2026-10-28 20:34:27 INFO wording cf-train-00457-status#2: accepted
+2026-10-28 20:34:36 INFO wording cf-v3-train-00345-status#0: accepted
+2026-10-28 20:34:42 INFO wording cf-v3-train-00345-status#1: accepted
+2026-10-28 20:34:47 INFO wording cf-v3-train-00345-status#2: accepted
+2026-10-28 20:34:53 INFO wording cf-v3-train-00902-meet_on#0: accepted
+2026-10-28 20:35:01 INFO wording cf-v3-train-00902-meet_on#1: length
+2026-10-28 20:35:07 INFO wording cf-v3-train-00902-meet_on#2: missing numbers ['50']
+2026-10-28 20:35:13 INFO wording cf-v3-train-01155-due_back#0: accepted
+2026-10-28 20:35:19 INFO wording cf-v3-train-01155-due_back#1: missing numbers ['50']
+2026-10-28 20:35:24 INFO wording cf-v3-train-01155-due_back#2: accepted
+2026-10-28 20:35:31 INFO wording cf-v3-train-01107-treat_on#0: accepted
+2026-10-28 20:35:37 INFO wording cf-v3-train-01107-treat_on#1: accepted
+2026-10-28 20:35:42 INFO wording cf-v3-train-01107-treat_on#2: accepted
+2026-10-28 20:35:51 INFO wording cf-v3-train-01209-status#0: length
+2026-10-28 20:35:56 INFO wording cf-v3-train-01209-status#1: accepted
+2026-10-28 20:36:02 INFO wording cf-v3-train-01209-status#2: accepted
+2026-10-28 20:36:11 INFO wording cf-train-00271-status#0: length
+2026-10-28 20:36:17 INFO wording cf-train-00271-status#1: accepted
+2026-10-28 20:36:24 INFO wording cf-train-00271-status#2: accepted
+2026-10-28 20:36:29 INFO wording cf-train-00453-last_visit#0: missing numbers ['30']
+2026-10-28 20:36:34 INFO wording cf-train-00453-last_visit#1: missing numbers ['30']
+2026-10-28 20:36:41 INFO wording cf-train-00453-last_visit#2: missing numbers ['30']
+2026-10-28 20:36:41 INFO 25/534 programs, 75 records, 44 accepted, 408 s
+2026-10-28 20:36:48 INFO wording cf-v3-train-00839-status#0: accepted
+2026-10-28 20:36:56 INFO wording cf-v3-train-00839-status#1: length
+2026-10-28 20:37:01 INFO wording cf-v3-train-00839-status#2: accepted
+2026-10-28 20:37:07 INFO wording cf-v3-train-00919-status#0: accepted
+2026-10-28 20:37:12 INFO wording cf-v3-train-00919-status#1: accepted
+2026-10-28 20:37:19 INFO wording cf-v3-train-00919-status#2: accepted
+2026-10-28 20:37:25 INFO wording cf-v3-train-01168-status#0: accepted
+2026-10-28 20:37:32 INFO wording cf-v3-train-01168-status#1: accepted
+2026-10-28 20:37:37 INFO wording cf-v3-train-01168-status#2: missing numbers ['50']
+2026-10-28 20:37:40 INFO wording cf-trap-train-00276-status#0: accepted
+2026-10-28 20:37:44 INFO wording cf-trap-train-00276-status#1: accepted
+2026-10-28 20:37:47 INFO wording cf-trap-train-00276-status#2: accepted
+2026-10-28 20:37:55 INFO wording cf-train-00835-sent_on#0: accepted
+2026-10-28 20:38:00 INFO wording cf-train-00835-sent_on#1: accepted
+2026-10-28 20:38:06 INFO wording cf-train-00835-sent_on#2: accepted
+2026-10-28 20:38:11 INFO wording cf-train-01280-held_until#0: missing numbers ['20']
+2026-10-28 20:38:17 INFO wording cf-train-01280-held_until#1: missing numbers ['11:00']
+2026-10-28 20:38:22 INFO wording cf-train-01280-held_until#2: accepted
+2026-10-28 20:38:28 INFO wording cf-v3-train-00120-status#0: accepted
+2026-10-28 20:38:33 INFO wording cf-v3-train-00120-status#1: accepted
+2026-10-28 20:38:40 INFO wording cf-v3-train-00120-status#2: accepted
+2026-10-28 20:38:45 INFO wording cf-train-01003-status#0: missing numbers ['30', '09:00']
+2026-10-28 20:38:49 INFO wording cf-train-01003-status#1: missing numbers ['30', '09:00']
+2026-10-28 20:38:53 INFO wording cf-train-01003-status#2: missing numbers ['30']
+2026-10-28 20:38:57 INFO wording cf-v3-train-01008-ready_on#0: accepted
+2026-10-28 20:39:02 INFO wording cf-v3-train-01008-ready_on#1: accepted
+2026-10-28 20:39:07 INFO wording cf-v3-train-01008-ready_on#2: accepted
+2026-10-28 20:39:10 INFO wording cf-trap-train-00113-status#0: accepted
+2026-10-28 20:39:13 INFO wording cf-trap-train-00113-status#1: accepted
+2026-10-28 20:39:17 INFO wording cf-trap-train-00113-status#2: accepted
+2026-10-28 20:39:22 INFO wording cf-v3-train-00411-promised_on#0: accepted
+2026-10-28 20:39:29 INFO wording cf-v3-train-00411-promised_on#1: invented numbers ['1234', '555']
+2026-10-28 20:39:34 INFO wording cf-v3-train-00411-promised_on#2: missing numbers ['50', '11:00']
+2026-10-28 20:39:39 INFO wording cf-trap-train-00074-status#0: accepted
+2026-10-28 20:39:42 INFO wording cf-trap-train-00074-status#1: accepted
+2026-10-28 20:39:44 INFO wording cf-trap-train-00074-status#2: accepted
+2026-10-28 20:39:51 INFO wording cf-trap-train-00051-held_until#0: accepted
+2026-10-28 20:39:57 INFO wording cf-trap-train-00051-held_until#1: accepted
+2026-10-28 20:40:02 INFO wording cf-trap-train-00051-held_until#2: trap ask missing
+2026-10-28 20:40:08 INFO wording cf-train-00543-renews_on#0: accepted
+2026-10-28 20:40:14 INFO wording cf-train-00543-renews_on#1: accepted
+2026-10-28 20:40:18 INFO wording cf-train-00543-renews_on#2: accepted
+2026-10-28 20:40:24 INFO wording cf-v3-train-01033-install_on#0: accepted
+2026-10-28 20:40:31 INFO wording cf-v3-train-01033-install_on#1: length
+2026-10-28 20:40:36 INFO wording cf-v3-train-01033-install_on#2: accepted
+2026-10-28 20:40:41 INFO wording cf-train-00182-status#0: missing numbers ['100']
+2026-10-28 20:40:47 INFO wording cf-train-00182-status#1: missing numbers ['10:00']
+2026-10-28 20:40:52 INFO wording cf-train-00182-status#2: missing numbers ['100']
+2026-10-28 20:40:58 INFO wording cf-v3-train-00454-review_on#0: accepted
+2026-10-28 20:41:04 INFO wording cf-v3-train-00454-review_on#1: accepted
+2026-10-28 20:41:10 INFO wording cf-v3-train-00454-review_on#2: missing numbers ['100']
+2026-10-28 20:41:16 INFO wording cf-v3-train-00883-renews_on#0: accepted
+2026-10-28 20:41:22 INFO wording cf-v3-train-00883-renews_on#1: accepted
+2026-10-28 20:41:28 INFO wording cf-v3-train-00883-renews_on#2: accepted
+2026-10-28 20:41:31 INFO wording cf-v3-train-00803-status#0: accepted
+2026-10-28 20:41:33 INFO wording cf-v3-train-00803-status#1: missing numbers ['20']
+2026-10-28 20:41:37 INFO wording cf-v3-train-00803-status#2: missing numbers ['08:30']
+2026-10-28 20:41:43 INFO wording cf-train-00461-last_visit#0: accepted
+2026-10-28 20:41:49 INFO wording cf-train-00461-last_visit#1: accepted
+2026-10-28 20:41:55 INFO wording cf-train-00461-last_visit#2: accepted
+2026-10-28 20:42:02 INFO wording cf-v3-train-01013-renews_on#0: accepted
+2026-10-28 20:42:07 INFO wording cf-v3-train-01013-renews_on#1: trap ask missing
+2026-10-28 20:42:12 INFO wording cf-v3-train-01013-renews_on#2: accepted
+2026-10-28 20:42:15 INFO wording cf-v3-train-00073-status#0: accepted
+2026-10-28 20:42:18 INFO wording cf-v3-train-00073-status#1: missing numbers ['20']
+2026-10-28 20:42:21 INFO wording cf-v3-train-00073-status#2: missing numbers ['20']
+2026-10-28 20:42:26 INFO wording cf-train-01002-status#0: missing numbers ['20']
+2026-10-28 20:42:31 INFO wording cf-train-01002-status#1: accepted
+2026-10-28 20:42:38 INFO wording cf-train-01002-status#2: accepted
+2026-10-28 20:42:40 INFO wording cf-v3-train-00737-status#0: missing numbers ['10']
+2026-10-28 20:42:43 INFO wording cf-v3-train-00737-status#1: missing numbers ['10']
+2026-10-28 20:42:46 INFO wording cf-v3-train-00737-status#2: missing numbers ['10']
+2026-10-28 20:42:50 INFO wording cf-train-00001-status#0: missing numbers ['30', '08:30']
+2026-10-28 20:42:57 INFO wording cf-train-00001-status#1: length
+2026-10-28 20:43:05 INFO wording cf-train-00001-status#2: length
+2026-10-28 20:43:05 INFO 50/534 programs, 150 records, 92 accepted, 792 s
+2026-10-28 20:43:10 INFO wording cf-v3-train-00029-status#0: accepted
+2026-10-28 20:43:13 INFO wording cf-v3-train-00029-status#1: trap ask missing
+2026-10-28 20:43:16 INFO wording cf-v3-train-00029-status#2: trap ask missing
+2026-10-28 20:43:20 INFO wording cf-trap-train-00149-due_date#0: missing numbers ['100']
+2026-10-28 20:43:26 INFO wording cf-trap-train-00149-due_date#1: trap ask missing
+2026-10-28 20:43:33 INFO wording cf-trap-train-00149-due_date#2: missing numbers ['100']
+2026-10-28 20:43:39 INFO wording cf-train-00266-status#0: accepted
+2026-10-28 20:43:45 INFO wording cf-train-00266-status#1: accepted
+2026-10-28 20:43:51 INFO wording cf-train-00266-status#2: missing numbers ['10:00']
+2026-10-28 20:43:57 INFO wording cf-train-01560-status#0: accepted
+2026-10-28 20:44:02 INFO wording cf-train-01560-status#1: accepted
+2026-10-28 20:44:07 INFO wording cf-train-01560-status#2: missing numbers ['20']
+2026-10-28 20:44:12 INFO wording cf-train-00355-ordered_on#0: accepted
+2026-10-28 20:44:16 INFO wording cf-train-00355-ordered_on#1: missing numbers ['50']
+2026-10-28 20:44:22 INFO wording cf-train-00355-ordered_on#2: accepted
+2026-10-28 20:44:28 INFO wording cf-train-01193-ready_on#0: accepted
+2026-10-28 20:44:34 INFO wording cf-train-01193-ready_on#1: accepted
+2026-10-28 20:44:41 INFO wording cf-train-01193-ready_on#2: accepted
+2026-10-28 20:44:46 INFO wording cf-trap-train-00082-ordered_on#0: accepted
+2026-10-28 20:44:50 INFO wording cf-trap-train-00082-ordered_on#1: accepted
+2026-10-28 20:44:55 INFO wording cf-trap-train-00082-ordered_on#2: trap ask missing
+2026-10-28 20:44:58 INFO wording cf-trap-train-00138-status#0: missing numbers ['10']
+2026-10-28 20:45:01 INFO wording cf-trap-train-00138-status#1: accepted
+2026-10-28 20:45:03 INFO wording cf-trap-train-00138-status#2: missing numbers ['10']
+2026-10-28 20:45:08 INFO wording cf-train-00828-status#0: missing numbers ['11:00']
+2026-10-28 20:45:13 INFO wording cf-train-00828-status#1: accepted
+2026-10-28 20:45:17 INFO wording cf-train-00828-status#2: missing numbers ['11:00']
+2026-10-28 20:45:22 INFO wording cf-v3-train-00398-status#0: accepted
+2026-10-28 20:45:29 INFO wording cf-v3-train-00398-status#1: missing numbers ['100']
+2026-10-28 20:45:35 INFO wording cf-v3-train-00398-status#2: accepted
+2026-10-28 20:45:41 INFO wording cf-train-00736-status#0: accepted
+2026-10-28 20:45:50 INFO wording cf-train-00736-status#1: length
+2026-10-28 20:45:57 INFO wording cf-train-00736-status#2: accepted
+2026-10-28 20:46:00 INFO wording cf-trap-train-00081-status#0: accepted
+2026-10-28 20:46:06 INFO wording cf-trap-train-00081-status#1: accepted
+2026-10-28 20:46:10 INFO wording cf-trap-train-00081-status#2: accepted
+2026-10-28 20:46:16 INFO wording cf-train-00464-last_visit#0: accepted
+2026-10-28 20:46:22 INFO wording cf-train-00464-last_visit#1: accepted
+2026-10-28 20:46:28 INFO wording cf-train-00464-last_visit#2: accepted
+2026-10-28 20:46:32 INFO wording cf-trap-train-00102-status#0: accepted
+2026-10-28 20:46:36 INFO wording cf-trap-train-00102-status#1: missing numbers ['10']
+2026-10-28 20:46:40 INFO wording cf-trap-train-00102-status#2: accepted
+2026-10-28 20:46:43 INFO wording cf-trap-train-00196-status#0: accepted
+2026-10-28 20:46:48 INFO wording cf-trap-train-00196-status#1: accepted
+2026-10-28 20:46:52 INFO wording cf-trap-train-00196-status#2: accepted
+2026-10-28 20:46:58 INFO wording cf-train-00924-due_date#0: accepted
+2026-10-28 20:47:04 INFO wording cf-train-00924-due_date#1: accepted
+2026-10-28 20:47:08 INFO wording cf-train-00924-due_date#2: accepted
+2026-10-28 20:47:12 INFO wording cf-v3-train-00174-status#0: trap ask missing
+2026-10-28 20:47:15 INFO wording cf-v3-train-00174-status#1: accepted
+2026-10-28 20:47:18 INFO wording cf-v3-train-00174-status#2: trap ask missing
+2026-10-28 20:47:23 INFO wording cf-train-00462-last_visit#0: accepted
+2026-10-28 20:47:30 INFO wording cf-train-00462-last_visit#1: length
+2026-10-28 20:47:35 INFO wording cf-train-00462-last_visit#2: accepted
+2026-10-28 20:47:41 INFO wording cf-v3-train-00976-clean_on#0: accepted
+2026-10-28 20:47:47 INFO wording cf-v3-train-00976-clean_on#1: missing numbers ['08:30']
+2026-10-28 20:47:52 INFO wording cf-v3-train-00976-clean_on#2: accepted
+2026-10-28 20:47:59 INFO wording cf-train-00640-status#0: invented numbers ['24']
+2026-10-28 20:48:04 INFO wording cf-train-00640-status#1: accepted
+2026-10-28 20:48:12 INFO wording cf-train-00640-status#2: length
+2026-10-28 20:48:15 INFO wording cf-trap-train-00204-status#0: missing numbers ['10']
+2026-10-28 20:48:17 INFO wording cf-trap-train-00204-status#1: missing numbers ['10']
+2026-10-28 20:48:19 INFO wording cf-trap-train-00204-status#2: missing numbers ['10']
+2026-10-28 20:48:25 INFO wording cf-v3-train-00899-due_back#0: missing numbers ['08:30']
+2026-10-28 20:48:31 INFO wording cf-v3-train-00899-due_back#1: accepted
+2026-10-28 20:48:34 INFO wording cf-v3-train-00899-due_back#2: missing numbers ['08:30']
+2026-10-28 20:48:39 INFO wording cf-v3-train-00709-dropped_on#0: invented numbers ['24']
+2026-10-28 20:48:45 INFO wording cf-v3-train-00709-dropped_on#1: accepted
+2026-10-28 20:48:50 INFO wording cf-v3-train-00709-dropped_on#2: accepted
+2026-10-28 20:48:58 INFO wording cf-train-00838-sent_on#0: accepted
+2026-10-28 20:49:04 INFO wording cf-train-00838-sent_on#1: accepted
+2026-10-28 20:49:13 INFO wording cf-train-00838-sent_on#2: length
+2026-10-28 20:49:20 INFO wording cf-v3-train-00315-dive_on#0: invented numbers ['24']
+2026-10-28 20:49:24 INFO wording cf-v3-train-00315-dive_on#1: missing numbers ['30']
+2026-10-28 20:49:30 INFO wording cf-v3-train-00315-dive_on#2: accepted
+2026-10-28 20:49:30 INFO 75/534 programs, 225 records, 136 accepted, 1177 s
+2026-10-28 20:49:34 INFO wording cf-v3-train-00490-ready_on#0: accepted
+2026-10-28 20:49:38 INFO wording cf-v3-train-00490-ready_on#1: accepted
+2026-10-28 20:49:43 INFO wording cf-v3-train-00490-ready_on#2: accepted
+2026-10-28 20:49:49 INFO wording cf-train-00362-ordered_on#0: accepted
+2026-10-28 20:49:54 INFO wording cf-train-00362-ordered_on#1: accepted
+2026-10-28 20:50:00 INFO wording cf-train-00362-ordered_on#2: accepted
+2026-10-28 20:50:04 INFO wording cf-trap-train-00389-status#0: accepted
+2026-10-28 20:50:09 INFO wording cf-trap-train-00389-status#1: accepted
+2026-10-28 20:50:14 INFO wording cf-trap-train-00389-status#2: accepted
+2026-10-28 20:50:20 INFO wording cf-train-00830-sent_on#0: accepted
+2026-10-28 20:50:26 INFO wording cf-train-00830-sent_on#1: missing numbers ['50']
+2026-10-28 20:50:32 INFO wording cf-train-00830-sent_on#2: missing numbers ['17:30']
+2026-10-28 20:50:38 INFO wording cf-v3-train-00925-expires_on#0: accepted
+2026-10-28 20:50:45 INFO wording cf-v3-train-00925-expires_on#1: accepted
+2026-10-28 20:50:52 INFO wording cf-v3-train-00925-expires_on#2: accepted
+2026-10-28 20:50:57 INFO wording cf-v3-train-00502-arrives_on#0: accepted
+2026-10-28 20:51:04 INFO wording cf-v3-train-00502-arrives_on#1: accepted
+2026-10-28 20:51:09 INFO wording cf-v3-train-00502-arrives_on#2: accepted
+2026-10-28 20:51:15 INFO wording cf-train-00096-status#0: accepted
+2026-10-28 20:51:21 INFO wording cf-train-00096-status#1: code in text
+2026-10-28 20:51:28 INFO wording cf-train-00096-status#2: accepted
+2026-10-28 20:51:31 INFO wording cf-v3-train-01224-status#0: missing numbers ['10', '11:00']
+2026-10-28 20:51:34 INFO wording cf-v3-train-01224-status#1: missing numbers ['10']
+2026-10-28 20:51:37 INFO wording cf-v3-train-01224-status#2: missing numbers ['10']
+2026-10-28 20:51:41 INFO wording cf-v3-train-01229-install_on#0: accepted
+2026-10-28 20:51:46 INFO wording cf-v3-train-01229-install_on#1: accepted
+2026-10-28 20:51:52 INFO wording cf-v3-train-01229-install_on#2: accepted
+2026-10-28 20:51:56 INFO wording cf-v3-train-00439-status#0: accepted
+2026-10-28 20:52:01 INFO wording cf-v3-train-00439-status#1: accepted
+2026-10-28 20:52:05 INFO wording cf-v3-train-00439-status#2: accepted
+2026-10-28 20:52:08 INFO wording cf-trap-train-00175-status#0: accepted
+2026-10-28 20:52:10 INFO wording cf-trap-train-00175-status#1: accepted
+2026-10-28 20:52:14 INFO wording cf-trap-train-00175-status#2: accepted
+2026-10-28 20:52:18 INFO wording cf-train-00357-ordered_on#0: missing numbers ['17:30']
+2026-10-28 20:52:22 INFO wording cf-train-00357-ordered_on#1: accepted
+2026-10-28 20:52:29 INFO wording cf-train-00357-ordered_on#2: missing numbers ['100']
+2026-10-28 20:52:33 INFO wording cf-trap-train-00162-renews_on#0: accepted
+2026-10-28 20:52:38 INFO wording cf-trap-train-00162-renews_on#1: code in text
+2026-10-28 20:52:43 INFO wording cf-trap-train-00162-renews_on#2: missing numbers ['30']
+2026-10-28 20:52:50 INFO wording cf-v3-train-01125-meet_on#0: length
+2026-10-28 20:52:55 INFO wording cf-v3-train-01125-meet_on#1: accepted
+2026-10-28 20:53:00 INFO wording cf-v3-train-01125-meet_on#2: accepted
+2026-10-28 20:53:05 INFO wording cf-trap-train-00166-held_until#0: accepted
+2026-10-28 20:53:10 INFO wording cf-trap-train-00166-held_until#1: accepted
+2026-10-28 20:53:15 INFO wording cf-trap-train-00166-held_until#2: missing numbers ['100']
+2026-10-28 20:53:19 INFO wording cf-trap-train-00039-status#0: accepted
+2026-10-28 20:53:24 INFO wording cf-trap-train-00039-status#1: accepted
+2026-10-28 20:53:28 INFO wording cf-trap-train-00039-status#2: accepted
+2026-10-28 20:53:34 INFO wording cf-train-00920-due_date#0: accepted
+2026-10-28 20:53:39 INFO wording cf-train-00920-due_date#1: accepted
+2026-10-28 20:53:45 INFO wording cf-train-00920-due_date#2: accepted
+2026-10-28 20:53:52 INFO wording cf-train-01195-ready_on#0: accepted
+2026-10-28 20:53:58 INFO wording cf-train-01195-ready_on#1: accepted
+2026-10-28 20:54:05 INFO wording cf-train-01195-ready_on#2: accepted
+2026-10-28 20:54:09 INFO wording cf-trap-train-00044-status#0: missing numbers ['20']
+2026-10-28 20:54:12 INFO wording cf-trap-train-00044-status#1: missing numbers ['20']
+2026-10-28 20:54:18 INFO wording cf-trap-train-00044-status#2: trap ask missing
+2026-10-28 20:54:21 INFO wording cf-trap-train-00000-status#0: missing numbers ['10']
+2026-10-28 20:54:24 INFO wording cf-trap-train-00000-status#1: missing numbers ['10']
+2026-10-28 20:54:28 INFO wording cf-trap-train-00000-status#2: accepted
+2026-10-28 20:54:34 INFO wording cf-v3-train-00963-clean_on#0: accepted
+2026-10-28 20:54:39 INFO wording cf-v3-train-00963-clean_on#1: accepted
+2026-10-28 20:54:44 INFO wording cf-v3-train-00963-clean_on#2: missing numbers ['30', '08:30']
+2026-10-28 20:54:49 INFO wording cf-train-01372-expires_on#0: missing numbers ['30']
+2026-10-28 20:54:55 INFO wording cf-train-01372-expires_on#1: accepted
+2026-10-28 20:54:59 INFO wording cf-train-01372-expires_on#2: missing numbers ['30']
+2026-10-28 20:55:02 INFO wording cf-v3-train-00566-status#0: accepted
+2026-10-28 20:55:05 INFO wording cf-v3-train-00566-status#1: accepted
+2026-10-28 20:55:09 INFO wording cf-v3-train-00566-status#2: trap ask missing
+2026-10-28 20:55:18 INFO wording cf-train-00832-sent_on#0: length
+2026-10-28 20:55:23 INFO wording cf-train-00832-sent_on#1: accepted
+2026-10-28 20:55:29 INFO wording cf-train-00832-sent_on#2: accepted
+2026-10-28 20:55:36 INFO wording cf-train-00365-ordered_on#0: accepted
+2026-10-28 20:55:43 INFO wording cf-train-00365-ordered_on#1: length
+2026-10-28 20:55:49 INFO wording cf-train-00365-ordered_on#2: accepted
+2026-10-28 20:55:49 INFO 100/534 programs, 300 records, 188 accepted, 1556 s
+2026-10-28 20:55:54 INFO wording cf-v3-train-00519-promised_on#0: accepted
+2026-10-28 20:55:59 INFO wording cf-v3-train-00519-promised_on#1: missing numbers ['100']
+2026-10-28 20:56:05 INFO wording cf-v3-train-00519-promised_on#2: accepted
+2026-10-28 20:56:11 INFO wording cf-train-01377-expires_on#0: missing numbers ['50']
+2026-10-28 20:56:18 INFO wording cf-train-01377-expires_on#1: length
+2026-10-28 20:56:25 INFO wording cf-train-01377-expires_on#2: length
+2026-10-28 20:56:29 INFO wording cf-trap-train-00285-status#0: accepted
+2026-10-28 20:56:33 INFO wording cf-trap-train-00285-status#1: accepted
+2026-10-28 20:56:36 INFO wording cf-trap-train-00285-status#2: missing numbers ['10']
+2026-10-28 20:56:43 INFO wording cf-v3-train-01007-renews_on#0: missing numbers ['100']
+2026-10-28 20:56:48 INFO wording cf-v3-train-01007-renews_on#1: accepted
+2026-10-28 20:56:55 INFO wording cf-v3-train-01007-renews_on#2: accepted
+2026-10-28 20:57:01 INFO wording cf-train-00833-sent_on#0: accepted
+2026-10-28 20:57:07 INFO wording cf-train-00833-sent_on#1: accepted
+2026-10-28 20:57:13 INFO wording cf-train-00833-sent_on#2: accepted
+2026-10-28 20:57:19 INFO wording cf-v3-train-00032-status#0: accepted
+2026-10-28 20:57:25 INFO wording cf-v3-train-00032-status#1: accepted
+2026-10-28 20:57:31 INFO wording cf-v3-train-00032-status#2: accepted
+2026-10-28 20:57:36 INFO wording cf-v3-train-00092-status#0: accepted
+2026-10-28 20:57:39 INFO wording cf-v3-train-00092-status#1: accepted
+2026-10-28 20:57:42 INFO wording cf-v3-train-00092-status#2: accepted
+2026-10-28 20:57:46 INFO wording cf-v3-train-00306-status#0: accepted
+2026-10-28 20:57:52 INFO wording cf-v3-train-00306-status#1: missing numbers ['09:00']
+2026-10-28 20:57:59 INFO wording cf-v3-train-00306-status#2: missing numbers ['100']
+2026-10-28 20:58:05 INFO wording cf-v3-train-00703-ready_on#0: accepted
+2026-10-28 20:58:10 INFO wording cf-v3-train-00703-ready_on#1: accepted
+2026-10-28 20:58:15 INFO wording cf-v3-train-00703-ready_on#2: accepted
+2026-10-28 20:58:21 INFO wording cf-train-01194-ready_on#0: accepted
+2026-10-28 20:58:27 INFO wording cf-train-01194-ready_on#1: accepted
+2026-10-28 20:58:33 INFO wording cf-train-01194-ready_on#2: accepted
+2026-10-28 20:58:37 INFO wording cf-train-01374-expires_on#0: accepted
+2026-10-28 20:58:43 INFO wording cf-train-01374-expires_on#1: missing numbers ['100']
+2026-10-28 20:58:48 INFO wording cf-train-01374-expires_on#2: accepted
+2026-10-28 20:58:56 INFO wording cf-train-00739-status#0: invented numbers ['24']
+2026-10-28 20:59:02 INFO wording cf-train-00739-status#1: accepted
+2026-10-28 20:59:09 INFO wording cf-train-00739-status#2: length
+2026-10-28 20:59:14 INFO wording cf-v3-train-00213-status#0: accepted
+2026-10-28 20:59:20 INFO wording cf-v3-train-00213-status#1: accepted
+2026-10-28 20:59:25 INFO wording cf-v3-train-00213-status#2: missing numbers ['30']
+2026-10-28 20:59:30 INFO wording cf-train-00925-due_date#0: accepted
+2026-10-28 20:59:35 INFO wording cf-train-00925-due_date#1: accepted
+2026-10-28 20:59:40 INFO wording cf-train-00925-due_date#2: accepted
+2026-10-28 20:59:47 INFO wording cf-train-00002-status#0: accepted
+2026-10-28 20:59:51 INFO wording cf-train-00002-status#1: accepted
+2026-10-28 20:59:57 INFO wording cf-train-00002-status#2: accepted
+2026-10-28 21:00:00 INFO wording cf-trap-train-00398-status#0: trap ask missing
+2026-10-28 21:00:04 INFO wording cf-trap-train-00398-status#1: trap ask missing
+2026-10-28 21:00:07 INFO wording cf-trap-train-00398-status#2: trap ask missing
+2026-10-28 21:00:12 INFO wording cf-train-00458-last_visit#0: accepted
+2026-10-28 21:00:17 INFO wording cf-train-00458-last_visit#1: accepted
+2026-10-28 21:00:22 INFO wording cf-train-00458-last_visit#2: accepted
+2026-10-28 21:00:27 INFO wording cf-train-00546-renews_on#0: accepted
+2026-10-28 21:00:34 INFO wording cf-train-00546-renews_on#1: accepted
+2026-10-28 21:00:41 INFO wording cf-train-00546-renews_on#2: accepted
+2026-10-28 21:00:45 INFO wording cf-train-00927-due_date#0: accepted
+2026-10-28 21:00:51 INFO wording cf-train-00927-due_date#1: accepted
+2026-10-28 21:00:57 INFO wording cf-train-00927-due_date#2: accepted
+2026-10-28 21:01:04 INFO wording cf-v3-train-00452-renews_on#0: length
+2026-10-28 21:01:10 INFO wording cf-v3-train-00452-renews_on#1: accepted
+2026-10-28 21:01:15 INFO wording cf-v3-train-00452-renews_on#2: code in text
+2026-10-28 21:01:21 INFO wording cf-train-01293-held_until#0: accepted
+2026-10-28 21:01:27 INFO wording cf-train-01293-held_until#1: accepted
+2026-10-28 21:01:34 INFO wording cf-train-01293-held_until#2: accepted
+2026-10-28 21:01:41 INFO wording cf-v3-train-01005-status#0: missing numbers ['16:00']
+2026-10-28 21:01:46 INFO wording cf-v3-train-01005-status#1: accepted
+2026-10-28 21:01:51 INFO wording cf-v3-train-01005-status#2: accepted
+2026-10-28 21:01:53 INFO wording cf-trap-train-00278-status#0: missing numbers ['30']
+2026-10-28 21:01:56 INFO wording cf-trap-train-00278-status#1: missing numbers ['30']
+2026-10-28 21:01:59 INFO wording cf-trap-train-00278-status#2: missing numbers ['30']
+2026-10-28 21:02:02 INFO wording cf-v3-train-00708-status#0: accepted
+2026-10-28 21:02:06 INFO wording cf-v3-train-00708-status#1: accepted
+2026-10-28 21:02:10 INFO wording cf-v3-train-00708-status#2: accepted
+2026-10-28 21:02:14 INFO wording cf-train-01187-ready_on#0: missing numbers ['20', '17:30']
+2026-10-28 21:02:18 INFO wording cf-train-01187-ready_on#1: accepted
+2026-10-28 21:02:22 INFO wording cf-train-01187-ready_on#2: missing numbers ['20', '17:30']
+2026-10-28 21:02:22 INFO 125/534 programs, 375 records, 240 accepted, 1949 s
+2026-10-28 21:02:27 INFO wording cf-v3-train-01001-promised_on#0: accepted
+2026-10-28 21:02:32 INFO wording cf-v3-train-01001-promised_on#1: accepted
+2026-10-28 21:02:36 INFO wording cf-v3-train-01001-promised_on#2: accepted
+2026-10-28 21:02:40 INFO wording cf-v3-train-01167-status#0: missing numbers ['20']
+2026-10-28 21:02:43 INFO wording cf-v3-train-01167-status#1: missing numbers ['20']
+2026-10-28 21:02:46 INFO wording cf-v3-train-01167-status#2: accepted
+2026-10-28 21:02:50 INFO wording cf-v3-train-00961-treat_on#0: accepted
+2026-10-28 21:02:55 INFO wording cf-v3-train-00961-treat_on#1: accepted
+2026-10-28 21:02:59 INFO wording cf-v3-train-00961-treat_on#2: accepted
+2026-10-28 21:03:04 INFO wording cf-trap-train-00337-ordered_on#0: missing numbers ['50']
+2026-10-28 21:03:09 INFO wording cf-trap-train-00337-ordered_on#1: missing numbers ['50']
+2026-10-28 21:03:13 INFO wording cf-trap-train-00337-ordered_on#2: accepted
+2026-10-28 21:03:17 INFO wording cf-trap-train-00084-status#0: trap ask missing
+2026-10-28 21:03:21 INFO wording cf-trap-train-00084-status#1: trap ask missing
+2026-10-28 21:03:25 INFO wording cf-trap-train-00084-status#2: accepted
+2026-10-28 21:03:30 INFO wording cf-v3-train-00135-status#0: accepted
+2026-10-28 21:03:36 INFO wording cf-v3-train-00135-status#1: accepted
+2026-10-28 21:03:44 INFO wording cf-v3-train-00135-status#2: length
+2026-10-28 21:03:47 INFO wording cf-v3-train-00242-status#0: accepted
+2026-10-28 21:03:50 INFO wording cf-v3-train-00242-status#1: trap ask missing
+2026-10-28 21:03:53 INFO wording cf-v3-train-00242-status#2: missing numbers ['10', '10:00']
+2026-10-28 21:03:56 INFO wording cf-trap-train-00028-status#0: trap ask missing
+2026-10-28 21:04:00 INFO wording cf-trap-train-00028-status#1: accepted
+2026-10-28 21:04:03 INFO wording cf-trap-train-00028-status#2: accepted
+2026-10-28 21:04:08 INFO wording cf-v3-train-00565-ready_on#0: accepted
+2026-10-28 21:04:12 INFO wording cf-v3-train-00565-ready_on#1: accepted
+2026-10-28 21:04:17 INFO wording cf-v3-train-00565-ready_on#2: invented numbers ['14']
+2026-10-28 21:04:21 INFO wording cf-train-00456-last_visit#0: accepted
+2026-10-28 21:04:26 INFO wording cf-train-00456-last_visit#1: accepted
+2026-10-28 21:04:30 INFO wording cf-train-00456-last_visit#2: accepted
+2026-10-28 21:04:33 INFO wording cf-v3-train-00615-status#0: missing numbers ['50']
+2026-10-28 21:04:39 INFO wording cf-v3-train-00615-status#1: accepted
+2026-10-28 21:04:43 INFO wording cf-v3-train-00615-status#2: missing numbers ['50']
+2026-10-28 21:04:49 INFO wording cf-v3-train-00020-status#0: missing numbers ['20']
+2026-10-28 21:04:53 INFO wording cf-v3-train-00020-status#1: accepted
+2026-10-28 21:04:59 INFO wording cf-v3-train-00020-status#2: accepted
+2026-10-28 21:05:04 INFO wording cf-trap-train-00152-held_until#0: missing numbers ['100']
+2026-10-28 21:05:09 INFO wording cf-trap-train-00152-held_until#1: missing numbers ['100']
+2026-10-28 21:05:14 INFO wording cf-trap-train-00152-held_until#2: accepted
+2026-10-28 21:05:20 INFO wording cf-v3-train-00151-meet_on#0: accepted
+2026-10-28 21:05:27 INFO wording cf-v3-train-00151-meet_on#1: length
+2026-10-28 21:05:32 INFO wording cf-v3-train-00151-meet_on#2: accepted
+2026-10-28 21:05:38 INFO wording cf-train-00190-status#0: accepted
+2026-10-28 21:05:45 INFO wording cf-train-00190-status#1: length
+2026-10-28 21:05:53 INFO wording cf-train-00190-status#2: accepted
+2026-10-28 21:05:59 INFO wording cf-train-01283-held_until#0: accepted
+2026-10-28 21:06:05 INFO wording cf-train-01283-held_until#1: accepted
+2026-10-28 21:06:12 INFO wording cf-train-01283-held_until#2: accepted
+2026-10-28 21:06:17 INFO wording cf-trap-train-00140-last_visit#0: accepted
+2026-10-28 21:06:22 INFO wording cf-trap-train-00140-last_visit#1: trap ask missing
+2026-10-28 21:06:26 INFO wording cf-trap-train-00140-last_visit#2: trap ask missing
+2026-10-28 21:06:33 INFO wording cf-trap-train-00060-status#0: accepted
+2026-10-28 21:06:38 INFO wording cf-trap-train-00060-status#1: trap ask missing
+2026-10-28 21:06:44 INFO wording cf-trap-train-00060-status#2: accepted
+2026-10-28 21:06:47 INFO wording cf-trap-train-00124-status#0: accepted
+2026-10-28 21:06:51 INFO wording cf-trap-train-00124-status#1: accepted
+2026-10-28 21:06:54 INFO wording cf-trap-train-00124-status#2: trap ask missing
+2026-10-28 21:07:00 INFO wording cf-train-01373-expires_on#0: accepted
+2026-10-28 21:07:06 INFO wording cf-train-01373-expires_on#1: accepted
+2026-10-28 21:07:10 INFO wording cf-train-01373-expires_on#2: missing numbers ['10:00']
+2026-10-28 21:07:16 INFO wording cf-v3-train-00142-dive_on#0: accepted
+2026-10-28 21:07:22 INFO wording cf-v3-train-00142-dive_on#1: accepted
+2026-10-28 21:07:29 INFO wording cf-v3-train-00142-dive_on#2: accepted
+2026-10-28 21:07:38 INFO wording cf-v3-train-00832-promised_on#0: length
+2026-10-28 21:07:44 INFO wording cf-v3-train-00832-promised_on#1: accepted
+2026-10-28 21:07:50 INFO wording cf-v3-train-00832-promised_on#2: accepted
+2026-10-28 21:07:57 INFO wording cf-train-00183-status#0: accepted
+2026-10-28 21:08:03 INFO wording cf-train-00183-status#1: missing numbers ['100']
+2026-10-28 21:08:09 INFO wording cf-train-00183-status#2: accepted
+2026-10-28 21:08:12 INFO wording cf-v3-train-00729-status#0: accepted
+2026-10-28 21:08:16 INFO wording cf-v3-train-00729-status#1: accepted
+2026-10-28 21:08:19 INFO wording cf-v3-train-00729-status#2: accepted
+2026-10-28 21:08:24 INFO wording cf-trap-train-00239-status#0: accepted
+2026-10-28 21:08:28 INFO wording cf-trap-train-00239-status#1: accepted
+2026-10-28 21:08:32 INFO wording cf-trap-train-00239-status#2: accepted
+2026-10-28 21:08:32 INFO 150/534 programs, 450 records, 290 accepted, 2319 s
+2026-10-28 21:08:37 INFO wording cf-train-01108-status#0: missing numbers ['10:00']
+2026-10-28 21:08:42 INFO wording cf-train-01108-status#1: accepted
+2026-10-28 21:08:49 INFO wording cf-train-01108-status#2: accepted
+2026-10-28 21:08:54 INFO wording cf-train-01477-status#0: missing numbers ['08:30']
+2026-10-28 21:08:59 INFO wording cf-train-01477-status#1: accepted
+2026-10-28 21:09:06 INFO wording cf-train-01477-status#2: accepted
+2026-10-28 21:09:09 INFO wording cf-trap-train-00210-status#0: accepted
+2026-10-28 21:09:12 INFO wording cf-trap-train-00210-status#1: missing numbers ['30']
+2026-10-28 21:09:16 INFO wording cf-trap-train-00210-status#2: missing numbers ['30']
+2026-10-28 21:09:23 INFO wording cf-v3-train-00015-status#0: accepted
+2026-10-28 21:09:29 INFO wording cf-v3-train-00015-status#1: accepted
+2026-10-28 21:09:34 INFO wording cf-v3-train-00015-status#2: accepted
+2026-10-28 21:09:37 INFO wording cf-v3-train-00948-status#0: trap ask missing
+2026-10-28 21:09:40 INFO wording cf-v3-train-00948-status#1: accepted
+2026-10-28 21:09:43 INFO wording cf-v3-train-00948-status#2: trap ask missing
+2026-10-28 21:09:47 INFO wording cf-v3-train-00097-status#0: missing numbers ['50']
+2026-10-28 21:09:53 INFO wording cf-v3-train-00097-status#1: missing numbers ['50']
+2026-10-28 21:09:57 INFO wording cf-v3-train-00097-status#2: code in text
+2026-10-28 21:10:00 INFO wording cf-trap-train-00125-ordered_on#0: trap ask missing
+2026-10-28 21:10:04 INFO wording cf-trap-train-00125-ordered_on#1: trap ask missing
+2026-10-28 21:10:07 INFO wording cf-trap-train-00125-ordered_on#2: accepted
+2026-10-28 21:10:15 INFO wording cf-v3-train-00992-status#0: length
+2026-10-28 21:10:22 INFO wording cf-v3-train-00992-status#1: accepted
+2026-10-28 21:10:27 INFO wording cf-v3-train-00992-status#2: accepted
+2026-10-28 21:10:33 INFO wording cf-train-01183-ready_on#0: accepted
+2026-10-28 21:10:37 INFO wording cf-train-01183-ready_on#1: accepted
+2026-10-28 21:10:43 INFO wording cf-train-01183-ready_on#2: accepted
+2026-10-28 21:10:50 INFO wording cf-train-00644-status#0: length
+2026-10-28 21:10:55 INFO wording cf-train-00644-status#1: accepted
+2026-10-28 21:11:00 INFO wording cf-train-00644-status#2: accepted
+2026-10-28 21:11:06 INFO wording cf-v3-train-00683-due_on#0: accepted
+2026-10-28 21:11:14 INFO wording cf-v3-train-00683-due_on#1: length
+2026-10-28 21:11:21 INFO wording cf-v3-train-00683-due_on#2: accepted
+2026-10-28 21:11:26 INFO wording cf-trap-train-00318-status#0: accepted
+2026-10-28 21:11:29 INFO wording cf-trap-train-00318-status#1: accepted
+2026-10-28 21:11:32 INFO wording cf-trap-train-00318-status#2: accepted
+2026-10-28 21:11:36 INFO wording cf-trap-train-00323-last_visit#0: accepted
+2026-10-28 21:11:41 INFO wording cf-trap-train-00323-last_visit#1: accepted
+2026-10-28 21:11:46 INFO wording cf-trap-train-00323-last_visit#2: accepted
+2026-10-28 21:11:49 INFO wording cf-v3-train-00103-status#0: accepted
+2026-10-28 21:11:52 INFO wording cf-v3-train-00103-status#1: accepted
+2026-10-28 21:11:55 INFO wording cf-v3-train-00103-status#2: accepted
+2026-10-28 21:12:02 INFO wording cf-v3-train-00185-expires_on#0: accepted
+2026-10-28 21:12:07 INFO wording cf-v3-train-00185-expires_on#1: accepted
+2026-10-28 21:12:14 INFO wording cf-v3-train-00185-expires_on#2: accepted
+2026-10-28 21:12:18 INFO wording cf-train-00189-status#0: accepted
+2026-10-28 21:12:24 INFO wording cf-train-00189-status#1: accepted
+2026-10-28 21:12:31 INFO wording cf-train-00189-status#2: length
+2026-10-28 21:12:37 INFO wording cf-v3-train-00061-ready_on#0: accepted
+2026-10-28 21:12:43 INFO wording cf-v3-train-00061-ready_on#1: accepted
+2026-10-28 21:12:49 INFO wording cf-v3-train-00061-ready_on#2: accepted
+2026-10-28 21:12:54 INFO wording cf-v3-train-00012-status#0: accepted
+2026-10-28 21:12:58 INFO wording cf-v3-train-00012-status#1: accepted
+2026-10-28 21:13:04 INFO wording cf-v3-train-00012-status#2: code in text
+2026-10-28 21:13:11 INFO wording cf-train-00555-renews_on#0: accepted
+2026-10-28 21:13:17 INFO wording cf-train-00555-renews_on#1: accepted
+2026-10-28 21:13:21 INFO wording cf-train-00555-renews_on#2: accepted
+2026-10-28 21:13:23 INFO wording cf-trap-train-00008-status#0: accepted
+2026-10-28 21:13:27 INFO wording cf-trap-train-00008-status#1: accepted
+2026-10-28 21:13:31 INFO wording cf-trap-train-00008-status#2: invented numbers ['50']
+2026-10-28 21:13:37 INFO wording cf-train-01192-ready_on#0: accepted
+2026-10-28 21:13:44 INFO wording cf-train-01192-ready_on#1: length
+2026-10-28 21:13:49 INFO wording cf-train-01192-ready_on#2: accepted
+2026-10-28 21:13:53 INFO wording cf-trap-train-00291-status#0: accepted
+2026-10-28 21:13:56 INFO wording cf-trap-train-00291-status#1: missing numbers ['20']
+2026-10-28 21:14:00 INFO wording cf-trap-train-00291-status#2: accepted
+2026-10-28 21:14:03 INFO wording cf-trap-train-00190-status#0: accepted
+2026-10-28 21:14:06 INFO wording cf-trap-train-00190-status#1: trap ask missing
+2026-10-28 21:14:09 INFO wording cf-trap-train-00190-status#2: accepted
+2026-10-28 21:14:12 INFO wording cf-v3-train-00402-status#0: missing numbers ['20']
+2026-10-28 21:14:16 INFO wording cf-v3-train-00402-status#1: accepted
+2026-10-28 21:14:19 INFO wording cf-v3-train-00402-status#2: missing numbers ['20']
+2026-10-28 21:14:22 INFO wording cf-trap-train-00319-status#0: accepted
+2026-10-28 21:14:24 INFO wording cf-trap-train-00319-status#1: accepted
+2026-10-28 21:14:26 INFO wording cf-trap-train-00319-status#2: missing numbers ['20']
+2026-10-28 21:14:26 INFO 175/534 programs, 525 records, 342 accepted, 2674 s
+2026-10-28 21:14:32 INFO wording cf-trap-train-00011-expires_on#0: accepted
+2026-10-28 21:14:39 INFO wording cf-trap-train-00011-expires_on#1: length
+2026-10-28 21:14:44 INFO wording cf-trap-train-00011-expires_on#2: trap ask missing
+2026-10-28 21:14:49 INFO wording cf-train-00639-status#0: accepted
+2026-10-28 21:14:54 INFO wording cf-train-00639-status#1: accepted
+2026-10-28 21:15:00 INFO wording cf-train-00639-status#2: accepted
+2026-10-28 21:15:04 INFO wording cf-trap-train-00240-status#0: accepted
+2026-10-28 21:15:08 INFO wording cf-trap-train-00240-status#1: accepted
+2026-10-28 21:15:11 INFO wording cf-trap-train-00240-status#2: missing numbers ['30']
+2026-10-28 21:15:17 INFO wording cf-v3-train-01150-due_back#0: length
+2026-10-28 21:15:24 INFO wording cf-v3-train-01150-due_back#1: length
+2026-10-28 21:15:29 INFO wording cf-v3-train-01150-due_back#2: accepted
+2026-10-28 21:15:34 INFO wording cf-v3-train-01221-status#0: accepted
+2026-10-28 21:15:38 INFO wording cf-v3-train-01221-status#1: accepted
+2026-10-28 21:15:42 INFO wording cf-v3-train-01221-status#2: missing numbers ['20']
+2026-10-28 21:15:48 INFO wording cf-v3-train-00342-meet_on#0: accepted
+2026-10-28 21:15:53 INFO wording cf-v3-train-00342-meet_on#1: accepted
+2026-10-28 21:15:59 INFO wording cf-v3-train-00342-meet_on#2: accepted
+2026-10-28 21:16:05 INFO wording cf-v3-train-00721-dropped_on#0: accepted
+2026-10-28 21:16:11 INFO wording cf-v3-train-00721-dropped_on#1: accepted
+2026-10-28 21:16:17 INFO wording cf-v3-train-00721-dropped_on#2: missing numbers ['18:00']
+2026-10-28 21:16:20 INFO wording cf-v3-train-00443-status#0: missing numbers ['30']
+2026-10-28 21:16:23 INFO wording cf-v3-train-00443-status#1: missing numbers ['30']
+2026-10-28 21:16:26 INFO wording cf-v3-train-00443-status#2: missing numbers ['08:00']
+2026-10-28 21:16:31 INFO wording cf-train-00556-renews_on#0: accepted
+2026-10-28 21:16:38 INFO wording cf-train-00556-renews_on#1: accepted
+2026-10-28 21:16:44 INFO wording cf-train-00556-renews_on#2: accepted
+2026-10-28 21:16:50 INFO wording cf-train-01556-status#0: missing numbers ['30']
+2026-10-28 21:16:56 INFO wording cf-train-01556-status#1: accepted
+2026-10-28 21:17:00 INFO wording cf-train-01556-status#2: accepted
+2026-10-28 21:17:04 INFO wording cf-trap-train-00289-status#0: accepted
+2026-10-28 21:17:07 INFO wording cf-trap-train-00289-status#1: accepted
+2026-10-28 21:17:11 INFO wording cf-trap-train-00289-status#2: trap ask missing
+2026-10-28 21:17:16 INFO wording cf-v3-train-00560-dropped_on#0: accepted
+2026-10-28 21:17:22 INFO wording cf-v3-train-00560-dropped_on#1: accepted
+2026-10-28 21:17:27 INFO wording cf-v3-train-00560-dropped_on#2: accepted
+2026-10-28 21:17:32 INFO wording cf-v3-train-01068-ready_on#0: missing numbers ['50']
+2026-10-28 21:17:41 INFO wording cf-v3-train-01068-ready_on#1: length
+2026-10-28 21:17:44 INFO wording cf-v3-train-01068-ready_on#2: missing numbers ['50', '08:30']
+2026-10-28 21:17:48 INFO wording cf-train-00834-sent_on#0: accepted
+2026-10-28 21:17:53 INFO wording cf-train-00834-sent_on#1: accepted
+2026-10-28 21:18:00 INFO wording cf-train-00834-sent_on#2: accepted
+2026-10-28 21:18:07 INFO wording cf-v3-train-00894-status#0: accepted
+2026-10-28 21:18:12 INFO wording cf-v3-train-00894-status#1: accepted
+2026-10-28 21:18:18 INFO wording cf-v3-train-00894-status#2: accepted
+2026-10-28 21:18:23 INFO wording cf-train-01464-status#0: missing numbers ['100']
+2026-10-28 21:18:28 INFO wording cf-train-01464-status#1: missing numbers ['100']
+2026-10-28 21:18:33 INFO wording cf-train-01464-status#2: missing numbers ['100']
+2026-10-28 21:18:38 INFO wording cf-v3-train-00131-status#0: missing numbers ['20']
+2026-10-28 21:18:43 INFO wording cf-v3-train-00131-status#1: missing numbers ['20']
+2026-10-28 21:18:49 INFO wording cf-v3-train-00131-status#2: invented numbers ['24']
+2026-10-28 21:18:52 INFO wording cf-trap-train-00308-status#0: accepted
+2026-10-28 21:18:57 INFO wording cf-trap-train-00308-status#1: accepted
+2026-10-28 21:19:01 INFO wording cf-trap-train-00308-status#2: accepted
+2026-10-28 21:19:06 INFO wording cf-trap-train-00017-status#0: trap ask missing
+2026-10-28 21:19:10 INFO wording cf-trap-train-00017-status#1: accepted
+2026-10-28 21:19:14 INFO wording cf-trap-train-00017-status#2: accepted
+2026-10-28 21:19:20 INFO wording cf-v3-train-00864-promised_on#0: accepted
+2026-10-28 21:19:27 INFO wording cf-v3-train-00864-promised_on#1: accepted
+2026-10-28 21:19:33 INFO wording cf-v3-train-00864-promised_on#2: accepted
+2026-10-28 21:19:40 INFO wording cf-train-00008-status#0: accepted
+2026-10-28 21:19:45 INFO wording cf-train-00008-status#1: accepted
+2026-10-28 21:19:51 INFO wording cf-train-00008-status#2: accepted
+2026-10-28 21:19:55 INFO wording cf-trap-train-00215-status#0: accepted
+2026-10-28 21:20:00 INFO wording cf-trap-train-00215-status#1: accepted
+2026-10-28 21:20:05 INFO wording cf-trap-train-00215-status#2: invented numbers ['50']
+2026-10-28 21:20:10 INFO wording cf-v3-train-00941-status#0: accepted
+2026-10-28 21:20:16 INFO wording cf-v3-train-00941-status#1: accepted
+2026-10-28 21:20:22 INFO wording cf-v3-train-00941-status#2: missing numbers ['20']
+2026-10-28 21:20:29 INFO wording cf-train-00270-status#0: accepted
+2026-10-28 21:20:34 INFO wording cf-train-00270-status#1: accepted
+2026-10-28 21:20:41 INFO wording cf-train-00270-status#2: accepted
+2026-10-28 21:20:43 INFO wording cf-trap-train-00263-status#0: accepted
+2026-10-28 21:20:48 INFO wording cf-trap-train-00263-status#1: accepted
+2026-10-28 21:20:50 INFO wording cf-trap-train-00263-status#2: accepted
+2026-10-28 21:20:50 INFO 200/534 programs, 600 records, 393 accepted, 3058 s
+2026-10-28 21:20:56 INFO wording cf-v3-train-00022-status#0: accepted
+2026-10-28 21:21:03 INFO wording cf-v3-train-00022-status#1: accepted
+2026-10-28 21:21:07 INFO wording cf-v3-train-00022-status#2: accepted
+2026-10-28 21:21:10 INFO wording cf-v3-train-00323-status#0: accepted
+2026-10-28 21:21:13 INFO wording cf-v3-train-00323-status#1: accepted
+2026-10-28 21:21:16 INFO wording cf-v3-train-00323-status#2: accepted
+2026-10-28 21:21:22 INFO wording cf-train-00010-status#0: accepted
+2026-10-28 21:21:29 INFO wording cf-train-00010-status#1: length
+2026-10-28 21:21:36 INFO wording cf-train-00010-status#2: length
+2026-10-28 21:21:40 INFO wording cf-v3-train-00132-status#0: accepted
+2026-10-28 21:21:44 INFO wording cf-v3-train-00132-status#1: trap ask missing
+2026-10-28 21:21:47 INFO wording cf-v3-train-00132-status#2: trap ask missing
+2026-10-28 21:21:51 INFO wording cf-trap-train-00216-status#0: missing numbers ['10']
+2026-10-28 21:21:54 INFO wording cf-trap-train-00216-status#1: accepted
+2026-10-28 21:21:57 INFO wording cf-trap-train-00216-status#2: missing numbers ['10']
+2026-10-28 21:22:04 INFO wording cf-v3-train-00773-clean_on#0: accepted
+2026-10-28 21:22:09 INFO wording cf-v3-train-00773-clean_on#1: accepted
+2026-10-28 21:22:15 INFO wording cf-v3-train-00773-clean_on#2: code in text
+2026-10-28 21:22:18 INFO wording cf-trap-train-00305-status#0: missing numbers ['10']
+2026-10-28 21:22:20 INFO wording cf-trap-train-00305-status#1: missing numbers ['10']
+2026-10-28 21:22:24 INFO wording cf-trap-train-00305-status#2: accepted
+2026-10-28 21:22:27 INFO wording cf-trap-train-00188-status#0: trap ask missing
+2026-10-28 21:22:30 INFO wording cf-trap-train-00188-status#1: accepted
+2026-10-28 21:22:34 INFO wording cf-trap-train-00188-status#2: accepted
+2026-10-28 21:22:38 INFO wording cf-v3-train-00950-ready_on#0: missing numbers ['50', '18:00']
+2026-10-28 21:22:42 INFO wording cf-v3-train-00950-ready_on#1: missing numbers ['50']
+2026-10-28 21:22:46 INFO wording cf-v3-train-00950-ready_on#2: missing numbers ['50']
+2026-10-28 21:22:52 INFO wording cf-train-00358-ordered_on#0: accepted
+2026-10-28 21:22:59 INFO wording cf-train-00358-ordered_on#1: length
+2026-10-28 21:23:04 INFO wording cf-train-00358-ordered_on#2: missing numbers ['30']
+2026-10-28 21:23:08 INFO wording cf-v3-train-00539-renews_on#0: missing numbers ['30']
+2026-10-28 21:23:12 INFO wording cf-v3-train-00539-renews_on#1: missing numbers ['30']
+2026-10-28 21:23:18 INFO wording cf-v3-train-00539-renews_on#2: missing numbers ['30']
+2026-10-28 21:23:21 INFO wording cf-trap-train-00363-status#0: missing numbers ['10']
+2026-10-28 21:23:25 INFO wording cf-trap-train-00363-status#1: missing numbers ['10']
+2026-10-28 21:23:28 INFO wording cf-trap-train-00363-status#2: accepted
+2026-10-28 21:23:33 INFO wording cf-train-01474-status#0: missing numbers ['11:00']
+2026-10-28 21:23:39 INFO wording cf-train-01474-status#1: missing numbers ['11:00']
+2026-10-28 21:23:44 INFO wording cf-train-01474-status#2: missing numbers ['11:00']
+2026-10-28 21:23:49 INFO wording cf-v3-train-01112-review_on#0: missing numbers ['20']
+2026-10-28 21:23:55 INFO wording cf-v3-train-01112-review_on#1: missing numbers ['20']
+2026-10-28 21:24:00 INFO wording cf-v3-train-01112-review_on#2: missing numbers ['20']
+2026-10-28 21:24:03 INFO wording cf-trap-train-00144-status#0: accepted
+2026-10-28 21:24:06 INFO wording cf-trap-train-00144-status#1: accepted
+2026-10-28 21:24:09 INFO wording cf-trap-train-00144-status#2: accepted
+2026-10-28 21:24:16 INFO wording cf-train-01378-expires_on#0: accepted
+2026-10-28 21:24:21 INFO wording cf-train-01378-expires_on#1: missing numbers ['50']
+2026-10-28 21:24:26 INFO wording cf-train-01378-expires_on#2: missing numbers ['50']
+2026-10-28 21:24:30 INFO wording cf-v3-train-00506-status#0: accepted
+2026-10-28 21:24:34 INFO wording cf-v3-train-00506-status#1: accepted
+2026-10-28 21:24:38 INFO wording cf-v3-train-00506-status#2: accepted
+2026-10-28 21:24:41 INFO wording cf-trap-train-00005-status#0: accepted
+2026-10-28 21:24:45 INFO wording cf-trap-train-00005-status#1: accepted
+2026-10-28 21:24:51 INFO wording cf-trap-train-00005-status#2: accepted
+2026-10-28 21:24:54 INFO wording cf-v3-train-00162-status#0: accepted
+2026-10-28 21:24:58 INFO wording cf-v3-train-00162-status#1: missing numbers ['30']
+2026-10-28 21:25:01 INFO wording cf-v3-train-00162-status#2: missing numbers ['30']
+2026-10-28 21:25:05 INFO wording cf-train-00184-status#0: accepted
+2026-10-28 21:25:10 INFO wording cf-train-00184-status#1: accepted
+2026-10-28 21:25:15 INFO wording cf-train-00184-status#2: missing numbers ['20']
+2026-10-28 21:25:20 INFO wording cf-train-00917-due_date#0: missing numbers ['100']
+2026-10-28 21:25:27 INFO wording cf-train-00917-due_date#1: accepted
+2026-10-28 21:25:31 INFO wording cf-train-00917-due_date#2: accepted
+2026-10-28 21:25:35 INFO wording cf-trap-train-00104-sent_on#0: accepted
+2026-10-28 21:25:39 INFO wording cf-trap-train-00104-sent_on#1: accepted
+2026-10-28 21:25:43 INFO wording cf-trap-train-00104-sent_on#2: accepted
+2026-10-28 21:25:49 INFO wording cf-v3-train-00863-promised_on#0: missing numbers ['100']
+2026-10-28 21:25:55 INFO wording cf-v3-train-00863-promised_on#1: accepted
+2026-10-28 21:26:01 INFO wording cf-v3-train-00863-promised_on#2: accepted
+2026-10-28 21:26:07 INFO wording cf-trap-train-00198-ordered_on#0: code in text
+2026-10-28 21:26:14 INFO wording cf-trap-train-00198-ordered_on#1: accepted
+2026-10-28 21:26:23 INFO wording cf-trap-train-00198-ordered_on#2: length
+2026-10-28 21:26:28 INFO wording cf-train-00460-last_visit#0: accepted
+2026-10-28 21:26:35 INFO wording cf-train-00460-last_visit#1: accepted
+2026-10-28 21:26:41 INFO wording cf-train-00460-last_visit#2: accepted
+2026-10-28 21:26:41 INFO 225/534 programs, 675 records, 433 accepted, 3408 s
+2026-10-28 21:26:44 INFO wording cf-v3-train-00101-status#0: accepted
+2026-10-28 21:26:47 INFO wording cf-v3-train-00101-status#1: accepted
+2026-10-28 21:26:50 INFO wording cf-v3-train-00101-status#2: accepted
+2026-10-28 21:26:53 INFO wording cf-v3-train-01159-status#0: missing numbers ['30']
+2026-10-28 21:26:57 INFO wording cf-v3-train-01159-status#1: accepted
+2026-10-28 21:27:00 INFO wording cf-v3-train-01159-status#2: accepted
+2026-10-28 21:27:07 INFO wording cf-train-00826-sent_on#0: accepted
+2026-10-28 21:27:12 INFO wording cf-train-00826-sent_on#1: accepted
+2026-10-28 21:27:18 INFO wording cf-train-00826-sent_on#2: accepted
+2026-10-28 21:27:21 INFO wording cf-trap-train-00259-status#0: accepted
+2026-10-28 21:27:25 INFO wording cf-trap-train-00259-status#1: accepted
+2026-10-28 21:27:29 INFO wording cf-trap-train-00259-status#2: accepted
+2026-10-28 21:27:34 INFO wording cf-v3-train-00727-arrives_on#0: accepted
+2026-10-28 21:27:39 INFO wording cf-v3-train-00727-arrives_on#1: accepted
+2026-10-28 21:27:46 INFO wording cf-v3-train-00727-arrives_on#2: accepted
+2026-10-28 21:27:53 INFO wording cf-v3-train-00922-due_on#0: missing numbers ['50']
+2026-10-28 21:27:59 INFO wording cf-v3-train-00922-due_on#1: missing numbers ['50']
+2026-10-28 21:28:04 INFO wording cf-v3-train-00922-due_on#2: accepted
+2026-10-28 21:28:09 INFO wording cf-train-00550-renews_on#0: accepted
+2026-10-28 21:28:15 INFO wording cf-train-00550-renews_on#1: accepted
+2026-10-28 21:28:19 INFO wording cf-train-00550-renews_on#2: accepted
+2026-10-28 21:28:26 INFO wording cf-trap-train-00407-ordered_on#0: accepted
+2026-10-28 21:28:31 INFO wording cf-trap-train-00407-ordered_on#1: accepted
+2026-10-28 21:28:37 INFO wording cf-trap-train-00407-ordered_on#2: accepted
+2026-10-28 21:28:41 INFO wording cf-trap-train-00160-status#0: accepted
+2026-10-28 21:28:44 INFO wording cf-trap-train-00160-status#1: trap ask missing
+2026-10-28 21:28:48 INFO wording cf-trap-train-00160-status#2: accepted
+2026-10-28 21:28:54 INFO wording cf-v3-train-00650-status#0: missing numbers ['30']
+2026-10-28 21:28:57 INFO wording cf-v3-train-00650-status#1: accepted
+2026-10-28 21:29:01 INFO wording cf-v3-train-00650-status#2: accepted
+2026-10-28 21:29:06 INFO wording cf-trap-train-00063-status#0: accepted
+2026-10-28 21:29:10 INFO wording cf-trap-train-00063-status#1: invented numbers ['50']
+2026-10-28 21:29:14 INFO wording cf-trap-train-00063-status#2: accepted
+2026-10-28 21:29:21 INFO wording cf-train-00095-status#0: accepted
+2026-10-28 21:29:28 INFO wording cf-train-00095-status#1: accepted
+2026-10-28 21:29:34 INFO wording cf-train-00095-status#2: accepted
+2026-10-28 21:29:39 INFO wording cf-train-00551-renews_on#0: accepted
+2026-10-28 21:29:44 INFO wording cf-train-00551-renews_on#1: accepted
+2026-10-28 21:29:50 INFO wording cf-train-00551-renews_on#2: accepted
+2026-10-28 21:29:54 INFO wording cf-train-01467-status#0: missing numbers ['50']
+2026-10-28 21:29:59 INFO wording cf-train-01467-status#1: accepted
+2026-10-28 21:30:04 INFO wording cf-train-01467-status#2: missing numbers ['50', '08:00']
+2026-10-28 21:30:08 INFO wording cf-trap-train-00183-status#0: accepted
+2026-10-28 21:30:12 INFO wording cf-trap-train-00183-status#1: missing numbers ['10']
+2026-10-28 21:30:16 INFO wording cf-trap-train-00183-status#2: accepted
+2026-10-28 21:30:21 INFO wording cf-train-00545-renews_on#0: accepted
+2026-10-28 21:30:27 INFO wording cf-train-00545-renews_on#1: accepted
+2026-10-28 21:30:33 INFO wording cf-train-00545-renews_on#2: accepted
+2026-10-28 21:30:37 INFO wording cf-trap-train-00094-status#0: accepted
+2026-10-28 21:30:41 INFO wording cf-trap-train-00094-status#1: accepted
+2026-10-28 21:30:44 INFO wording cf-trap-train-00094-status#2: accepted
+2026-10-28 21:30:49 INFO wording cf-v3-train-00432-status#0: missing numbers ['20']
+2026-10-28 21:30:55 INFO wording cf-v3-train-00432-status#1: accepted
+2026-10-28 21:30:59 INFO wording cf-v3-train-00432-status#2: accepted
+2026-10-28 21:31:07 INFO wording cf-v3-train-00019-status#0: length
+2026-10-28 21:31:12 INFO wording cf-v3-train-00019-status#1: accepted
+2026-10-28 21:31:17 INFO wording cf-v3-train-00019-status#2: accepted
+2026-10-28 21:31:23 INFO wording cf-train-01282-held_until#0: invented numbers ['24']
+2026-10-28 21:31:29 INFO wording cf-train-01282-held_until#1: accepted
+2026-10-28 21:31:35 INFO wording cf-train-01282-held_until#2: accepted
+2026-10-28 21:31:41 INFO wording cf-train-01469-status#0: accepted
+2026-10-28 21:31:46 INFO wording cf-train-01469-status#1: accepted
+2026-10-28 21:31:50 INFO wording cf-train-01469-status#2: accepted
+2026-10-28 21:31:55 INFO wording cf-trap-train-00364-status#0: trap ask missing
+2026-10-28 21:31:59 INFO wording cf-trap-train-00364-status#1: accepted
+2026-10-28 21:32:04 INFO wording cf-trap-train-00364-status#2: trap ask missing
+2026-10-28 21:32:11 INFO wording cf-v3-train-00564-install_on#0: accepted
+2026-10-28 21:32:17 INFO wording cf-v3-train-00564-install_on#1: missing numbers ['18:00']
+2026-10-28 21:32:23 INFO wording cf-v3-train-00564-install_on#2: accepted
+2026-10-28 21:32:30 INFO wording cf-v3-train-00625-dive_on#0: accepted
+2026-10-28 21:32:36 INFO wording cf-v3-train-00625-dive_on#1: accepted
+2026-10-28 21:32:40 INFO wording cf-v3-train-00625-dive_on#2: accepted
+2026-10-28 21:32:47 INFO wording cf-train-00353-ordered_on#0: accepted
+2026-10-28 21:32:50 INFO wording cf-train-00353-ordered_on#1: missing numbers ['30']
+2026-10-28 21:32:55 INFO wording cf-train-00353-ordered_on#2: missing numbers ['30']
+2026-10-28 21:32:55 INFO 250/534 programs, 750 records, 491 accepted, 3782 s
+2026-10-28 21:33:03 INFO wording cf-v3-train-00195-expires_on#0: length
+2026-10-28 21:33:08 INFO wording cf-v3-train-00195-expires_on#1: missing numbers ['30']
+2026-10-28 21:33:12 INFO wording cf-v3-train-00195-expires_on#2: accepted
+2026-10-28 21:33:18 INFO wording cf-v3-train-00838-status#0: accepted
+2026-10-28 21:33:25 INFO wording cf-v3-train-00838-status#1: invented numbers ['2']
+2026-10-28 21:33:30 INFO wording cf-v3-train-00838-status#2: accepted
+2026-10-28 21:33:37 INFO wording cf-train-01385-expires_on#0: length
+2026-10-28 21:33:43 INFO wording cf-train-01385-expires_on#1: accepted
+2026-10-28 21:33:50 INFO wording cf-train-01385-expires_on#2: accepted
+2026-10-28 21:33:55 INFO wording cf-train-00547-renews_on#0: accepted
+2026-10-28 21:33:59 INFO wording cf-train-00547-renews_on#1: accepted
+2026-10-28 21:34:04 INFO wording cf-train-00547-renews_on#2: accepted
+2026-10-28 21:34:08 INFO wording cf-v3-train-00309-status#0: trap ask missing
+2026-10-28 21:34:11 INFO wording cf-v3-train-00309-status#1: trap ask missing
+2026-10-28 21:34:15 INFO wording cf-v3-train-00309-status#2: trap ask missing
+2026-10-28 21:34:18 INFO wording cf-v3-train-00804-status#0: accepted
+2026-10-28 21:34:21 INFO wording cf-v3-train-00804-status#1: accepted
+2026-10-28 21:34:23 INFO wording cf-v3-train-00804-status#2: accepted
+2026-10-28 21:34:31 INFO wording cf-trap-train-00355-status#0: length
+2026-10-28 21:34:38 INFO wording cf-trap-train-00355-status#1: accepted
+2026-10-28 21:34:45 INFO wording cf-trap-train-00355-status#2: accepted
+2026-10-28 21:34:51 INFO wording cf-train-00730-status#0: accepted
+2026-10-28 21:34:55 INFO wording cf-train-00730-status#1: accepted
+2026-10-28 21:35:02 INFO wording cf-train-00730-status#2: accepted
+2026-10-28 21:35:06 INFO wording cf-trap-train-00013-held_until#0: missing numbers ['100']
+2026-10-28 21:35:11 INFO wording cf-trap-train-00013-held_until#1: accepted
+2026-10-28 21:35:16 INFO wording cf-trap-train-00013-held_until#2: missing numbers ['18:00']
+2026-10-28 21:35:21 INFO wording cf-v3-train-00227-status#0: missing numbers ['30']
+2026-10-28 21:35:27 INFO wording cf-v3-train-00227-status#1: missing numbers ['30']
+2026-10-28 21:35:32 INFO wording cf-v3-train-00227-status#2: missing numbers ['30']
+2026-10-28 21:35:38 INFO wording cf-v3-train-00649-dive_on#0: accepted
+2026-10-28 21:35:45 INFO wording cf-v3-train-00649-dive_on#1: accepted
+2026-10-28 21:35:50 INFO wording cf-v3-train-00649-dive_on#2: accepted
+2026-10-28 21:35:53 INFO wording cf-trap-train-00031-status#0: accepted
+2026-10-28 21:35:56 INFO wording cf-trap-train-00031-status#1: accepted
+2026-10-28 21:35:58 INFO wording cf-trap-train-00031-status#2: accepted
+2026-10-28 21:36:03 INFO wording cf-train-01184-ready_on#0: accepted
+2026-10-28 21:36:06 INFO wording cf-train-01184-ready_on#1: missing numbers ['50']
+2026-10-28 21:36:10 INFO wording cf-train-01184-ready_on#2: accepted
+2026-10-28 21:36:14 INFO wording cf-train-00092-status#0: missing numbers ['16:00']
+2026-10-28 21:36:18 INFO wording cf-train-00092-status#1: missing numbers ['16:00']
+2026-10-28 21:36:22 INFO wording cf-train-00092-status#2: accepted
+2026-10-28 21:36:24 INFO wording cf-trap-train-00042-status#0: missing numbers ['10']
+2026-10-28 21:36:26 INFO wording cf-trap-train-00042-status#1: missing numbers ['10']
+2026-10-28 21:36:29 INFO wording cf-trap-train-00042-status#2: trap ask missing
+2026-10-28 21:36:36 INFO wording cf-train-01009-status#0: length
+2026-10-28 21:36:41 INFO wording cf-train-01009-status#1: accepted
+2026-10-28 21:36:44 INFO wording cf-train-01009-status#2: missing numbers ['100', '16:00']
+2026-10-28 21:36:50 INFO wording cf-trap-train-00020-status#0: length
+2026-10-28 21:36:55 INFO wording cf-trap-train-00020-status#1: accepted
+2026-10-28 21:37:02 INFO wording cf-trap-train-00020-status#2: length
+2026-10-28 21:37:07 INFO wording cf-train-01106-status#0: accepted
+2026-10-28 21:37:13 INFO wording cf-train-01106-status#1: accepted
+2026-10-28 21:37:19 INFO wording cf-train-01106-status#2: accepted
+2026-10-28 21:37:22 INFO wording cf-v3-train-00955-status#0: missing numbers ['08:30']
+2026-10-28 21:37:26 INFO wording cf-v3-train-00955-status#1: accepted
+2026-10-28 21:37:29 INFO wording cf-v3-train-00955-status#2: accepted
+2026-10-28 21:37:34 INFO wording cf-v3-train-00578-status#0: accepted
+2026-10-28 21:37:40 INFO wording cf-v3-train-00578-status#1: accepted
+2026-10-28 21:37:47 INFO wording cf-v3-train-00578-status#2: accepted
+2026-10-28 21:37:50 INFO wording cf-v3-train-00662-status#0: accepted
+2026-10-28 21:37:55 INFO wording cf-v3-train-00662-status#1: accepted
+2026-10-28 21:37:59 INFO wording cf-v3-train-00662-status#2: missing numbers ['10']
+2026-10-28 21:38:03 INFO wording cf-trap-train-00147-ordered_on#0: trap ask missing
+2026-10-28 21:38:07 INFO wording cf-trap-train-00147-ordered_on#1: invented numbers ['10']
+2026-10-28 21:38:12 INFO wording cf-trap-train-00147-ordered_on#2: accepted
+2026-10-28 21:38:17 INFO wording cf-train-01566-status#0: accepted
+2026-10-28 21:38:23 INFO wording cf-train-01566-status#1: length
+2026-10-28 21:38:28 INFO wording cf-train-01566-status#2: missing numbers ['16:00']
+2026-10-28 21:38:31 INFO wording cf-trap-train-00132-status#0: trap ask missing
+2026-10-28 21:38:35 INFO wording cf-trap-train-00132-status#1: missing numbers ['30']
+2026-10-28 21:38:37 INFO wording cf-trap-train-00132-status#2: accepted
+2026-10-28 21:38:43 INFO wording cf-train-00836-sent_on#0: accepted
+2026-10-28 21:38:50 INFO wording cf-train-00836-sent_on#1: length
+2026-10-28 21:38:56 INFO wording cf-train-00836-sent_on#2: accepted
+2026-10-28 21:38:56 INFO 275/534 programs, 825 records, 534 accepted, 4143 s
+2026-10-28 21:39:01 INFO wording cf-v3-train-01039-status#0: accepted
+2026-10-28 21:39:07 INFO wording cf-v3-train-01039-status#1: missing numbers ['100']
+2026-10-28 21:39:12 INFO wording cf-v3-train-01039-status#2: missing numbers ['100']
+2026-10-28 21:39:16 INFO wording cf-v3-train-00869-status#0: accepted
+2026-10-28 21:39:19 INFO wording cf-v3-train-00869-status#1: accepted
+2026-10-28 21:39:23 INFO wording cf-v3-train-00869-status#2: accepted
+2026-10-28 21:39:28 INFO wording cf-train-00837-sent_on#0: accepted
+2026-10-28 21:39:34 INFO wording cf-train-00837-sent_on#1: accepted
+2026-10-28 21:39:39 INFO wording cf-train-00837-sent_on#2: accepted
+2026-10-28 21:39:43 INFO wording cf-trap-train-00251-status#0: trap ask missing
+2026-10-28 21:39:46 INFO wording cf-trap-train-00251-status#1: accepted
+2026-10-28 21:39:51 INFO wording cf-trap-train-00251-status#2: invented numbers ['15']
+2026-10-28 21:39:57 INFO wording cf-train-01563-status#0: accepted
+2026-10-28 21:40:05 INFO wording cf-train-01563-status#1: accepted
+2026-10-28 21:40:11 INFO wording cf-train-01563-status#2: accepted
+2026-10-28 21:40:16 INFO wording cf-train-00455-last_visit#0: accepted
+2026-10-28 21:40:23 INFO wording cf-train-00455-last_visit#1: accepted
+2026-10-28 21:40:27 INFO wording cf-train-00455-last_visit#2: accepted
+2026-10-28 21:40:33 INFO wording cf-v3-train-01230-clean_on#0: accepted
+2026-10-28 21:40:38 INFO wording cf-v3-train-01230-clean_on#1: missing numbers ['10:00']
+2026-10-28 21:40:44 INFO wording cf-v3-train-01230-clean_on#2: accepted
+2026-10-28 21:40:48 INFO wording cf-train-00633-status#0: missing numbers ['30', '17:30']
+2026-10-28 21:40:53 INFO wording cf-train-00633-status#1: accepted
+2026-10-28 21:40:57 INFO wording cf-train-00633-status#2: accepted
+2026-10-28 21:41:03 INFO wording cf-train-00549-renews_on#0: accepted
+2026-10-28 21:41:09 INFO wording cf-train-00549-renews_on#1: accepted
+2026-10-28 21:41:16 INFO wording cf-train-00549-renews_on#2: length
+2026-10-28 21:41:24 INFO wording cf-train-00915-due_date#0: length
+2026-10-28 21:41:29 INFO wording cf-train-00915-due_date#1: accepted
+2026-10-28 21:41:34 INFO wording cf-train-00915-due_date#2: missing numbers ['50']
+2026-10-28 21:41:37 INFO wording cf-trap-train-00327-status#0: accepted
+2026-10-28 21:41:40 INFO wording cf-trap-train-00327-status#1: accepted
+2026-10-28 21:41:44 INFO wording cf-trap-train-00327-status#2: missing numbers ['08:00']
+2026-10-28 21:41:48 INFO wording cf-v3-train-01006-ready_on#0: accepted
+2026-10-28 21:41:53 INFO wording cf-v3-train-01006-ready_on#1: accepted
+2026-10-28 21:41:56 INFO wording cf-v3-train-01006-ready_on#2: accepted
+2026-10-28 21:42:02 INFO wording cf-v3-train-01215-status#0: accepted
+2026-10-28 21:42:05 INFO wording cf-v3-train-01215-status#1: accepted
+2026-10-28 21:42:08 INFO wording cf-v3-train-01215-status#2: accepted
+2026-10-28 21:42:14 INFO wording cf-train-01099-status#0: accepted
+2026-10-28 21:42:19 INFO wording cf-train-01099-status#1: accepted
+2026-10-28 21:42:24 INFO wording cf-train-01099-status#2: accepted
+2026-10-28 21:42:26 INFO wording cf-trap-train-00096-status#0: missing numbers ['20']
+2026-10-28 21:42:28 INFO wording cf-trap-train-00096-status#1: accepted
+2026-10-28 21:42:32 INFO wording cf-trap-train-00096-status#2: accepted
+2026-10-28 21:42:36 INFO wording cf-v3-train-01190-status#0: missing numbers ['20']
+2026-10-28 21:42:40 INFO wording cf-v3-train-01190-status#1: accepted
+2026-10-28 21:42:46 INFO wording cf-v3-train-01190-status#2: missing numbers ['20']
+2026-10-28 21:42:48 INFO wording cf-v3-train-00363-status#0: missing numbers ['10']
+2026-10-28 21:42:51 INFO wording cf-v3-train-00363-status#1: missing numbers ['10']
+2026-10-28 21:42:55 INFO wording cf-v3-train-00363-status#2: accepted
+2026-10-28 21:43:00 INFO wording cf-v3-train-00376-arrives_on#0: accepted
+2026-10-28 21:43:05 INFO wording cf-v3-train-00376-arrives_on#1: accepted
+2026-10-28 21:43:10 INFO wording cf-v3-train-00376-arrives_on#2: accepted
+2026-10-28 21:43:13 INFO wording cf-trap-train-00185-status#0: accepted
+2026-10-28 21:43:16 INFO wording cf-trap-train-00185-status#1: accepted
+2026-10-28 21:43:18 INFO wording cf-trap-train-00185-status#2: trap ask missing
+2026-10-28 21:43:22 INFO wording cf-train-01185-ready_on#0: missing numbers ['50']
+2026-10-28 21:43:28 INFO wording cf-train-01185-ready_on#1: accepted
+2026-10-28 21:43:33 INFO wording cf-train-01185-ready_on#2: missing numbers ['50']
+2026-10-28 21:43:39 INFO wording cf-trap-train-00139-ordered_on#0: missing numbers ['30']
+2026-10-28 21:43:42 INFO wording cf-trap-train-00139-ordered_on#1: missing numbers ['30']
+2026-10-28 21:43:46 INFO wording cf-trap-train-00139-ordered_on#2: missing numbers ['30']
+2026-10-28 21:43:51 INFO wording cf-trap-train-00260-status#0: accepted
+2026-10-28 21:43:54 INFO wording cf-trap-train-00260-status#1: missing numbers ['30']
+2026-10-28 21:43:58 INFO wording cf-trap-train-00260-status#2: accepted
+2026-10-28 21:44:00 INFO wording cf-trap-train-00373-status#0: accepted
+2026-10-28 21:44:04 INFO wording cf-trap-train-00373-status#1: missing numbers ['20']
+2026-10-28 21:44:07 INFO wording cf-trap-train-00373-status#2: accepted
+2026-10-28 21:44:13 INFO wording cf-train-00097-status#0: missing numbers ['100']
+2026-10-28 21:44:19 INFO wording cf-train-00097-status#1: invented numbers ['24']
+2026-10-28 21:44:26 INFO wording cf-train-00097-status#2: accepted
+2026-10-28 21:44:32 INFO wording cf-train-00262-status#0: accepted
+2026-10-28 21:44:38 INFO wording cf-train-00262-status#1: accepted
+2026-10-28 21:44:44 INFO wording cf-train-00262-status#2: accepted
+2026-10-28 21:44:44 INFO 300/534 programs, 900 records, 584 accepted, 4491 s
+2026-10-28 21:44:46 INFO wording cf-v3-train-00257-status#0: trap ask missing
+2026-10-28 21:44:50 INFO wording cf-v3-train-00257-status#1: missing numbers ['10']
+2026-10-28 21:44:52 INFO wording cf-v3-train-00257-status#2: accepted
+2026-10-28 21:44:57 INFO wording cf-v3-train-00765-clean_on#0: missing numbers ['50']
+2026-10-28 21:45:03 INFO wording cf-v3-train-00765-clean_on#1: missing numbers ['50']
+2026-10-28 21:45:07 INFO wording cf-v3-train-00765-clean_on#2: missing numbers ['50']
+2026-10-28 21:45:11 INFO wording cf-v3-train-00247-status#0: accepted
+2026-10-28 21:45:14 INFO wording cf-v3-train-00247-status#1: accepted
+2026-10-28 21:45:17 INFO wording cf-v3-train-00247-status#2: invented numbers ['5']
+2026-10-28 21:45:26 INFO wording cf-train-01381-expires_on#0: length
+2026-10-28 21:45:34 INFO wording cf-train-01381-expires_on#1: length
+2026-10-28 21:45:42 INFO wording cf-train-01381-expires_on#2: length
+2026-10-28 21:45:49 INFO wording cf-train-00272-status#0: accepted
+2026-10-28 21:45:54 INFO wording cf-train-00272-status#1: accepted
+2026-10-28 21:46:00 INFO wording cf-train-00272-status#2: accepted
+2026-10-28 21:46:04 INFO wording cf-trap-train-00068-status#0: accepted
+2026-10-28 21:46:07 INFO wording cf-trap-train-00068-status#1: accepted
+2026-10-28 21:46:10 INFO wording cf-trap-train-00068-status#2: accepted
+2026-10-28 21:46:16 INFO wording cf-train-01186-ready_on#0: accepted
+2026-10-28 21:46:22 INFO wording cf-train-01186-ready_on#1: accepted
+2026-10-28 21:46:26 INFO wording cf-train-01186-ready_on#2: accepted
+2026-10-28 21:46:32 INFO wording cf-v3-train-01017-review_on#0: accepted
+2026-10-28 21:46:38 INFO wording cf-v3-train-01017-review_on#1: accepted
+2026-10-28 21:46:44 INFO wording cf-v3-train-01017-review_on#2: accepted
+2026-10-28 21:46:50 INFO wording cf-trap-train-00121-due_date#0: missing numbers ['100']
+2026-10-28 21:46:54 INFO wording cf-trap-train-00121-due_date#1: missing numbers ['100']
+2026-10-28 21:47:00 INFO wording cf-trap-train-00121-due_date#2: accepted
+2026-10-28 21:47:05 INFO wording cf-train-00728-status#0: missing numbers ['50']
+2026-10-28 21:47:08 INFO wording cf-train-00728-status#1: missing numbers ['50']
+2026-10-28 21:47:14 INFO wording cf-train-00728-status#2: accepted
+2026-10-28 21:47:23 INFO wording cf-v3-train-00048-status#0: length
+2026-10-28 21:47:28 INFO wording cf-v3-train-00048-status#1: accepted
+2026-10-28 21:47:35 INFO wording cf-v3-train-00048-status#2: missing numbers ['11:00']
+2026-10-28 21:47:41 INFO wording cf-v3-train-00183-promised_on#0: code in text
+2026-10-28 21:47:48 INFO wording cf-v3-train-00183-promised_on#1: accepted
+2026-10-28 21:47:54 INFO wording cf-v3-train-00183-promised_on#2: accepted
+2026-10-28 21:48:01 INFO wording cf-train-01384-expires_on#0: accepted
+2026-10-28 21:48:07 INFO wording cf-train-01384-expires_on#1: accepted
+2026-10-28 21:48:15 INFO wording cf-train-01384-expires_on#2: length
+2026-10-28 21:48:22 INFO wording cf-train-00465-last_visit#0: accepted
+2026-10-28 21:48:30 INFO wording cf-train-00465-last_visit#1: length
+2026-10-28 21:48:36 INFO wording cf-train-00465-last_visit#2: accepted
+2026-10-28 21:48:39 INFO wording cf-trap-train-00001-status#0: missing numbers ['20']
+2026-10-28 21:48:42 INFO wording cf-trap-train-00001-status#1: accepted
+2026-10-28 21:48:46 INFO wording cf-trap-train-00001-status#2: missing numbers ['20']
+2026-10-28 21:48:50 INFO wording cf-train-01375-status#0: accepted
+2026-10-28 21:48:55 INFO wording cf-train-01375-status#1: missing numbers ['50']
+2026-10-28 21:48:59 INFO wording cf-train-01375-status#2: missing numbers ['50']
+2026-10-28 21:49:05 INFO wording cf-train-00916-due_date#0: missing numbers ['20']
+2026-10-28 21:49:12 INFO wording cf-train-00916-due_date#1: missing numbers ['20']
+2026-10-28 21:49:17 INFO wording cf-train-00916-due_date#2: accepted
+2026-10-28 21:49:23 INFO wording cf-trap-train-00326-status#0: trap ask missing
+2026-10-28 21:49:31 INFO wording cf-trap-train-00326-status#1: code in text
+2026-10-28 21:49:39 INFO wording cf-trap-train-00326-status#2: length
+2026-10-28 21:49:45 INFO wording cf-train-00454-last_visit#0: accepted
+2026-10-28 21:49:51 INFO wording cf-train-00454-last_visit#1: missing numbers ['30']
+2026-10-28 21:49:56 INFO wording cf-train-00454-last_visit#2: missing numbers ['30']
+2026-10-28 21:50:02 INFO wording cf-train-00554-renews_on#0: accepted
+2026-10-28 21:50:08 INFO wording cf-train-00554-renews_on#1: accepted
+2026-10-28 21:50:15 INFO wording cf-train-00554-renews_on#2: accepted
+2026-10-28 21:50:21 INFO wording cf-v3-train-00268-treat_on#0: missing numbers ['20', '18:00']
+2026-10-28 21:50:28 INFO wording cf-v3-train-00268-treat_on#1: accepted
+2026-10-28 21:50:34 INFO wording cf-v3-train-00268-treat_on#2: missing numbers ['18:00']
+2026-10-28 21:50:41 INFO wording cf-train-00825-sent_on#0: accepted
+2026-10-28 21:50:44 INFO wording cf-train-00825-sent_on#1: missing numbers ['50']
+2026-10-28 21:50:50 INFO wording cf-train-00825-sent_on#2: accepted
+2026-10-28 21:50:57 INFO wording cf-train-00263-status#0: missing numbers ['100', '17:30']
+2026-10-28 21:51:01 INFO wording cf-train-00263-status#1: missing numbers ['100']
+2026-10-28 21:51:07 INFO wording cf-train-00263-status#2: accepted
+2026-10-28 21:51:12 INFO wording cf-train-01095-status#0: accepted
+2026-10-28 21:51:16 INFO wording cf-train-01095-status#1: missing numbers ['20']
+2026-10-28 21:51:21 INFO wording cf-train-01095-status#2: accepted
+2026-10-28 21:51:27 INFO wording cf-v3-train-00878-status#0: accepted
+2026-10-28 21:51:33 INFO wording cf-v3-train-00878-status#1: accepted
+2026-10-28 21:51:38 INFO wording cf-v3-train-00878-status#2: accepted
+2026-10-28 21:51:38 INFO 325/534 programs, 975 records, 624 accepted, 4905 s
+2026-10-28 21:51:40 INFO wording cf-trap-train-00157-status#0: missing numbers ['30']
+2026-10-28 21:51:44 INFO wording cf-trap-train-00157-status#1: missing numbers ['30']
+2026-10-28 21:51:47 INFO wording cf-trap-train-00157-status#2: missing numbers ['30']
+2026-10-28 21:51:53 INFO wording cf-train-01196-ready_on#0: missing numbers ['17:30']
+2026-10-28 21:51:59 INFO wording cf-train-01196-ready_on#1: accepted
+2026-10-28 21:52:06 INFO wording cf-train-01196-ready_on#2: accepted
+2026-10-28 21:52:13 INFO wording cf-v3-train-00998-status#0: accepted
+2026-10-28 21:52:20 INFO wording cf-v3-train-00998-status#1: accepted
+2026-10-28 21:52:26 INFO wording cf-v3-train-00998-status#2: accepted
+2026-10-28 21:52:29 INFO wording cf-trap-train-00041-status#0: accepted
+2026-10-28 21:52:33 INFO wording cf-trap-train-00041-status#1: accepted
+2026-10-28 21:52:36 INFO wording cf-trap-train-00041-status#2: trap ask missing
+2026-10-28 21:52:42 INFO wording cf-v3-train-00420-ready_on#0: accepted
+2026-10-28 21:52:48 INFO wording cf-v3-train-00420-ready_on#1: accepted
+2026-10-28 21:52:54 INFO wording cf-v3-train-00420-ready_on#2: accepted
+2026-10-28 21:53:01 INFO wording cf-v3-train-01134-treat_on#0: length
+2026-10-28 21:53:08 INFO wording cf-v3-train-01134-treat_on#1: accepted
+2026-10-28 21:53:16 INFO wording cf-v3-train-01134-treat_on#2: accepted
+2026-10-28 21:53:21 INFO wording cf-train-00638-status#0: missing numbers ['100']
+2026-10-28 21:53:26 INFO wording cf-train-00638-status#1: missing numbers ['100', '16:00']
+2026-10-28 21:53:30 INFO wording cf-train-00638-status#2: missing numbers ['100']
+2026-10-28 21:53:33 INFO wording cf-trap-train-00387-status#0: accepted
+2026-10-28 21:53:37 INFO wording cf-trap-train-00387-status#1: accepted
+2026-10-28 21:53:40 INFO wording cf-trap-train-00387-status#2: trap ask missing
+2026-10-28 21:53:45 INFO wording cf-trap-train-00201-renews_on#0: trap ask missing
+2026-10-28 21:53:52 INFO wording cf-trap-train-00201-renews_on#1: accepted
+2026-10-28 21:53:59 INFO wording cf-trap-train-00201-renews_on#2: trap ask missing
+2026-10-28 21:54:05 INFO wording cf-v3-train-00871-due_back#0: accepted
+2026-10-28 21:54:10 INFO wording cf-v3-train-00871-due_back#1: accepted
+2026-10-28 21:54:15 INFO wording cf-v3-train-00871-due_back#2: accepted
+2026-10-28 21:54:21 INFO wording cf-train-00831-sent_on#0: accepted
+2026-10-28 21:54:27 INFO wording cf-train-00831-sent_on#1: accepted
+2026-10-28 21:54:33 INFO wording cf-train-00831-sent_on#2: missing numbers ['100', '16:00']
+2026-10-28 21:54:39 INFO wording cf-train-00268-status#0: accepted
+2026-10-28 21:54:44 INFO wording cf-train-00268-status#1: accepted
+2026-10-28 21:54:51 INFO wording cf-train-00268-status#2: accepted
+2026-10-28 21:54:58 INFO wording cf-train-00265-status#0: accepted
+2026-10-28 21:55:05 INFO wording cf-train-00265-status#1: missing numbers ['100']
+2026-10-28 21:55:11 INFO wording cf-train-00265-status#2: accepted
+2026-10-28 21:55:15 INFO wording cf-v3-train-00666-due_on#0: accepted
+2026-10-28 21:55:21 INFO wording cf-v3-train-00666-due_on#1: accepted
+2026-10-28 21:55:27 INFO wording cf-v3-train-00666-due_on#2: accepted
+2026-10-28 21:55:33 INFO wording cf-train-01004-status#0: accepted
+2026-10-28 21:55:40 INFO wording cf-train-01004-status#1: accepted
+2026-10-28 21:55:46 INFO wording cf-train-01004-status#2: accepted
+2026-10-28 21:55:53 INFO wording cf-train-00466-last_visit#0: length
+2026-10-28 21:55:58 INFO wording cf-train-00466-last_visit#1: accepted
+2026-10-28 21:56:03 INFO wording cf-train-00466-last_visit#2: accepted
+2026-10-28 21:56:10 INFO wording cf-train-00459-last_visit#0: accepted
+2026-10-28 21:56:17 INFO wording cf-train-00459-last_visit#1: accepted
+2026-10-28 21:56:22 INFO wording cf-train-00459-last_visit#2: accepted
+2026-10-28 21:56:25 INFO wording cf-v3-train-00504-status#0: accepted
+2026-10-28 21:56:29 INFO wording cf-v3-train-00504-status#1: missing numbers ['10']
+2026-10-28 21:56:32 INFO wording cf-v3-train-00504-status#2: accepted
+2026-10-28 21:56:36 INFO wording cf-trap-train-00344-status#0: accepted
+2026-10-28 21:56:41 INFO wording cf-trap-train-00344-status#1: accepted
+2026-10-28 21:56:45 INFO wording cf-trap-train-00344-status#2: accepted
+2026-10-28 21:56:51 INFO wording cf-v3-train-00084-due_back#0: accepted
+2026-10-28 21:56:59 INFO wording cf-v3-train-00084-due_back#1: length
+2026-10-28 21:57:06 INFO wording cf-v3-train-00084-due_back#2: accepted
+2026-10-28 21:57:09 INFO wording cf-trap-train-00229-status#0: accepted
+2026-10-28 21:57:13 INFO wording cf-trap-train-00229-status#1: accepted
+2026-10-28 21:57:17 INFO wording cf-trap-train-00229-status#2: accepted
+2026-10-28 21:57:22 INFO wording cf-trap-train-00035-status#0: accepted
+2026-10-28 21:57:29 INFO wording cf-trap-train-00035-status#1: accepted
+2026-10-28 21:57:33 INFO wording cf-trap-train-00035-status#2: accepted
+2026-10-28 21:57:39 INFO wording cf-train-01191-ready_on#0: accepted
+2026-10-28 21:57:46 INFO wording cf-train-01191-ready_on#1: accepted
+2026-10-28 21:57:52 INFO wording cf-train-01191-ready_on#2: accepted
+2026-10-28 21:57:59 INFO wording cf-v3-train-00927-install_on#0: accepted
+2026-10-28 21:58:05 INFO wording cf-v3-train-00927-install_on#1: accepted
+2026-10-28 21:58:11 INFO wording cf-v3-train-00927-install_on#2: missing numbers ['100']
+2026-10-28 21:58:18 INFO wording cf-train-00011-status#0: accepted
+2026-10-28 21:58:23 INFO wording cf-train-00011-status#1: accepted
+2026-10-28 21:58:29 INFO wording cf-train-00011-status#2: accepted
+2026-10-28 21:58:29 INFO 350/534 programs, 1050 records, 681 accepted, 5316 s
+2026-10-28 21:58:36 INFO wording cf-train-00003-status#0: accepted
+2026-10-28 21:58:43 INFO wording cf-train-00003-status#1: accepted
+2026-10-28 21:58:52 INFO wording cf-train-00003-status#2: length
+2026-10-28 21:59:00 INFO wording cf-trap-train-00179-status#0: length
+2026-10-28 21:59:08 INFO wording cf-trap-train-00179-status#1: length
+2026-10-28 21:59:16 INFO wording cf-trap-train-00179-status#2: length
+2026-10-28 21:59:22 INFO wording cf-train-01475-status#0: accepted
+2026-10-28 21:59:29 INFO wording cf-train-01475-status#1: accepted
+2026-10-28 21:59:35 INFO wording cf-train-01475-status#2: accepted
+2026-10-28 21:59:42 INFO wording cf-train-01290-held_until#0: accepted
+2026-10-28 21:59:46 INFO wording cf-train-01290-held_until#1: accepted
+2026-10-28 21:59:51 INFO wording cf-train-01290-held_until#2: accepted
+2026-10-28 21:59:55 INFO wording cf-trap-train-00392-renews_on#0: accepted
+2026-10-28 22:00:02 INFO wording cf-trap-train-00392-renews_on#1: trap ask missing
+2026-10-28 22:00:09 INFO wording cf-trap-train-00392-renews_on#2: accepted
+2026-10-28 22:00:16 INFO wording cf-train-01288-held_until#0: accepted
+2026-10-28 22:00:22 INFO wording cf-train-01288-held_until#1: accepted
+2026-10-28 22:00:27 INFO wording cf-train-01288-held_until#2: accepted
+2026-10-28 22:00:33 INFO wording cf-v3-train-00967-ready_on#0: accepted
+2026-10-28 22:00:41 INFO wording cf-v3-train-00967-ready_on#1: length
+2026-10-28 22:00:47 INFO wording cf-v3-train-00967-ready_on#2: accepted
+2026-10-28 22:00:55 INFO wording cf-v3-train-00169-status#0: length
+2026-10-28 22:01:01 INFO wording cf-v3-train-00169-status#1: missing numbers ['08:00']
+2026-10-28 22:01:07 INFO wording cf-v3-train-00169-status#2: accepted
+2026-10-28 22:01:11 INFO wording cf-train-00544-renews_on#0: missing numbers ['100']
+2026-10-28 22:01:16 INFO wording cf-train-00544-renews_on#1: accepted
+2026-10-28 22:01:21 INFO wording cf-train-00544-renews_on#2: accepted
+2026-10-28 22:01:26 INFO wording cf-train-00921-due_date#0: accepted
+2026-10-28 22:01:32 INFO wording cf-train-00921-due_date#1: length
+2026-10-28 22:01:37 INFO wording cf-train-00921-due_date#2: accepted
+2026-10-28 22:01:39 INFO wording cf-v3-train-00893-status#0: missing numbers ['10']
+2026-10-28 22:01:42 INFO wording cf-v3-train-00893-status#1: missing numbers ['10']
+2026-10-28 22:01:44 INFO wording cf-v3-train-00893-status#2: missing numbers ['10']
+2026-10-28 22:01:47 INFO wording cf-trap-train-00317-status#0: accepted
+2026-10-28 22:01:50 INFO wording cf-trap-train-00317-status#1: accepted
+2026-10-28 22:01:53 INFO wording cf-trap-train-00317-status#2: accepted
+2026-10-28 22:01:58 INFO wording cf-v3-train-00589-ready_on#0: accepted
+2026-10-28 22:02:03 INFO wording cf-v3-train-00589-ready_on#1: accepted
+2026-10-28 22:02:09 INFO wording cf-v3-train-00589-ready_on#2: accepted
+2026-10-28 22:02:15 INFO wording cf-trap-train-00026-status#0: missing numbers ['30']
+2026-10-28 22:02:20 INFO wording cf-trap-train-00026-status#1: accepted
+2026-10-28 22:02:24 INFO wording cf-trap-train-00026-status#2: missing numbers ['30']
+2026-10-28 22:02:27 INFO wording cf-trap-train-00410-status#0: invented numbers ['50']
+2026-10-28 22:02:30 INFO wording cf-trap-train-00410-status#1: accepted
+2026-10-28 22:02:33 INFO wording cf-trap-train-00410-status#2: trap ask missing
+2026-10-28 22:02:36 INFO wording cf-trap-train-00275-status#0: accepted
+2026-10-28 22:02:39 INFO wording cf-trap-train-00275-status#1: accepted
+2026-10-28 22:02:43 INFO wording cf-trap-train-00275-status#2: accepted
+2026-10-28 22:02:47 INFO wording cf-v3-train-00907-clean_on#0: missing numbers ['20', '11:00']
+2026-10-28 22:02:51 INFO wording cf-v3-train-00907-clean_on#1: missing numbers ['20', '11:00']
+2026-10-28 22:02:55 INFO wording cf-v3-train-00907-clean_on#2: accepted
+2026-10-28 22:02:59 INFO wording cf-v3-train-00808-status#0: accepted
+2026-10-28 22:03:04 INFO wording cf-v3-train-00808-status#1: accepted
+2026-10-28 22:03:09 INFO wording cf-v3-train-00808-status#2: accepted
+2026-10-28 22:03:15 INFO wording cf-v3-train-00134-status#0: accepted
+2026-10-28 22:03:20 INFO wording cf-v3-train-00134-status#1: accepted
+2026-10-28 22:03:25 INFO wording cf-v3-train-00134-status#2: accepted
+2026-10-28 22:03:31 INFO wording cf-train-01007-status#0: length
+2026-10-28 22:03:35 INFO wording cf-train-01007-status#1: missing numbers ['50']
+2026-10-28 22:03:40 INFO wording cf-train-01007-status#2: missing numbers ['50']
+2026-10-28 22:03:44 INFO wording cf-trap-train-00192-status#0: accepted
+2026-10-28 22:03:47 INFO wording cf-trap-train-00192-status#1: missing numbers ['10']
+2026-10-28 22:03:51 INFO wording cf-trap-train-00192-status#2: missing numbers ['10']
+2026-10-28 22:03:55 INFO wording cf-train-01285-held_until#0: missing numbers ['11:00']
+2026-10-28 22:04:00 INFO wording cf-train-01285-held_until#1: accepted
+2026-10-28 22:04:03 INFO wording cf-train-01285-held_until#2: accepted
+2026-10-28 22:04:07 INFO wording cf-trap-train-00237-status#0: trap ask missing
+2026-10-28 22:04:11 INFO wording cf-trap-train-00237-status#1: invented numbers ['50']
+2026-10-28 22:04:14 INFO wording cf-trap-train-00237-status#2: trap ask missing
+2026-10-28 22:04:19 INFO wording cf-v3-train-00374-due_on#0: missing numbers ['11:00']
+2026-10-28 22:04:25 INFO wording cf-v3-train-00374-due_on#1: accepted
+2026-10-28 22:04:30 INFO wording cf-v3-train-00374-due_on#2: missing numbers ['30']
+2026-10-28 22:04:36 INFO wording cf-v3-train-01113-renews_on#0: accepted
+2026-10-28 22:04:43 INFO wording cf-v3-train-01113-renews_on#1: accepted
+2026-10-28 22:04:47 INFO wording cf-v3-train-01113-renews_on#2: accepted
+2026-10-28 22:04:47 INFO 375/534 programs, 1125 records, 726 accepted, 5694 s
+2026-10-28 22:04:52 INFO wording cf-train-00918-due_date#0: accepted
+2026-10-28 22:04:57 INFO wording cf-train-00918-due_date#1: accepted
+2026-10-28 22:05:02 INFO wording cf-train-00918-due_date#2: accepted
+2026-10-28 22:05:05 INFO wording cf-train-01463-status#0: missing numbers ['100', '08:00']
+2026-10-28 22:05:10 INFO wording cf-train-01463-status#1: missing numbers ['100', '08:00']
+2026-10-28 22:05:15 INFO wording cf-train-01463-status#2: missing numbers ['100']
+2026-10-28 22:05:19 INFO wording cf-trap-train-00233-status#0: trap ask missing
+2026-10-28 22:05:23 INFO wording cf-trap-train-00233-status#1: accepted
+2026-10-28 22:05:26 INFO wording cf-trap-train-00233-status#2: accepted
+2026-10-28 22:05:31 INFO wording cf-train-00914-due_date#0: accepted
+2026-10-28 22:05:36 INFO wording cf-train-00914-due_date#1: accepted
+2026-10-28 22:05:41 INFO wording cf-train-00914-due_date#2: accepted
+2026-10-28 22:05:47 INFO wording cf-v3-train-00297-renews_on#0: accepted
+2026-10-28 22:05:55 INFO wording cf-v3-train-00297-renews_on#1: missing numbers ['200']
+2026-10-28 22:06:00 INFO wording cf-v3-train-00297-renews_on#2: trap ask missing
+2026-10-28 22:06:06 INFO wording cf-train-01189-ready_on#0: accepted
+2026-10-28 22:06:12 INFO wording cf-train-01189-ready_on#1: accepted
+2026-10-28 22:06:18 INFO wording cf-train-01189-ready_on#2: invented numbers ['2']
+2026-10-28 22:06:25 INFO wording cf-train-01286-held_until#0: accepted
+2026-10-28 22:06:29 INFO wording cf-train-01286-held_until#1: missing numbers ['50']
+2026-10-28 22:06:34 INFO wording cf-train-01286-held_until#2: missing numbers ['50']
+2026-10-28 22:06:37 INFO wording cf-trap-train-00360-status#0: missing numbers ['10']
+2026-10-28 22:06:40 INFO wording cf-trap-train-00360-status#1: missing numbers ['10']
+2026-10-28 22:06:44 INFO wording cf-trap-train-00360-status#2: missing numbers ['10']
+2026-10-28 22:06:50 INFO wording cf-train-00354-ordered_on#0: accepted
+2026-10-28 22:06:54 INFO wording cf-train-00354-ordered_on#1: accepted
+2026-10-28 22:07:01 INFO wording cf-train-00354-ordered_on#2: accepted
+2026-10-28 22:07:06 INFO wording cf-train-01102-status#0: missing numbers ['08:30']
+2026-10-28 22:07:13 INFO wording cf-train-01102-status#1: length
+2026-10-28 22:07:18 INFO wording cf-train-01102-status#2: accepted
+2026-10-28 22:07:23 INFO wording cf-trap-train-00221-status#0: accepted
+2026-10-28 22:07:26 INFO wording cf-trap-train-00221-status#1: accepted
+2026-10-28 22:07:29 INFO wording cf-trap-train-00221-status#2: accepted
+2026-10-28 22:07:37 INFO wording cf-train-00552-renews_on#0: length
+2026-10-28 22:07:45 INFO wording cf-train-00552-renews_on#1: length
+2026-10-28 22:07:50 INFO wording cf-train-00552-renews_on#2: accepted
+2026-10-28 22:07:54 INFO wording cf-trap-train-00391-status#0: accepted
+2026-10-28 22:07:59 INFO wording cf-trap-train-00391-status#1: accepted
+2026-10-28 22:08:02 INFO wording cf-trap-train-00391-status#2: accepted
+2026-10-28 22:08:06 INFO wording cf-trap-train-00141-status#0: missing numbers ['20']
+2026-10-28 22:08:10 INFO wording cf-trap-train-00141-status#1: accepted
+2026-10-28 22:08:13 INFO wording cf-trap-train-00141-status#2: missing numbers ['20']
+2026-10-28 22:08:19 INFO wording cf-v3-train-00121-arrives_on#0: accepted
+2026-10-28 22:08:25 INFO wording cf-v3-train-00121-arrives_on#1: accepted
+2026-10-28 22:08:30 INFO wording cf-v3-train-00121-arrives_on#2: accepted
+2026-10-28 22:08:35 INFO wording cf-train-01462-status#0: accepted
+2026-10-28 22:08:40 INFO wording cf-train-01462-status#1: invented numbers ['24']
+2026-10-28 22:08:46 INFO wording cf-train-01462-status#2: accepted
+2026-10-28 22:08:51 INFO wording cf-v3-train-00605-due_on#0: accepted
+2026-10-28 22:08:56 INFO wording cf-v3-train-00605-due_on#1: accepted
+2026-10-28 22:09:01 INFO wording cf-v3-train-00605-due_on#2: accepted
+2026-10-28 22:09:06 INFO wording cf-train-01097-status#0: accepted
+2026-10-28 22:09:12 INFO wording cf-train-01097-status#1: length
+2026-10-28 22:09:16 INFO wording cf-train-01097-status#2: missing numbers ['30']
+2026-10-28 22:09:19 INFO wording cf-trap-train-00161-status#0: accepted
+2026-10-28 22:09:22 INFO wording cf-trap-train-00161-status#1: trap ask missing
+2026-10-28 22:09:25 INFO wording cf-trap-train-00161-status#2: invented numbers ['50']
+2026-10-28 22:09:31 INFO wording cf-v3-train-00158-ready_on#0: accepted
+2026-10-28 22:09:35 INFO wording cf-v3-train-00158-ready_on#1: missing numbers ['50']
+2026-10-28 22:09:39 INFO wording cf-v3-train-00158-ready_on#2: missing numbers ['50']
+2026-10-28 22:09:42 INFO wording cf-trap-train-00077-status#0: accepted
+2026-10-28 22:09:45 INFO wording cf-trap-train-00077-status#1: accepted
+2026-10-28 22:09:49 INFO wording cf-trap-train-00077-status#2: accepted
+2026-10-28 22:09:56 INFO wording cf-trap-train-00324-status#0: length
+2026-10-28 22:10:02 INFO wording cf-trap-train-00324-status#1: accepted
+2026-10-28 22:10:09 INFO wording cf-trap-train-00324-status#2: accepted
+2026-10-28 22:10:13 INFO wording cf-v3-train-00406-status#0: accepted
+2026-10-28 22:10:17 INFO wording cf-v3-train-00406-status#1: accepted
+2026-10-28 22:10:21 INFO wording cf-v3-train-00406-status#2: accepted
+2026-10-28 22:10:24 INFO wording cf-v3-train-00453-status#0: missing numbers ['10']
+2026-10-28 22:10:26 INFO wording cf-v3-train-00453-status#1: missing numbers ['10']
+2026-10-28 22:10:29 INFO wording cf-v3-train-00453-status#2: missing numbers ['10']
+2026-10-28 22:10:33 INFO wording cf-trap-train-00117-status#0: accepted
+2026-10-28 22:10:37 INFO wording cf-trap-train-00117-status#1: missing numbers ['30']
+2026-10-28 22:10:40 INFO wording cf-trap-train-00117-status#2: missing numbers ['30']
+2026-10-28 22:10:40 INFO 400/534 programs, 1200 records, 770 accepted, 6047 s
+2026-10-28 22:10:44 INFO wording cf-v3-train-01003-due_back#0: missing numbers ['20']
+2026-10-28 22:10:50 INFO wording cf-v3-train-01003-due_back#1: missing numbers ['20']
+2026-10-28 22:10:56 INFO wording cf-v3-train-01003-due_back#2: accepted
+2026-10-28 22:11:02 INFO wording cf-v3-train-00538-dropped_on#0: accepted
+2026-10-28 22:11:07 INFO wording cf-v3-train-00538-dropped_on#1: missing numbers ['50', '08:30']
+2026-10-28 22:11:14 INFO wording cf-v3-train-00538-dropped_on#2: length
+2026-10-28 22:11:19 INFO wording cf-train-01292-held_until#0: accepted
+2026-10-28 22:11:24 INFO wording cf-train-01292-held_until#1: accepted
+2026-10-28 22:11:29 INFO wording cf-train-01292-held_until#2: accepted
+2026-10-28 22:11:35 INFO wording cf-train-01386-expires_on#0: accepted
+2026-10-28 22:11:39 INFO wording cf-train-01386-expires_on#1: accepted
+2026-10-28 22:11:45 INFO wording cf-train-01386-expires_on#2: accepted
+2026-10-28 22:11:51 INFO wording cf-train-00553-renews_on#0: accepted
+2026-10-28 22:11:58 INFO wording cf-train-00553-renews_on#1: code in text
+2026-10-28 22:12:03 INFO wording cf-train-00553-renews_on#2: code in text
+2026-10-28 22:12:08 INFO wording cf-train-01188-ready_on#0: missing numbers ['30']
+2026-10-28 22:12:13 INFO wording cf-train-01188-ready_on#1: missing numbers ['30']
+2026-10-28 22:12:19 INFO wording cf-train-01188-ready_on#2: accepted
+2026-10-28 22:12:24 INFO wording cf-train-00009-status#0: accepted
+2026-10-28 22:12:32 INFO wording cf-train-00009-status#1: code in text
+2026-10-28 22:12:39 INFO wording cf-train-00009-status#2: missing numbers ['18:00']
+2026-10-28 22:12:41 INFO wording cf-v3-train-01078-status#0: missing numbers ['10']
+2026-10-28 22:12:43 INFO wording cf-v3-train-01078-status#1: missing numbers ['10']
+2026-10-28 22:12:46 INFO wording cf-v3-train-01078-status#2: missing numbers ['10']
+2026-10-28 22:12:51 INFO wording cf-train-01279-held_until#0: accepted
+2026-10-28 22:12:59 INFO wording cf-train-01279-held_until#1: accepted
+2026-10-28 22:13:05 INFO wording cf-train-01279-held_until#2: accepted
+2026-10-28 22:13:13 INFO wording cf-v3-train-01009-status#0: length
+2026-10-28 22:13:19 INFO wording cf-v3-train-01009-status#1: accepted
+2026-10-28 22:13:25 INFO wording cf-v3-train-01009-status#2: accepted
+2026-10-28 22:13:31 INFO wording cf-v3-train-00764-treat_on#0: accepted
+2026-10-28 22:13:36 INFO wording cf-v3-train-00764-treat_on#1: accepted
+2026-10-28 22:13:42 INFO wording cf-v3-train-00764-treat_on#2: accepted
+2026-10-28 22:13:46 INFO wording cf-trap-train-00348-ready_on#0: missing numbers ['30']
+2026-10-28 22:13:52 INFO wording cf-trap-train-00348-ready_on#1: missing numbers ['30']
+2026-10-28 22:13:56 INFO wording cf-trap-train-00348-ready_on#2: missing numbers ['30']
+2026-10-28 22:14:01 INFO wording cf-v3-train-00860-status#0: accepted
+2026-10-28 22:14:09 INFO wording cf-v3-train-00860-status#1: length
+2026-10-28 22:14:15 INFO wording cf-v3-train-00860-status#2: accepted
+2026-10-28 22:14:19 INFO wording cf-trap-train-00321-status#0: accepted
+2026-10-28 22:14:23 INFO wording cf-trap-train-00321-status#1: accepted
+2026-10-28 22:14:27 INFO wording cf-trap-train-00321-status#2: accepted
+2026-10-28 22:14:29 INFO wording cf-trap-train-00332-status#0: missing numbers ['10']
+2026-10-28 22:14:32 INFO wording cf-trap-train-00332-status#1: missing numbers ['10']
+2026-10-28 22:14:35 INFO wording cf-trap-train-00332-status#2: accepted
+2026-10-28 22:14:39 INFO wording cf-trap-train-00056-status#0: accepted
+2026-10-28 22:14:42 INFO wording cf-trap-train-00056-status#1: accepted
+2026-10-28 22:14:45 INFO wording cf-trap-train-00056-status#2: missing numbers ['20']
+2026-10-28 22:14:48 INFO wording cf-v3-train-01123-status#0: missing numbers ['20']
+2026-10-28 22:14:51 INFO wording cf-v3-train-01123-status#1: accepted
+2026-10-28 22:14:55 INFO wording cf-v3-train-01123-status#2: accepted
+2026-10-28 22:14:58 INFO wording cf-trap-train-00356-status#0: accepted
+2026-10-28 22:15:02 INFO wording cf-trap-train-00356-status#1: accepted
+2026-10-28 22:15:05 INFO wording cf-trap-train-00356-status#2: missing numbers ['18:00']
+2026-10-28 22:15:11 INFO wording cf-train-00007-status#0: code in text
+2026-10-28 22:15:16 INFO wording cf-train-00007-status#1: accepted
+2026-10-28 22:15:21 INFO wording cf-train-00007-status#2: accepted
+2026-10-28 22:15:27 INFO wording cf-train-01371-expires_on#0: missing numbers ['08:30']
+2026-10-28 22:15:34 INFO wording cf-train-01371-expires_on#1: accepted
+2026-10-28 22:15:38 INFO wording cf-train-01371-expires_on#2: invented numbers ['3']
+2026-10-28 22:15:43 INFO wording cf-train-01017-status#0: accepted
+2026-10-28 22:15:52 INFO wording cf-train-01017-status#1: length
+2026-10-28 22:15:59 INFO wording cf-train-01017-status#2: accepted
+2026-10-28 22:16:05 INFO wording cf-train-00006-status#0: accepted
+2026-10-28 22:16:12 INFO wording cf-train-00006-status#1: length
+2026-10-28 22:16:19 INFO wording cf-train-00006-status#2: missing numbers ['10:00']
+2026-10-28 22:16:24 INFO wording cf-train-00733-status#0: accepted
+2026-10-28 22:16:31 INFO wording cf-train-00733-status#1: accepted
+2026-10-28 22:16:37 INFO wording cf-train-00733-status#2: accepted
+2026-10-28 22:16:43 INFO wording cf-train-00361-ordered_on#0: accepted
+2026-10-28 22:16:49 INFO wording cf-train-00361-ordered_on#1: accepted
+2026-10-28 22:16:57 INFO wording cf-train-00361-ordered_on#2: length
+2026-10-28 22:17:03 INFO wording cf-v3-train-00859-status#0: accepted
+2026-10-28 22:17:09 INFO wording cf-v3-train-00859-status#1: missing numbers ['100']
+2026-10-28 22:17:16 INFO wording cf-v3-train-00859-status#2: length
+2026-10-28 22:17:16 INFO 425/534 programs, 1275 records, 813 accepted, 6443 s
+2026-10-28 22:17:20 INFO wording cf-train-01281-held_until#0: accepted
+2026-10-28 22:17:24 INFO wording cf-train-01281-held_until#1: accepted
+2026-10-28 22:17:28 INFO wording cf-train-01281-held_until#2: accepted
+2026-10-28 22:17:31 INFO wording cf-trap-train-00203-status#0: missing numbers ['20']
+2026-10-28 22:17:34 INFO wording cf-trap-train-00203-status#1: accepted
+2026-10-28 22:17:37 INFO wording cf-trap-train-00203-status#2: accepted
+2026-10-28 22:17:40 INFO wording cf-v3-train-00126-status#0: trap ask missing
+2026-10-28 22:17:43 INFO wording cf-v3-train-00126-status#1: trap ask missing
+2026-10-28 22:17:46 INFO wording cf-v3-train-00126-status#2: accepted
+2026-10-28 22:17:52 INFO wording cf-train-00827-sent_on#0: accepted
+2026-10-28 22:17:57 INFO wording cf-train-00827-sent_on#1: accepted
+2026-10-28 22:18:02 INFO wording cf-train-00827-sent_on#2: accepted
+2026-10-28 22:18:10 INFO wording cf-v3-train-00343-due_on#0: length
+2026-10-28 22:18:16 INFO wording cf-v3-train-00343-due_on#1: accepted
+2026-10-28 22:18:24 INFO wording cf-v3-train-00343-due_on#2: accepted
+2026-10-28 22:18:28 INFO wording cf-v3-train-01062-ready_on#0: accepted
+2026-10-28 22:18:33 INFO wording cf-v3-train-01062-ready_on#1: accepted
+2026-10-28 22:18:39 INFO wording cf-v3-train-01062-ready_on#2: accepted
+2026-10-28 22:18:44 INFO wording cf-train-01466-status#0: missing numbers ['20']
+2026-10-28 22:18:48 INFO wording cf-train-01466-status#1: missing numbers ['20']
+2026-10-28 22:18:53 INFO wording cf-train-01466-status#2: missing numbers ['20', '08:00']
+2026-10-28 22:18:58 INFO wording cf-train-00359-ordered_on#0: accepted
+2026-10-28 22:19:03 INFO wording cf-train-00359-ordered_on#1: accepted
+2026-10-28 22:19:08 INFO wording cf-train-00359-ordered_on#2: accepted
+2026-10-28 22:19:14 INFO wording cf-train-00641-status#0: accepted
+2026-10-28 22:19:20 INFO wording cf-train-00641-status#1: missing numbers ['17:30']
+2026-10-28 22:19:24 INFO wording cf-train-00641-status#2: accepted
+2026-10-28 22:19:29 INFO wording cf-train-01014-status#0: accepted
+2026-10-28 22:19:35 INFO wording cf-train-01014-status#1: accepted
+2026-10-28 22:19:40 INFO wording cf-train-01014-status#2: accepted
+2026-10-28 22:19:43 INFO wording cf-v3-train-00047-status#0: trap ask missing
+2026-10-28 22:19:47 INFO wording cf-v3-train-00047-status#1: trap ask missing
+2026-10-28 22:19:51 INFO wording cf-v3-train-00047-status#2: accepted
+2026-10-28 22:19:58 INFO wording cf-train-01287-held_until#0: accepted
+2026-10-28 22:20:02 INFO wording cf-train-01287-held_until#1: accepted
+2026-10-28 22:20:09 INFO wording cf-train-01287-held_until#2: accepted
+2026-10-28 22:20:14 INFO wording cf-v3-train-00834-ready_on#0: accepted
+2026-10-28 22:20:18 INFO wording cf-v3-train-00834-ready_on#1: accepted
+2026-10-28 22:20:22 INFO wording cf-v3-train-00834-ready_on#2: missing numbers ['30']
+2026-10-28 22:20:29 INFO wording cf-train-01465-status#0: missing numbers ['50']
+2026-10-28 22:20:34 INFO wording cf-train-01465-status#1: missing numbers ['50']
+2026-10-28 22:20:40 INFO wording cf-train-01465-status#2: accepted
+2026-10-28 22:20:45 INFO wording cf-v3-train-00416-status#0: accepted
+2026-10-28 22:20:51 INFO wording cf-v3-train-00416-status#1: accepted
+2026-10-28 22:20:59 INFO wording cf-v3-train-00416-status#2: length
+2026-10-28 22:21:02 INFO wording cf-trap-train-00309-status#0: accepted
+2026-10-28 22:21:05 INFO wording cf-trap-train-00309-status#1: accepted
+2026-10-28 22:21:09 INFO wording cf-trap-train-00309-status#2: missing numbers ['10']
+2026-10-28 22:21:14 INFO wording cf-train-00727-status#0: accepted
+2026-10-28 22:21:21 INFO wording cf-train-00727-status#1: accepted
+2026-10-28 22:21:27 INFO wording cf-train-00727-status#2: accepted
+2026-10-28 22:21:32 INFO wording cf-trap-train-00163-status#0: accepted
+2026-10-28 22:21:35 INFO wording cf-trap-train-00163-status#1: accepted
+2026-10-28 22:21:38 INFO wording cf-trap-train-00163-status#2: accepted
+2026-10-28 22:21:44 INFO wording cf-train-01190-ready_on#0: missing numbers ['10:00']
+2026-10-28 22:21:49 INFO wording cf-train-01190-ready_on#1: accepted
+2026-10-28 22:21:54 INFO wording cf-train-01190-ready_on#2: accepted
+2026-10-28 22:21:57 INFO wording cf-trap-train-00029-status#0: accepted
+2026-10-28 22:22:00 INFO wording cf-trap-train-00029-status#1: accepted
+2026-10-28 22:22:03 INFO wording cf-trap-train-00029-status#2: trap ask missing
+2026-10-28 22:22:09 INFO wording cf-train-01010-status#0: accepted
+2026-10-28 22:22:14 INFO wording cf-train-01010-status#1: missing numbers ['09:00']
+2026-10-28 22:22:20 INFO wording cf-train-01010-status#2: accepted
+2026-10-28 22:22:26 INFO wording cf-v3-train-01204-install_on#0: accepted
+2026-10-28 22:22:32 INFO wording cf-v3-train-01204-install_on#1: accepted
+2026-10-28 22:22:39 INFO wording cf-v3-train-01204-install_on#2: accepted
+2026-10-28 22:22:46 INFO wording cf-v3-train-00361-review_on#0: length
+2026-10-28 22:22:55 INFO wording cf-v3-train-00361-review_on#1: length
+2026-10-28 22:23:01 INFO wording cf-v3-train-00361-review_on#2: accepted
+2026-10-28 22:23:05 INFO wording cf-train-00732-status#0: accepted
+2026-10-28 22:23:09 INFO wording cf-train-00732-status#1: accepted
+2026-10-28 22:23:14 INFO wording cf-train-00732-status#2: accepted
+2026-10-28 22:23:18 INFO wording cf-trap-train-00330-status#0: accepted
+2026-10-28 22:23:21 INFO wording cf-trap-train-00330-status#1: missing numbers ['10']
+2026-10-28 22:23:24 INFO wording cf-trap-train-00330-status#2: missing numbers ['10']
+2026-10-28 22:23:24 INFO 450/534 programs, 1350 records, 866 accepted, 6811 s
+2026-10-28 22:23:28 INFO wording cf-train-00000-status#0: missing numbers ['18:00']
+2026-10-28 22:23:33 INFO wording cf-train-00000-status#1: missing numbers ['18:00']
+2026-10-28 22:23:37 INFO wording cf-train-00000-status#2: accepted
+2026-10-28 22:23:42 INFO wording cf-v3-train-00819-status#0: accepted
+2026-10-28 22:23:47 INFO wording cf-v3-train-00819-status#1: accepted
+2026-10-28 22:23:53 INFO wording cf-v3-train-00819-status#2: accepted
+2026-10-28 22:24:00 INFO wording cf-train-01379-expires_on#0: length
+2026-10-28 22:24:06 INFO wording cf-train-01379-expires_on#1: accepted
+2026-10-28 22:24:13 INFO wording cf-train-01379-expires_on#2: accepted
+2026-10-28 22:24:17 INFO wording cf-train-00737-status#0: accepted
+2026-10-28 22:24:21 INFO wording cf-train-00737-status#1: accepted
+2026-10-28 22:24:28 INFO wording cf-train-00737-status#2: length
+2026-10-28 22:24:34 INFO wording cf-train-00261-status#0: missing numbers ['100']
+2026-10-28 22:24:38 INFO wording cf-train-00261-status#1: accepted
+2026-10-28 22:24:46 INFO wording cf-train-00261-status#2: length
+2026-10-28 22:24:53 INFO wording cf-v3-train-00397-status#0: length
+2026-10-28 22:25:01 INFO wording cf-v3-train-00397-status#1: length
+2026-10-28 22:25:07 INFO wording cf-v3-train-00397-status#2: accepted
+2026-10-28 22:25:12 INFO wording cf-train-01380-expires_on#0: accepted
+2026-10-28 22:25:17 INFO wording cf-train-01380-expires_on#1: accepted
+2026-10-28 22:25:22 INFO wording cf-train-01380-expires_on#2: accepted
+2026-10-28 22:25:28 INFO wording cf-v3-train-00917-renews_on#0: accepted
+2026-10-28 22:25:34 INFO wording cf-v3-train-00917-renews_on#1: invented numbers ['2']
+2026-10-28 22:25:38 INFO wording cf-v3-train-00917-renews_on#2: accepted
+2026-10-28 22:25:41 INFO wording cf-trap-train-00336-status#0: trap ask missing
+2026-10-28 22:25:44 INFO wording cf-trap-train-00336-status#1: trap ask missing
+2026-10-28 22:25:48 INFO wording cf-trap-train-00336-status#2: trap ask missing
+2026-10-28 22:25:53 INFO wording cf-trap-train-00315-status#0: accepted
+2026-10-28 22:25:57 INFO wording cf-trap-train-00315-status#1: accepted
+2026-10-28 22:26:01 INFO wording cf-trap-train-00315-status#2: accepted
+2026-10-28 22:26:04 INFO wording cf-trap-train-00380-status#0: accepted
+2026-10-28 22:26:09 INFO wording cf-trap-train-00380-status#1: trap ask missing
+2026-10-28 22:26:12 INFO wording cf-trap-train-00380-status#2: accepted
+2026-10-28 22:26:19 INFO wording cf-v3-train-00219-review_on#0: accepted
+2026-10-28 22:26:24 INFO wording cf-v3-train-00219-review_on#1: accepted
+2026-10-28 22:26:30 INFO wording cf-v3-train-00219-review_on#2: accepted
+2026-10-28 22:26:36 INFO wording cf-v3-train-00474-status#0: accepted
+2026-10-28 22:26:39 INFO wording cf-v3-train-00474-status#1: missing numbers ['100']
+2026-10-28 22:26:47 INFO wording cf-v3-train-00474-status#2: length
+2026-10-28 22:26:52 INFO wording cf-train-01096-status#0: accepted
+2026-10-28 22:26:58 INFO wording cf-train-01096-status#1: accepted
+2026-10-28 22:27:03 INFO wording cf-train-01096-status#2: accepted
+2026-10-28 22:27:08 INFO wording cf-v3-train-01051-dropped_on#0: accepted
+2026-10-28 22:27:17 INFO wording cf-v3-train-01051-dropped_on#1: length
+2026-10-28 22:27:24 INFO wording cf-v3-train-01051-dropped_on#2: code in text
+2026-10-28 22:27:28 INFO wording cf-trap-train-00065-status#0: accepted
+2026-10-28 22:27:34 INFO wording cf-trap-train-00065-status#1: invented numbers ['50']
+2026-10-28 22:27:37 INFO wording cf-trap-train-00065-status#2: accepted
+2026-10-28 22:27:40 INFO wording cf-trap-train-00354-status#0: accepted
+2026-10-28 22:27:43 INFO wording cf-trap-train-00354-status#1: missing numbers ['10']
+2026-10-28 22:27:46 INFO wording cf-trap-train-00354-status#2: missing numbers ['10']
+2026-10-28 22:27:50 INFO wording cf-trap-train-00313-status#0: trap ask missing
+2026-10-28 22:27:53 INFO wording cf-trap-train-00313-status#1: missing numbers ['10']
+2026-10-28 22:27:56 INFO wording cf-trap-train-00313-status#2: trap ask missing
+2026-10-28 22:28:05 INFO wording cf-train-00094-status#0: length
+2026-10-28 22:28:11 INFO wording cf-train-00094-status#1: accepted
+2026-10-28 22:28:15 INFO wording cf-train-00094-status#2: missing numbers ['50', '08:30']
+2026-10-28 22:28:22 INFO wording cf-train-01291-held_until#0: accepted
+2026-10-28 22:28:27 INFO wording cf-train-01291-held_until#1: accepted
+2026-10-28 22:28:35 INFO wording cf-train-01291-held_until#2: length
+2026-10-28 22:28:41 INFO wording cf-train-00735-status#0: accepted
+2026-10-28 22:28:47 INFO wording cf-train-00735-status#1: accepted
+2026-10-28 22:28:54 INFO wording cf-train-00735-status#2: accepted
+2026-10-28 22:29:01 INFO wording cf-train-00913-due_date#0: length
+2026-10-28 22:29:09 INFO wording cf-train-00913-due_date#1: length
+2026-10-28 22:29:16 INFO wording cf-train-00913-due_date#2: accepted
+2026-10-28 22:29:18 INFO wording cf-v3-train-00483-status#0: missing numbers ['10']
+2026-10-28 22:29:22 INFO wording cf-v3-train-00483-status#1: missing numbers ['10']
+2026-10-28 22:29:24 INFO wording cf-v3-train-00483-status#2: missing numbers ['10']
+2026-10-28 22:29:28 INFO wording cf-train-00646-status#0: accepted
+2026-10-28 22:29:35 INFO wording cf-train-00646-status#1: accepted
+2026-10-28 22:29:41 INFO wording cf-train-00646-status#2: accepted
+2026-10-28 22:29:46 INFO wording cf-train-00643-status#0: accepted
+2026-10-28 22:29:54 INFO wording cf-train-00643-status#1: length
+2026-10-28 22:29:58 INFO wording cf-train-00643-status#2: accepted
+2026-10-28 22:29:58 INFO 475/534 programs, 1425 records, 909 accepted, 7205 s
+2026-10-28 22:30:01 INFO wording cf-trap-train-00254-status#0: accepted
+2026-10-28 22:30:04 INFO wording cf-trap-train-00254-status#1: accepted
+2026-10-28 22:30:08 INFO wording cf-trap-train-00254-status#2: accepted
+2026-10-28 22:30:13 INFO wording cf-v3-train-00652-treat_on#0: missing numbers ['30']
+2026-10-28 22:30:20 INFO wording cf-v3-train-00652-treat_on#1: length
+2026-10-28 22:30:27 INFO wording cf-v3-train-00652-treat_on#2: missing numbers ['30']
+2026-10-28 22:30:32 INFO wording cf-v3-train-00581-dropped_on#0: missing numbers ['17:30']
+2026-10-28 22:30:38 INFO wording cf-v3-train-00581-dropped_on#1: accepted
+2026-10-28 22:30:44 INFO wording cf-v3-train-00581-dropped_on#2: accepted
+2026-10-28 22:30:50 INFO wording cf-v3-train-00616-treat_on#0: accepted
+2026-10-28 22:30:57 INFO wording cf-v3-train-00616-treat_on#1: length
+2026-10-28 22:31:04 INFO wording cf-v3-train-00616-treat_on#2: accepted
+2026-10-28 22:31:10 INFO wording cf-train-00731-status#0: accepted
+2026-10-28 22:31:17 INFO wording cf-train-00731-status#1: accepted
+2026-10-28 22:31:23 INFO wording cf-train-00731-status#2: accepted
+2026-10-28 22:31:29 INFO wording cf-train-01284-held_until#0: accepted
+2026-10-28 22:31:34 INFO wording cf-train-01284-held_until#1: accepted
+2026-10-28 22:31:39 INFO wording cf-train-01284-held_until#2: accepted
+2026-10-28 22:31:43 INFO wording cf-train-00356-ordered_on#0: accepted
+2026-10-28 22:31:49 INFO wording cf-train-00356-ordered_on#1: missing numbers ['20', '08:30']
+2026-10-28 22:31:54 INFO wording cf-train-00356-ordered_on#2: accepted
+2026-10-28 22:32:03 INFO wording cf-trap-train-00002-sent_on#0: length
+2026-10-28 22:32:09 INFO wording cf-trap-train-00002-sent_on#1: accepted
+2026-10-28 22:32:14 INFO wording cf-trap-train-00002-sent_on#2: accepted
+2026-10-28 22:32:20 INFO wording cf-v3-train-00622-status#0: accepted
+2026-10-28 22:32:25 INFO wording cf-v3-train-00622-status#1: accepted
+2026-10-28 22:32:32 INFO wording cf-v3-train-00622-status#2: length
+2026-10-28 22:32:36 INFO wording cf-train-01006-status#0: accepted
+2026-10-28 22:32:43 INFO wording cf-train-01006-status#1: accepted
+2026-10-28 22:32:50 INFO wording cf-train-01006-status#2: accepted
+2026-10-28 22:32:57 INFO wording cf-v3-train-00877-status#0: accepted
+2026-10-28 22:33:06 INFO wording cf-v3-train-00877-status#1: length
+2026-10-28 22:33:13 INFO wording cf-v3-train-00877-status#2: accepted
+2026-10-28 22:33:19 INFO wording cf-trap-train-00345-last_visit#0: missing numbers ['50']
+2026-10-28 22:33:25 INFO wording cf-trap-train-00345-last_visit#1: accepted
+2026-10-28 22:33:30 INFO wording cf-trap-train-00345-last_visit#2: accepted
+2026-10-28 22:33:37 INFO wording cf-train-00726-status#0: length
+2026-10-28 22:33:41 INFO wording cf-train-00726-status#1: accepted
+2026-10-28 22:33:47 INFO wording cf-train-00726-status#2: accepted
+2026-10-28 22:33:52 INFO wording cf-train-01289-held_until#0: accepted
+2026-10-28 22:34:01 INFO wording cf-train-01289-held_until#1: length
+2026-10-28 22:34:08 INFO wording cf-train-01289-held_until#2: accepted
+2026-10-28 22:34:12 INFO wording cf-trap-train-00219-status#0: accepted
+2026-10-28 22:34:17 INFO wording cf-trap-train-00219-status#1: accepted
+2026-10-28 22:34:20 INFO wording cf-trap-train-00219-status#2: accepted
+2026-10-28 22:34:25 INFO wording cf-train-00180-status#0: invented numbers ['3']
+2026-10-28 22:34:31 INFO wording cf-train-00180-status#1: accepted
+2026-10-28 22:34:37 INFO wording cf-train-00180-status#2: missing numbers ['30']
+2026-10-28 22:34:41 INFO wording cf-v3-train-00930-status#0: trap ask missing
+2026-10-28 22:34:44 INFO wording cf-v3-train-00930-status#1: trap ask missing
+2026-10-28 22:34:47 INFO wording cf-v3-train-00930-status#2: invented numbers ['50']
+2026-10-28 22:34:52 INFO wording cf-train-00645-status#0: accepted
+2026-10-28 22:34:56 INFO wording cf-train-00645-status#1: accepted
+2026-10-28 22:35:01 INFO wording cf-train-00645-status#2: accepted
+2026-10-28 22:35:06 INFO wording cf-v3-train-00854-expires_on#0: accepted
+2026-10-28 22:35:12 INFO wording cf-v3-train-00854-expires_on#1: accepted
+2026-10-28 22:35:18 INFO wording cf-v3-train-00854-expires_on#2: accepted
+2026-10-28 22:35:24 INFO wording cf-train-00928-due_date#0: accepted
+2026-10-28 22:35:30 INFO wording cf-train-00928-due_date#1: accepted
+2026-10-28 22:35:37 INFO wording cf-train-00928-due_date#2: length
+2026-10-28 22:35:40 INFO wording cf-trap-train-00049-status#0: missing numbers ['10']
+2026-10-28 22:35:45 INFO wording cf-trap-train-00049-status#1: accepted
+2026-10-28 22:35:49 INFO wording cf-trap-train-00049-status#2: accepted
+2026-10-28 22:35:54 INFO wording cf-train-00192-status#0: accepted
+2026-10-28 22:36:01 INFO wording cf-train-00192-status#1: accepted
+2026-10-28 22:36:08 INFO wording cf-train-00192-status#2: length
+2026-10-28 22:36:13 INFO wording cf-train-01382-expires_on#0: accepted
+2026-10-28 22:36:20 INFO wording cf-train-01382-expires_on#1: length
+2026-10-28 22:36:27 INFO wording cf-train-01382-expires_on#2: accepted
+2026-10-28 22:36:33 INFO wording cf-train-00363-ordered_on#0: accepted
+2026-10-28 22:36:42 INFO wording cf-train-00363-ordered_on#1: length
+2026-10-28 22:36:50 INFO wording cf-train-00363-ordered_on#2: length
+2026-10-28 22:36:53 INFO wording cf-v3-train-01220-status#0: accepted
+2026-10-28 22:36:57 INFO wording cf-v3-train-01220-status#1: accepted
+2026-10-28 22:37:01 INFO wording cf-v3-train-01220-status#2: accepted
+2026-10-28 22:37:01 INFO 500/534 programs, 1500 records, 961 accepted, 7628 s
+2026-10-28 22:37:09 INFO wording cf-v3-train-00153-expires_on#0: length
+2026-10-28 22:37:16 INFO wording cf-v3-train-00153-expires_on#1: accepted
+2026-10-28 22:37:23 INFO wording cf-v3-train-00153-expires_on#2: accepted
+2026-10-28 22:37:29 INFO wording cf-train-01476-status#0: missing numbers ['10:00']
+2026-10-28 22:37:35 INFO wording cf-train-01476-status#1: missing numbers ['20', '10:00']
+2026-10-28 22:37:40 INFO wording cf-train-01476-status#2: accepted
+2026-10-28 22:37:43 INFO wording cf-trap-train-00304-status#0: missing numbers ['10']
+2026-10-28 22:37:46 INFO wording cf-trap-train-00304-status#1: accepted
+2026-10-28 22:37:50 INFO wording cf-trap-train-00304-status#2: missing numbers ['10']
+2026-10-28 22:37:55 INFO wording cf-train-00922-due_date#0: accepted
+2026-10-28 22:38:01 INFO wording cf-train-00922-due_date#1: code in text
+2026-10-28 22:38:09 INFO wording cf-train-00922-due_date#2: length
+2026-10-28 22:38:11 INFO wording cf-v3-train-00555-status#0: missing numbers ['30']
+2026-10-28 22:38:15 INFO wording cf-v3-train-00555-status#1: missing numbers ['30']
+2026-10-28 22:38:17 INFO wording cf-v3-train-00555-status#2: missing numbers ['30', '09:00']
+2026-10-28 22:38:20 INFO wording cf-trap-train-00164-status#0: trap ask missing
+2026-10-28 22:38:24 INFO wording cf-trap-train-00164-status#1: accepted
+2026-10-28 22:38:28 INFO wording cf-trap-train-00164-status#2: accepted
+2026-10-28 22:38:35 INFO wording cf-train-00364-ordered_on#0: accepted
+2026-10-28 22:38:42 INFO wording cf-train-00364-ordered_on#1: accepted
+2026-10-28 22:38:49 INFO wording cf-train-00364-ordered_on#2: length
+2026-10-28 22:38:55 INFO wording cf-train-00463-last_visit#0: accepted
+2026-10-28 22:39:00 INFO wording cf-train-00463-last_visit#1: accepted
+2026-10-28 22:39:05 INFO wording cf-train-00463-last_visit#2: missing numbers ['16:00']
+2026-10-28 22:39:08 INFO wording cf-trap-train-00114-status#0: accepted
+2026-10-28 22:39:12 INFO wording cf-trap-train-00114-status#1: trap ask missing
+2026-10-28 22:39:14 INFO wording cf-trap-train-00114-status#2: accepted
+2026-10-28 22:39:21 INFO wording cf-v3-train-00547-status#0: accepted
+2026-10-28 22:39:25 INFO wording cf-v3-train-00547-status#1: accepted
+2026-10-28 22:39:30 INFO wording cf-v3-train-00547-status#2: accepted
+2026-10-28 22:39:34 INFO wording cf-train-00366-ordered_on#0: missing numbers ['100']
+2026-10-28 22:39:40 INFO wording cf-train-00366-ordered_on#1: accepted
+2026-10-28 22:39:46 INFO wording cf-train-00366-ordered_on#2: accepted
+2026-10-28 22:39:55 INFO wording cf-trap-train-00176-status#0: length
+2026-10-28 22:40:03 INFO wording cf-trap-train-00176-status#1: code in text
+2026-10-28 22:40:09 INFO wording cf-trap-train-00176-status#2: accepted
+2026-10-28 22:40:16 INFO wording cf-v3-train-01181-status#0: missing numbers ['30']
+2026-10-28 22:40:21 INFO wording cf-v3-train-01181-status#1: accepted
+2026-10-28 22:40:27 INFO wording cf-v3-train-01181-status#2: accepted
+2026-10-28 22:40:32 INFO wording cf-v3-train-00249-status#0: accepted
+2026-10-28 22:40:39 INFO wording cf-v3-train-00249-status#1: accepted
+2026-10-28 22:40:44 INFO wording cf-v3-train-00249-status#2: accepted
+2026-10-28 22:40:47 INFO wording cf-trap-train-00079-status#0: accepted
+2026-10-28 22:40:50 INFO wording cf-trap-train-00079-status#1: accepted
+2026-10-28 22:40:56 INFO wording cf-trap-train-00079-status#2: accepted
+2026-10-28 22:41:00 INFO wording cf-trap-train-00347-status#0: accepted
+2026-10-28 22:41:03 INFO wording cf-trap-train-00347-status#1: accepted
+2026-10-28 22:41:07 INFO wording cf-trap-train-00347-status#2: invented numbers ['50']
+2026-10-28 22:41:11 INFO wording cf-v3-train-00542-status#0: accepted
+2026-10-28 22:41:15 INFO wording cf-v3-train-00542-status#1: missing numbers ['10']
+2026-10-28 22:41:18 INFO wording cf-v3-train-00542-status#2: accepted
+2026-10-28 22:41:23 INFO wording cf-v3-train-00667-due_back#0: accepted
+2026-10-28 22:41:28 INFO wording cf-v3-train-00667-due_back#1: accepted
+2026-10-28 22:41:32 INFO wording cf-v3-train-00667-due_back#2: missing numbers ['30', '16:00']
+2026-10-28 22:41:38 INFO wording cf-train-01383-expires_on#0: accepted
+2026-10-28 22:41:45 INFO wording cf-train-01383-expires_on#1: length
+2026-10-28 22:41:52 INFO wording cf-train-01383-expires_on#2: accepted
+2026-10-28 22:41:58 INFO wording cf-v3-train-01029-expires_on#0: accepted
+2026-10-28 22:42:04 INFO wording cf-v3-train-01029-expires_on#1: accepted
+2026-10-28 22:42:10 INFO wording cf-v3-train-01029-expires_on#2: accepted
+2026-10-28 22:42:20 INFO wording cf-train-00923-due_date#0: length
+2026-10-28 22:42:28 INFO wording cf-train-00923-due_date#1: length
+2026-10-28 22:42:34 INFO wording cf-train-00923-due_date#2: accepted
+2026-10-28 22:42:42 INFO wording cf-train-00181-status#0: length
+2026-10-28 22:42:48 INFO wording cf-train-00181-status#1: accepted
+2026-10-28 22:42:54 INFO wording cf-train-00181-status#2: accepted
+2026-10-28 22:42:58 INFO wording cf-train-00919-due_date#0: accepted
+2026-10-28 22:43:02 INFO wording cf-train-00919-due_date#1: accepted
+2026-10-28 22:43:06 INFO wording cf-train-00919-due_date#2: accepted
+2026-10-28 22:43:12 INFO wording cf-train-00098-status#0: accepted
+2026-10-28 22:43:17 INFO wording cf-train-00098-status#1: accepted
+2026-10-28 22:43:23 INFO wording cf-train-00098-status#2: code in text
+2026-10-28 22:43:27 INFO wording cf-train-00926-due_date#0: accepted
+2026-10-28 22:43:32 INFO wording cf-train-00926-due_date#1: accepted
+2026-10-28 22:43:36 INFO wording cf-train-00926-due_date#2: accepted
+2026-10-28 22:43:36 INFO 525/534 programs, 1575 records, 1010 accepted, 8023 s
+2026-10-28 22:43:41 INFO wording cf-train-00829-sent_on#0: accepted
+2026-10-28 22:43:46 INFO wording cf-train-00829-sent_on#1: accepted
+2026-10-28 22:43:52 INFO wording cf-train-00829-sent_on#2: accepted
+2026-10-28 22:43:55 INFO wording cf-trap-train-00171-status#0: accepted
+2026-10-28 22:44:00 INFO wording cf-trap-train-00171-status#1: accepted
+2026-10-28 22:44:03 INFO wording cf-trap-train-00171-status#2: accepted
+2026-10-28 22:44:06 INFO wording cf-v3-train-00843-status#0: accepted
+2026-10-28 22:44:08 INFO wording cf-v3-train-00843-status#1: missing numbers ['10']
+2026-10-28 22:44:12 INFO wording cf-v3-train-00843-status#2: trap ask missing
+2026-10-28 22:44:19 INFO wording cf-train-00100-status#0: length
+2026-10-28 22:44:25 INFO wording cf-train-00100-status#1: accepted
+2026-10-28 22:44:33 INFO wording cf-train-00100-status#2: length
+2026-10-28 22:44:38 INFO wording cf-train-00360-ordered_on#0: accepted
+2026-10-28 22:44:45 INFO wording cf-train-00360-ordered_on#1: accepted
+2026-10-28 22:44:51 INFO wording cf-train-00360-ordered_on#2: accepted
+2026-10-28 22:44:59 INFO wording cf-train-01197-ready_on#0: length
+2026-10-28 22:45:05 INFO wording cf-train-01197-ready_on#1: accepted
+2026-10-28 22:45:11 INFO wording cf-train-01197-ready_on#2: accepted
+2026-10-28 22:45:15 INFO wording cf-trap-train-00045-held_until#0: accepted
+2026-10-28 22:45:19 INFO wording cf-trap-train-00045-held_until#1: accepted
+2026-10-28 22:45:24 INFO wording cf-trap-train-00045-held_until#2: accepted
+2026-10-28 22:45:28 INFO wording cf-v3-train-00689-dive_on#0: missing numbers ['100']
+2026-10-28 22:45:33 INFO wording cf-v3-train-00689-dive_on#1: missing numbers ['100']
+2026-10-28 22:45:38 INFO wording cf-v3-train-00689-dive_on#2: accepted
+2026-10-28 22:45:40 INFO wording cf-v3-train-00929-status#0: missing numbers ['20']
+2026-10-28 22:45:43 INFO wording cf-v3-train-00929-status#1: missing numbers ['20']
+2026-10-28 22:45:46 INFO wording cf-v3-train-00929-status#2: accepted
+2026-10-28 22:45:46 INFO done: {"stage": 3, "finished": true, "model": "Qwen/Qwen2.5-7B-Instruct", "revision": "a09a35458c", "license": "apache-2.0", "seed_programs": 534, "programs_attempted": 534, "records": 1602, "accepted": 1028, "train": 950, "valid": 78, "rejected_by_reason": {"trap ask missing": 76, "missing numbers": 329, "length": 122, "invented numbers": 30, "code in text": 17}, "seconds": 8153, "stopped_by_time": false, "sources": ["data/synthetic_cf"], "hosted_ai_text_used": false}

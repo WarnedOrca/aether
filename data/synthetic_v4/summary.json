@@ -8,8 +8,8 @@
   "programs_attempted": 1519,
   "records": 4557,
   "accepted": 2600,
-  "train": 2401,
-  "valid": 199,
+  "train": 3351,
+  "valid": 277,
   "rejected_by_reason": {
     "missing numbers": 581,
     "length": 894,
@@ -26,5 +26,21 @@
     "data/synthetic_v3"
   ],
   "hosted_ai_text_used": false,
-  "removed_by_tightened_trap_filter": 28
+  "removed_by_tightened_trap_filter": 28,
+  "counterfactual_merge": {
+    "old_rows": {
+      "train": 2401,
+      "valid": 199
+    },
+    "new_rows": {
+      "train": 950,
+      "valid": 78
+    },
+    "new_share": 0.2834,
+    "new_trap_rows": 344,
+    "merged_from": [
+      "data/synthetic_v4_cf",
+      "data/synthetic_cf"
+    ]
+  }
 }
