@@ -61,3 +61,31 @@ def test_variants_and_selection_on_a_small_example():
     cands = [{"column": c, "seed_id": f"s{i}"} for i, c in enumerate(["x"] * 10 + ["y"] * 2)]
     picked = select(cands, 6, 1, max_per_column=3)
     assert sum(p["column"] == "x" for p in picked) == 3 and sum(p["column"] == "y" for p in picked) == 2
+
+
+def test_merge_keeps_old_rows_and_adds_new_ones_idempotently(tmp_path):
+    from stages.merge_cf import merge
+    from stages.stage3_paraphrase import build_splits
+
+    def rec(key, accepted=True):
+        return {"key": key, "seed_id": key.split("#")[0], "trap": "none", "policy": "p", "sheets": "s", "program": "x",
+                "sop": "w", "accepted": accepted, "reject_reason": "", "provenance": {"hosted_ai_text": False}}
+    v4, cf, seeds = tmp_path / "v4", tmp_path / "cf", tmp_path / "seeds"
+    for d in (v4, cf, seeds):
+        d.mkdir()
+    old = [rec(f"train-{i}#0") for i in range(30)] + [rec("train-99#0", accepted=False)]
+    new = [rec(f"cf-train-{i}-status#0") for i in range(10)]
+    (v4 / "records.jsonl").write_text("".join(json.dumps(r) + "\n" for r in old))
+    (cf / "records.jsonl").write_text("".join(json.dumps(r) + "\n" for r in new))
+    (seeds / "train.jsonl").write_text("".join(json.dumps({"id": r["seed_id"], "provenance": {"column_not_allowed": "status"}}) + "\n" for r in new))
+    (v4 / "summary.json").write_text("{}")
+    info = merge(v4, cf, seeds)
+    assert info["new_share"] == round(10 / 40, 4)
+    first = {s: (v4 / f"{s}.jsonl").read_text() for s in ("train", "valid")}
+    rows = [json.loads(l) for s in first.values() for l in s.splitlines()]
+    assert len(rows) == 40
+    old_rows = [r for s in build_splits(old).values() for r in s]
+    assert all(r in rows for r in old_rows)  # old accepted rows unchanged
+    assert all(r["provenance"]["counterfactual"]["column_not_allowed"] == "status" for r in rows if r["id"].startswith("cf-"))
+    merge(v4, cf, seeds)
+    assert {s: (v4 / f"{s}.jsonl").read_text() for s in ("train", "valid")} == first
