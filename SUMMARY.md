@@ -1,34 +1,37 @@
-# Aether unattended session 2: 2026-10-26 evening to 2026-10-28
+# Aether session 3: 2026-10-28 (dev split only, no training)
 
-**Outcome: the data is cleaner and almost three times bigger, and the new 7B adapter was trained and tested on the dev split. It still does not beat v0.2:** 32 of 110 correct against v0.2's 34 (not a significant difference). So it is **not** worth spending the one-time held-out v3 run on. Nothing here is reviewed, and nothing says the model is safe: the only claim is what the checker verifies.
+**Outcome: we now know where the new 7B model fails, and checker feedback does not separate it from v0.2.** With checker feedback, the new model (q7b-v2 epoch 2) solves 35 of 110 dev tasks and v0.2 solves 36 (exploratory, p = 1.0). Nothing here changes the earlier decision: no candidate is worth the one-time held-out v3 run. Nothing says the model is safe: the only claim is what the checker verifies.
 
-## Final dev table (110 benchmark tasks, dev split only)
-Source: `eval/results/dev-report-q7b-v2-2026-10-27.json`.
+## 1. Why the new model fails (from saved outputs, no model run)
+Source: `eval/results/dev-failure-diagnosis-2026-10-28.json`.
+- The new model almost always writes code that parses (2 parse failures vs 24 for v0.2), but more of its code does the wrong thing (36 vs 26), and 25 of its programs use a column the policy forbids (v0.2: 3).
+- **The forbidden-column problem is the model, not the tasks.** On the 25 tasks where the new model makes that error, v0.2 makes it only once. In all 25 cases the program names the right policy and then still uses a column the policy does not allow. So the model copies the policy line but does not follow it.
+- **Why, partly a guess:** 8 of the 25 are the `status` column, which 2,254 of the 2,401 training programs filter on, so it is probably a trained habit. The other columns appear in no training program, so habit does not explain them. The model may pick the column that sounds right instead of the one it is allowed to use (not tested).
+- Trap tasks: the new model's most common trap failure is this same error (12 of 30 trap tasks).
 
-| Run | Correct /110 | Non-trap /80 | Trap /30 | Parses | McNemar p vs v0.2 | Reused a training `about` line | Read a forbidden column |
-|---|---|---|---|---|---|---|---|
-| v0.2 (the released model) | 34 | 31 | 3 | 78% | - | 6 | 3 |
-| Last attempt (v1, epoch 2) | 30 | 26 | 4 | 98% | 0.60 | 32 | 21 |
-| New, epoch 1 | 32 | 28 | 4 | 97% | 0.86 | 28 | 22 |
-| New, epoch 2 | 32 | 28 | 4 | 98% | 0.85 | 26 | 25 |
+## 2. Memorisation (from saved outputs)
+Source: `eval/results/dev-memorisation-2026-10-28.json`.
+- The new model reuses a training program's first line (`about "..."`) in 26 of 110 outputs (v0.2: 6). But those outputs are **not** more often wrong: 10 of 26 correct, against 22 of 84 for the rest.
+- I could not show that whole programs are copied: Aether programs all have a similar shape, so they look as much like the right answer as like the training program. The earlier "it recalls training programs" explanation is therefore weaker than it seemed.
 
-In plain words: the new model writes code that parses almost every time, and it got 2 more tasks right than the last attempt. But it still gets 2 fewer right than v0.2, and the gap is small enough to be chance. It still copies the first line of training programs about a quarter of the time (v0.2: 6 times), and it reads columns the policy forbids more often than before. The checker blocked every program that broke a rule, and no accepted program caused a monitor problem.
+## 3. Checker feedback (GPU, exploratory)
+Sources: `eval/results/repair-q7b-v2-epoch2-dev-benchmark.json`, `eval/results/repair-v0.2-dev-rerun-benchmark.json`, `eval/results/dev-repair-compare-2026-10-28.json`.
 
-## What was done
-1. **Mislabelled trap rows removed.** The tightened trap-ask filter was already the acceptance filter in the code; the old data had been built before it. A script (`stages/apply_trap_filter.py`) removed exactly the 28 flagged rows and kept their full records and provenance in `data/synthetic_v4/removed_rows.jsonl`. A test checks the real data.
-2. **Review sample for you:** `docs/review/wordings-sample-2026-10-27.md`, 30 wordings picked by a fixed random seed (not by hand), with their program ids.
-3. **More data.** The local Qwen2.5-7B model wrote wordings for **1,519 programs** (was 515), with traps at 27% of programs, like the benchmark: **2,401 train + 199 valid** wordings (was 898 + 67). On the new part, 55% of attempts were accepted, and none was a near-copy of the generator's English (highest similarity 0.225; limit 0.6).
-4. **Training** with the same recipe as last time (only the data changed): 2 epochs, 302 steps. Validation loss 0.00919, then 0.00814.
-5. **Dev evaluation** of both epochs against v0.2 (table above).
+| Model | Without feedback | With feedback | Non-trap /80 | Trap /30 |
+|---|---|---|---|---|
+| New 7B (q7b-v2 epoch 2) | 32 | 35 | 31 | 4 |
+| v0.2 | 34 | 36 | 32 | 4 |
 
-## Problems found and fixed
-- **Validation stalled for 30+ minutes** at the end of epoch 1 (GPU memory full, Windows spilled to system RAM). Validation now uses the same answer-only loss as training: same number (unit-tested), about 2 minutes. Training resumed from the step-150 checkpoint.
-- Stage 3 can now be extended (more programs, a set trap share) without changing anything that shapes a wording.
-- Tests: 329 pass. No guard (GPU lock, licence, frozen hashes) was weakened.
+- Head to head with feedback: 16 tasks only the new model solves, 17 only v0.2; exact McNemar p = 1.0. Exploratory, not confirmatory.
+- Feedback cuts the new model's forbidden-column errors from 25 to 16. But programs that pass the checker and still do the wrong thing rise from 36 to 49. The feedback gets programs past the checker without making them do what the owner asked.
+- The checker blocked every program that broke a rule, and accepted programs caused 0 monitor problems.
+
+## What changed in the code
+- `eval/repair.py` now saves after every task and continues where it stopped (tested with a simulated crash). New CPU scripts: `eval/dev_failure_analysis.py`, `eval/dev_memorisation_check.py`, `eval/dev_repair_compare.py`. 330 tests pass.
 
 ## Needs you
-1. Read the 30 sample wordings.
-2. Decide the next experiment (suggestions in `HANDOFF.md`: train shorter, and look into why the model reads forbidden columns, before adding still more data).
-3. Stage 5 still needs owner-reviewed `models.lock.json` entries for the older 1.5B and 0.5B base models.
+1. Decide the next experiment. The evidence points at the policy allow-list being ignored, not at too little data. One idea (your data decision): training examples where the obvious column is not allowed.
+2. v0.2 ran in normal (not offline) mode from the default Hugging Face cache, as on 2026-10-25, because its base model has no reviewed `models.lock.json` entry. Adding one is your call.
+3. Still open from before: read the 30 sample wordings in `docs/review/wordings-sample-2026-10-27.md`.
 
-The GPU is idle. Left alone: `pyproject.toml`, `uv.lock`, `data/synthetic_v4_smoke/`. Stage 5 was not run, held-out sets were not touched, and `stages/stage5_conditions.json` was not edited. Nothing was pushed, uploaded, installed, bought or signed in to.
+The GPU is idle. Stage 5 was not run, held-out sets were not touched, and `stages/stage5_conditions.json` was not edited. Left alone: `pyproject.toml`, `uv.lock`, `data/synthetic_v4_smoke/`. Nothing was pushed, uploaded, installed, bought or signed in to.

@@ -2,9 +2,11 @@
 
 Updated 2026-10-26 afternoon by Claude Code (unattended session below). That session supersedes the Codex morning notes: the snapshot blocker is fixed and stages 3-4 and the dev comparison were run. Historical results remain below. Agents: update this file at the end of every session (see `AGENTS.md`).
 
-## Session 3 (2026-10-28, Claude Code): dev-only diagnosis and exploratory checker-feedback runs (IN PROGRESS)
+## Session 3 (2026-10-28, Claude Code): dev-only diagnosis and exploratory checker-feedback runs (DONE)
 
-### If interrupted (computer shut down)
+**Short version:** the E401 gap is the model ignoring the policy's allow-list (same tasks, same policy name, forbidden column); reusing training `about` lines does not make outputs fail more; with checker feedback q7b-v2 epoch 2 gets 35/110 and v0.2 36/110 (exploratory, p = 1.0). Nothing here changes the earlier decision: no candidate is worth the held-out v3 run. All results: `eval/results/session3-findings-2026-10-28.json` and the files it lists. GPU idle; stage 5 not run; held-out sets untouched; `stages/stage5_conditions.json` untouched.
+
+### If interrupted (computer shut down) - all steps finished; kept for reproduction
 Each step below is committed as soon as it finishes. GPU jobs save one row per task to `<out>.partial.jsonl` and skip finished tasks when rerun; the summary `.json`/`.jsonl` appear only when all 110 tasks are done. To continue, from the repo root in Git Bash, ONE at a time (check `nvidia-smi` first; only one GPU job):
 1. q7b-v2 epoch 2 with checker feedback: `bash eval/run_dev_repair_q7b_v2.sh` (progress: `wc -l eval/results/repair-q7b-v2-epoch2-dev-benchmark.partial.jsonl`; done when `eval/results/repair-q7b-v2-epoch2-dev-benchmark.json` exists).
 2. Then v0.2 with checker feedback: `bash eval/run_dev_repair_v0.2.sh` (same pattern, files `eval/results/repair-v0.2-dev-rerun-benchmark.*`).
@@ -37,6 +39,25 @@ Trap tasks (30): v0.2 fails mostly by not parsing (8); q7b-v2 fails mostly with 
 **E401 cause: partly a guess.** The most common forbidden column is `status` (8 of 25); `status` appears in a filter/where/set line of 2,254 of the 2,401 training programs, so a trained habit of filtering on `status` is a likely reason for those 8. But 12 of the 25 columns (`plan`, `last_exam`, `reorder_at`, ...) appear in no training program at all (counts in the same file), so the habit explanation does not cover them; the model seems to pick the column that sounds right for the request even when the policy only allows a different one. That second part is a guess, not tested.
 
 **2. Memorisation: weaker evidence than the session-2 note suggested.** Epoch 2 reuses a training `about` line in 26 outputs (epoch 1: 28, v0.2: 6). Those outputs are **not** more often wrong: 10 of 26 correct (38%) vs 22 of 84 (26%) for outputs without a reused line (epoch 1: 12/28 vs 20/82; v0.2: 2/6 vs 32/104). By statement skeleton (names, strings and numbers removed), 19 of the 26 are at least 90% similar to the training program with that `about` line, but they are almost as similar to the task's own reference program (median 0.939 vs 0.904), because most Aether programs share one shape. So: known that the model reuses `about` wording; not shown that it copies whole programs or that reuse causes failures. Examples of a copied skeleton that is wrong: physio-02, hw-01, hw-02, tattoo-02, tattoo-05.
+
+### Findings, step 3: checker feedback on dev (EXPLORATORY, not confirmatory)
+Protocol: `eval.repair` as used before (parser + checker error text only, never the reference or scenario results; up to 3 rounds; greedy), one task at a time, 110 dev tasks. Files: `eval/results/repair-q7b-v2-epoch2-dev-benchmark.json`, `eval/results/repair-v0.2-dev-rerun-benchmark.json`, `eval/results/dev-repair-compare-2026-10-28.json`.
+
+| Run | plain correct | with feedback | non-trap /80 | trap /30 | feedback rounds used (0/1/2/3) | monitor problems |
+|---|---|---|---|---|---|---|
+| q7b-v2 epoch 2 | 32 | **35** | 31 | 4 | 69 / 13 / 2 / 26 | 0 |
+| v0.2 (rerun) | 34 | **36** | 32 | 4 | 60 / 3 / 0 / 47 | 0 |
+
+- With feedback vs the same model without: q7b +3 (3 tasks gained, 0 lost, exact McNemar p = 0.25); v0.2 +2 (2 gained, 0 lost, p = 0.5).
+- **q7b-v2 epoch 2 with feedback vs v0.2 with feedback: 16 tasks only q7b gets right, 17 only v0.2; exact McNemar p = 1.0.** No difference.
+- v0.2's rerun gives 36, the same count as its 2026-10-25 feedback run (`repair-v0.2-dev-benchmark-2026-10-25.json`).
+- What feedback changes (from `eval/results/session3-findings-2026-10-28.json`): for q7b, E401 drops from 25 to 16, but "passes the checker with wrong effects" rises from 36 to 49. The checker error text gets the program past the checker without making it do what the owner asked. For v0.2, most failures after feedback are still parse errors (27) and wrong effects (27).
+- The checker blocked every program that broke a rule in both runs; accepted programs caused 0 monitor problems. This is what the checker verifies, not a claim that the model is safe.
+
+### What is known vs only a guess
+- Known (from the result files): the E401 gap is on the same tasks and comes from the model reading/writing columns outside the given policy's allow-list while naming the right policy; `about` reuse is common but not linked to more failures; checker feedback adds 2-3 tasks for each model and leaves them level.
+- Guess (not tested): `status` is filtered in 2,254 of 2,401 training programs, so habit explains some E401s (8 of 25 are `status`); the other columns appear in no training program, so the model may pick the column that "sounds right" over the allowed one. A direct test would be a dev-only probe: give the same task with and without the forbidden column in the sheet list.
+- Guess: the training programs almost always filter on the policy's allowed columns, so the model never had to learn to check the allow-list (it was always satisfied). Training examples where the obvious column is NOT allowed might help; this is a data decision for the owner.
 
 ## Unattended session 2 (2026-10-26 evening to 2026-10-28, Claude Code): cleaner, bigger data, retrain, dev evaluation done; the new adapter does NOT clearly beat v0.2
 

@@ -1,0 +1,135 @@
+{
+  "date": "2026-10-28",
+  "split": "eval/benchmark (dev, 110 tasks) only; no held-out set was used",
+  "sources": [
+    "eval/results/dev-failure-diagnosis-2026-10-28.json",
+    "eval/results/dev-memorisation-2026-10-28.json",
+    "eval/results/repair-q7b-v2-epoch2-dev-benchmark.json",
+    "eval/results/repair-v0.2-dev-rerun-benchmark.json",
+    "eval/results/dev-repair-compare-2026-10-28.json"
+  ],
+  "e401": {
+    "q7b_v2_epoch2_count": 25,
+    "v0.2_count": 3,
+    "v0.2_on_same_tasks": {
+      "parse": 5,
+      "correct": 7,
+      "wrong-effect": 5,
+      "E104": 1,
+      "E601": 3,
+      "E301": 1,
+      "E502": 2,
+      "E401": 1
+    },
+    "names_given_policy": 25,
+    "by_action": {
+      "reads": 21,
+      "writes": 4
+    },
+    "by_cause": {
+      "unprompted": 24,
+      "sop_mentions": 1
+    },
+    "column_status": 8,
+    "columns_in_no_training_program": 12,
+    "training_programs_using_status": 2254,
+    "training_programs": 2401
+  },
+  "memorisation": {
+    "v0.2": {
+      "reuse_about": 6,
+      "reuse_correct": 2,
+      "no_reuse": 104,
+      "no_reuse_correct": 32,
+      "structure_copied_ratio_ge_0.9": 3,
+      "median_skeleton_vs_training": 0.947,
+      "median_skeleton_vs_reference": 0.89
+    },
+    "q7b-v2-epoch1": {
+      "reuse_about": 28,
+      "reuse_correct": 12,
+      "no_reuse": 82,
+      "no_reuse_correct": 20,
+      "structure_copied_ratio_ge_0.9": 20,
+      "median_skeleton_vs_training": 0.945,
+      "median_skeleton_vs_reference": 0.91
+    },
+    "q7b-v2-epoch2": {
+      "reuse_about": 26,
+      "reuse_correct": 10,
+      "no_reuse": 84,
+      "no_reuse_correct": 22,
+      "structure_copied_ratio_ge_0.9": 19,
+      "median_skeleton_vs_training": 0.939,
+      "median_skeleton_vs_reference": 0.904
+    }
+  },
+  "checker_feedback_exploratory": {
+    "status": "EXPLORATORY (dev split, not pre-registered; not confirmatory)",
+    "q7b_v2_epoch2": {
+      "plain": {
+        "all": 32,
+        "non_trap": 28,
+        "trap": 4
+      },
+      "with_feedback": {
+        "all": 35,
+        "non_trap": 31,
+        "trap": 4
+      },
+      "outcomes_after_feedback": {
+        "wrong-effect": 49,
+        "correct": 35,
+        "E401": 16,
+        "parse": 4,
+        "E601": 4,
+        "E701": 1,
+        "E201": 1
+      }
+    },
+    "v0.2": {
+      "plain": {
+        "all": 34,
+        "non_trap": 31,
+        "trap": 3
+      },
+      "with_feedback": {
+        "all": 36,
+        "non_trap": 32,
+        "trap": 4
+      },
+      "outcomes_after_feedback": {
+        "correct": 36,
+        "wrong-effect": 27,
+        "parse": 27,
+        "E601": 7,
+        "E502": 5,
+        "E401": 4,
+        "E201": 2,
+        "E301": 1,
+        "E104": 1
+      }
+    },
+    "q7b_vs_v0.2_with_feedback": {
+      "a": "q7b-v2-epoch2",
+      "b": "v0.2",
+      "a_only": 16,
+      "b_only": 17,
+      "mcnemar_exact_p": 1.0
+    },
+    "monitor_problems": {
+      "q7b-v2-epoch2": 0,
+      "v0.2": 0
+    }
+  },
+  "known": [
+    "On the same 110 tasks, q7b-v2 epoch 2 hits E401 25 times and v0.2 3 times; where q7b-v2 hits E401, v0.2 hits it once, so the tasks do not force it.",
+    "In every E401 case the model names the given policy and then reads or writes a column that policy does not allow.",
+    "Outputs that reuse a training about line are not more often wrong.",
+    "With checker feedback both models gain a few tasks; the difference between them stays non-significant (exploratory)."
+  ],
+  "guesses": [
+    "The status column habit (status appears in most training programs) explains some E401 cases; the rest look like the model picking the column that sounds right over the allowed one. Not tested.",
+    "Whether the model copies whole training programs cannot be told apart from the common shape of Aether programs with the skeleton test."
+  ]
+}
