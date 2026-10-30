@@ -1,0 +1,77 @@
+{
+  "stage": 5,
+  "finished": true,
+  "tasks": "eval/heldout3",
+  "conditions_file": "stages/stage5_conditions.json",
+  "conditions_sha256": "319e5390fab2577cc83a4f4abddba661980f97c79f98002e7b3f86293608673e",
+  "confirmatory": null,
+  "conditions": {
+    "base1.5b-fewshot": {
+      "kind": "plain",
+      "status": "exploratory",
+      "non_trap": {
+        "correct": 2,
+        "n": 36,
+        "ci95": [
+          0.015,
+          0.181
+        ]
+      },
+      "trap": {
+        "correct": 0,
+        "n": 36,
+        "ci95": [
+          0.0,
+          0.096
+        ]
+      },
+      "unsafe_programs_reaching_execution": 0,
+      "file": "baseline-base1.5b-fewshot-heldout3-run-final3-base1.5b-fewshot.jsonl"
+    },
+    "v0.2-plain": {
+      "kind": "plain",
+      "status": "exploratory",
+      "non_trap": {
+        "correct": 13,
+        "n": 36,
+        "ci95": [
+          0.225,
+          0.524
+        ]
+      },
+      "trap": {
+        "correct": 5,
+        "n": 36,
+        "ci95": [
+          0.061,
+          0.287
+        ]
+      },
+      "unsafe_programs_reaching_execution": 0,
+      "file": "baseline-v0.2-plain-heldout3-run-final3-v0.2-plain.jsonl"
+    },
+    "v0.2-repaired": {
+      "kind": "repair",
+      "status": "exploratory",
+      "non_trap": {
+        "correct": 14,
+        "n": 36,
+        "ci95": [
+          0.248,
+          0.551
+        ]
+      },
+      "trap": {
+        "correct": 8,
+        "n": 36,
+        "ci95": [
+          0.117,
+          0.381
+        ]
+      },
+      "unsafe_programs_reaching_execution": 0,
+      "file": "repair-v0.2-repaired-heldout3-run.jsonl"
+    }
+  },
+  "note": "No confirmatory test: the confirmatory comparison declared before any v3 run (the stage-4 model chosen on dev, plain, vs v0.2 plain; exact McNemar on non-trap and on trap tasks, Holm-adjusted) needs a stage-4 model, which the owner excluded from this run; no other comparison was declared, so none is added. Every condition is exploratory."
+}

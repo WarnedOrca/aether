@@ -1,0 +1,9 @@
+{
+  "adapter": "outputs/ft-coder1.5b-v0.2/epoch2",
+  "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "plain": "<repo>\\eval\\results\\baseline-v0.2-plain-heldout3-run-final3-v0.2-plain.jsonl",
+  "tasks_dir": "eval/heldout3",
+  "label": "v0.2-repaired",
+  "rounds": 3,
+  "fewshot": 0
+}

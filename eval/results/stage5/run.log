@@ -7,3 +7,5 @@
 2026-10-29 22:41:58 INFO v0.2-plain: starting stages.gpu eval.baseline --model Qwen/Qwen2.5-Coder-1.5B-Instruct --tasks-dir eval/heldout3 --label v0.2-plain --fewshot 0 --suffix=-final3-v0.2-plain --batch 4 --out <repo>\eval\results\baseline-v0.2-plain-heldout3-run-final3-v0.2-plain --adapter outputs/ft-coder1.5b-v0.2/epoch2
 2026-10-29 22:45:57 INFO v0.2-plain: done in 239 s
 2026-10-29 22:45:57 INFO v0.2-repaired: starting stages.gpu eval.repair --model Qwen/Qwen2.5-Coder-1.5B-Instruct --tasks-dir eval/heldout3 --label v0.2-repaired --plain <repo>\eval\results\baseline-v0.2-plain-heldout3-run-final3-v0.2-plain.jsonl --batch 4 --out <repo>\eval\results\repair-v0.2-repaired-heldout3-run --adapter outputs/ft-coder1.5b-v0.2/epoch2
+2026-10-29 23:06:34 INFO v0.2-repaired: done in 1237 s
+2026-10-29 23:06:34 INFO done: null
