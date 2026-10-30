@@ -1,0 +1,9 @@
+{
+  "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "adapter": null,
+  "fewshot": 1,
+  "limit": 0,
+  "synthetic": 100,
+  "batch": 4,
+  "tasks_dir": "eval/heldout3"
+}

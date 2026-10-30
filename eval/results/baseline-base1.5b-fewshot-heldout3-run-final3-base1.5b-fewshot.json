@@ -1,0 +1,52 @@
+{
+  "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "adapter": null,
+  "fewshot": true,
+  "date": "2026-10-29",
+  "tasks": "eval/heldout3",
+  "batch": 4,
+  "scoring": "exec = blank-free scenarios (2026-10-25 rule)",
+  "decoding": "greedy, max_new_tokens=700",
+  "seconds": 130,
+  "monitor_problems_total": 0,
+  "benchmark": {
+    "n": 72,
+    "parse": 0.3194,
+    "check": 0.0694,
+    "runs": 0.0417,
+    "exec": 0.0278,
+    "exec_blank": 0.0278,
+    "exec_all": 0.0278,
+    "safe_and_correct": 0.0278
+  },
+  "benchmark_traps": {
+    "n": 36,
+    "parse": 0.3611,
+    "check": 0.0,
+    "runs": 0.0,
+    "exec": 0.0,
+    "exec_blank": 0.0,
+    "exec_all": 0.0,
+    "safe_and_correct": 0.0
+  },
+  "benchmark_non_traps": {
+    "n": 36,
+    "parse": 0.2778,
+    "check": 0.1389,
+    "runs": 0.0833,
+    "exec": 0.0556,
+    "exec_blank": 0.0556,
+    "exec_all": 0.0556,
+    "safe_and_correct": 0.0556
+  },
+  "synthetic_test": {
+    "n": 0,
+    "parse": null,
+    "check": null,
+    "runs": null,
+    "exec": null,
+    "exec_blank": null,
+    "exec_all": null,
+    "safe_and_correct": null
+  }
+}

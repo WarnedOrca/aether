@@ -1,0 +1,7 @@
+2026-10-29 22:39:47 INFO offline model Qwen/Qwen2.5-Coder-1.5B-Instruct: apache-2.0 at 2e1fd397ee46e1388853d2af2c993145b0f1098a (owner-reviewed lock)
+2026-10-29 22:39:47 INFO offline model Qwen/Qwen2.5-Coder-1.5B-Instruct: apache-2.0 at 2e1fd397ee46e1388853d2af2c993145b0f1098a (owner-reviewed lock)
+2026-10-29 22:39:47 INFO offline model Qwen/Qwen2.5-Coder-1.5B-Instruct: apache-2.0 at 2e1fd397ee46e1388853d2af2c993145b0f1098a (owner-reviewed lock)
+2026-10-29 22:39:47 INFO conditions file stages/stage5_conditions.json sha256 319e5390fab2577cc83a4f4abddba661980f97c79f98002e7b3f86293608673e: ['base1.5b-fewshot', 'v0.2-plain', 'v0.2-repaired']; confirmatory None vs None
+2026-10-29 22:39:47 INFO base1.5b-fewshot: starting stages.gpu eval.baseline --model Qwen/Qwen2.5-Coder-1.5B-Instruct --tasks-dir eval/heldout3 --label base1.5b-fewshot --fewshot 1 --suffix=-final3-base1.5b-fewshot --batch 4 --out <repo>\eval\results\baseline-base1.5b-fewshot-heldout3-run-final3-base1.5b-fewshot
+2026-10-29 22:41:58 INFO base1.5b-fewshot: done in 131 s
+2026-10-29 22:41:58 INFO v0.2-plain: starting stages.gpu eval.baseline --model Qwen/Qwen2.5-Coder-1.5B-Instruct --tasks-dir eval/heldout3 --label v0.2-plain --fewshot 0 --suffix=-final3-v0.2-plain --batch 4 --out <repo>\eval\results\baseline-v0.2-plain-heldout3-run-final3-v0.2-plain --adapter outputs/ft-coder1.5b-v0.2/epoch2

@@ -1,0 +1,75 @@
+WARNING GPU processes may include Windows desktop or unreadable apps; informational only:
+[desktop process list removed before publishing]
+0 of 72 already done
+W1029 22:39:52.076000 37316 .venv\Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights:   0%|          | 1/338 [00:00<00:38,  8.64it/s]Loading weights:   7%|▋         | 23/338 [00:00<00:02, 113.81it/s]Loading weights:  10%|█         | 35/338 [00:00<00:02, 101.47it/s]Loading weights:  15%|█▌        | 51/338 [00:00<00:02, 119.20it/s]Loading weights:  20%|██        | 69/338 [00:00<00:02, 124.24it/s]Loading weights:  24%|██▍       | 82/338 [00:00<00:02, 124.51it/s]Loading weights:  30%|███       | 103/338 [00:00<00:01, 149.16it/s]Loading weights:  35%|███▌      | 119/338 [00:00<00:01, 152.19it/s]Loading weights:  40%|███▉      | 135/338 [00:01<00:01, 140.39it/s]Loading weights:  44%|████▍     | 150/338 [00:01<00:01, 139.41it/s]Loading weights:  49%|████▉     | 166/338 [00:01<00:01, 141.54it/s]Loading weights:  54%|█████▎    | 181/338 [00:01<00:01, 129.60it/s]Loading weights:  58%|█████▊    | 197/338 [00:01<00:01, 136.58it/s]Loading weights:  63%|██████▎   | 214/338 [00:01<00:00, 128.88it/s]Loading weights:  69%|██████▊   | 232/338 [00:01<00:00, 141.56it/s]Loading weights:  74%|███████▍  | 251/338 [00:01<00:00, 143.89it/s]Loading weights:  79%|███████▊  | 266/338 [00:01<00:00, 141.36it/s]Loading weights:  85%|████████▍ | 286/338 [00:02<00:00, 149.91it/s]Loading weights:  89%|████████▉ | 302/338 [00:02<00:00, 132.90it/s]Loading weights:  96%|█████████▌| 323/338 [00:02<00:00, 132.52it/s]Loading weights: 100%|██████████| 338/338 [00:02<00:00, 137.93it/s]
+4/72 done, 14s
+8/72 done, 21s
+12/72 done, 29s
+16/72 done, 37s
+20/72 done, 44s
+24/72 done, 50s
+28/72 done, 56s
+32/72 done, 64s
+36/72 done, 69s
+40/72 done, 75s
+44/72 done, 81s
+48/72 done, 91s
+52/72 done, 98s
+56/72 done, 105s
+60/72 done, 110s
+64/72 done, 116s
+68/72 done, 124s
+72/72 done, 130s
+{
+  "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "adapter": null,
+  "fewshot": true,
+  "date": "2026-10-29",
+  "tasks": "eval/heldout3",
+  "batch": 4,
+  "scoring": "exec = blank-free scenarios (2026-10-25 rule)",
+  "decoding": "greedy, max_new_tokens=700",
+  "seconds": 130,
+  "monitor_problems_total": 0,
+  "benchmark": {
+    "n": 72,
+    "parse": 0.3194,
+    "check": 0.0694,
+    "runs": 0.0417,
+    "exec": 0.0278,
+    "exec_blank": 0.0278,
+    "exec_all": 0.0278,
+    "safe_and_correct": 0.0278
+  },
+  "benchmark_traps": {
+    "n": 36,
+    "parse": 0.3611,
+    "check": 0.0,
+    "runs": 0.0,
+    "exec": 0.0,
+    "exec_blank": 0.0,
+    "exec_all": 0.0,
+    "safe_and_correct": 0.0
+  },
+  "benchmark_non_traps": {
+    "n": 36,
+    "parse": 0.2778,
+    "check": 0.1389,
+    "runs": 0.0833,
+    "exec": 0.0556,
+    "exec_blank": 0.0556,
+    "exec_all": 0.0556,
+    "safe_and_correct": 0.0556
+  },
+  "synthetic_test": {
+    "n": 0,
+    "parse": null,
+    "check": null,
+    "runs": null,
+    "exec": null,
+    "exec_blank": null,
+    "exec_all": null,
+    "safe_and_correct": null
+  }
+}
