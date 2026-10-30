@@ -2,6 +2,19 @@
 
 Updated 2026-10-26 afternoon by Claude Code (unattended session below). That session supersedes the Codex morning notes: the snapshot blocker is fixed and stages 3-4 and the dev comparison were run. Historical results remain below. Agents: update this file at the end of every session (see `AGENTS.md`).
 
+## Session 5 (2026-10-29, Claude Code): finalise v0.2 and the one-time held-out v3 evaluation (IN PROGRESS)
+
+**Held-out v3 is used once; any later model change needs a new frozen held-out set first.**
+
+### If interrupted (computer shut down)
+(filled in step by step)
+
+### Step 1: pre-flight (CPU + a 2-task dev check), done 2026-10-29 22:40
+- `pytest -q`: 336 passed. `python -m eval.validate_tasks eval/heldout3`: 72 tasks, 36 traps, 18 businesses, 0 problems. `tests/test_heldout_frozen.py`: 3 passed (frozen hashes unchanged).
+- `models.lock.json` has a reviewed entry for v0.2's base, Qwen/Qwen2.5-Coder-1.5B-Instruct, revision `2e1fd397ee46e1388853d2af2c993145b0f1098a`, apache-2.0 (licence check: `eval/results/licence-check-older-bases-2026-10-28.json`).
+- v0.2 adapter `outputs/ft-coder1.5b-v0.2/epoch2/adapter_model.safetensors` sha256 `e3dd973d3d19d99629fe235d87a2101940c4ac8b75bbd28050c857f5c1323dc3`, identical to the released adapter recorded in `eval/results/ft/LOCAL_ARTIFACTS.md`.
+- Offline end-to-end check on 2 DEV tasks (not held-out): `HF_HOME=$HOME/.cache/huggingface HF_HUB_OFFLINE=1 python -m stages.gpu eval.baseline --model Qwen/Qwen2.5-Coder-1.5B-Instruct --adapter outputs/ft-coder1.5b-v0.2/epoch2 --fewshot 0 --tasks-dir eval/benchmark --limit 2` -> exit 0, licence read from the lock, model and adapter loaded with no network. **Nothing is missing.** Stage 5 must run with `HF_HOME=$HOME/.cache/huggingface` (the 1.5B model is in the default cache, not the repo's `.hf-cache`).
+
 ## Session 4 (2026-10-28 to 2026-10-29, Claude Code): counterfactual "forbidden column" data, retrain, dev eval (DONE)
 
 **Short version:** adding script-made training programs where the obvious column is NOT allowed cut the forbidden-column errors (E401) on dev from 25 to 13, and forbidden `status` reads from 8 to 2. But the model did not get better overall: q7b-v3 epoch 2 solves 33 of 110 (v0.2: 34, exact McNemar p = 1.0); trap tasks went up (4 -> 9 of 30) and non-trap tasks went down (28 -> 24 of 80), and "passes the checker but does the wrong thing" went up (36 -> 50). With checker feedback: 36 vs 36 (p = 1.0, exploratory). Not a candidate for the held-out v3 run. All numbers: `eval/results/session4-findings.json` and the files it is built from. GPU idle; stage 5 not run; held-out sets and `stages/stage5_conditions.json` untouched.
