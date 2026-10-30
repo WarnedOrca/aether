@@ -26,7 +26,7 @@ Each task asks for something the policy forbids or Aether cannot do. The correct
 - **Negative result:** adding {n_traps} targeted trap samples did **not** improve held-out performance. v0.2 vs v0.1: {h_v2} vs {h_v1}, paired exact McNemar p = {p_v2_v1}.
 - v0.2 vs the base model: p = {p_v2_base}.
 - Novel trap types absent from all training data (delete rows, raise a limit): 0/4 for every system.
-- In every evaluation, the checker blocked every program that broke a rule, and programs it accepted had 0 monitor violations. The model by itself solves {h_v2}/30 held-out traps.
+- In every evaluation, the programs the checker accepted had 0 monitor violations when run on generated test data. The model by itself solves {h_v2}/30 held-out traps.
 
 ## Held-out v2 (90 tasks, 30 traps, 15 new business types; each condition run once)
 
@@ -39,7 +39,7 @@ A second frozen set, written and hashed before any v0.3 training or tuning. Same
 - **Pre-registered primary comparison (null result):** v0.3 with checker feedback vs this adapter (v0.2) plain: {v2_pa} vs {v2_pb}, paired exact McNemar p = {v2_pp}. The new data plus checker feedback did **not** improve on v0.2.
 - v0.2 plain vs the base model: {v2_v2} vs {v2_base} (paired p = {v2_p_base}; this test was not pre-registered).
 - Everything else in this table is exploratory. "With checker feedback" means up to 3 extra attempts in which the model sees the parser and checker errors; it is reported separately from plain output. "Grammar-constrained" means decoding restricted to tokens the Aether grammar allows.
-- **v0.3 is not released.** It is a negative result: it adds 1,232 generated samples from 30 more business types, scores 100/100 on its synthetic test split (as v0.2 does), and does worse than v0.2 on new SOPs, which suggests the generated data teaches the generator's templates more than reading real SOPs.
+- **v0.3 is not released.** It is a negative result: it adds 1,232 generated samples from 30 more business types, scores 100/100 on its synthetic test split (as v0.2 does), and solves fewer held-out v2 tasks than v0.2 (not significant in the pre-registered test), which may suggest the generated data teaches the generator's templates more than reading real SOPs.
 
 ## Development benchmark (110 tasks, used during development)
 
@@ -64,8 +64,8 @@ After v0.2, three QLoRA adapters on Qwen2.5-Coder-7B-Instruct were trained on ne
 | q7b-v3 | q7b-v2 data + 950 rows where the obvious column is not allowed | 29, 33 | 1.0 | `eval/results/dev-report-q7b-v3-session4.json` |
 
 - With checker feedback on dev (exploratory): q7b-v2 epoch 2 35/110 and q7b-v3 epoch 2 36/110, against v0.2 36/110 (p = 1.0 both; `eval/results/dev-repair-compare-2026-10-28.json`, `eval/results/dev-repair-compare-session4.json`).
-- The 7B adapters almost always write code that parses, but more of it reads columns the policy forbids (21-25 of 110 for q7b-v1 and q7b-v2, against 3 for v0.2) or does the wrong thing. Training on programs where the obvious column is not allowed (q7b-v3) cut forbidden-column errors to 13 but did not raise the score.
-- In all of these runs the checker blocked every program that broke a rule, and accepted programs caused 0 monitor problems.
+- The 7B adapters' output parses more often (94.5-98.2% of the 110 tasks, against 78.2% for v0.2), but more of it reads or writes columns the policy does not allow (21-25 of 110 for q7b-v1 and q7b-v2, against 3 for v0.2) or does the wrong thing. q7b-v3, trained with programs where the obvious column is not allowed, had 13 such errors (q7b-v2: 25) and 33/110 correct (q7b-v2: 32); with one training run each, neither difference is a tested effect.
+- In all of these runs, the programs the checker accepted caused 0 monitor problems.
 
 ## Training
 

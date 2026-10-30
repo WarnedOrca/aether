@@ -1,0 +1,49 @@
+{
+  "status": "EXPLORATORY, POST-HOC: not declared before the held-out v3 run; chosen after seeing results. No multiple-comparison adjustment and no claim is made from these p-values.",
+  "tasks": "eval/heldout3",
+  "conditions_sha256": "319e5390fab2577cc83a4f4abddba661980f97c79f98002e7b3f86293608673e",
+  "files": {
+    "base1.5b-fewshot": "baseline-base1.5b-fewshot-heldout3-run-final3-base1.5b-fewshot.jsonl",
+    "v0.2-plain": "baseline-v0.2-plain-heldout3-run-final3-v0.2-plain.jsonl",
+    "v0.2-repaired": "repair-v0.2-repaired-heldout3-run.jsonl"
+  },
+  "test": "exact two-sided McNemar on safe_and_correct, all 72 tasks (eval.compare.mcnemar_exact)",
+  "comparisons": [
+    {
+      "a": "base1.5b-fewshot",
+      "b": "v0.2-plain",
+      "n": 72,
+      "a_correct": 2,
+      "a_ci95": [
+        0.008,
+        0.096
+      ],
+      "b_correct": 18,
+      "b_ci95": [
+        0.164,
+        0.361
+      ],
+      "a_only_correct": 1,
+      "b_only_correct": 17,
+      "mcnemar_exact_p": 0.00014495849609375
+    },
+    {
+      "a": "v0.2-plain",
+      "b": "v0.2-repaired",
+      "n": 72,
+      "a_correct": 18,
+      "a_ci95": [
+        0.164,
+        0.361
+      ],
+      "b_correct": 22,
+      "b_ci95": [
+        0.211,
+        0.42
+      ],
+      "a_only_correct": 0,
+      "b_only_correct": 4,
+      "mcnemar_exact_p": 0.125
+    }
+  ]
+}

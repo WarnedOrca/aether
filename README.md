@@ -4,7 +4,7 @@ An original programming language for **verifiable business procedures**, plus a 
 
 **What it is:** an open benchmark, a small model, and a checker. It is not a new safety paradigm. The checker verifies a fixed set of named rules for this language only; see `spec/SPEC.md` sections 5 and 13.
 
-**Main contribution: the checker.** In every evaluation, the checker blocked every program that broke a rule, and the programs it accepted had 0 monitor violations. The released model (v0.2) solves only 6/30 held-out trap tasks by itself. Neither the model nor the system should be called "safe"; the narrow claim is that the checker verifies rules C1-C8 for Aether programs.
+**Main contribution: the checker.** In every evaluation, the programs the checker accepted had 0 monitor violations when run on generated test data. The released model (v0.2) solves only 6/30 held-out trap tasks by itself. Neither the model nor the system should be called "safe"; the narrow claim is that the checker verifies rules C1-C8 for Aether programs.
 
 ## Links
 
@@ -27,7 +27,7 @@ An original programming language for **verifiable business procedures**, plus a 
 | v0.1 LoRA (synthetic data) | 6/30 | 0.10-0.37 |
 | **v0.2 LoRA (+ 413 trap samples), released** | **6/30** | 0.10-0.37 |
 
-Negative result: the 413 targeted trap samples did not improve held-out performance (v0.2 vs v0.1: 6 vs 6, paired exact McNemar p = 1.0). Both LoRAs beat the base model (p = 0.031). Novel trap types absent from training: 0/4 for all.
+Negative result: the 413 targeted trap samples did not improve held-out performance (v0.2 vs v0.1: 6 vs 6, paired exact McNemar p = 1.0). Both LoRAs solved more tasks than the base model (6 vs 0, paired exact McNemar p = 0.031). Novel trap types absent from training: 0/4 for all.
 
 **Held-out v2** (90 tasks, 30 traps, 15 new business types; frozen before any v0.3 training; each condition run once; plan pre-registered):
 
@@ -41,9 +41,9 @@ Negative result: the 413 targeted trap samples did not improve held-out performa
 | v0.3 with checker feedback, not released (pre-registered primary) | 15 | 0.10-0.26 | 3 |
 | v0.3 grammar-constrained, not released (exploratory) | 15 | 0.10-0.26 | 3 |
 
-Pre-registered primary comparison, **null result:** v0.3 with checker feedback vs v0.2 plain, 15 vs 20, paired exact McNemar p = 0.33. v0.3 (more varied generated data) is an unreleased negative result: 100/100 on its synthetic test (as v0.2 is), worse on new SOPs. "With checker feedback" = up to 3 retries that see parser and checker errors; always reported separately from plain output. Details: [docs/RESULTS.md](docs/RESULTS.md).
+Pre-registered primary comparison, **null result:** v0.3 with checker feedback vs v0.2 plain, 15 vs 20, paired exact McNemar p = 0.33. v0.3 (more varied generated data) is an unreleased negative result: 100/100 on its synthetic test (as v0.2 is), but fewer held-out v2 tasks solved than v0.2 (14 vs 20 plain; the pre-registered test above was not significant). "With checker feedback" = up to 3 retries that see parser and checker errors; always reported separately from plain output. Details: [docs/RESULTS.md](docs/RESULTS.md).
 
-**Held-out v3** (72 tasks, 36 traps, 18 new business types; the one-time final run of the released v0.2, 2026-10-29; each condition run once): base model with 3 examples 2/72 (95% CI 0.01-0.10); **v0.2 plain 18/72** (0.16-0.36; 13/36 ordinary tasks, 5/36 traps); v0.2 with checker feedback 22/72 (0.21-0.42). No confirmatory test was run (the declared comparison needed a 7B model; none beat v0.2 on dev). The checker's accepted programs caused 0 monitor problems. Source: `eval/results/stage5/`.
+**Held-out v3** (72 tasks, 36 traps, 18 new business types; the one-time final run of the released v0.2, 2026-10-29; each condition run once): base model with 3 examples 2/72 (95% CI 0.01-0.10); **v0.2 plain 18/72** (0.16-0.36; 13/36 ordinary tasks, 5/36 traps); v0.2 with checker feedback 22/72 (0.21-0.42). No confirmatory test was run (the declared comparison needed a 7B model; none beat v0.2 on dev). Post-hoc and exploratory only (not declared before the run): base vs v0.2 plain, exact McNemar p = 0.00015; v0.2 plain vs with feedback, p = 0.125 (not significant); `eval/results/stage5-posthoc.json`. The checker's accepted programs caused 0 monitor problems. Source: `eval/results/stage5/`.
 
 **Development benchmark: 110 tasks, used during development** (scorer design, SOP wording, and model comparison, so not a clean test): base with 3 examples 3/110; v0.1 30/110; v0.2 34/110 (v0.2 vs v0.1 p = 0.48).
 
@@ -60,8 +60,8 @@ After v0.2, three QLoRA adapters on Qwen2.5-Coder-7B-Instruct were trained on ne
 | q7b-v3 | q7b-v2 data + 950 rows where the obvious column is not allowed | 29, 33 | 1.0 | `eval/results/dev-report-q7b-v3-session4.json` |
 
 - With checker feedback on dev (exploratory): q7b-v2 epoch 2 35/110 and q7b-v3 epoch 2 36/110, against v0.2 36/110 (p = 1.0 both; `eval/results/dev-repair-compare-2026-10-28.json`, `eval/results/dev-repair-compare-session4.json`).
-- The 7B adapters almost always write code that parses, but more of it reads columns the policy forbids (21-25 of 110 for q7b-v1 and q7b-v2, against 3 for v0.2) or does the wrong thing. Training on programs where the obvious column is not allowed (q7b-v3) cut forbidden-column errors to 13 but did not raise the score.
-- In all of these runs the checker blocked every program that broke a rule, and accepted programs caused 0 monitor problems.
+- The 7B adapters' output parses more often (94.5-98.2% of the 110 tasks, against 78.2% for v0.2), but more of it reads or writes columns the policy does not allow (21-25 of 110 for q7b-v1 and q7b-v2, against 3 for v0.2) or does the wrong thing. q7b-v3, trained with programs where the obvious column is not allowed, had 13 such errors (q7b-v2: 25) and 33/110 correct (q7b-v2: 32); with one training run each, neither difference is a tested effect.
+- In all of these runs, the programs the checker accepted caused 0 monitor problems.
 
 ## Idea
 

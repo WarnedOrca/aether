@@ -236,3 +236,14 @@ def test_stage5_without_confirmatory_reports_all_exploratory(tmp_path, monkeypat
     assert len(calls) == 3
     s5.main()  # rerun after finishing: nothing runs again
     assert len(calls) == 3
+
+
+def test_stage5_posthoc_paired_counts():
+    from eval.stage5_posthoc import paired
+    a = {"t1": True, "t2": False, "t3": False, "t4": True}
+    b = {"t1": True, "t2": True, "t3": True, "t4": False}
+    r = paired("a", a, "b", b)
+    assert (r["a_correct"], r["b_correct"], r["a_only_correct"], r["b_only_correct"]) == (2, 3, 1, 2)
+    assert r["mcnemar_exact_p"] == 1.0
+    with pytest.raises(ValueError, match="different tasks"):
+        paired("a", a, "b", {"t1": True})

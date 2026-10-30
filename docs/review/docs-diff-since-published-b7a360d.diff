@@ -1,0 +1,117 @@
+diff --git a/README.md b/README.md
+index bf98f26..8ba552c 100644
+--- a/README.md
++++ b/README.md
+@@ -43,10 +43,26 @@ Negative result: the 413 targeted trap samples did not improve held-out performa
+ 
+ Pre-registered primary comparison, **null result:** v0.3 with checker feedback vs v0.2 plain, 15 vs 20, paired exact McNemar p = 0.33. v0.3 (more varied generated data) is an unreleased negative result: 100/100 on its synthetic test (as v0.2 is), worse on new SOPs. "With checker feedback" = up to 3 retries that see parser and checker errors; always reported separately from plain output. Details: [docs/RESULTS.md](docs/RESULTS.md).
+ 
++**Held-out v3** (72 tasks, 36 traps, 18 new business types; the one-time final run of the released v0.2, 2026-10-29; each condition run once): base model with 3 examples 2/72 (95% CI 0.01-0.10); **v0.2 plain 18/72** (0.16-0.36; 13/36 ordinary tasks, 5/36 traps); v0.2 with checker feedback 22/72 (0.21-0.42). No confirmatory test was run (the declared comparison needed a 7B model; none beat v0.2 on dev). The checker's accepted programs caused 0 monitor problems. Source: `eval/results/stage5/`.
++
+ **Development benchmark: 110 tasks, used during development** (scorer design, SOP wording, and model comparison, so not a clean test): base with 3 examples 3/110; v0.1 30/110; v0.2 34/110 (v0.2 vs v0.1 p = 0.48).
+ 
+ **Limitations:** all benchmark and held-out tasks were drafted by Claude (an AI assistant), not taken from real businesses. The training English is templated. Evaluation sets are small, with wide intervals, and there is one seed per model. All external actions are mocked.
+ 
++## Larger-model experiments (7B, development benchmark only): negative results
++
++After v0.2, three QLoRA adapters on Qwen2.5-Coder-7B-Instruct were trained on new data whose English was written by a locally run open model (Qwen2.5-7B-Instruct) from script-made programs. None was better than v0.2 on the 110-task development benchmark, so **none was released and none was evaluated on a held-out set.** Same scorer, greedy decoding, paired exact McNemar against v0.2 (34/110).
++
++| Adapter (7B) | Training data | Correct /110 (epoch 1, epoch 2) | p vs v0.2 (epoch 2) | Source |
++|---|---|---|---|---|
++| q7b-v1 | 898 local-model wordings of 515 programs | 26, 30 | 0.60 | `eval/results/compare-dev-v0.2-vs-q7b-epoch*-2026-10-26.json` |
++| q7b-v2 | 2,401 wordings of 1,519 programs (mislabelled trap rows removed) | 32, 32 | 0.85 | `eval/results/dev-report-q7b-v2-2026-10-27.json` |
++| q7b-v3 | q7b-v2 data + 950 rows where the obvious column is not allowed | 29, 33 | 1.0 | `eval/results/dev-report-q7b-v3-session4.json` |
++
++- With checker feedback on dev (exploratory): q7b-v2 epoch 2 35/110 and q7b-v3 epoch 2 36/110, against v0.2 36/110 (p = 1.0 both; `eval/results/dev-repair-compare-2026-10-28.json`, `eval/results/dev-repair-compare-session4.json`).
++- The 7B adapters almost always write code that parses, but more of it reads columns the policy forbids (21-25 of 110 for q7b-v1 and q7b-v2, against 3 for v0.2) or does the wrong thing. Training on programs where the obvious column is not allowed (q7b-v3) cut forbidden-column errors to 13 but did not raise the score.
++- In all of these runs the checker blocked every program that broke a rule, and accepted programs caused 0 monitor problems.
++
+ ## Idea
+ 
+ 1. A business owner writes a procedure in English.
+diff --git a/docs/RESULTS.md b/docs/RESULTS.md
+index 87b0f20..cd9d00d 100644
+--- a/docs/RESULTS.md
++++ b/docs/RESULTS.md
+@@ -49,6 +49,20 @@ Paired exact McNemar tests (`eval/results/ft/heldout-*.json`):
+ - **v0.3** (`eval/results/ft/ft-coder1.5b-v0.3-run.json`): the v0.2 recipe plus 1,232 checker-verified samples from 30 new business types (`data/synthetic_v3/`), 3,294 training examples. Like v0.1 and v0.2, it scores 100/100 on its synthetic test split, but lower than v0.2 on held-out v2 and on the development benchmark (26/110 vs 34/110). Our reading (a hypothesis, not tested): the generated data teaches the generator's templates more than reading real SOPs. **v0.3 is not released.**
+ - Development-only results that came before the held-out run: checker feedback on the 110-task benchmark, v0.2 34 -> 36; grammar-constrained, 33 (parse rate 0.78 -> 0.88).
+ 
++## 1c. Held-out v3: 72 tasks, the one-time final run of v0.2 (2026-10-29)
++
++72 tasks (36 traps, 36 general) in 18 business types not used anywhere else (`eval/heldout3/`, SHA-256 in `FROZEN.md`), drafted by Claude and frozen before any 7B training. Each condition was run exactly once (`stages/stage5_eval.py`, conditions committed first: `stages/stage5_conditions.json`). Results: `eval/results/stage5/summary.json` and `eval/results/stage5/report.json`.
++
++| System | correct (of 72) | 95% CI | non-trap (of 36) | traps (of 36) | parse |
++|---|---|---|---|---|---|
++| Base model, reference card + 3 examples | 2 | 0.01-0.10 | 2 | 0 | 0.32 |
++| **v0.2 plain (released)** | **18** | 0.16-0.36 | 13 | 5 | 0.81 |
++| v0.2 with checker feedback | 22 | 0.21-0.42 | 14 | 8 | 0.79 |
++
++- **No confirmatory test.** The comparison declared before this run (the 7B model chosen on dev vs v0.2 plain) needed a 7B adapter; none was better than v0.2 on dev, so the owner excluded them and no other test was declared. All rows are descriptive.
++- The checker rejected 18, 25 and 20 parsed programs in the three conditions, and the programs it accepted caused 0 monitor problems.
++- Held-out v3 is now used. Any later model change needs a new frozen held-out set first.
++
+ ## 2. Development benchmark: 110 tasks, used during development
+ 
+ This benchmark was used to build and debug the scorer, the blank-cell rule, and the SOP wording, and to compare models during development. Treat it as a development set, not a clean test.
+@@ -65,6 +79,20 @@ This benchmark was used to build and debug the scorer, the blank-cell rule, and
+ 
+ v0.1 vs the base model with 3 examples: 30 vs 3, exact McNemar p = 1.4e-6. v0.2 vs v0.1: 34 vs 30, p = 0.48 (not significant).
+ 
++## Larger-model experiments (7B, development benchmark only): negative results
++
++After v0.2, three QLoRA adapters on Qwen2.5-Coder-7B-Instruct were trained on new data whose English was written by a locally run open model (Qwen2.5-7B-Instruct) from script-made programs. None was better than v0.2 on the 110-task development benchmark, so **none was released and none was evaluated on a held-out set.** Same scorer, greedy decoding, paired exact McNemar against v0.2 (34/110).
++
++| Adapter (7B) | Training data | Correct /110 (epoch 1, epoch 2) | p vs v0.2 (epoch 2) | Source |
++|---|---|---|---|---|
++| q7b-v1 | 898 local-model wordings of 515 programs | 26, 30 | 0.60 | `eval/results/compare-dev-v0.2-vs-q7b-epoch*-2026-10-26.json` |
++| q7b-v2 | 2,401 wordings of 1,519 programs (mislabelled trap rows removed) | 32, 32 | 0.85 | `eval/results/dev-report-q7b-v2-2026-10-27.json` |
++| q7b-v3 | q7b-v2 data + 950 rows where the obvious column is not allowed | 29, 33 | 1.0 | `eval/results/dev-report-q7b-v3-session4.json` |
++
++- With checker feedback on dev (exploratory): q7b-v2 epoch 2 35/110 and q7b-v3 epoch 2 36/110, against v0.2 36/110 (p = 1.0 both; `eval/results/dev-repair-compare-2026-10-28.json`, `eval/results/dev-repair-compare-session4.json`).
++- The 7B adapters almost always write code that parses, but more of it reads columns the policy forbids (21-25 of 110 for q7b-v1 and q7b-v2, against 3 for v0.2) or does the wrong thing. Training on programs where the obvious column is not allowed (q7b-v3) cut forbidden-column errors to 13 but did not raise the score.
++- In all of these runs the checker blocked every program that broke a rule, and accepted programs caused 0 monitor problems.
++
+ ## 3. Checker and interpreter
+ 
+ | Check | Result | Source |
+@@ -87,5 +115,7 @@ These results support only this statement: the checker verifies core rules C1-C8
+ - All benchmark and held-out tasks were drafted by Claude (an AI assistant), not taken from real businesses.
+ - The training English is templated (rule-based generator). Most held-out failures are general errors on unfamiliar businesses.
+ - Small evaluation sets with wide intervals; one training seed per model.
+-- Both held-out sets are now used (v1 once per model; v2 once per condition). Model work is stopped; any further model change needs a new held-out set.
++- All three held-out sets are now used (v1 once per model; v2 and v3 once per condition). Any further model change needs a new frozen held-out set first.
+ - All external actions are mocked. The checker's guarantees cover only rules C1-C8, under the trust assumptions in `spec/SPEC.md` section 5.
++
++Provenance clarification: the older rule-based generator's template sentences in `data/gen/*.py` were typed by Claude Code, an AI coding assistant. Script execution produced the older training examples, but their English templates were AI-authored. The owner has decided that stage 4 will train only on `data/synthetic_v4`, whose wordings come from a locally run open-weight model. This note changes no published results.
+diff --git a/release/templates/model_card.md b/release/templates/model_card.md
+index 39ad506..c14a94e 100644
+--- a/release/templates/model_card.md
++++ b/release/templates/model_card.md
+@@ -53,6 +53,20 @@ This benchmark was used to build the scorer and compare models during developmen
+ 
+ v0.2 vs v0.1: paired p = {p_dev}.
+ 
++## Larger-model experiments (7B, development benchmark only): negative results
++
++After v0.2, three QLoRA adapters on Qwen2.5-Coder-7B-Instruct were trained on new data whose English was written by a locally run open model (Qwen2.5-7B-Instruct) from script-made programs. None was better than v0.2 on the 110-task development benchmark, so **none was released and none was evaluated on a held-out set.** Same scorer, greedy decoding, paired exact McNemar against v0.2 (34/110).
++
++| Adapter (7B) | Training data | Correct /110 (epoch 1, epoch 2) | p vs v0.2 (epoch 2) | Source |
++|---|---|---|---|---|
++| q7b-v1 | 898 local-model wordings of 515 programs | 26, 30 | 0.60 | `eval/results/compare-dev-v0.2-vs-q7b-epoch*-2026-10-26.json` |
++| q7b-v2 | 2,401 wordings of 1,519 programs (mislabelled trap rows removed) | 32, 32 | 0.85 | `eval/results/dev-report-q7b-v2-2026-10-27.json` |
++| q7b-v3 | q7b-v2 data + 950 rows where the obvious column is not allowed | 29, 33 | 1.0 | `eval/results/dev-report-q7b-v3-session4.json` |
++
++- With checker feedback on dev (exploratory): q7b-v2 epoch 2 35/110 and q7b-v3 epoch 2 36/110, against v0.2 36/110 (p = 1.0 both; `eval/results/dev-repair-compare-2026-10-28.json`, `eval/results/dev-repair-compare-session4.json`).
++- The 7B adapters almost always write code that parses, but more of it reads columns the policy forbids (21-25 of 110 for q7b-v1 and q7b-v2, against 3 for v0.2) or does the wrong thing. Training on programs where the obvious column is not allowed (q7b-v3) cut forbidden-column errors to 13 but did not raise the score.
++- In all of these runs the checker blocked every program that broke a rule, and accepted programs caused 0 monitor problems.
++
+ ## Training
+ 
+ The v0.1 recipe (LoRA rank {rank}, learning rate {lr}, {epochs} epochs, seed 42; only the program tokens are trained) on {n_train} verified examples: {n_base} synthetic plus {n_traps} trap-style. Training took {minutes} minutes on one {gpu}, at $0. The checkpoint was chosen by validation loss.
+@@ -64,3 +78,5 @@ The v0.1 recipe (LoRA rank {rank}, learning rate {lr}, {epochs} epochs, seed 42;
+ - Small evaluation sets with wide intervals; one training seed per model.
+ - Aether's external actions (messages, money, calendars) are mocked. This is research software.
+ - Do not describe this model, or Aether as a whole, as "safe". The narrow claim is that the checker verifies the named rules C1-C8 for Aether programs (see the specification).
++
++Provenance clarification: the older rule-based generator's template sentences in `data/gen/*.py` were typed by Claude Code, an AI coding assistant. Script execution produced the older training examples, but their English templates were AI-authored. The owner has decided that stage 4 will train only on `data/synthetic_v4`, whose wordings come from a locally run open-weight model. This note changes no published results.
