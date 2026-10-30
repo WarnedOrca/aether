@@ -1,0 +1,29 @@
+{
+  "label": "q7b-v3-epoch2-dev",
+  "adapter": "outputs/qlora-7b-v3/epoch2",
+  "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+  "tasks": "eval/benchmark",
+  "n": 110,
+  "rounds_max": 3,
+  "date": "2026-10-29",
+  "seconds": 893,
+  "feedback": "parser + checker only",
+  "order": "one task at a time (all rounds), saved after each task",
+  "plain": {
+    "parse": 0.9545,
+    "check": 0.7636,
+    "exec": 0.3,
+    "safe_and_correct": 0.3
+  },
+  "repaired": {
+    "parse": 0.9545,
+    "check": 0.8636,
+    "exec": 0.3273,
+    "safe_and_correct": 0.3273
+  },
+  "plain_correct": 33,
+  "repaired_correct": 36,
+  "plain_traps": 0.3,
+  "repaired_traps": 0.3,
+  "monitor_problems_total": 0
+}

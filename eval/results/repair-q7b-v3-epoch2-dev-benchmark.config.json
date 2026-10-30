@@ -1,0 +1,9 @@
+{
+  "adapter": "outputs/qlora-7b-v3/epoch2",
+  "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+  "plain": "eval/results/baseline-q7b-v3-epoch2-dev-benchmark.jsonl",
+  "tasks_dir": "eval/benchmark",
+  "label": "q7b-v3-epoch2-dev",
+  "rounds": 3,
+  "fewshot": 0
+}
