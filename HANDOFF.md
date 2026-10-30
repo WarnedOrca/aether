@@ -2,14 +2,16 @@
 
 Updated 2026-10-26 afternoon by Claude Code (unattended session below). That session supersedes the Codex morning notes: the snapshot blocker is fixed and stages 3-4 and the dev comparison were run. Historical results remain below. Agents: update this file at the end of every session (see `AGENTS.md`).
 
-## Session 4 (2026-10-28 evening, Claude Code): counterfactual "forbidden column" data, retrain, dev eval (IN PROGRESS)
+## Session 4 (2026-10-28 to 2026-10-29, Claude Code): counterfactual "forbidden column" data, retrain, dev eval (DONE)
+
+**Short version:** adding script-made training programs where the obvious column is NOT allowed cut the forbidden-column errors (E401) on dev from 25 to 13, and forbidden `status` reads from 8 to 2. But the model did not get better overall: q7b-v3 epoch 2 solves 33 of 110 (v0.2: 34, exact McNemar p = 1.0); trap tasks went up (4 -> 9 of 30) and non-trap tasks went down (28 -> 24 of 80), and "passes the checker but does the wrong thing" went up (36 -> 50). With checker feedback: 36 vs 36 (p = 1.0, exploratory). Not a candidate for the held-out v3 run. All numbers: `eval/results/session4-findings.json` and the files it is built from. GPU idle; stage 5 not run; held-out sets and `stages/stage5_conditions.json` untouched.
 
 Goal (owner): test whether the E401 (forbidden column) errors come from training data where the obvious column is always allowed. Dev split only; stage 5 not run; held-out sets and `stages/stage5_conditions.json` untouched.
 
 ### If interrupted (computer shut down)
 Every step is committed when it finishes. Resume from the first unfinished step (check `git log --oneline -10` and `nvidia-smi`; one GPU job at a time):
 1. Counterfactual programs: DONE (`data/synthetic_cf`, commit after this note).
-2-3-5. **One command does everything that is left, in order, and can be rerun at any time:** `bash eval/run_session4_chain.sh` (from the repo root in Git Bash). It skips finished steps, resumes unfinished ones and commits each result locally: stage 3 wordings for the counterfactual programs (`data/synthetic_v4_cf`, resumes per wording) -> quality gate + merge into `data/synthetic_v4` -> stage 4 into `outputs/qlora-7b-v3` (checkpoint every 25 steps, resumes) -> plain dev eval of epoch 1 and 2 (`eval/results/baseline-q7b-v3-epoch*-dev-benchmark.*`, saved every batch of 2 tasks, resumes) -> checker-feedback run on the epoch with more plain correct (`eval/results/repair-q7b-v3-*-dev-benchmark.*`, saved every task, resumes) -> reports (`eval/results/*-session4.json`). Progress: `cat logs/session4-chain.log`. If a step says STOP, read the matching `logs/*.err`.
+2-3-5. DONE. **One command did everything after step 1, in order, and can be rerun at any time:** `bash eval/run_session4_chain.sh` (from the repo root in Git Bash). It skips finished steps, resumes unfinished ones and commits each result locally: stage 3 wordings for the counterfactual programs (`data/synthetic_v4_cf`, resumes per wording) -> quality gate + merge into `data/synthetic_v4` -> stage 4 into `outputs/qlora-7b-v3` (checkpoint every 25 steps, resumes) -> plain dev eval of epoch 1 and 2 (`eval/results/baseline-q7b-v3-epoch*-dev-benchmark.*`, saved every batch of 2 tasks, resumes) -> checker-feedback run on the epoch with more plain correct (`eval/results/repair-q7b-v3-*-dev-benchmark.*`, saved every task, resumes) -> reports (`eval/results/*-session4.json`). Progress: `cat logs/session4-chain.log`. If a step says STOP, read the matching `logs/*.err`.
 4. Lock entries: DONE.
 - **Interruption 1 (2026-10-28 night):** the computer was shut down during training at step 121 of 420 (checkpoint `ckpt-100` intact). On 2026-10-29 17:36 the GPU had only 9,900-9,986 MiB free (other Windows desktop apps), below the guard's 10,240 MiB; I did not lower the guard or close any app. `bash eval/run_session4_when_gpu_free.sh` waits until at least 10,400 MiB are free and then runs the chain (which resumes training from the newest checkpoint). If it keeps waiting, closing another desktop app frees enough memory.
 
@@ -19,6 +21,35 @@ Every step is committed when it finishes. Resume from the first unfinished step 
 - **Step 2 (wordings), done:** stage 3 with the same local Qwen2.5-7B-Instruct (a09a35458c, 4-bit), prompt p2 and the tightened trap filter, 3 wordings per counterfactual program, into `data/synthetic_v4_cf`: **1,028 of 1,602 accepted (64.2%)**; rejected: missing numbers 329, length 122, trap ask missing 76, invented numbers 30, code in text 17 (`eval/results/stage3-quality-gate-cf-session4.json`; its near-copy check is empty because the counterfactual seeds have no generator English). `stages/merge_cf.py` rebuilt `data/synthetic_v4` train/valid as the unchanged old accepted rows (2,401 / 199) plus the new ones (950 / 78): **new rows = 28.3% of the data** (target 25-30%), 344 of the new rows are trap wordings. Each new row carries the counterfactual provenance (seed program, forbidden column, dropped condition). Stage 4 refuses other data folders, so merging into `data/synthetic_v4` was the only way to train on both without weakening that guard.
 - **Step 4 (lock entries), done:** the licence was read from each model's Hugging Face card metadata (anonymous, `huggingface_hub.model_info`, no token) at the exact revision in the local cache: Qwen2.5-Coder-1.5B-Instruct `2e1fd397ee46e1388853d2af2c993145b0f1098a` and Qwen2.5-Coder-0.5B-Instruct `ea3f2471cf1b1f0db85067f1ef93848e38e88c25` are both **apache-2.0**, and both cached revisions equal the current `main` (`eval/results/licence-check-older-bases-2026-10-28.json`). Both were added to `models.lock.json` with the full revision. Offline check: `stages.common.check_license` and an offline tokenizer load work for both. **Note:** these two models are in the default cache (`~/.cache/huggingface`), not in the repo's `.hf-cache`, so an offline run needs `HF_HOME=$HOME/.cache/huggingface` (stage 5 sets `HF_HOME` to the repo cache by default; check that before any stage 5 run). Nothing was downloaded.
 - `status` is still the largest group (300 of 534) because only 1017 candidates exist and most non-`status` columns have few; the cap keeps it at about 56%.
+
+### Session 4 results (dev split only)
+Training (`eval/results/ft/qlora-7b-v3-summary.json`): same recipe (Qwen2.5-Coder-7B-Instruct, QLoRA r16, lr 2e-4, 1 x 16, 2 epochs), 3,351 train / 277 valid rows, 420 steps, valid loss 0.00856 (epoch 1) -> 0.00804 (epoch 2); interrupted once by a shutdown at step 121 and resumed from `ckpt-100`. Adapter sha256 (local only): epoch1 `3efeb36183abe99cc14a89c54043d29b5fe10176ebb27d1622801e91e9bc3171`, epoch2 `5a6836f7a6749ac24d23de9accac1f7a9c28027d5e45c4c37649ae711d6a06b4`.
+
+Plain dev evaluation, 110 benchmark tasks (`eval/results/dev-report-q7b-v3-session4.json`, `eval/results/dev-failure-diagnosis-session4.json`; same settings as before: greedy, no examples, 4-bit, batch 2):
+
+| Run | correct /110 | non-trap /80 | trap /30 | parses | E401 (of which `status`) | passes checker, wrong effects | McNemar p vs v0.2 (v0.2-only / run-only) |
+|---|---|---|---|---|---|---|---|
+| v0.2 | 34 | 31 | 3 | 78.2% | 3 (0) | 26 | - |
+| q7b-v2 epoch 2 (no counterfactual data) | 32 | 28 | 4 | 98.2% | 25 (8) | 36 | 0.85 (15 / 13) |
+| q7b-v3 epoch 1 | 29 | 24 | 5 | 94.5% | 13 (1) | 51 | 0.51 (21 / 16) |
+| **q7b-v3 epoch 2** | **33** | 24 | 9 | 95.5% | **13 (2)** | 50 | **1.0 (21 / 20)** |
+
+With checker feedback (EXPLORATORY; `eval/results/dev-repair-compare-session4.json`; same protocol as session 3, on epoch 2 because it had more plain correct): q7b-v3 epoch 2 33 -> **36** (3 gained, 0 lost, p = 0.25); v0.2 (session 3 rerun) 34 -> **36**; head to head with feedback 23 tasks only q7b-v3, 23 only v0.2, **p = 1.0**. Monitor problems: 0 in every run; the checker blocked every program that broke a rule.
+
+**What is known (from the result files):**
+- E401 went down by about half (25 -> 13 at both epochs), and forbidden `status` reads almost vanished (8 -> 1 and 2). Of the 25 tasks where q7b-v2 hit E401, q7b-v3 epoch 2 still hits it on 10 and no longer on 15; it hits 3 new ones. So the counterfactual data changed exactly the behaviour it targeted, most clearly for `status` (300 of the 534 counterfactual programs).
+- The model did not get better overall. Most of the removed E401 failures turned into programs that pass the checker but have the wrong effects (36 -> 50), and non-trap correct fell from 28 to 24. Trap correct rose from 4 to 9 of 30. None of these differences vs v0.2 is significant (p = 1.0 overall).
+
+**What is only a guess (not tested):**
+- The counterfactual programs teach "drop the condition on the forbidden column". On dev tasks the condition is still needed, but must be written with a different, allowed column. The model may have learned to drop the condition rather than find the allowed column, which would explain the rise in wrong effects. A dev-only check would be to look at the 15 tasks that lost their E401 and see whether the new program simply leaves the filter out.
+- The trap gain (4 -> 9) may come from the 344 new trap wordings (the new rows are 33% traps), not from the counterfactual itself. One training run per data set cannot separate these; run-to-run noise is also unmeasured.
+- Remaining E401s are mostly columns that appear in no training program (`last_exam`, `reorder_at`, `stamps`, ...), which the counterfactual data could not cover (see the limit above).
+
+### Needs the owner (session 4)
+1. **Truly new columns:** your request asked for counterfactuals on columns that never appear in the training set. The seed programs only filter on 20 columns, all already in the training text, so making new ones would mean inventing column names (hosted-AI-written training text). I did not. Options: you write a list of new column names yourself (human-written is allowed), or accept the 20-column version.
+2. **Next experiment (your call):** the counterfactual data fixed most `status` reads but the model now drops needed conditions. A variant where the counterfactual program keeps an equivalent condition on a *different allowed column* would teach "use the allowed column" instead of "drop the condition"; making that equivalence by script needs a rule for which columns are equivalent, which is a data-design decision.
+3. **Lock entries added (step 4):** Qwen2.5-Coder-1.5B-Instruct and 0.5B-Instruct (both apache-2.0, revisions recorded). They live in the default Hugging Face cache, not the repo cache; an offline run needs `HF_HOME=$HOME/.cache/huggingface`.
+4. Still open from before: read the 30 sample wordings in `docs/review/wordings-sample-2026-10-27.md`.
 
 ## Session 3 (2026-10-28, Claude Code): dev-only diagnosis and exploratory checker-feedback runs (DONE)
 

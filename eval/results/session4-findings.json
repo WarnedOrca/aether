@@ -1,0 +1,170 @@
+{
+  "session": 4,
+  "split": "eval/benchmark (dev, 110 tasks) only; no held-out set used; stage 5 not run",
+  "question": "Do E401 (forbidden column) errors come from training data where the obvious column is always allowed?",
+  "data": {
+    "counterfactual_programs": 534,
+    "distinct_columns": 20,
+    "status_programs": 300,
+    "new_rows": {
+      "train": 950,
+      "valid": 78
+    },
+    "old_rows": {
+      "train": 2401,
+      "valid": 199
+    },
+    "new_share": 0.2834
+  },
+  "training": {
+    "steps": 420,
+    "history": [
+      {
+        "epoch": 1,
+        "valid_loss": 0.00856,
+        "elapsed_s": 8110
+      },
+      {
+        "epoch": 2,
+        "valid_loss": 0.00804,
+        "elapsed_s": 16180
+      }
+    ],
+    "train_examples": 3351
+  },
+  "plain": {
+    "q7b-v2-epoch2": {
+      "correct": 32,
+      "non_trap_correct": 28,
+      "trap_correct": 4,
+      "parse_rate": 0.9818,
+      "checker_pass_rate": 0.6273,
+      "e401": {
+        "count": 25,
+        "status": 8,
+        "by_action": {
+          "reads": 21,
+          "writes": 4
+        },
+        "trap_tasks": 12,
+        "non_trap_tasks": 13
+      },
+      "wrong_effect": 36,
+      "vs_v0.2": {
+        "reference_only_correct": 15,
+        "run_only_correct": 13,
+        "mcnemar_exact_p": 0.8506
+      }
+    },
+    "q7b-v3-epoch1": {
+      "correct": 29,
+      "non_trap_correct": 24,
+      "trap_correct": 5,
+      "parse_rate": 0.9455,
+      "checker_pass_rate": 0.7364,
+      "e401": {
+        "count": 13,
+        "status": 1,
+        "by_action": {
+          "reads": 12,
+          "writes": 1
+        },
+        "trap_tasks": 7,
+        "non_trap_tasks": 6
+      },
+      "wrong_effect": 51,
+      "vs_v0.2": {
+        "reference_only_correct": 21,
+        "run_only_correct": 16,
+        "mcnemar_exact_p": 0.5114
+      }
+    },
+    "q7b-v3-epoch2": {
+      "correct": 33,
+      "non_trap_correct": 24,
+      "trap_correct": 9,
+      "parse_rate": 0.9545,
+      "checker_pass_rate": 0.7636,
+      "e401": {
+        "count": 13,
+        "status": 2,
+        "by_action": {
+          "writes": 3,
+          "reads": 10
+        },
+        "trap_tasks": 5,
+        "non_trap_tasks": 8
+      },
+      "wrong_effect": 50,
+      "vs_v0.2": {
+        "reference_only_correct": 21,
+        "run_only_correct": 20,
+        "mcnemar_exact_p": 1.0
+      }
+    }
+  },
+  "v0.2_plain": {
+    "correct": 34,
+    "non_trap_correct": 31,
+    "trap_correct": 3,
+    "parse_rate": 0.7818,
+    "e401": {
+      "count": 3,
+      "status": 0,
+      "by_action": {
+        "reads": 3
+      },
+      "trap_tasks": 2,
+      "non_trap_tasks": 1
+    },
+    "wrong_effect": 26
+  },
+  "e401_tasks_v2e2_vs_v3e2": {
+    "both": 10,
+    "only_v2": 15,
+    "only_v3": 3
+  },
+  "feedback_exploratory": {
+    "status": "EXPLORATORY (dev split, not pre-registered; not confirmatory)",
+    "q7b-v3-epoch2": {
+      "plain": {
+        "all": 33,
+        "non_trap": 24,
+        "trap": 9
+      },
+      "with_feedback": {
+        "all": 36,
+        "non_trap": 27,
+        "trap": 9
+      },
+      "vs_own_plain": {
+        "a_only": 3,
+        "b_only": 0,
+        "mcnemar_exact_p": 0.25
+      }
+    },
+    "v0.2": {
+      "plain": {
+        "all": 34,
+        "non_trap": 31,
+        "trap": 3
+      },
+      "with_feedback": {
+        "all": 36,
+        "non_trap": 32,
+        "trap": 4
+      }
+    },
+    "head_to_head": {
+      "a": "q7b-v3-epoch2",
+      "b": "v0.2",
+      "a_only": 23,
+      "b_only": 23,
+      "mcnemar_exact_p": 1.0
+    },
+    "monitor_problems": {
+      "q7b-v3-epoch2": 0,
+      "v0.2": 0
+    }
+  }
+}
