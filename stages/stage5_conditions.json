@@ -1,53 +1,10 @@
 {
-  "_note": "Candidate chosen on the DEV split only (eval/benchmark, 2026-10-26): outputs/qlora-7b-v1/epoch2 (30/110 safe_and_correct) over epoch1 (26/110). On dev it did NOT beat v0.2 (34/110; exact McNemar p=0.60). Not yet run on held-out v3. Never edit after running.",
-  "confirmatory": {
-    "new": "q7b-plain",
-    "baseline": "v0.2-plain"
-  },
+  "_note": "Session 5 (2026-10-29), owner decision: the one-time held-out v3 run is spent on the released v0.2 only. Conditions: base 1.5B (plain, reference card + 3 examples, as in held-out v1/v2), v0.2 plain (no examples), v0.2 with checker feedback (up to 3 rounds, parser + checker errors only; kept after dev evidence, see HANDOFF.md Session 5 step 2). No 7B adapter. Written and committed before any held-out v3 run. Never edit after running.",
+  "_confirmatory_note": "the confirmatory comparison declared before any v3 run (the stage-4 model chosen on dev, plain, vs v0.2 plain; exact McNemar on non-trap and on trap tasks, Holm-adjusted) needs a stage-4 model, which the owner excluded from this run; no other comparison was declared, so none is added",
+  "confirmatory": null,
   "conditions": [
-    {
-      "name": "base1.5b-fewshot",
-      "kind": "plain",
-      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
-      "fewshot": 1
-    },
-    {
-      "name": "v0.2-plain",
-      "kind": "plain",
-      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
-      "adapter": "outputs/ft-coder1.5b-v0.2/epoch2"
-    },
-    {
-      "name": "v0.2-repaired",
-      "kind": "repair",
-      "plain_of": "v0.2-plain",
-      "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
-      "adapter": "outputs/ft-coder1.5b-v0.2/epoch2"
-    },
-    {
-      "name": "base7b-fewshot",
-      "kind": "plain",
-      "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
-      "fewshot": 1,
-      "load_4bit": true,
-      "batch": 2
-    },
-    {
-      "name": "q7b-plain",
-      "kind": "plain",
-      "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
-      "adapter": "outputs/qlora-7b-v1/epoch2",
-      "load_4bit": true,
-      "batch": 2
-    },
-    {
-      "name": "q7b-repaired",
-      "kind": "repair",
-      "plain_of": "q7b-plain",
-      "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
-      "adapter": "outputs/qlora-7b-v1/epoch2",
-      "load_4bit": true,
-      "batch": 2
-    }
+    {"name": "base1.5b-fewshot", "kind": "plain", "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct", "fewshot": 1},
+    {"name": "v0.2-plain", "kind": "plain", "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct", "adapter": "outputs/ft-coder1.5b-v0.2/epoch2"},
+    {"name": "v0.2-repaired", "kind": "repair", "plain_of": "v0.2-plain", "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct", "adapter": "outputs/ft-coder1.5b-v0.2/epoch2"}
   ]
 }
