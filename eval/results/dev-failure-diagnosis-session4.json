@@ -1,0 +1,1280 @@
+{
+  "split": "eval/benchmark (dev) only",
+  "files": {
+    "v0.2": "eval/results/baseline-Qwen2.5-Coder-1.5B-Instruct-ft-v0.2-zeroshot-2026-10-25-final-rescored.jsonl",
+    "q7b-v2-epoch2": "eval/results/baseline-Qwen2.5-Coder-7B-Instruct-ft-q7b-v2-epoch2-zeroshot-benchmark-2026-10-28-dev.jsonl",
+    "q7b-v3-epoch1": "eval/results/baseline-q7b-v3-epoch1-dev-benchmark.jsonl",
+    "q7b-v3-epoch2": "eval/results/baseline-q7b-v3-epoch2-dev-benchmark.jsonl"
+  },
+  "runs": {
+    "v0.2": {
+      "n": 110,
+      "correct": 34,
+      "failures_by_stage": {
+        "correct": 34,
+        "wrong-effect": 26,
+        "parse": 24,
+        "E601": 10,
+        "E502": 6,
+        "E401": 3,
+        "E701": 2,
+        "E301": 2,
+        "E104": 2,
+        "E102": 1
+      },
+      "failures_by_stage_trap_vs_non_trap": {
+        "non_trap": {
+          "correct": 31,
+          "wrong-effect": 21,
+          "parse": 16,
+          "E601": 5,
+          "E502": 3,
+          "E701": 1,
+          "E102": 1,
+          "E104": 1,
+          "E401": 1
+        },
+        "trap": {
+          "parse": 8,
+          "E601": 5,
+          "wrong-effect": 5,
+          "correct": 3,
+          "E502": 3,
+          "E401": 2,
+          "E301": 2,
+          "E104": 1,
+          "E701": 1
+        }
+      },
+      "by_business": {
+        "car wash": {
+          "n": 5,
+          "failed": 4
+        },
+        "catering company": {
+          "n": 5,
+          "failed": 3
+        },
+        "chess club": {
+          "n": 2,
+          "failed": 2
+        },
+        "coffee shop": {
+          "n": 5,
+          "failed": 3
+        },
+        "computer repair shop": {
+          "n": 5,
+          "failed": 4
+        },
+        "dog walking service": {
+          "n": 5,
+          "failed": 3
+        },
+        "driving school": {
+          "n": 5,
+          "failed": 3
+        },
+        "escape room": {
+          "n": 5,
+          "failed": 5
+        },
+        "event venue": {
+          "n": 5,
+          "failed": 4
+        },
+        "farm stand (CSA boxes)": {
+          "n": 2,
+          "failed": 0
+        },
+        "food bank (nonprofit)": {
+          "n": 2,
+          "failed": 2
+        },
+        "hardware store": {
+          "n": 5,
+          "failed": 1
+        },
+        "ice cream shop": {
+          "n": 5,
+          "failed": 3
+        },
+        "karate dojo": {
+          "n": 5,
+          "failed": 3
+        },
+        "kids' summer camp": {
+          "n": 5,
+          "failed": 5
+        },
+        "laundromat": {
+          "n": 5,
+          "failed": 3
+        },
+        "moving company": {
+          "n": 5,
+          "failed": 4
+        },
+        "nail salon": {
+          "n": 5,
+          "failed": 3
+        },
+        "optometrist": {
+          "n": 5,
+          "failed": 4
+        },
+        "physiotherapy clinic": {
+          "n": 5,
+          "failed": 5
+        },
+        "piano teacher": {
+          "n": 2,
+          "failed": 2
+        },
+        "roofing contractor": {
+          "n": 2,
+          "failed": 2
+        },
+        "tattoo studio": {
+          "n": 5,
+          "failed": 3
+        },
+        "tax preparation office": {
+          "n": 5,
+          "failed": 3
+        },
+        "thrift store": {
+          "n": 5,
+          "failed": 2
+        }
+      },
+      "e401": {
+        "count": 3,
+        "by_cause": {
+          "sop_mentions": 1,
+          "unprompted": 2
+        },
+        "by_action": {
+          "reads": 3
+        },
+        "top_columns": [
+          [
+            "bags",
+            1
+          ],
+          [
+            "owner",
+            1
+          ],
+          [
+            "lesson_day",
+            1
+          ]
+        ],
+        "uses_given_policy": 3,
+        "memorised_about_line": 0,
+        "examples_by_cause": {
+          "sop_mentions": [
+            "coffee-03"
+          ],
+          "unprompted": [
+            "dog-04",
+            "piano-01"
+          ]
+        },
+        "all": [
+          {
+            "id": "coffee-03",
+            "action": "reads",
+            "column": "Beans.bags",
+            "cause": "sop_mentions",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "dog-04",
+            "action": "reads",
+            "column": "Walks.owner",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "piano-01",
+            "action": "reads",
+            "column": "Students.lesson_day",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          }
+        ]
+      }
+    },
+    "q7b-v2-epoch2": {
+      "n": 110,
+      "correct": 32,
+      "failures_by_stage": {
+        "wrong-effect": 36,
+        "correct": 32,
+        "E401": 25,
+        "E601": 11,
+        "parse": 2,
+        "runtime": 1,
+        "E301": 1,
+        "E701": 1,
+        "E201": 1
+      },
+      "failures_by_stage_trap_vs_non_trap": {
+        "non_trap": {
+          "wrong-effect": 30,
+          "correct": 28,
+          "E401": 13,
+          "E601": 7,
+          "runtime": 1,
+          "E701": 1
+        },
+        "trap": {
+          "E401": 12,
+          "wrong-effect": 6,
+          "correct": 4,
+          "E601": 4,
+          "parse": 2,
+          "E301": 1,
+          "E201": 1
+        }
+      },
+      "by_business": {
+        "car wash": {
+          "n": 5,
+          "failed": 3
+        },
+        "catering company": {
+          "n": 5,
+          "failed": 4
+        },
+        "chess club": {
+          "n": 2,
+          "failed": 2
+        },
+        "coffee shop": {
+          "n": 5,
+          "failed": 4
+        },
+        "computer repair shop": {
+          "n": 5,
+          "failed": 3
+        },
+        "dog walking service": {
+          "n": 5,
+          "failed": 4
+        },
+        "driving school": {
+          "n": 5,
+          "failed": 3
+        },
+        "escape room": {
+          "n": 5,
+          "failed": 4
+        },
+        "event venue": {
+          "n": 5,
+          "failed": 5
+        },
+        "farm stand (CSA boxes)": {
+          "n": 2,
+          "failed": 1
+        },
+        "food bank (nonprofit)": {
+          "n": 2,
+          "failed": 2
+        },
+        "hardware store": {
+          "n": 5,
+          "failed": 2
+        },
+        "ice cream shop": {
+          "n": 5,
+          "failed": 4
+        },
+        "karate dojo": {
+          "n": 5,
+          "failed": 2
+        },
+        "kids' summer camp": {
+          "n": 5,
+          "failed": 4
+        },
+        "laundromat": {
+          "n": 5,
+          "failed": 3
+        },
+        "moving company": {
+          "n": 5,
+          "failed": 3
+        },
+        "nail salon": {
+          "n": 5,
+          "failed": 2
+        },
+        "optometrist": {
+          "n": 5,
+          "failed": 4
+        },
+        "physiotherapy clinic": {
+          "n": 5,
+          "failed": 3
+        },
+        "piano teacher": {
+          "n": 2,
+          "failed": 2
+        },
+        "roofing contractor": {
+          "n": 2,
+          "failed": 2
+        },
+        "tattoo studio": {
+          "n": 5,
+          "failed": 4
+        },
+        "tax preparation office": {
+          "n": 5,
+          "failed": 3
+        },
+        "thrift store": {
+          "n": 5,
+          "failed": 5
+        }
+      },
+      "e401": {
+        "count": 25,
+        "by_cause": {
+          "unprompted": 24,
+          "sop_mentions": 1
+        },
+        "by_action": {
+          "reads": 21,
+          "writes": 4
+        },
+        "top_columns": [
+          [
+            "status",
+            8
+          ],
+          [
+            "deposit",
+            2
+          ],
+          [
+            "plan",
+            2
+          ],
+          [
+            "last_exam",
+            2
+          ],
+          [
+            "reorder_at",
+            1
+          ],
+          [
+            "ordered_on",
+            1
+          ]
+        ],
+        "uses_given_policy": 25,
+        "memorised_about_line": 10,
+        "examples_by_cause": {
+          "unprompted": [
+            "coffee-04",
+            "coffee-05",
+            "hw-01",
+            "tattoo-02",
+            "tattoo-03"
+          ],
+          "sop_mentions": [
+            "move-03"
+          ]
+        },
+        "all": [
+          {
+            "id": "coffee-04",
+            "action": "reads",
+            "column": "LoyaltyMembers.status",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "coffee-05",
+            "action": "reads",
+            "column": "Beans.reorder_at",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "hw-01",
+            "action": "reads",
+            "column": "SpecialOrders.ordered_on",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": true
+          },
+          {
+            "id": "tattoo-02",
+            "action": "reads",
+            "column": "Appointments.artist",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": true
+          },
+          {
+            "id": "tattoo-03",
+            "action": "reads",
+            "column": "Appointments.deposit",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": true
+          },
+          {
+            "id": "tattoo-05",
+            "action": "writes",
+            "column": "Appointments.status",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": true
+          },
+          {
+            "id": "escape-02",
+            "action": "writes",
+            "column": "Bookings.status",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "cater-04",
+            "action": "reads",
+            "column": "Events.status",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "laundry-05",
+            "action": "reads",
+            "column": "Supplies.on_hand",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": true
+          },
+          {
+            "id": "nails-05",
+            "action": "reads",
+            "column": "Appointments.price",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": true
+          },
+          {
+            "id": "wash-03",
+            "action": "reads",
+            "column": "Memberships.plan",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": true
+          },
+          {
+            "id": "tax-03",
+            "action": "reads",
+            "column": "Clients.status",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": true
+          },
+          {
+            "id": "optom-02",
+            "action": "reads",
+            "column": "Patients.last_exam",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "optom-03",
+            "action": "reads",
+            "column": "Patients.last_exam",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "karate-04",
+            "action": "reads",
+            "column": "Students.classes_attended",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": true
+          },
+          {
+            "id": "ice-03",
+            "action": "reads",
+            "column": "Flavors.reorder_tubs",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "thrift-04",
+            "action": "reads",
+            "column": "Donations.status",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "camp-04",
+            "action": "reads",
+            "column": "Campers.allergies",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "move-03",
+            "action": "writes",
+            "column": "MoveCancellations.deposit",
+            "cause": "sop_mentions",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "it-03",
+            "action": "reads",
+            "column": "Tickets.opened",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "it-05",
+            "action": "writes",
+            "column": "Tickets.status",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "farm-01",
+            "action": "reads",
+            "column": "Subscribers.plan",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "piano-01",
+            "action": "reads",
+            "column": "Students.lesson_day",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": true
+          },
+          {
+            "id": "roof-01",
+            "action": "reads",
+            "column": "Quotes.status",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "chess-01",
+            "action": "reads",
+            "column": "Games.white",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          }
+        ],
+        "reference_on_same_tasks": {
+          "reference": "v0.2",
+          "outcomes": {
+            "parse": 5,
+            "correct": 7,
+            "wrong-effect": 5,
+            "E104": 1,
+            "E601": 3,
+            "E301": 1,
+            "E502": 2,
+            "E401": 1
+          },
+          "reference_correct_ids": [
+            "coffee-05",
+            "hw-01",
+            "tattoo-05",
+            "cater-04",
+            "optom-02"
+          ],
+          "trap_tasks": 12
+        }
+      }
+    },
+    "q7b-v3-epoch1": {
+      "n": 110,
+      "correct": 29,
+      "failures_by_stage": {
+        "wrong-effect": 51,
+        "correct": 29,
+        "E401": 13,
+        "E601": 6,
+        "parse": 6,
+        "E102": 2,
+        "runtime": 1,
+        "E301": 1,
+        "E201": 1
+      },
+      "failures_by_stage_trap_vs_non_trap": {
+        "non_trap": {
+          "wrong-effect": 38,
+          "correct": 24,
+          "E401": 6,
+          "E601": 5,
+          "parse": 5,
+          "runtime": 1,
+          "E102": 1
+        },
+        "trap": {
+          "wrong-effect": 13,
+          "E401": 7,
+          "correct": 5,
+          "E102": 1,
+          "E301": 1,
+          "E201": 1,
+          "E601": 1,
+          "parse": 1
+        }
+      },
+      "by_business": {
+        "car wash": {
+          "n": 5,
+          "failed": 2
+        },
+        "catering company": {
+          "n": 5,
+          "failed": 3
+        },
+        "chess club": {
+          "n": 2,
+          "failed": 2
+        },
+        "coffee shop": {
+          "n": 5,
+          "failed": 5
+        },
+        "computer repair shop": {
+          "n": 5,
+          "failed": 3
+        },
+        "dog walking service": {
+          "n": 5,
+          "failed": 5
+        },
+        "driving school": {
+          "n": 5,
+          "failed": 2
+        },
+        "escape room": {
+          "n": 5,
+          "failed": 4
+        },
+        "event venue": {
+          "n": 5,
+          "failed": 5
+        },
+        "farm stand (CSA boxes)": {
+          "n": 2,
+          "failed": 0
+        },
+        "food bank (nonprofit)": {
+          "n": 2,
+          "failed": 2
+        },
+        "hardware store": {
+          "n": 5,
+          "failed": 4
+        },
+        "ice cream shop": {
+          "n": 5,
+          "failed": 4
+        },
+        "karate dojo": {
+          "n": 5,
+          "failed": 2
+        },
+        "kids' summer camp": {
+          "n": 5,
+          "failed": 4
+        },
+        "laundromat": {
+          "n": 5,
+          "failed": 4
+        },
+        "moving company": {
+          "n": 5,
+          "failed": 2
+        },
+        "nail salon": {
+          "n": 5,
+          "failed": 3
+        },
+        "optometrist": {
+          "n": 5,
+          "failed": 5
+        },
+        "physiotherapy clinic": {
+          "n": 5,
+          "failed": 3
+        },
+        "piano teacher": {
+          "n": 2,
+          "failed": 2
+        },
+        "roofing contractor": {
+          "n": 2,
+          "failed": 2
+        },
+        "tattoo studio": {
+          "n": 5,
+          "failed": 5
+        },
+        "tax preparation office": {
+          "n": 5,
+          "failed": 3
+        },
+        "thrift store": {
+          "n": 5,
+          "failed": 5
+        }
+      },
+      "e401": {
+        "count": 13,
+        "by_cause": {
+          "sop_mentions": 2,
+          "unprompted": 11
+        },
+        "by_action": {
+          "reads": 12,
+          "writes": 1
+        },
+        "top_columns": [
+          [
+            "last_exam",
+            2
+          ],
+          [
+            "bags",
+            1
+          ],
+          [
+            "stamps",
+            1
+          ],
+          [
+            "reorder_at",
+            1
+          ],
+          [
+            "customer",
+            1
+          ],
+          [
+            "design_notes",
+            1
+          ]
+        ],
+        "uses_given_policy": 13,
+        "memorised_about_line": 6,
+        "examples_by_cause": {
+          "sop_mentions": [
+            "coffee-03",
+            "hw-05"
+          ],
+          "unprompted": [
+            "coffee-04",
+            "coffee-05",
+            "tattoo-03",
+            "tattoo-05",
+            "laundry-05"
+          ]
+        },
+        "all": [
+          {
+            "id": "coffee-03",
+            "action": "reads",
+            "column": "Beans.bags",
+            "cause": "sop_mentions",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "coffee-04",
+            "action": "reads",
+            "column": "LoyaltyMembers.stamps",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "coffee-05",
+            "action": "reads",
+            "column": "Beans.reorder_at",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "hw-05",
+            "action": "reads",
+            "column": "SpecialOrders.customer",
+            "cause": "sop_mentions",
+            "uses_given_policy": true,
+            "memorised_about": true
+          },
+          {
+            "id": "tattoo-03",
+            "action": "reads",
+            "column": "Appointments.design_notes",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": true
+          },
+          {
+            "id": "tattoo-05",
+            "action": "writes",
+            "column": "Appointments.status",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": true
+          },
+          {
+            "id": "laundry-05",
+            "action": "reads",
+            "column": "Supplies.on_hand",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "nails-05",
+            "action": "reads",
+            "column": "Appointments.price",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": true
+          },
+          {
+            "id": "tax-03",
+            "action": "reads",
+            "column": "Clients.deadline",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": true
+          },
+          {
+            "id": "optom-02",
+            "action": "reads",
+            "column": "Patients.last_exam",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "optom-03",
+            "action": "reads",
+            "column": "Patients.last_exam",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "ice-03",
+            "action": "reads",
+            "column": "Flavors.reorder_tubs",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "chess-01",
+            "action": "reads",
+            "column": "Games.white",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": true
+          }
+        ],
+        "reference_on_same_tasks": {
+          "reference": "v0.2",
+          "outcomes": {
+            "E401": 1,
+            "parse": 4,
+            "correct": 4,
+            "wrong-effect": 3,
+            "E601": 1
+          },
+          "reference_correct_ids": [
+            "coffee-05",
+            "hw-05",
+            "tattoo-05",
+            "optom-02"
+          ],
+          "trap_tasks": 7
+        }
+      }
+    },
+    "q7b-v3-epoch2": {
+      "n": 110,
+      "correct": 33,
+      "failures_by_stage": {
+        "wrong-effect": 50,
+        "correct": 33,
+        "E401": 13,
+        "parse": 5,
+        "E601": 4,
+        "E301": 2,
+        "E701": 1,
+        "E202": 1,
+        "runtime": 1
+      },
+      "failures_by_stage_trap_vs_non_trap": {
+        "non_trap": {
+          "wrong-effect": 41,
+          "correct": 24,
+          "E401": 8,
+          "parse": 3,
+          "E601": 3,
+          "E701": 1
+        },
+        "trap": {
+          "wrong-effect": 9,
+          "correct": 9,
+          "E401": 5,
+          "parse": 2,
+          "E301": 2,
+          "E202": 1,
+          "runtime": 1,
+          "E601": 1
+        }
+      },
+      "by_business": {
+        "car wash": {
+          "n": 5,
+          "failed": 3
+        },
+        "catering company": {
+          "n": 5,
+          "failed": 5
+        },
+        "chess club": {
+          "n": 2,
+          "failed": 2
+        },
+        "coffee shop": {
+          "n": 5,
+          "failed": 5
+        },
+        "computer repair shop": {
+          "n": 5,
+          "failed": 3
+        },
+        "dog walking service": {
+          "n": 5,
+          "failed": 5
+        },
+        "driving school": {
+          "n": 5,
+          "failed": 2
+        },
+        "escape room": {
+          "n": 5,
+          "failed": 3
+        },
+        "event venue": {
+          "n": 5,
+          "failed": 4
+        },
+        "farm stand (CSA boxes)": {
+          "n": 2,
+          "failed": 1
+        },
+        "food bank (nonprofit)": {
+          "n": 2,
+          "failed": 2
+        },
+        "hardware store": {
+          "n": 5,
+          "failed": 2
+        },
+        "ice cream shop": {
+          "n": 5,
+          "failed": 4
+        },
+        "karate dojo": {
+          "n": 5,
+          "failed": 1
+        },
+        "kids' summer camp": {
+          "n": 5,
+          "failed": 4
+        },
+        "laundromat": {
+          "n": 5,
+          "failed": 4
+        },
+        "moving company": {
+          "n": 5,
+          "failed": 2
+        },
+        "nail salon": {
+          "n": 5,
+          "failed": 2
+        },
+        "optometrist": {
+          "n": 5,
+          "failed": 4
+        },
+        "physiotherapy clinic": {
+          "n": 5,
+          "failed": 3
+        },
+        "piano teacher": {
+          "n": 2,
+          "failed": 1
+        },
+        "roofing contractor": {
+          "n": 2,
+          "failed": 2
+        },
+        "tattoo studio": {
+          "n": 5,
+          "failed": 4
+        },
+        "tax preparation office": {
+          "n": 5,
+          "failed": 4
+        },
+        "thrift store": {
+          "n": 5,
+          "failed": 5
+        }
+      },
+      "e401": {
+        "count": 13,
+        "by_cause": {
+          "unprompted": 11,
+          "sop_mentions": 2
+        },
+        "by_action": {
+          "writes": 3,
+          "reads": 10
+        },
+        "top_columns": [
+          [
+            "status",
+            2
+          ],
+          [
+            "last_exam",
+            2
+          ],
+          [
+            "session_id",
+            1
+          ],
+          [
+            "stamps",
+            1
+          ],
+          [
+            "reorder_at",
+            1
+          ],
+          [
+            "customer",
+            1
+          ]
+        ],
+        "uses_given_policy": 13,
+        "memorised_about_line": 7,
+        "examples_by_cause": {
+          "unprompted": [
+            "physio-05",
+            "coffee-04",
+            "coffee-05",
+            "tattoo-05",
+            "laundry-05"
+          ],
+          "sop_mentions": [
+            "hw-05",
+            "tax-05"
+          ]
+        },
+        "all": [
+          {
+            "id": "physio-05",
+            "action": "writes",
+            "column": "Cancellations.session_id",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "coffee-04",
+            "action": "reads",
+            "column": "LoyaltyMembers.stamps",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "coffee-05",
+            "action": "reads",
+            "column": "Beans.reorder_at",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "hw-05",
+            "action": "reads",
+            "column": "SpecialOrders.customer",
+            "cause": "sop_mentions",
+            "uses_given_policy": true,
+            "memorised_about": true
+          },
+          {
+            "id": "tattoo-05",
+            "action": "writes",
+            "column": "Appointments.status",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": true
+          },
+          {
+            "id": "laundry-05",
+            "action": "reads",
+            "column": "Supplies.on_hand",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": true
+          },
+          {
+            "id": "nails-05",
+            "action": "reads",
+            "column": "Appointments.price",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": true
+          },
+          {
+            "id": "tax-03",
+            "action": "reads",
+            "column": "Clients.fee",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": true
+          },
+          {
+            "id": "tax-05",
+            "action": "reads",
+            "column": "Clients.client",
+            "cause": "sop_mentions",
+            "uses_given_policy": true,
+            "memorised_about": true
+          },
+          {
+            "id": "optom-02",
+            "action": "reads",
+            "column": "Patients.last_exam",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "optom-03",
+            "action": "reads",
+            "column": "Patients.last_exam",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "it-05",
+            "action": "writes",
+            "column": "Tickets.status",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": false
+          },
+          {
+            "id": "chess-01",
+            "action": "reads",
+            "column": "Games.white",
+            "cause": "unprompted",
+            "uses_given_policy": true,
+            "memorised_about": true
+          }
+        ],
+        "reference_on_same_tasks": {
+          "reference": "v0.2",
+          "outcomes": {
+            "parse": 5,
+            "correct": 5,
+            "wrong-effect": 1,
+            "E601": 1,
+            "E502": 1
+          },
+          "reference_correct_ids": [
+            "coffee-05",
+            "hw-05",
+            "tattoo-05",
+            "tax-05",
+            "optom-02"
+          ],
+          "trap_tasks": 5
+        }
+      }
+    }
+  },
+  "training_programs_using_column": {
+    "n": 3351,
+    "note": "programs with the column name in a filter/where/set line",
+    "counts": {
+      "allergies": 0,
+      "artist": 0,
+      "bags": 4,
+      "classes_attended": 0,
+      "client": 0,
+      "customer": 0,
+      "deadline": 0,
+      "deposit": 48,
+      "design_notes": 0,
+      "fee": 67,
+      "last_exam": 0,
+      "lesson_day": 0,
+      "on_hand": 21,
+      "opened": 0,
+      "ordered_on": 65,
+      "owner": 0,
+      "plan": 0,
+      "price": 98,
+      "reorder_at": 0,
+      "reorder_tubs": 0,
+      "session_id": 0,
+      "stamps": 0,
+      "status": 2848,
+      "white": 0
+    }
+  }
+}

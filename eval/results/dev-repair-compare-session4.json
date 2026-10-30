@@ -1,0 +1,74 @@
+{
+  "status": "EXPLORATORY (dev split, not pre-registered; not confirmatory)",
+  "n": 110,
+  "protocol": "eval.repair: parser + checker feedback only, up to 3 rounds, greedy",
+  "files": {
+    "q7b-v3-epoch2": "eval/results/repair-q7b-v3-epoch2-dev-benchmark.jsonl",
+    "v0.2": "eval/results/repair-v0.2-dev-rerun-benchmark.jsonl"
+  },
+  "runs": {
+    "q7b-v3-epoch2": {
+      "plain_correct": {
+        "all": 33,
+        "non_trap": 24,
+        "trap": 9
+      },
+      "repaired_correct": {
+        "all": 36,
+        "non_trap": 27,
+        "trap": 9
+      },
+      "repaired_ci95": [
+        0.247,
+        0.419
+      ],
+      "rounds_used": {
+        "0": 84,
+        "1": 10,
+        "2": 0,
+        "3": 16
+      },
+      "monitor_problems_total": 0,
+      "repaired_vs_own_plain": {
+        "a_only": 3,
+        "b_only": 0,
+        "mcnemar_exact_p": 0.25
+      }
+    },
+    "v0.2": {
+      "plain_correct": {
+        "all": 34,
+        "non_trap": 31,
+        "trap": 3
+      },
+      "repaired_correct": {
+        "all": 36,
+        "non_trap": 32,
+        "trap": 4
+      },
+      "repaired_ci95": [
+        0.247,
+        0.419
+      ],
+      "rounds_used": {
+        "0": 60,
+        "1": 3,
+        "2": 0,
+        "3": 47
+      },
+      "monitor_problems_total": 0,
+      "repaired_vs_own_plain": {
+        "a_only": 2,
+        "b_only": 0,
+        "mcnemar_exact_p": 0.5
+      }
+    }
+  },
+  "repaired_a_vs_repaired_b": {
+    "a": "q7b-v3-epoch2",
+    "b": "v0.2",
+    "a_only": 23,
+    "b_only": 23,
+    "mcnemar_exact_p": 1.0
+  }
+}
