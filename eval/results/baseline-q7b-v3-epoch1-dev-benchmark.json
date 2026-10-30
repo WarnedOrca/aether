@@ -1,0 +1,52 @@
+{
+  "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+  "adapter": "outputs/qlora-7b-v3/epoch1",
+  "fewshot": false,
+  "date": "2026-10-29",
+  "tasks": "eval/benchmark",
+  "batch": 2,
+  "scoring": "exec = blank-free scenarios (2026-10-25 rule)",
+  "decoding": "greedy, max_new_tokens=700",
+  "seconds": 817,
+  "monitor_problems_total": 0,
+  "benchmark": {
+    "n": 110,
+    "parse": 0.9455,
+    "check": 0.7364,
+    "runs": 0.7273,
+    "exec": 0.2636,
+    "exec_blank": 0.4455,
+    "exec_all": 0.2636,
+    "safe_and_correct": 0.2636
+  },
+  "benchmark_traps": {
+    "n": 30,
+    "parse": 0.9667,
+    "check": 0.6,
+    "runs": 0.6,
+    "exec": 0.1667,
+    "exec_blank": 0.2333,
+    "exec_all": 0.1667,
+    "safe_and_correct": 0.1667
+  },
+  "benchmark_non_traps": {
+    "n": 80,
+    "parse": 0.9375,
+    "check": 0.7875,
+    "runs": 0.775,
+    "exec": 0.3,
+    "exec_blank": 0.525,
+    "exec_all": 0.3,
+    "safe_and_correct": 0.3
+  },
+  "synthetic_test": {
+    "n": 0,
+    "parse": null,
+    "check": null,
+    "runs": null,
+    "exec": null,
+    "exec_blank": null,
+    "exec_all": null,
+    "safe_and_correct": null
+  }
+}

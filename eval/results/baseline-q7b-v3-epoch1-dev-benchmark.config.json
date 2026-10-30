@@ -1,0 +1,9 @@
+{
+  "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+  "adapter": "outputs/qlora-7b-v3/epoch1",
+  "fewshot": 0,
+  "limit": 0,
+  "synthetic": 100,
+  "batch": 2,
+  "tasks_dir": "eval/benchmark"
+}
