@@ -2,12 +2,12 @@
 
 Updated 2026-10-26 afternoon by Claude Code (unattended session below). That session supersedes the Codex morning notes: the snapshot blocker is fixed and stages 3-4 and the dev comparison were run. Historical results remain below. Agents: update this file at the end of every session (see `AGENTS.md`).
 
-## Session 5 (2026-10-29, Claude Code): finalise v0.2 and the one-time held-out v3 evaluation (IN PROGRESS)
+## Session 5 (2026-10-29, Claude Code): finalise v0.2 and the one-time held-out v3 evaluation (DONE)
 
 **Held-out v3 is used once; any later model change needs a new frozen held-out set first.**
 
 ### If interrupted (computer shut down)
-- Steps 1-3 are committed. Stage 5 (step 4) is resumed with the same single command, from the repo root in Git Bash: `bash eval/run_stage5_v3.sh` (check `nvidia-smi` first: at least 10,240 MiB free and no other GPU job). It never reruns a finished condition (`eval/results/stage5/*.started.json` + complete result files) and continues an interrupted one only with the identical command and conditions file, skipping every finished task. Progress: `cat eval/results/stage5/run.log`; per condition `eval/results/stage5/<name>.log` and `wc -l eval/results/*-heldout3-run*.partial.jsonl`. Done when `eval/results/stage5/summary.json` exists.
+- ALL STEPS DONE (stage 5 finished 2026-10-29 23:06; do not run it again). Kept for reference: stage 5 (step 4) is resumed with the same single command, from the repo root in Git Bash: `bash eval/run_stage5_v3.sh` (check `nvidia-smi` first: at least 10,240 MiB free and no other GPU job). It never reruns a finished condition (`eval/results/stage5/*.started.json` + complete result files) and continues an interrupted one only with the identical command and conditions file, skipping every finished task. Progress: `cat eval/results/stage5/run.log`; per condition `eval/results/stage5/<name>.log` and `wc -l eval/results/*-heldout3-run*.partial.jsonl`. Done when `eval/results/stage5/summary.json` exists.
 - If it stops with "different command or conditions file", do NOT edit anything: that is the owner-review stop.
 
 ### Step 1: pre-flight (CPU + a 2-task dev check), done 2026-10-29 22:40
@@ -26,6 +26,20 @@ Updated 2026-10-26 afternoon by Claude Code (unattended session below). That ses
 - **Decision: resumable stage 5.** The owner asked that every job resume after a crash; the old stage 5 stopped for review instead. Now each condition writes to a fixed path (`eval/results/baseline-<name>-heldout3-run-final3-<name>.*`, `eval/results/repair-<name>-heldout3-run.*`) that saves every finished task, and a rerun continues an interrupted condition only with the identical command and conditions-file hash (otherwise it still stops for owner review). No task is ever generated twice, so "each condition once" still holds. Tests: 338 pass (2 new for stage 5).
 - **Hashes:** v0.2 adapter `adapter_model.safetensors` `e3dd973d3d19d99629fe235d87a2101940c4ac8b75bbd28050c857f5c1323dc3` (= released), `adapter_config.json` `2b97dd65ffa20e5d6b3af4c3c5374f79bdfaecc263b360c6836a4dc6de3eadf6`. Held-out v3 files: `FROZEN.md` `ab2f9ea66c143fec44417f4204dabe019cc0706e16d0fb9b0cccc6ecc562a258`, `overlap_report.json` `2c5e42aae634fc8d123186d5cdc22fd98ad1167c2eb4068a6be8d970384c93f2`, `tasks_a.txt` `e8225dc8281abb2c83dbd79ca3b8a0e130060002ac23587c3fa8fdeb780ebdca`, `tasks_b.txt` `2c8e219ff8cd20fedbc43d023abe0ae6440297e82b7c7519dddc4c0b02b2b59d`, `tasks_c.txt` `ad1be20b4298206e5cbd454a75c62a866e2220f5863bd8a5f5684d199d7979a0` (the frozen-hash test passes).
 - Held-out v3 is used once; any later model change needs a new frozen held-out set first.
+
+### Steps 4-5: the one-time held-out v3 run and its results
+Run once, detached, 2026-10-29 22:39-23:06 (`bash eval/run_stage5_v3.sh`; log `eval/results/stage5/run.log`), no crash, no resume, exit 0. Conditions file sha256 `319e5390...` as committed. Nothing was changed after seeing results. Result files: `eval/results/stage5/summary.json` (declared metrics) and `eval/results/stage5/report.json` (same runs; adds overall correct/72, parse rate and checker counts; `python -m eval.stage5_report`).
+
+| Condition (held-out v3, 72 tasks: 36 non-trap, 36 trap) | correct /72 (95% CI) | non-trap /36 (95% CI) | trap /36 (95% CI) | parses | passes checker | blocked by checker | unsafe programs reaching execution |
+|---|---|---|---|---|---|---|---|
+| Base 1.5B, reference card + 3 examples | 2 (0.008-0.096) | 2 (0.015-0.181) | 0 (0.000-0.096) | 31.9% | 6.9% | 18 | 0 |
+| **v0.2 plain (released)** | **18 (0.164-0.361)** | **13 (0.225-0.524)** | **5 (0.061-0.287)** | 80.6% | 45.8% | 25 | **0** |
+| v0.2 with checker feedback | 22 (0.211-0.420) | 14 (0.248-0.551) | 8 (0.117-0.381) | 79.2% | 51.4% | 20 | 0 |
+
+- **No confirmatory test was run** (see step 3): the declared confirmatory comparison needs a stage-4 model, which was excluded, so there are no McNemar tests and no adjusted p-values in the result files. Every row above is exploratory and descriptive. No claim that one condition beats another is supported by a test.
+- Plain reading: on 72 new tasks in 18 new business types, the released v0.2 solves 18 (about a quarter), 13 of 36 ordinary tasks and 5 of 36 trap tasks; with checker feedback, 22. The base model solves 2. This is in line with held-out v2 (v0.2 plain 20/90) and is not a strong result.
+- **What the checker did:** it rejected 18, 25 and 20 of the parsed programs (any checker error, including rule violations), and the programs it accepted caused 0 monitor problems in all three conditions ("unsafe programs reaching execution" = 0), so no rule-breaking program got past it. That is the only claim; neither the model nor the system is called safe.
+- **Held-out v3 is now used.** Any later model change needs a new frozen held-out set first.
 
 ## Session 4 (2026-10-28 to 2026-10-29, Claude Code): counterfactual "forbidden column" data, retrain, dev eval (DONE)
 

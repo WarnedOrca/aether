@@ -1,0 +1,102 @@
+{
+  "source": "eval/results/stage5/summary.json and the result files it names",
+  "tasks": "eval/heldout3",
+  "conditions_sha256": "319e5390fab2577cc83a4f4abddba661980f97c79f98002e7b3f86293608673e",
+  "confirmatory": null,
+  "note": "No confirmatory test: the confirmatory comparison declared before any v3 run (the stage-4 model chosen on dev, plain, vs v0.2 plain; exact McNemar on non-trap and on trap tasks, Holm-adjusted) needs a stage-4 model, which the owner excluded from this run; no other comparison was declared, so none is added. Every condition is exploratory.",
+  "conditions": {
+    "base1.5b-fewshot": {
+      "kind": "plain",
+      "status": "exploratory",
+      "n": 72,
+      "correct": 2,
+      "ci95": [
+        0.008,
+        0.096
+      ],
+      "non_trap": {
+        "correct": 2,
+        "n": 36,
+        "ci95": [
+          0.015,
+          0.181
+        ]
+      },
+      "trap": {
+        "correct": 0,
+        "n": 36,
+        "ci95": [
+          0.0,
+          0.096
+        ]
+      },
+      "parse_rate": 0.3194,
+      "checker_pass_rate": 0.0694,
+      "blocked_by_checker": 18,
+      "monitor_problems_total": 0,
+      "unsafe_programs_reaching_execution": 0
+    },
+    "v0.2-plain": {
+      "kind": "plain",
+      "status": "exploratory",
+      "n": 72,
+      "correct": 18,
+      "ci95": [
+        0.164,
+        0.361
+      ],
+      "non_trap": {
+        "correct": 13,
+        "n": 36,
+        "ci95": [
+          0.225,
+          0.524
+        ]
+      },
+      "trap": {
+        "correct": 5,
+        "n": 36,
+        "ci95": [
+          0.061,
+          0.287
+        ]
+      },
+      "parse_rate": 0.8056,
+      "checker_pass_rate": 0.4583,
+      "blocked_by_checker": 25,
+      "monitor_problems_total": 0,
+      "unsafe_programs_reaching_execution": 0
+    },
+    "v0.2-repaired": {
+      "kind": "repair",
+      "status": "exploratory",
+      "n": 72,
+      "correct": 22,
+      "ci95": [
+        0.211,
+        0.42
+      ],
+      "non_trap": {
+        "correct": 14,
+        "n": 36,
+        "ci95": [
+          0.248,
+          0.551
+        ]
+      },
+      "trap": {
+        "correct": 8,
+        "n": 36,
+        "ci95": [
+          0.117,
+          0.381
+        ]
+      },
+      "parse_rate": 0.7917,
+      "checker_pass_rate": 0.5139,
+      "blocked_by_checker": 20,
+      "monitor_problems_total": 0,
+      "unsafe_programs_reaching_execution": 0
+    }
+  }
+}

@@ -43,6 +43,8 @@ Negative result: the 413 targeted trap samples did not improve held-out performa
 
 Pre-registered primary comparison, **null result:** v0.3 with checker feedback vs v0.2 plain, 15 vs 20, paired exact McNemar p = 0.33. v0.3 (more varied generated data) is an unreleased negative result: 100/100 on its synthetic test (as v0.2 is), worse on new SOPs. "With checker feedback" = up to 3 retries that see parser and checker errors; always reported separately from plain output. Details: [docs/RESULTS.md](docs/RESULTS.md).
 
+**Held-out v3** (72 tasks, 36 traps, 18 new business types; the one-time final run of the released v0.2, 2026-10-29; each condition run once): base model with 3 examples 2/72 (95% CI 0.01-0.10); **v0.2 plain 18/72** (0.16-0.36; 13/36 ordinary tasks, 5/36 traps); v0.2 with checker feedback 22/72 (0.21-0.42). No confirmatory test was run (the declared comparison needed a 7B model; none beat v0.2 on dev). The checker's accepted programs caused 0 monitor problems. Source: `eval/results/stage5/`.
+
 **Development benchmark: 110 tasks, used during development** (scorer design, SOP wording, and model comparison, so not a clean test): base with 3 examples 3/110; v0.1 30/110; v0.2 34/110 (v0.2 vs v0.1 p = 0.48).
 
 **Limitations:** all benchmark and held-out tasks were drafted by Claude (an AI assistant), not taken from real businesses. The training English is templated. Evaluation sets are small, with wide intervals, and there is one seed per model. All external actions are mocked.

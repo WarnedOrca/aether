@@ -49,6 +49,20 @@ Paired exact McNemar tests (`eval/results/ft/heldout-*.json`):
 - **v0.3** (`eval/results/ft/ft-coder1.5b-v0.3-run.json`): the v0.2 recipe plus 1,232 checker-verified samples from 30 new business types (`data/synthetic_v3/`), 3,294 training examples. Like v0.1 and v0.2, it scores 100/100 on its synthetic test split, but lower than v0.2 on held-out v2 and on the development benchmark (26/110 vs 34/110). Our reading (a hypothesis, not tested): the generated data teaches the generator's templates more than reading real SOPs. **v0.3 is not released.**
 - Development-only results that came before the held-out run: checker feedback on the 110-task benchmark, v0.2 34 -> 36; grammar-constrained, 33 (parse rate 0.78 -> 0.88).
 
+## 1c. Held-out v3: 72 tasks, the one-time final run of v0.2 (2026-10-29)
+
+72 tasks (36 traps, 36 general) in 18 business types not used anywhere else (`eval/heldout3/`, SHA-256 in `FROZEN.md`), drafted by Claude and frozen before any 7B training. Each condition was run exactly once (`stages/stage5_eval.py`, conditions committed first: `stages/stage5_conditions.json`). Results: `eval/results/stage5/summary.json` and `eval/results/stage5/report.json`.
+
+| System | correct (of 72) | 95% CI | non-trap (of 36) | traps (of 36) | parse |
+|---|---|---|---|---|---|
+| Base model, reference card + 3 examples | 2 | 0.01-0.10 | 2 | 0 | 0.32 |
+| **v0.2 plain (released)** | **18** | 0.16-0.36 | 13 | 5 | 0.81 |
+| v0.2 with checker feedback | 22 | 0.21-0.42 | 14 | 8 | 0.79 |
+
+- **No confirmatory test.** The comparison declared before this run (the 7B model chosen on dev vs v0.2 plain) needed a 7B adapter; none was better than v0.2 on dev, so the owner excluded them and no other test was declared. All rows are descriptive.
+- The checker rejected 18, 25 and 20 parsed programs in the three conditions, and the programs it accepted caused 0 monitor problems.
+- Held-out v3 is now used. Any later model change needs a new frozen held-out set first.
+
 ## 2. Development benchmark: 110 tasks, used during development
 
 This benchmark was used to build and debug the scorer, the blank-cell rule, and the SOP wording, and to compare models during development. Treat it as a development set, not a clean test.
@@ -101,7 +115,7 @@ These results support only this statement: the checker verifies core rules C1-C8
 - All benchmark and held-out tasks were drafted by Claude (an AI assistant), not taken from real businesses.
 - The training English is templated (rule-based generator). Most held-out failures are general errors on unfamiliar businesses.
 - Small evaluation sets with wide intervals; one training seed per model.
-- Both held-out sets are now used (v1 once per model; v2 once per condition). Model work is stopped; any further model change needs a new held-out set.
+- All three held-out sets are now used (v1 once per model; v2 and v3 once per condition). Any further model change needs a new frozen held-out set first.
 - All external actions are mocked. The checker's guarantees cover only rules C1-C8, under the trust assumptions in `spec/SPEC.md` section 5.
 
 Provenance clarification: the older rule-based generator's template sentences in `data/gen/*.py` were typed by Claude Code, an AI coding assistant. Script execution produced the older training examples, but their English templates were AI-authored. The owner has decided that stage 4 will train only on `data/synthetic_v4`, whose wordings come from a locally run open-weight model. This note changes no published results.
