@@ -65,6 +65,20 @@ This benchmark was used to build and debug the scorer, the blank-cell rule, and 
 
 v0.1 vs the base model with 3 examples: 30 vs 3, exact McNemar p = 1.4e-6. v0.2 vs v0.1: 34 vs 30, p = 0.48 (not significant).
 
+## Larger-model experiments (7B, development benchmark only): negative results
+
+After v0.2, three QLoRA adapters on Qwen2.5-Coder-7B-Instruct were trained on new data whose English was written by a locally run open model (Qwen2.5-7B-Instruct) from script-made programs. None was better than v0.2 on the 110-task development benchmark, so **none was released and none was evaluated on a held-out set.** Same scorer, greedy decoding, paired exact McNemar against v0.2 (34/110).
+
+| Adapter (7B) | Training data | Correct /110 (epoch 1, epoch 2) | p vs v0.2 (epoch 2) | Source |
+|---|---|---|---|---|
+| q7b-v1 | 898 local-model wordings of 515 programs | 26, 30 | 0.60 | `eval/results/compare-dev-v0.2-vs-q7b-epoch*-2026-10-26.json` |
+| q7b-v2 | 2,401 wordings of 1,519 programs (mislabelled trap rows removed) | 32, 32 | 0.85 | `eval/results/dev-report-q7b-v2-2026-10-27.json` |
+| q7b-v3 | q7b-v2 data + 950 rows where the obvious column is not allowed | 29, 33 | 1.0 | `eval/results/dev-report-q7b-v3-session4.json` |
+
+- With checker feedback on dev (exploratory): q7b-v2 epoch 2 35/110 and q7b-v3 epoch 2 36/110, against v0.2 36/110 (p = 1.0 both; `eval/results/dev-repair-compare-2026-10-28.json`, `eval/results/dev-repair-compare-session4.json`).
+- The 7B adapters almost always write code that parses, but more of it reads columns the policy forbids (21-25 of 110 for q7b-v1 and q7b-v2, against 3 for v0.2) or does the wrong thing. Training on programs where the obvious column is not allowed (q7b-v3) cut forbidden-column errors to 13 but did not raise the score.
+- In all of these runs the checker blocked every program that broke a rule, and accepted programs caused 0 monitor problems.
+
 ## 3. Checker and interpreter
 
 | Check | Result | Source |
