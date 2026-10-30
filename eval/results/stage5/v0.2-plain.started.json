@@ -1,0 +1,25 @@
+{
+  "conditions_sha256": "319e5390fab2577cc83a4f4abddba661980f97c79f98002e7b3f86293608673e",
+  "command": [
+    "<repo>\\.venv\\Scripts\\python.exe",
+    "-u",
+    "-m",
+    "stages.gpu",
+    "eval.baseline",
+    "--model",
+    "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+    "--tasks-dir",
+    "eval/heldout3",
+    "--label",
+    "v0.2-plain",
+    "--fewshot",
+    "0",
+    "--suffix=-final3-v0.2-plain",
+    "--batch",
+    "4",
+    "--out",
+    "<repo>\\eval\\results\\baseline-v0.2-plain-heldout3-run-final3-v0.2-plain",
+    "--adapter",
+    "outputs/ft-coder1.5b-v0.2/epoch2"
+  ]
+}

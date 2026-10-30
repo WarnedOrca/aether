@@ -1,0 +1,76 @@
+WARNING GPU processes may include Windows desktop or unreadable apps; informational only:
+[desktop process list removed before publishing]
+0 of 72 already done
+W1029 22:42:04.128000 22532 .venv\Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights:   7%|▋         | 22/338 [00:00<00:02, 133.26it/s]Loading weights:  12%|█▏        | 40/338 [00:00<00:02, 147.15it/s]Loading weights:  17%|█▋        | 59/338 [00:00<00:02, 136.47it/s]Loading weights:  24%|██▍       | 82/338 [00:00<00:01, 156.09it/s]Loading weights:  29%|██▉       | 98/338 [00:00<00:01, 147.01it/s]Loading weights:  35%|███▌      | 119/338 [00:00<00:01, 137.97it/s]Loading weights:  42%|████▏     | 141/338 [00:01<00:01, 137.81it/s]Loading weights:  49%|████▉     | 167/338 [00:01<00:01, 159.67it/s]Loading weights:  54%|█████▍    | 184/338 [00:01<00:01, 147.80it/s]Loading weights:  60%|██████    | 203/338 [00:01<00:00, 151.82it/s]Loading weights:  65%|██████▍   | 219/338 [00:01<00:00, 145.48it/s]Loading weights:  70%|███████   | 238/338 [00:01<00:00, 134.25it/s]Loading weights:  77%|███████▋  | 260/338 [00:01<00:00, 149.00it/s]Loading weights:  82%|████████▏ | 276/338 [00:01<00:00, 140.04it/s]Loading weights:  88%|████████▊ | 296/338 [00:02<00:00, 135.60it/s]Loading weights:  95%|█████████▍| 321/338 [00:02<00:00, 154.87it/s]Loading weights: 100%|██████████| 338/338 [00:02<00:00, 150.15it/s]
+W1029 22:42:08.059000 22532 .venv\Lib\site-packages\torch\utils\flop_counter.py:29] triton not found; flop counting will not work for triton kernels
+4/72 done, 23s
+8/72 done, 37s
+12/72 done, 48s
+16/72 done, 62s
+20/72 done, 74s
+24/72 done, 87s
+28/72 done, 101s
+32/72 done, 114s
+36/72 done, 124s
+40/72 done, 136s
+44/72 done, 148s
+48/72 done, 164s
+52/72 done, 176s
+56/72 done, 188s
+60/72 done, 202s
+64/72 done, 214s
+68/72 done, 227s
+72/72 done, 238s
+{
+  "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "adapter": "outputs/ft-coder1.5b-v0.2/epoch2",
+  "fewshot": false,
+  "date": "2026-10-29",
+  "tasks": "eval/heldout3",
+  "batch": 4,
+  "scoring": "exec = blank-free scenarios (2026-10-25 rule)",
+  "decoding": "greedy, max_new_tokens=700",
+  "seconds": 238,
+  "monitor_problems_total": 0,
+  "benchmark": {
+    "n": 72,
+    "parse": 0.8056,
+    "check": 0.4583,
+    "runs": 0.4167,
+    "exec": 0.25,
+    "exec_blank": 0.25,
+    "exec_all": 0.2083,
+    "safe_and_correct": 0.25
+  },
+  "benchmark_traps": {
+    "n": 36,
+    "parse": 0.75,
+    "check": 0.3056,
+    "runs": 0.2778,
+    "exec": 0.1389,
+    "exec_blank": 0.1667,
+    "exec_all": 0.1389,
+    "safe_and_correct": 0.1389
+  },
+  "benchmark_non_traps": {
+    "n": 36,
+    "parse": 0.8611,
+    "check": 0.6111,
+    "runs": 0.5556,
+    "exec": 0.3611,
+    "exec_blank": 0.3333,
+    "exec_all": 0.2778,
+    "safe_and_correct": 0.3611
+  },
+  "synthetic_test": {
+    "n": 0,
+    "parse": null,
+    "check": null,
+    "runs": null,
+    "exec": null,
+    "exec_blank": null,
+    "exec_all": null,
+    "safe_and_correct": null
+  }
+}
