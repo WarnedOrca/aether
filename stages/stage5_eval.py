@@ -2,7 +2,11 @@
 
 Conditions come from a JSON file written and committed BEFORE this runs (see stages/stage5_conditions.example.json);
 the stage-4 model in it must be chosen on the dev split only. Each condition runs as its own subprocess with its own
-log; a completed condition is never run again. Interrupted conditions stop for owner review.
+log; a completed condition is never run again. A condition interrupted by a crash or shutdown resumes on rerun only
+with the identical command and conditions file: each run saves every finished task and never regenerates it
+(eval.baseline / eval.repair with --out). Anything else stops for owner review.
+If the declared confirmatory comparison cannot be run (its model is not in the conditions), the conditions file sets
+"confirmatory": null and no confirmatory test is computed; every condition is then reported as exploratory.
 
 Declared metrics (vault decision log, 2026-10-25): non-trap success (36 tasks) and trap safe-alternative rate
 (36 tasks), reported separately with 95% Wilson intervals, plus unsafe programs reaching execution (programs that
@@ -40,16 +44,34 @@ def result_file(c: dict) -> Path | None:
     return next((p for p in reversed(hits) if p.with_suffix(".json").is_file()), None)
 
 
+def out_path(c: dict) -> Path:
+    """Fixed output path (without extension) matching result_file's pattern, so a rerun continues the same files."""
+    if c["kind"] == "plain":
+        return ROOT / "eval/results" / f"baseline-{c['name']}-heldout3-run-final3-{c['name']}"
+    return ROOT / "eval/results" / f"repair-{c['name']}-heldout3-run"
+
+
+def may_resume(marker: Path, cmd: list[str], spec_hash: str) -> bool:
+    """A started-but-unfinished condition may only continue with exactly the same command and conditions file."""
+    if not marker.exists():
+        return False
+    prev = json.loads(marker.read_text(encoding="utf-8"))
+    if prev.get("command") != cmd or prev.get("conditions_sha256") != spec_hash:
+        raise ValueError(f"Interrupted condition {marker.stem} was started with a different command or conditions file; "
+                         "stop for owner review")
+    return True
+
+
 def command(c: dict, conds: dict) -> list[str]:
     py = [sys.executable, "-u", "-m", "stages.gpu"]
     if c["kind"] == "plain":
         cmd = py + ["eval.baseline", "--model", c["model"], "--tasks-dir", TASKS, "--label", c["name"],
-                    "--fewshot", str(c.get("fewshot", 0)), f"--suffix=-final3-{c['name']}", "--batch", str(c.get("batch", 4))]
+                    "--fewshot", str(c.get("fewshot", 0)), f"--suffix=-final3-{c['name']}", "--batch", str(c.get("batch", 4)), "--out", str(out_path(c))]
         return cmd + (["--adapter", c["adapter"]] if c.get("adapter") else [])
     if c["kind"] == "repair":
         plain = result_file(conds[c["plain_of"]])
         cmd = py + ["eval.repair", "--model", c["model"], "--tasks-dir", TASKS, "--label", c["name"], "--plain", str(plain),
-                    "--batch", str(c.get("batch", 4))]
+                    "--batch", str(c.get("batch", 4)), "--out", str(out_path(c))]
         return cmd + (["--adapter", c["adapter"]] if c.get("adapter") else [])
     cmd = py + ["eval.constrained", "--tasks-dir", TASKS, "--label", c["name"]]
     return cmd + (["--adapter", c["adapter"]] if c.get("adapter") else [])
@@ -110,7 +132,10 @@ def main() -> None:
     for c in spec["conditions"]:
         check_license(c["model"], log)
     conds = {c["name"]: c for c in spec["conditions"]}
-    a, b = spec["confirmatory"]["new"], spec["confirmatory"]["baseline"]
+    conf = spec.get("confirmatory")
+    a, b = (conf["new"], conf["baseline"]) if conf else (None, None)
+    if conf and not {a, b} <= set(conds):
+        raise ValueError("Confirmatory conditions must be in the conditions list")
     log.info("conditions file %s sha256 %s: %s; confirmatory %s vs %s", args.conditions, spec_hash, list(conds), a, b)
     for c in spec["conditions"]:
         if result_file(c):
@@ -118,13 +143,14 @@ def main() -> None:
             log.info("%s: result exists (%s); not running again", c["name"], result_file(c).name)
             continue
         marker = OUT / f"{c['name']}.started.json"
-        if marker.exists():
-            raise ValueError(f"Interrupted condition {c['name']}; stop for owner review, never silently rerun")
         env = {**os.environ, "AETHER_LOAD_4BIT": "1" if c.get("load_4bit") else "0", "PYTHONIOENCODING": "utf-8"}
         cmd = command(c, conds)
-        log.info("%s: starting %s", c["name"], " ".join(cmd[3:]))
+        if may_resume(marker, cmd, spec_hash):
+            log.info("%s: resuming after an interruption (finished tasks are kept, never regenerated)", c["name"])
+        else:
+            log.info("%s: starting %s", c["name"], " ".join(cmd[3:]))
+            write_json(marker, {"conditions_sha256": spec_hash, "command": cmd})
         t0 = time.time()
-        write_json(marker, {"conditions_sha256": spec_hash, "command": cmd})
         with (OUT / f"{c['name']}.log").open("a", encoding="utf-8") as f:
             rc = subprocess.run(cmd, cwd=ROOT, env=env, stdout=f, stderr=subprocess.STDOUT,
                                 timeout=args.condition_timeout).returncode
@@ -148,7 +174,7 @@ def main() -> None:
                            encoding="utf-8")).get("monitor_problems_total"),
                        "file": result_file(c).name}
     tests = {}
-    for part, want in (("non_trap", False), ("trap", True)):
+    for part, want in ((("non_trap", False), ("trap", True)) if conf else ()):
         ids = [i for i, r in runs[a].items() if r["trap"] == want and i in runs[b]]
         a_only = sum(runs[a][i]["ok"] and not runs[b][i]["ok"] for i in ids)
         b_only = sum(runs[b][i]["ok"] and not runs[a][i]["ok"] for i in ids)
@@ -156,8 +182,12 @@ def main() -> None:
     for part, p_adj in zip(tests, holm([t["p"] for t in tests.values()])):
         tests[part]["p_holm"] = p_adj
     summary = {"stage": 5, "finished": True, "tasks": TASKS, "conditions_file": args.conditions,
-               "conditions_sha256": spec_hash, "confirmatory": {"new": a, "baseline": b, "tests": tests},
-               "conditions": table, "note": "Only the two confirmatory tests are pre-registered; everything else is exploratory."}
+               "conditions_sha256": spec_hash,
+               "confirmatory": {"new": a, "baseline": b, "tests": tests} if conf else None,
+               "conditions": table,
+               "note": ("Only the two confirmatory tests are pre-registered; everything else is exploratory." if conf else
+                        "No confirmatory test: " + spec.get("_confirmatory_note", "none declared for these conditions")
+                        + ". Every condition is exploratory.")}
     write_json(OUT / "summary.json", summary)
     log.info("done: %s", json.dumps(summary["confirmatory"]))
 

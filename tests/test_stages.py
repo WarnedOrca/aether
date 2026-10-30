@@ -170,3 +170,69 @@ def test_answer_only_valid_loss_matches_finetune_evaluate(monkeypatch):
     expected = evaluate(model, items, 2, 0, torch)
     got = stage4_qlora.answer_only_valid_loss(model, items, 2, 0)
     assert abs(expected - got) < 1e-5
+
+
+def test_stage5_resume_rules_and_fixed_output_paths(tmp_path, monkeypatch):
+    from stages import stage5_eval as s5
+    monkeypatch.setattr(s5, "ROOT", tmp_path)
+    (tmp_path / "eval/results").mkdir(parents=True)
+    plain = {"name": "v0.2-plain", "kind": "plain", "model": "m"}
+    rep = {"name": "v0.2-repaired", "kind": "repair", "model": "m", "plain_of": "v0.2-plain"}
+    for c in (plain, rep):  # the fixed output path is what result_file looks for
+        base = s5.out_path(c)
+        base.with_name(base.name + ".jsonl").write_text("{}")
+        base.with_name(base.name + ".partial.jsonl").write_text("{}")
+        assert s5.result_file(c) is None  # no summary .json yet: not complete
+        base.with_name(base.name + ".json").write_text("{}")
+        assert s5.result_file(c) == base.with_name(base.name + ".jsonl")
+    marker = tmp_path / "x.started.json"
+    assert s5.may_resume(marker, ["a"], "h") is False
+    marker.write_text(json.dumps({"command": ["a"], "conditions_sha256": "h"}))
+    assert s5.may_resume(marker, ["a"], "h") is True
+    with pytest.raises(ValueError, match="different command"):
+        s5.may_resume(marker, ["b"], "h")
+    with pytest.raises(ValueError, match="different command"):
+        s5.may_resume(marker, ["a"], "other")
+
+
+def test_stage5_without_confirmatory_reports_all_exploratory(tmp_path, monkeypatch):
+    import subprocess
+    from types import SimpleNamespace
+    from stages import stage5_eval as s5
+    import eval.bench
+    monkeypatch.setattr(s5, "ROOT", tmp_path)
+    monkeypatch.setattr(s5, "OUT", tmp_path / "eval/results/stage5")
+    (tmp_path / "eval/results").mkdir(parents=True)
+    spec = {"_confirmatory_note": "declared comparison needs a stage-4 model", "confirmatory": None, "conditions": [
+        {"name": "base-fewshot", "kind": "plain", "model": "m", "fewshot": 1},
+        {"name": "v0.2-plain", "kind": "plain", "model": "m", "adapter": "a"},
+        {"name": "v0.2-repaired", "kind": "repair", "plain_of": "v0.2-plain", "model": "m", "adapter": "a"}]}
+    spec_path = tmp_path / "conds.json"
+    spec_path.write_text(json.dumps(spec))
+    ids = [("t1", "none"), ("t2", "none"), ("t3", "over-limit")]
+    monkeypatch.setattr(eval.bench, "load_tasks", lambda d: [SimpleNamespace(id=i, trap=t) for i, t in ids])
+    monkeypatch.setattr(s5, "check_license", lambda m, log: "apache-2.0")
+    real_check_output = subprocess.check_output
+    monkeypatch.setattr(subprocess, "check_output", lambda *a, **k: spec_path.read_bytes() if a and a[0][:2] == ["git", "show"] else real_check_output(*a, **k))
+    calls = []
+
+    def fake_run(cmd, **kw):
+        calls.append(cmd)
+        out = cmd[cmd.index("--out") + 1]
+        repair = "eval.repair" in cmd
+        with open(out + ".jsonl", "w") as f:
+            for n, (i, t) in enumerate(ids):
+                ok = n == 0
+                f.write(json.dumps({"id": i, "trap": t, **({"repaired": {"safe_and_correct": ok}} if repair else {"safe_and_correct": ok})}) + "\n")
+        open(out + ".json", "w").write(json.dumps({"monitor_problems_total": 0}))
+        return SimpleNamespace(returncode=0)
+    monkeypatch.setattr(subprocess, "run", fake_run)
+    monkeypatch.setattr("sys.argv", ["stage5", "--conditions", "conds.json"])
+    s5.main()
+    summary = json.loads((tmp_path / "eval/results/stage5/summary.json").read_text())
+    assert summary["confirmatory"] is None and "stage-4 model" in summary["note"]
+    assert all(c["status"] == "exploratory" for c in summary["conditions"].values())
+    assert summary["conditions"]["v0.2-plain"]["non_trap"]["correct"] == 1 and summary["conditions"]["v0.2-plain"]["trap"]["n"] == 1
+    assert len(calls) == 3
+    s5.main()  # rerun after finishing: nothing runs again
+    assert len(calls) == 3
