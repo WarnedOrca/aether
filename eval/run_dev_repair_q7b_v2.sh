@@ -1,6 +1,6 @@
 #!/bin/bash
 # Exploratory dev-only checker-feedback run for q7b-v2 epoch 2. Resumable: rerun this script; finished tasks are skipped.
-cd <repo>
+cd "$(dirname "$0")/.."
 export HF_HOME="$PWD/.hf-cache" HF_HUB_OFFLINE=1 AETHER_LOAD_4BIT=1
 for try in 1 2 3; do
   .venv/Scripts/python.exe -u -m stages.gpu eval.repair --model Qwen/Qwen2.5-Coder-7B-Instruct --adapter outputs/qlora-7b-v2/epoch2 \

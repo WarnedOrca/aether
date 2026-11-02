@@ -2,7 +2,7 @@
 # Session 4 chain (dev split only; no stage 5, no held-out). Every step is skipped if its result exists, resumes if it
 # was interrupted, and commits its result locally. Rerun this script after a shutdown: `bash eval/run_session4_chain.sh`.
 # With --wait it first waits for an already running stage 3 wrapper instead of starting stage 3 itself.
-cd <repo>
+cd "$(dirname "$0")/.."
 export HF_HOME="$PWD/.hf-cache" HF_HUB_OFFLINE=1
 PY=.venv/Scripts/python.exe
 R=eval/results

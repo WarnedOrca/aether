@@ -1,7 +1,7 @@
 #!/bin/bash
 # Exploratory dev-only checker-feedback run for v0.2 (1.5B base + LoRA). Resumable: rerun this script; finished tasks are skipped.
 # Not offline: the 1.5B base has no owner-reviewed models.lock.json entry, so it loads from the default HF cache as on 2026-10-25.
-cd <repo>
+cd "$(dirname "$0")/.."
 unset HF_HUB_OFFLINE AETHER_LOAD_4BIT
 export HF_HOME="$HOME/.cache/huggingface" HF_HUB_DISABLE_IMPLICIT_TOKEN=1
 for try in 1 2 3; do

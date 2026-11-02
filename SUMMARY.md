@@ -28,7 +28,10 @@ Sources: `eval/results/stage5/summary.json`, `eval/results/stage5/report.json`.
 - Toned down claims that were stronger than the data: "the checker blocked every program that broke a rule" (7 places) now says what the data shows, that accepted programs caused 0 monitor violations on generated test data; "beat the base model", "worse on new SOPs" and "from 0 to a useful level" now give the counts and whether a test was significant; the 7B notes now say "reads or writes" (the counts include writes), give the measured parse range, and no longer say the counterfactual data "cut" errors (one run each, not a tested effect).
 - The column "unsafe programs reaching execution" is now "rule-violating programs that executed" in the write-ups (the JSON field in the committed result files keeps its old name, because results were not changed).
 
-## Session 7 (2026-11-01): publishing was stopped before anything went public
+## Session 7 (2026-11-01): personal data removed, then published to GitHub
+- You chose "scrub, then push". Your user folder and the lists of running desktop programs were removed from all 53 unpublished commits before anything went public; no number changed (checked automatically), all 339 tests pass, and the push was a normal one. The old local history is kept as branch `backup/pre-scrub-2026-11-01` (never pushed).
+
+### Before the scrub
 - The pre-publish scan found **personal data** in the 52 unpublished commits: your Windows user folder (`<home>`) in 16 files, and the list of desktop programs that were running (names not repeated here) in several committed result files. No secrets, tokens or real email addresses were found, and nothing is too large. As instructed, I stopped: **nothing was pushed and nothing was uploaded to Hugging Face.**
 - Fixed one number: the post-hoc base-vs-v0.2 p-value is 0.00014 (it was written as 0.00015). Also removed the word "guarantees" from `docs/RESULTS.md`.
 - Hugging Face is not logged in on this machine, so the model card upload needs you anyway. The card is built and ready in `dist/model/README.md`; its numbers match the README.
