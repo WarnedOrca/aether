@@ -13,7 +13,7 @@ Sources: `eval/results/stage5/summary.json`, `eval/results/stage5/report.json`.
 
 - **Statistical tests: none.** The only test declared before any v3 run was "the 7B model chosen on dev vs v0.2 plain". You excluded every 7B adapter, and you said not to add new comparisons, so there is no McNemar test and no adjusted p-value. All rows are descriptive and exploratory. Overlapping intervals mean the table does not show that feedback beats plain.
 - **What the checker did:** it rejected 18, 25 and 20 programs, and every program it accepted ran with 0 monitor problems.
-- **Post-hoc tests (added later, exploratory, not declared before the run, no adjustment for doing two tests; `eval/results/stage5-posthoc.json`):** base vs v0.2 plain, 2 vs 18 correct, exact McNemar p = 0.00015; v0.2 plain vs with feedback, 18 vs 22 (feedback fixed 4 tasks and broke none), p = 0.125, which is **not** significant. So there is no evidence here that feedback helps; v0.2 clearly solves more than the base model, but that test was chosen after seeing the results.
+- **Post-hoc tests (added later, exploratory, not declared before the run, no adjustment for doing two tests; `eval/results/stage5-posthoc.json`):** base vs v0.2 plain, 2 vs 18 correct, exact McNemar p = 0.00014; v0.2 plain vs with feedback, 18 vs 22 (feedback fixed 4 tasks and broke none), p = 0.125, which is **not** significant. So there is no evidence here that feedback helps; v0.2 clearly solves more than the base model, but that test was chosen after seeing the results.
 
 ## What was done
 1. **Pre-flight:** 336 tests passed and held-out v3 validated (72 tasks, 0 problems, frozen hashes unchanged). The 1.5B base model has a reviewed Apache-2.0 lock entry. The v0.2 adapter is byte-identical to the released one. Offline loading was checked on 2 development tasks.
@@ -28,8 +28,14 @@ Sources: `eval/results/stage5/summary.json`, `eval/results/stage5/report.json`.
 - Toned down claims that were stronger than the data: "the checker blocked every program that broke a rule" (7 places) now says what the data shows, that accepted programs caused 0 monitor violations on generated test data; "beat the base model", "worse on new SOPs" and "from 0 to a useful level" now give the counts and whether a test was significant; the 7B notes now say "reads or writes" (the counts include writes), give the measured parse range, and no longer say the counterfactual data "cut" errors (one run each, not a tested effect).
 - The column "unsafe programs reaching execution" is now "rule-violating programs that executed" in the write-ups (the JSON field in the committed result files keeps its old name, because results were not changed).
 
-## Needs you
-1. Review the wording in the README and `docs/RESULTS.md` (the new 7B and held-out v3 sections) before anything is published. Nothing was pushed or uploaded, and the Hugging Face model card was not changed.
-2. A new held-out set is needed before any further model work.
+## Session 7 (2026-11-01): publishing was stopped before anything went public
+- The pre-publish scan found **personal data** in the 52 unpublished commits: your Windows user folder (`<home>`) in 16 files, and the list of desktop programs that were running (names not repeated here) in several committed result files. No secrets, tokens or real email addresses were found, and nothing is too large. As instructed, I stopped: **nothing was pushed and nothing was uploaded to Hugging Face.**
+- Fixed one number: the post-hoc base-vs-v0.2 p-value is 0.00014 (it was written as 0.00015). Also removed the word "guarantees" from `docs/RESULTS.md`.
+- Hugging Face is not logged in on this machine, so the model card upload needs you anyway. The card is built and ready in `dist/model/README.md`; its numbers match the README.
 
-The GPU is idle. Left alone: `pyproject.toml`, `uv.lock`, `data/synthetic_v4_smoke/`. Nothing was pushed, uploaded, installed, bought or signed in to.
+## Needs you
+1. Decide about the personal data: push as is, or have the unpublished commits cleaned first (exact options and commands in `HANDOFF.md`, Session 7).
+2. Upload the model card yourself (log in, then one `hf upload` command; it is in `HANDOFF.md`, Session 7).
+3. A new held-out set is needed before any further model work.
+
+Nothing was pushed, uploaded, installed, bought or signed in to. Left alone: `pyproject.toml`, `uv.lock`, `data/synthetic_v4_smoke/`.

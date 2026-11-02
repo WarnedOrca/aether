@@ -61,7 +61,7 @@ Paired exact McNemar tests (`eval/results/ft/heldout-*.json`):
 
 - **No confirmatory test.** The comparison declared before this run (the 7B model chosen on dev vs v0.2 plain) needed a 7B adapter; none was better than v0.2 on dev, so the owner excluded them and no other test was declared. All rows are descriptive.
 - The checker rejected 18, 25 and 20 parsed programs in the three conditions, and the programs it accepted caused 0 monitor problems.
-- **Post-hoc tests (exploratory; not declared before the run, chosen after seeing results; no multiple-comparison adjustment; `eval/results/stage5-posthoc.json`):** exact McNemar on all 72 tasks. Base vs v0.2 plain: 2 vs 18 (1 task only the base solved, 17 only v0.2), p = 0.00015. v0.2 plain vs v0.2 with checker feedback: 18 vs 22 (4 tasks only with feedback, 0 only without), p = 0.125, not significant.
+- **Post-hoc tests (exploratory; not declared before the run, chosen after seeing results; no multiple-comparison adjustment; `eval/results/stage5-posthoc.json`):** exact McNemar on all 72 tasks. Base vs v0.2 plain: 2 vs 18 (1 task only the base solved, 17 only v0.2), p = 0.00014. v0.2 plain vs v0.2 with checker feedback: 18 vs 22 (4 tasks only with feedback, 0 only without), p = 0.125, not significant.
 - Held-out v3 is now used. Any later model change needs a new frozen held-out set first.
 
 ## 2. Development benchmark: 110 tasks, used during development
@@ -117,6 +117,6 @@ These results support only this statement: the checker verifies core rules C1-C8
 - The training English is templated (rule-based generator). Most held-out failures are general errors on unfamiliar businesses.
 - Small evaluation sets with wide intervals; one training seed per model.
 - All three held-out sets are now used (v1 once per model; v2 and v3 once per condition). Any further model change needs a new frozen held-out set first.
-- All external actions are mocked. The checker's guarantees cover only rules C1-C8, under the trust assumptions in `spec/SPEC.md` section 5.
+- All external actions are mocked. The checker verifies only rules C1-C8, under the trust assumptions in `spec/SPEC.md` section 5.
 
 Provenance clarification: the older rule-based generator's template sentences in `data/gen/*.py` were typed by Claude Code, an AI coding assistant. Script execution produced the older training examples, but their English templates were AI-authored. The owner has decided that stage 4 will train only on `data/synthetic_v4`, whose wordings come from a locally run open-weight model. This note changes no published results.
