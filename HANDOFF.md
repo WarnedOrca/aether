@@ -10,6 +10,18 @@ Updated 2026-10-26 afternoon by Claude Code (unattended session below). That ses
 - The pre-scrub history is kept locally as branch `backup/pre-scrub-2026-11-01` (never pushed; delete it with `git branch -D backup/pre-scrub-2026-11-01` once you are happy).
 - The six `eval/run_*.sh` scripts started with `cd <the user folder>`; after the scrub they now `cd "$(dirname "$0")/.."` (work from any checkout).
 
+### Published (2026-11-01) and confirmed by fetching the public pages
+- **GitHub:** `git push origin main` (normal push, existing credentials; no force) -> `b7a360d..6fb1215`. `https://api.github.com/repos/WarnedOrca/aether/commits/main` reports `6fb12158d9ceab096668f07c833b409c0e5cbfd8`; the public README at that commit is byte-identical to the local one (contains held-out v3 18/72 and post-hoc p = 0.00014); the published `eval/results/stage5/run.log` contains no user folder or program names. Only `main` was pushed; `backup/pre-scrub-2026-11-01` stays local. This HANDOFF note itself is a later local commit (not pushed).
+- **GitHub Pages** (`https://warnedorca.github.io/aether/`, branch `gh-pages`, the in-browser checker demo): HTTP 200 and it shows no result numbers, so nothing there can disagree with the README; no change was needed.
+- **Hugging Face model card: NOT updated.** No logged-in session on this machine. The public card (`https://huggingface.co/sidchalamala/aether-coder-1.5b-lora`) is still the earlier version (no 7B section).
+
+### Needs the owner (current)
+1. **Upload the model card** (from the repo root in PowerShell; you type the token yourself):
+   `.venv\Scripts\python.exe release/build.py` (rebuilds `dist/model/README.md` from the reviewed template), then `.venv\Scripts\hf.exe auth login`, then `.venv\Scripts\hf.exe upload sidchalamala/aether-coder-1.5b-lora dist/model/README.md README.md --commit-message "Update model card: 7B negative results, wording"`. This uploads only the card as the repo's `README.md`; `dist/model/` also holds a weights copy, which this command does not upload. The reviewed template has no held-out v3 section (the README and `docs/RESULTS.md` do); add one only if you want it.
+2. Optionally delete the local backup branch: `git branch -D backup/pre-scrub-2026-11-01`.
+3. Push this last local HANDOFF/SUMMARY commit whenever convenient (`git push origin main`), or leave it local.
+4. A new frozen held-out set is needed before any further model change.
+
 ## Session 7, first part (2026-11-01): publish attempt STOPPED at the pre-publish scan
 
 ### What was checked (step 1)

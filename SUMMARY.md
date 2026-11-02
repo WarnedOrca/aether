@@ -36,9 +36,15 @@ Sources: `eval/results/stage5/summary.json`, `eval/results/stage5/report.json`.
 - Fixed one number: the post-hoc base-vs-v0.2 p-value is 0.00014 (it was written as 0.00015). Also removed the word "guarantees" from `docs/RESULTS.md`.
 - Hugging Face is not logged in on this machine, so the model card upload needs you anyway. The card is built and ready in `dist/model/README.md`; its numbers match the README.
 
-## Needs you
-1. Decide about the personal data: push as is, or have the unpublished commits cleaned first (exact options and commands in `HANDOFF.md`, Session 7).
-2. Upload the model card yourself (log in, then one `hf upload` command; it is in `HANDOFF.md`, Session 7).
-3. A new held-out set is needed before any further model work.
+## What is live now (checked by fetching the public pages)
+- **GitHub:** commit `6fb1215` is on `main`; the public README matches the local one exactly (held-out v3 18/72, post-hoc p = 0.00014), and the published logs contain no user folder or program names.
+- **GitHub Pages:** the demo site is up and shows no result numbers, so it cannot disagree with the README.
+- **Hugging Face:** the model card was **not** updated (not logged in on this machine); it still shows the earlier text.
 
-Nothing was pushed, uploaded, installed, bought or signed in to. Left alone: `pyproject.toml`, `uv.lock`, `data/synthetic_v4_smoke/`.
+## Needs you
+1. Upload the model card yourself: rebuild, log in, then one `hf upload` command that sends only the card (exact commands in `HANDOFF.md`, Session 7).
+2. Optionally delete the local backup branch `backup/pre-scrub-2026-11-01`.
+3. This summary update is a local commit; push it when convenient.
+4. A new frozen held-out set is needed before any further model change.
+
+Nothing was uploaded to Hugging Face, and nothing was installed, bought or signed in to. Left alone: `pyproject.toml`, `uv.lock`, `data/synthetic_v4_smoke/`.
