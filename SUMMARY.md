@@ -36,15 +36,14 @@ Sources: `eval/results/stage5/summary.json`, `eval/results/stage5/report.json`.
 - Fixed one number: the post-hoc base-vs-v0.2 p-value is 0.00014 (it was written as 0.00015). Also removed the word "guarantees" from `docs/RESULTS.md`.
 - Hugging Face is not logged in on this machine, so the model card upload needs you anyway. The card is built and ready in `dist/model/README.md`; its numbers match the README.
 
-## What is live now (checked by fetching the public pages)
-- **GitHub:** commit `6fb1215` is on `main`; the public README matches the local one exactly (held-out v3 18/72, post-hoc p = 0.00014), and the published logs contain no user folder or program names.
-- **GitHub Pages:** the demo site is up and shows no result numbers, so it cannot disagree with the README.
-- **Hugging Face:** the model card was **not** updated (not logged in on this machine); it still shows the earlier text.
+## What is live now (checked by fetching the public pages, 2026-11-07)
+- **GitHub:** commit `115241c` is on `main` (a normal push). The public README matches the local one exactly. It shows the held-out v3 results (base 2/72, v0.2 18/72, v0.2 with feedback 22/72) and the new checker sentence: "The checker rejects programs that break the policy's rules; in every evaluation, the programs it accepted caused 0 monitor violations on generated test data." The README, `docs/RESULTS.md` and the model card now all say "monitor violations".
+- **GitHub Pages:** the demo site shows no result numbers, so it cannot disagree with the README.
+- **Hugging Face:** the model card was **not** updated, because this machine is not logged in to Hugging Face. The public card is still the older text, without the held-out v3 section or the new sentence. The new card is built and checked in `dist/model/README.md`.
 
 ## Needs you
-1. Upload the model card yourself: rebuild, log in, then one `hf upload` command that sends only the card (exact commands in `HANDOFF.md`, Session 7).
+1. Upload the model card yourself: log in with `.venv\Scripts\hf.exe auth login`, then run the one `hf upload` command in `HANDOFF.md` (Session 9). It sends only the card, not the weights.
 2. Optionally delete the local backup branch `backup/pre-scrub-2026-11-01`.
-3. This summary update is a local commit; push it when convenient.
-4. A new frozen held-out set is needed before any further model change.
+3. A new frozen held-out set is needed before any further model change.
 
 Nothing was uploaded to Hugging Face, and nothing was installed, bought or signed in to. Left alone: `pyproject.toml`, `uv.lock`, `data/synthetic_v4_smoke/`.

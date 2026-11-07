@@ -2,6 +2,22 @@
 
 Updated 2026-10-26 afternoon by Claude Code (unattended session below). That session supersedes the Codex morning notes: the snapshot blocker is fixed and stages 3-4 and the dev comparison were run. Historical results remain below. Agents: update this file at the end of every session (see `AGENTS.md`).
 
+## Session 9 (2026-11-07, Claude Code): wording fixes published to GitHub; Hugging Face card NOT uploaded (not logged in)
+
+- **Wording (owner-approved):** in `release/templates/model_card.md`, `README.md` and `docs/RESULTS.md` the checker claim is now one sentence everywhere: "The checker rejects programs that break the policy's rules; in every evaluation, the programs it accepted caused 0 monitor violations on generated test data." (card opening; README "Main contribution"; RESULTS held-out v1 section and "What this shows"). "monitor problems" -> "monitor violations" in all three (7 places), and the older variant "had 0 monitor violations when run on generated test data" -> "caused 0 monitor violations on generated test data". No number changed; the card's held-out v3 paragraph is still identical to the README's.
+- **Checks:** rebuilt with `release/build.py` (its asserts passed); every number in the card, README and RESULTS re-checked against `eval/results/` (all match); "safe" appears only in the quoted "do not call it safe" sentence, no "proves" or "guarantee", "significant" only as "not significant". Tests: 339 passed. `eval.validate_tasks eval/heldout3`: 72 tasks, 0 problems. Scan of the 3 commits to push (`6fb1215..115241c`): no tokens, no user paths, no program names, no email addresses, no file over 1 MB; only 6 doc/build files.
+- **GitHub:** normal `git push origin main` (no force) -> `6fb1215..115241c`. Confirmed: `https://api.github.com/repos/WarnedOrca/aether/commits/main` reports `115241c86b4e1481b5db929af2a75412685adb80`; the public README at that commit is byte-identical to the local one and contains 2/72, 18/72, 22/72 and the new opening sentence. This note is pushed as a follow-up commit.
+- **Hugging Face: not uploaded.** `.venv\Scripts\hf.exe auth whoami` -> "Not logged in" (no token read or printed). The public card (`https://huggingface.co/sidchalamala/aether-coder-1.5b-lora`) is still the earlier version: it has no held-out v3 section, no 2/72, 18/72 or 22/72, and not the new opening sentence. The ready card is `dist/model/README.md` (sha256 `9b2f51c84d8f4f660ef4fba798437a1da081ec622ba5a46f1f3e5e1ad7b6da11`, rebuilt from the template at `115241c`).
+
+### Needs the owner
+1. **Upload the model card** (from the repo root in PowerShell; you type the token yourself at the login prompt):
+   - `.venv\Scripts\python.exe release/build.py` (rebuilds `dist/model/README.md`; optional, it is already current)
+   - `.venv\Scripts\hf.exe auth login`
+   - `.venv\Scripts\hf.exe upload sidchalamala/aether-coder-1.5b-lora dist/model/README.md README.md --commit-message "Update model card: held-out v3, 7B negative results, wording"`
+   This sends only the card as the repo's `README.md`; `dist/model/` also holds a weights copy, which this command does not upload. Afterwards, `https://huggingface.co/sidchalamala/aether-coder-1.5b-lora/raw/main/README.md` should contain 2/72, 18/72, 22/72 and the sentence starting "The checker rejects programs".
+2. Optionally delete the local backup branch `backup/pre-scrub-2026-11-01`.
+3. A new frozen held-out set is needed before any further model change.
+
 ## Session 8 (2026-11-07, Claude Code): held-out v3 section added to the model card (local only; nothing pushed or uploaded)
 
 - `release/templates/model_card.md` now has a "Held-out v3" section after held-out v2: the README's held-out v3 paragraph copied word for word, a table (correct /72, ordinary /36 and traps /36 with 95% Wilson intervals, parse rate) and two lines: feedback's 22 vs plain's 18 was not a pre-declared test (the post-hoc tests are exploratory, no multiple-comparison adjustment), and programs the checker accepted caused 0 monitor violations on generated test data.
