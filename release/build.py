@@ -65,6 +65,42 @@ def build_benchmark() -> None:
     shutil.copy(ROOT / "eval/heldout/FROZEN.md", out / "HELDOUT_FROZEN.md")
 
 
+def _wilson_exact(k: int, n: int, z: float = 1.96) -> tuple[float, float]:
+    """eval.compare.wilson without its 3-decimal rounding, so the card's 2-decimal values are not rounded twice."""
+    p = k / n
+    d = 1 + z * z / n
+    c = (p + z * z / (2 * n)) / d
+    h = z * (p * (1 - p) / n + z * z / (4 * n * n)) ** 0.5 / d
+    return max(0.0, c - h), min(1.0, c + h)
+
+
+def _v3_rows() -> str:
+    """Held-out v3 table rows, computed from eval/results/stage5/ (counts and parse rate from report.json, intervals
+    recomputed from the counts and checked against the 3-decimal intervals stored in summary.json/report.json)."""
+    rep = _json(RES / "stage5/report.json")["conditions"]
+    names = {"base1.5b-fewshot": "Base model + reference card + 3 examples", "v0.2-plain": "**v0.2 plain (this adapter)**",
+             "v0.2-repaired": "v0.2 with checker feedback"}
+    rows = []
+    for key, label in names.items():
+        c = rep[key]
+        parts = [(c["correct"], c["n"], c["ci95"]), (c["non_trap"]["correct"], c["non_trap"]["n"], c["non_trap"]["ci95"]),
+                 (c["trap"]["correct"], c["trap"]["n"], c["trap"]["ci95"])]
+        cis = []
+        for k, n, stored in parts:
+            lo, hi = _wilson_exact(k, n)
+            assert [round(lo, 3), round(hi, 3)] == list(stored), (key, k, n, lo, hi, stored)
+            cis.append(f"{lo:.2f}-{hi:.2f}")
+        rows.append(f"| {label} | {c['correct']} | {cis[0]} | {c['non_trap']['correct']} ({cis[1]}) | "
+                    f"{c['trap']['correct']} ({cis[2]}) | {c['parse_rate']:.2f} |")
+    # the README sentence copied into the card states these numbers; refuse to build if the files disagree
+    ph = _json(RES / "stage5-posthoc.json")["comparisons"]
+    assert (rep["base1.5b-fewshot"]["correct"], rep["v0.2-plain"]["correct"], rep["v0.2-repaired"]["correct"]) == (2, 18, 22)
+    assert (rep["v0.2-plain"]["non_trap"]["correct"], rep["v0.2-plain"]["trap"]["correct"]) == (13, 5)
+    assert f"{ph[0]['mcnemar_exact_p']:.2g}" == "0.00014" and ph[1]["mcnemar_exact_p"] == 0.125
+    assert all(rep[k]["monitor_problems_total"] == 0 for k in names)
+    return "\n".join(rows)
+
+
 def build_model() -> None:
     out = DIST / "model"
     if out.exists():
@@ -87,7 +123,7 @@ def build_model() -> None:
     pa, pb = v2["primary"]["a"], v2["primary"]["b"]
     card = (ROOT / "release/templates/model_card.md").read_text(encoding="utf-8")
     card = card.format(
-        v2_rows=v2_rows, v2_pa=v2["conditions"][pa]["correct"], v2_pb=v2["conditions"][pb]["correct"],
+        v2_rows=v2_rows, v3_rows=_v3_rows(), v2_pa=v2["conditions"][pa]["correct"], v2_pb=v2["conditions"][pb]["correct"],
         v2_pp=f"{v2['primary']['mcnemar_exact_p']:.2g}", v2_v2=v2b["a_correct"], v2_base=v2b["b_correct"],
         v2_p_base=f"{v2b['mcnemar_exact_p']:.2g}",
         h_base=h2b["b_correct"], h_base_lo=f"{h2b['b_ci95'][0]:.2f}", h_base_hi=f"{h2b['b_ci95'][1]:.2f}",

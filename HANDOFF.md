@@ -2,6 +2,13 @@
 
 Updated 2026-10-26 afternoon by Claude Code (unattended session below). That session supersedes the Codex morning notes: the snapshot blocker is fixed and stages 3-4 and the dev comparison were run. Historical results remain below. Agents: update this file at the end of every session (see `AGENTS.md`).
 
+## Session 8 (2026-11-07, Claude Code): held-out v3 section added to the model card (local only; nothing pushed or uploaded)
+
+- `release/templates/model_card.md` now has a "Held-out v3" section after held-out v2: the README's held-out v3 paragraph copied word for word, a table (correct /72, ordinary /36 and traps /36 with 95% Wilson intervals, parse rate) and two lines: feedback's 22 vs plain's 18 was not a pre-declared test (the post-hoc tests are exploratory, no multiple-comparison adjustment), and programs the checker accepted caused 0 monitor violations on generated test data.
+- `release/build.py` builds that table from `eval/results/stage5/report.json`. Intervals are recomputed from the counts without the 3-decimal rounding stored in the files (to avoid rounding twice), and the build asserts they equal the stored 3-decimal intervals; it also refuses to build if the counts or p-values in the copied README sentence (2/18/22, 13/5, p = 0.00014 and 0.125, 0 monitor problems) disagree with the result files.
+- Re-check of every number in the built card (`dist/model/README.md`, sha256 `66aa5e4f7165d6eae1f022a554cfee750bc5f62686819d7cf6d2f34b3f688ef3`): all match. This found one double-rounding slip elsewhere: `SUMMARY.md` gave v0.2 plain's ordinary-task interval as 0.23-0.52; from 13/36 it is 0.2246-0.524, i.e. **0.22-0.52** (fixed; the 3-decimal value 0.225-0.524 in this file was right). README and `docs/RESULTS.md` were already exact.
+- Needs the owner: upload the card yourself when you want (commands in Session 7); push this local commit when convenient.
+
 ## Session 7 (2026-11-01, Claude Code): personal data scrubbed from the unpublished commits, then pushed (owner decision "Scrub, then push")
 
 ### Scrub (owner chose option b)

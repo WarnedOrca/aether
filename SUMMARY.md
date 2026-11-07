@@ -8,7 +8,7 @@ Sources: `eval/results/stage5/summary.json`, `eval/results/stage5/report.json`.
 | System | Correct /72 (95% CI) | Ordinary /36 (95% CI) | Traps /36 (95% CI) | Parses | Rejected by checker | Rule-violating programs that executed |
 |---|---|---|---|---|---|---|
 | Base 1.5B + 3 examples | 2 (0.01-0.10) | 2 (0.02-0.18) | 0 (0.00-0.10) | 32% | 18 | 0 |
-| **v0.2 plain (released)** | **18 (0.16-0.36)** | **13 (0.23-0.52)** | **5 (0.06-0.29)** | 81% | 25 | **0** |
+| **v0.2 plain (released)** | **18 (0.16-0.36)** | **13 (0.22-0.52)** | **5 (0.06-0.29)** | 81% | 25 | **0** |
 | v0.2 with checker feedback | 22 (0.21-0.42) | 14 (0.25-0.55) | 8 (0.12-0.38) | 79% | 20 | 0 |
 
 - **Statistical tests: none.** The only test declared before any v3 run was "the 7B model chosen on dev vs v0.2 plain". You excluded every 7B adapter, and you said not to add new comparisons, so there is no McNemar test and no adjusted p-value. All rows are descriptive and exploratory. Overlapping intervals mean the table does not show that feedback beats plain.

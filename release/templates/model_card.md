@@ -41,6 +41,17 @@ A second frozen set, written and hashed before any v0.3 training or tuning. Same
 - Everything else in this table is exploratory. "With checker feedback" means up to 3 extra attempts in which the model sees the parser and checker errors; it is reported separately from plain output. "Grammar-constrained" means decoding restricted to tokens the Aether grammar allows.
 - **v0.3 is not released.** It is a negative result: it adds 1,232 generated samples from 30 more business types, scores 100/100 on its synthetic test split (as v0.2 does), and solves fewer held-out v2 tasks than v0.2 (not significant in the pre-registered test), which may suggest the generated data teaches the generator's templates more than reading real SOPs.
 
+## Held-out v3 (72 tasks, 36 traps, 18 new business types; the one-time final run of this adapter)
+
+**Held-out v3** (72 tasks, 36 traps, 18 new business types; the one-time final run of the released v0.2, 2026-10-29; each condition run once): base model with 3 examples 2/72 (95% CI 0.01-0.10); **v0.2 plain 18/72** (0.16-0.36; 13/36 ordinary tasks, 5/36 traps); v0.2 with checker feedback 22/72 (0.21-0.42). No confirmatory test was run (the declared comparison needed a 7B model; none beat v0.2 on dev). Post-hoc and exploratory only (not declared before the run): base vs v0.2 plain, exact McNemar p = 0.00014; v0.2 plain vs with feedback, p = 0.125 (not significant); `eval/results/stage5-posthoc.json`. The checker's accepted programs caused 0 monitor problems. Source: `eval/results/stage5/`.
+
+| System | Correct (of 72) | 95% CI | Ordinary (of 36), 95% CI | Traps (of 36), 95% CI | Parse rate |
+|---|---|---|---|---|---|
+{v3_rows}
+
+- Feedback's 22 vs plain's 18 was not a pre-declared test. The two post-hoc tests above are exploratory: chosen after seeing the results, with no multiple-comparison adjustment.
+- Programs the checker accepted caused 0 monitor violations on generated test data.
+
 ## Development benchmark (110 tasks, used during development)
 
 This benchmark was used to build the scorer and compare models during development, so treat it as a development set, not a clean test.
