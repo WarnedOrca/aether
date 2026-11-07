@@ -39,11 +39,10 @@ Sources: `eval/results/stage5/summary.json`, `eval/results/stage5/report.json`.
 ## What is live now (checked by fetching the public pages, 2026-11-07)
 - **GitHub:** commit `115241c` is on `main` (a normal push). The public README matches the local one exactly. It shows the held-out v3 results (base 2/72, v0.2 18/72, v0.2 with feedback 22/72) and the new checker sentence: "The checker rejects programs that break the policy's rules; in every evaluation, the programs it accepted caused 0 monitor violations on generated test data." The README, `docs/RESULTS.md` and the model card now all say "monitor violations".
 - **GitHub Pages:** the demo site shows no result numbers, so it cannot disagree with the README.
-- **Hugging Face:** the model card was **not** updated, because this machine is not logged in to Hugging Face. The public card is still the older text, without the held-out v3 section or the new sentence. The new card is built and checked in `dist/model/README.md`.
+- **Hugging Face:** the model card is live (you updated it through the website; model-repo commit `070b1c3`, "Update model card: held-out v3, 7B negative results, wording"). It shows the new checker sentence, the held-out v3 section (2/72, 18/72, 22/72) and the feedback test as not significant, and its text matches the locally built card.
 
 ## Needs you
-1. Upload the model card yourself: log in with `.venv\Scripts\hf.exe auth login`, then run the one `hf upload` command in `HANDOFF.md` (Session 9). It sends only the card, not the weights.
-2. Optionally delete the local backup branch `backup/pre-scrub-2026-11-01`.
-3. A new frozen held-out set is needed before any further model change.
+1. Optionally delete the local backup branch `backup/pre-scrub-2026-11-01`.
+2. A new frozen held-out set is needed before any further model change.
 
-Nothing was uploaded to Hugging Face, and nothing was installed, bought or signed in to. Left alone: `pyproject.toml`, `uv.lock`, `data/synthetic_v4_smoke/`.
+Claude uploaded nothing to Hugging Face (you updated the card yourself), and nothing was installed, bought or signed in to. Left alone: `pyproject.toml`, `uv.lock`, `data/synthetic_v4_smoke/`.

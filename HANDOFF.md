@@ -2,6 +2,17 @@
 
 Updated 2026-10-26 afternoon by Claude Code (unattended session below). That session supersedes the Codex morning notes: the snapshot blocker is fixed and stages 3-4 and the dev comparison were run. Historical results remain below. Agents: update this file at the end of every session (see `AGENTS.md`).
 
+## Session 10 (2026-11-07, Claude Code): Hugging Face model card confirmed live; final note pushed
+
+- Before this note there was nothing new to push: local `main` = `origin/main` = `252ba25` (the only local changes are the owner's old `pyproject.toml` / `uv.lock` edits and the untracked `data/synthetic_v4_smoke/`, all left alone; the local backup branch was not pushed). Tests: 339 passed.
+- **GitHub (public, fetched):** README, HANDOFF.md and SUMMARY.md on `main` are byte-identical to the local files; the README shows 2/72, 18/72 and 22/72, and the Session 9 note is there.
+- **Hugging Face model card is live**, updated by the owner through the website. Public card `https://huggingface.co/sidchalamala/aether-coder-1.5b-lora` (raw `README.md`, HTTP 200) contains the new opening sentence ("The checker rejects programs that break the policy's rules; in every evaluation, the programs it accepted caused 0 monitor violations on generated test data."), the "Held-out v3" section with 2/72, 18/72 and 22/72, and "v0.2 plain vs with feedback, p = 0.125 (not significant)". Its content is line-for-line identical to the locally built `dist/model/README.md` (only the line endings differ: LF online, CRLF locally). Latest model-repo commit (from the public commits API): `070b1c389dc4e807cb6db99eea1dee36f7b0cd07`, message **"Update model card: held-out v3, 7B negative results, wording"**, 2026-11-07 19:50 UTC.
+- The "Upload the model card" item under Needs the owner (Sessions 7 and 9) is therefore done.
+
+### Needs the owner
+1. Optionally delete the local backup branch `backup/pre-scrub-2026-11-01`.
+2. A new frozen held-out set is needed before any further model change.
+
 ## Session 9 (2026-11-07, Claude Code): wording fixes published to GitHub; Hugging Face card NOT uploaded (not logged in)
 
 - **Wording (owner-approved):** in `release/templates/model_card.md`, `README.md` and `docs/RESULTS.md` the checker claim is now one sentence everywhere: "The checker rejects programs that break the policy's rules; in every evaluation, the programs it accepted caused 0 monitor violations on generated test data." (card opening; README "Main contribution"; RESULTS held-out v1 section and "What this shows"). "monitor problems" -> "monitor violations" in all three (7 places), and the older variant "had 0 monitor violations when run on generated test data" -> "caused 0 monitor violations on generated test data". No number changed; the card's held-out v3 paragraph is still identical to the README's.
