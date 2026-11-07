@@ -27,7 +27,7 @@ Paired exact McNemar tests (`eval/results/ft/heldout-*.json`):
 - about 13 were general mistakes on unfamiliar businesses: 5 parse errors, plus type errors, reading columns the policy does not allow, and `skip` outside a loop
 - about 4 did roughly what the reference does, but with a different number of owner notes
 
-**The programs the checker accepted had 0 monitor violations when run on generated test data.**
+**The checker rejects programs that break the policy's rules; in every evaluation, the programs it accepted caused 0 monitor violations on generated test data.**
 
 ## 1b. Held-out v2: 90 tasks (clean; plan pre-registered)
 
@@ -60,7 +60,7 @@ Paired exact McNemar tests (`eval/results/ft/heldout-*.json`):
 | v0.2 with checker feedback | 22 | 0.21-0.42 | 14 | 8 | 0.79 |
 
 - **No confirmatory test.** The comparison declared before this run (the 7B model chosen on dev vs v0.2 plain) needed a 7B adapter; none was better than v0.2 on dev, so the owner excluded them and no other test was declared. All rows are descriptive.
-- The checker rejected 18, 25 and 20 parsed programs in the three conditions, and the programs it accepted caused 0 monitor problems.
+- The checker rejected 18, 25 and 20 parsed programs in the three conditions, and the programs it accepted caused 0 monitor violations.
 - **Post-hoc tests (exploratory; not declared before the run, chosen after seeing results; no multiple-comparison adjustment; `eval/results/stage5-posthoc.json`):** exact McNemar on all 72 tasks. Base vs v0.2 plain: 2 vs 18 (1 task only the base solved, 17 only v0.2), p = 0.00014. v0.2 plain vs v0.2 with checker feedback: 18 vs 22 (4 tasks only with feedback, 0 only without), p = 0.125, not significant.
 - Held-out v3 is now used. Any later model change needs a new frozen held-out set first.
 
@@ -92,7 +92,7 @@ After v0.2, three QLoRA adapters on Qwen2.5-Coder-7B-Instruct were trained on ne
 
 - With checker feedback on dev (exploratory): q7b-v2 epoch 2 35/110 and q7b-v3 epoch 2 36/110, against v0.2 36/110 (p = 1.0 both; `eval/results/dev-repair-compare-2026-10-28.json`, `eval/results/dev-repair-compare-session4.json`).
 - The 7B adapters' output parses more often (94.5-98.2% of the 110 tasks, against 78.2% for v0.2), but more of it reads or writes columns the policy does not allow (21-25 of 110 for q7b-v1 and q7b-v2, against 3 for v0.2) or does the wrong thing. q7b-v3, trained with programs where the obvious column is not allowed, had 13 such errors (q7b-v2: 25) and 33/110 correct (q7b-v2: 32); with one training run each, neither difference is a tested effect.
-- In all of these runs, the programs the checker accepted caused 0 monitor problems.
+- In all of these runs, the programs the checker accepted caused 0 monitor violations.
 
 ## 3. Checker and interpreter
 
@@ -110,7 +110,7 @@ These results support only this statement: the checker verifies core rules C1-C8
 - Fine-tuning on checker-verified synthetic data raised a 1.5B model's correct count on hand-written tasks (development: 30/110 vs 3/110; held-out traps: 6/30 vs 0/30), though it still solves well under half.
 - **Adding trap-style synthetic data did not improve trap handling** (held-out: 6/30 for both v0.1 and v0.2). Most remaining failures are general robustness errors on new business types, not only trap-following. Fixing that probably needs more varied training language or a larger model, not more templated traps.
 - **More varied generated data, checker feedback, and grammar-constrained decoding did not measurably help on held-out v2** (pre-registered null, p = 0.33). A model that scores 100/100 on its own synthetic test can still solve fewer new SOPs.
-- **Blocking rule-breaking programs is the checker's job, not the model's.** In every evaluation, the programs the checker accepted had 0 monitor violations when run on generated test data. The model by itself solves 6/30 held-out traps.
+- **Blocking rule-breaking programs is the checker's job, not the model's.** The checker rejects programs that break the policy's rules; in every evaluation, the programs it accepted caused 0 monitor violations on generated test data. The model by itself solves 6/30 held-out traps.
 ## Limitations
 
 - All benchmark and held-out tasks were drafted by Claude (an AI assistant), not taken from real businesses.

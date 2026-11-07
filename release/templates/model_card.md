@@ -7,7 +7,7 @@ tags: [lora, code, dsl, aether]
 
 # Aether SOP-to-program LoRA v0.2 (Qwen2.5-Coder-1.5B-Instruct)
 
-A LoRA adapter that turns a plain-English business procedure, plus the owner's policy and sheet list, into an Aether program. **The model is not a safety mechanism.** Every program it writes must pass the Aether checker before it runs. The checker blocks programs that break the policy's rules; the model often writes such programs.
+A LoRA adapter that turns a plain-English business procedure, plus the owner's policy and sheet list, into an Aether program. **The model is not a safety mechanism.** Every program it writes must pass the Aether checker before it runs. The checker rejects programs that break the policy's rules; in every evaluation, the programs it accepted caused 0 monitor violations on generated test data. The model often writes such programs.
 
 **Links:** browser demo of the checker and interpreter (the model is not hosted there): https://warnedorca.github.io/aether/ · code: https://github.com/WarnedOrca/aether · benchmark and held-out set: https://huggingface.co/datasets/sidchalamala/aether-benchmark
 
@@ -26,7 +26,7 @@ Each task asks for something the policy forbids or Aether cannot do. The correct
 - **Negative result:** adding {n_traps} targeted trap samples did **not** improve held-out performance. v0.2 vs v0.1: {h_v2} vs {h_v1}, paired exact McNemar p = {p_v2_v1}.
 - v0.2 vs the base model: p = {p_v2_base}.
 - Novel trap types absent from all training data (delete rows, raise a limit): 0/4 for every system.
-- In every evaluation, the programs the checker accepted had 0 monitor violations when run on generated test data. The model by itself solves {h_v2}/30 held-out traps.
+- In every evaluation, the programs the checker accepted caused 0 monitor violations on generated test data. The model by itself solves {h_v2}/30 held-out traps.
 
 ## Held-out v2 (90 tasks, 30 traps, 15 new business types; each condition run once)
 
@@ -43,7 +43,7 @@ A second frozen set, written and hashed before any v0.3 training or tuning. Same
 
 ## Held-out v3 (72 tasks, 36 traps, 18 new business types; the one-time final run of this adapter)
 
-**Held-out v3** (72 tasks, 36 traps, 18 new business types; the one-time final run of the released v0.2, 2026-10-29; each condition run once): base model with 3 examples 2/72 (95% CI 0.01-0.10); **v0.2 plain 18/72** (0.16-0.36; 13/36 ordinary tasks, 5/36 traps); v0.2 with checker feedback 22/72 (0.21-0.42). No confirmatory test was run (the declared comparison needed a 7B model; none beat v0.2 on dev). Post-hoc and exploratory only (not declared before the run): base vs v0.2 plain, exact McNemar p = 0.00014; v0.2 plain vs with feedback, p = 0.125 (not significant); `eval/results/stage5-posthoc.json`. The checker's accepted programs caused 0 monitor problems. Source: `eval/results/stage5/`.
+**Held-out v3** (72 tasks, 36 traps, 18 new business types; the one-time final run of the released v0.2, 2026-10-29; each condition run once): base model with 3 examples 2/72 (95% CI 0.01-0.10); **v0.2 plain 18/72** (0.16-0.36; 13/36 ordinary tasks, 5/36 traps); v0.2 with checker feedback 22/72 (0.21-0.42). No confirmatory test was run (the declared comparison needed a 7B model; none beat v0.2 on dev). Post-hoc and exploratory only (not declared before the run): base vs v0.2 plain, exact McNemar p = 0.00014; v0.2 plain vs with feedback, p = 0.125 (not significant); `eval/results/stage5-posthoc.json`. The checker's accepted programs caused 0 monitor violations. Source: `eval/results/stage5/`.
 
 | System | Correct (of 72) | 95% CI | Ordinary (of 36), 95% CI | Traps (of 36), 95% CI | Parse rate |
 |---|---|---|---|---|---|
@@ -76,7 +76,7 @@ After v0.2, three QLoRA adapters on Qwen2.5-Coder-7B-Instruct were trained on ne
 
 - With checker feedback on dev (exploratory): q7b-v2 epoch 2 35/110 and q7b-v3 epoch 2 36/110, against v0.2 36/110 (p = 1.0 both; `eval/results/dev-repair-compare-2026-10-28.json`, `eval/results/dev-repair-compare-session4.json`).
 - The 7B adapters' output parses more often (94.5-98.2% of the 110 tasks, against 78.2% for v0.2), but more of it reads or writes columns the policy does not allow (21-25 of 110 for q7b-v1 and q7b-v2, against 3 for v0.2) or does the wrong thing. q7b-v3, trained with programs where the obvious column is not allowed, had 13 such errors (q7b-v2: 25) and 33/110 correct (q7b-v2: 32); with one training run each, neither difference is a tested effect.
-- In all of these runs, the programs the checker accepted caused 0 monitor problems.
+- In all of these runs, the programs the checker accepted caused 0 monitor violations.
 
 ## Training
 
