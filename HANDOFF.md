@@ -2,6 +2,32 @@
 
 Updated 2026-10-26 afternoon by Claude Code (unattended session below). That session supersedes the Codex morning notes: the snapshot blocker is fixed and stages 3-4 and the dev comparison were run. Historical results remain below. Agents: update this file at the end of every session (see `AGENTS.md`).
 
+## Session 11 (2026-11-08, Claude Code): impact phase, outreach kit and local-only tracking (no GPU, no model work; nothing sent, nothing pushed)
+
+The model phase is finished (v0.2 final and published). The next phase is impact: real local businesses (local area) trying the business-workflow agent, and measuring what changes for real people. Nobody has been contacted.
+
+### What exists now
+- `docs/outreach/AGENT-TODAY.md`: an honest inventory, checked on 2026-11-08. The checker, plain-English rendering, interpreter and independent monitor work (339 tests pass; a dry run of `data/examples/AppointmentReminders.ae` on made-up rows: status ok, 0 monitor problems). **Every connector is still a mock: nothing reads a real sheet or sends a real message.** The model is correct on 18 of 72 new held-out tasks, so a person must write or fix each program. The local demo app does not start because `gradio` is not installed (the browser demo works). It lists what a business would need to give (task description, column names, rules, their own time estimate; no customer data) and what could go wrong.
+- Outreach kit in `docs/outreach/`: `interview-guide.md` (10 minutes, one task: what, how often, how long, what goes wrong, who is affected), `outreach-message.md` (email, text, in person; student voice, free, no pressure, says plainly that it can't connect to their systems yet), `pilot-agreement-template.md` (one page: free, data listed, no customer personal data without written permission, owner approval before anything is sent, either side can stop, no guarantees; marked "not legal advice"; a "may we name your business" box defaulting to no), `one-page-handout.md`, `practice-conversations.md` ("I'm busy", "is my customer data safe?", "what's the catch?").
+- `docs/outreach/MEASURING-IMPACT.md`: the measures in plain words and the rule that nothing goes into a Common App entry, the paper or a public page unless it is a dated row in `private/pilot-log.csv` with a checkable `how_measured`, and (if the business is named) the owner's written permission. No example numbers.
+- `private/target-list.csv` and `private/pilot-log.csv`: headers and empty rows only. **`private/` was added to `.gitignore` before the files were created**; `git check-ignore` confirms both are ignored and `git ls-files private/` lists nothing.
+
+### Decisions (with reasons)
+- **Built on the vault drafts of 2026-10-25** (`Agent/Interview Guide.md`, `Pilot Agreement Template.md`, `Outreach and Architecture.md`) rather than starting over; the repo versions are shorter (10-minute interview as asked), match today's real capability, and use [placeholders] for every name and contact. The vault notes were not edited (the vault's CLAUDE.md asks not to overwrite notes without asking).
+- **Honesty about the missing connector is in every piece** (handout, messages, practice answers): a pilot today can produce a checked plan, a dry run on made-up data and a "before" measurement, but it cannot save time until a draft-only connector exists. Saying otherwise would be overclaiming.
+- **The kit lives in `docs/outreach/` (would be public if pushed)**, so it contains no real names, contacts or numbers. Everything real goes only in `private/`.
+- **`pilot-log.csv` uses a business code, not the name**, so measurements and names never share a row; names stay in `target-list.csv`. Columns beyond those requested (task, before/after phase, permission to mention) are needed to make before/after comparisons and the permission rule checkable.
+- **Data-safety answer** in `practice-conversations.md` never says "safe"; it states only the checker's narrow, tested claim and the data rules of the pilot.
+
+### Needs the owner
+1. **Pick about 5 businesses you or your family already know** and write them in `private/target-list.csv` (local only). Do not invent entries.
+2. **Parent or guardian review** of the target list, the messages in `docs/outreach/outreach-message.md` and the pilot agreement template, before any contact. Fill in the [placeholders] together, including which contact route (email or phone) you may use.
+3. **Make the first contact yourself.** Claude does not send messages or contact anyone.
+4. **Decide whether to build the draft-only connector** (a Google Apps Script inside the business's own account that writes drafts, never sends; plan in the vault's `Agent/Outreach and Architecture.md`). Without it, no pilot can save real time; with it, it needs its own review and tests before touching real data.
+5. **Your vault's `Common App Activity Entries.md` conflicts with the claims rules** (not edited by Claude): Entry A says "programs checked for safety before they run", the additional-info draft says the checker "blocked every unsafe program" and that "the checker... provides the safety", and the "Target once real" line has numbers ("600+ tasks", "3 local businesses", "~20 staff hrs/mo") that are targets, not results. Suggested wording for the narrow claim: "the checker verifies core rules C1-C8; programs it accepted caused 0 monitor violations on generated test data." Use only logged, dated, permitted numbers (see `MEASURING-IMPACT.md`).
+6. Optional: installing `gradio` (`uv sync --group demo`) would let the local demo with the model tab run; that changes the environment, so it is your call.
+7. Still open from before: delete the local backup branch `backup/pre-scrub-2026-11-01` when you are happy; any further model change needs a new frozen held-out set first.
+
 ## Session 10 (2026-11-07, Claude Code): Hugging Face model card confirmed live; final note pushed
 
 - Before this note there was nothing new to push: local `main` = `origin/main` = `252ba25` (the only local changes are the owner's old `pyproject.toml` / `uv.lock` edits and the untracked `data/synthetic_v4_smoke/`, all left alone; the local backup branch was not pushed). Tests: 339 passed.

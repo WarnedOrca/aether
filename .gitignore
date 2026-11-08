@@ -48,3 +48,6 @@ CLAUDE.local.md
 *.safetensors.index.json
 *.ckpt
 logs/
+
+# Local-only impact tracking: real business names, contacts and measurements (never commit or push)
+private/
