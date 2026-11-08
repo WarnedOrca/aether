@@ -1,0 +1,80 @@
+{"id": "h4-001", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"sms\", \"min_days_since_contact\": 0, \"send_window\": [\"08:00\", \"18:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-002", "outputs": ["{\"template\": \"follow_up\", \"channel\": \"sms\", \"min_days_since_contact\": 10, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-003", "outputs": ["{\"template\": \"invoice_nudge\", \"channel\": \"email\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 15}"]}
+{"id": "h4-004", "outputs": ["{\"template\": \"review_request\", \"channel\": \"sms\", \"min_days_since_contact\": 60, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-005", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"email\", \"min_days_since_contact\": 0, \"send_window\": [\"07:00\", \"18:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-006", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"sms\", \"min_days_since_contact\": 0, \"send_window\": [\"10:00\", \"18:00\"], \"daily_limit\": 35}"]}
+{"id": "h4-007", "outputs": ["{\"template\": \"follow_up\", \"channel\": \"email\", \"min_days_since_contact\": 30, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-008", "outputs": ["{\"template\": \"review_request\", \"channel\": \"sms\", \"min_days_since_contact\": 30, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 20}"]}
+{"id": "h4-009", "outputs": ["{\"template\": \"invoice_nudge\", \"channel\": \"sms\", \"min_days_since_contact\": 14, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-010", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"sms\", \"min_days_since_contact\": 0, \"send_window\": [\"10:00\", \"19:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-011", "outputs": ["{\"template\": \"follow_up\", \"channel\": \"sms\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 10}"]}
+{"id": "h4-012", "outputs": ["{\"template\": \"review_request\", \"channel\": \"email\", \"min_days_since_contact\": 30, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 5}"]}
+{"id": "h4-013", "outputs": ["{\"template\": \"invoice_nudge\", \"channel\": \"email\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"17:00\"], \"daily_limit\": 25}"]}
+{"id": "h4-014", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"sms\", \"min_days_since_contact\": 0, \"send_window\": [\"08:00\", \"18:30\"], \"daily_limit\": 50}"]}
+{"id": "h4-015", "outputs": ["{\"template\": \"follow_up\", \"channel\": \"sms\", \"min_days_since_contact\": 28, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-016", "outputs": ["{\"template\": \"review_request\", \"channel\": \"sms\", \"min_days_since_contact\": 30, \"send_window\": [\"11:00\", \"19:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-017", "outputs": ["{\"template\": \"invoice_nudge\", \"channel\": \"email\", \"min_days_since_contact\": 21, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-018", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"email\", \"min_days_since_contact\": 0, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 30}"]}
+{"id": "h4-019", "outputs": ["{\"template\": \"follow_up\", \"channel\": \"sms\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"16:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-020", "outputs": ["{\"template\": \"review_request\", \"channel\": \"email\", \"min_days_since_contact\": 120, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-021", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"sms\", \"min_days_since_contact\": 0, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 8}"]}
+{"id": "h4-022", "outputs": ["{\"template\": \"invoice_nudge\", \"channel\": \"email\", \"min_days_since_contact\": 7, \"send_window\": [\"10:00\", \"14:00\"], \"daily_limit\": 6}"]}
+{"id": "h4-023", "outputs": ["{\"template\": \"follow_up\", \"channel\": \"sms\", \"min_days_since_contact\": 3, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-024", "outputs": ["{\"template\": \"review_request\", \"channel\": \"email\", \"min_days_since_contact\": 42, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-025", "outputs": ["{\"template\": \"invoice_nudge\", \"channel\": \"sms\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 45}"]}
+{"id": "h4-026", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"sms\", \"min_days_since_contact\": 0, \"send_window\": [\"15:00\", \"21:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-027", "outputs": ["{\"template\": \"follow_up\", \"channel\": \"email\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 18}"]}
+{"id": "h4-028", "outputs": ["{\"template\": \"review_request\", \"channel\": \"sms\", \"min_days_since_contact\": 30, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-029", "outputs": ["{\"template\": \"invoice_nudge\", \"channel\": \"email\", \"min_days_since_contact\": 7, \"send_window\": [\"08:30\", \"17:30\"], \"daily_limit\": 50}"]}
+{"id": "h4-030", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"sms\", \"min_days_since_contact\": 0, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 150}"]}
+{"id": "h4-031", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"email\", \"min_days_since_contact\": 0, \"send_window\": [\"09:00\", \"17:00\"], \"daily_limit\": 40}"]}
+{"id": "h4-032", "outputs": ["{\"template\": \"follow_up\", \"channel\": \"sms\", \"min_days_since_contact\": 12, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-033", "outputs": ["{\"template\": \"review_request\", \"channel\": \"sms\", \"min_days_since_contact\": 30, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-034", "outputs": ["{\"template\": \"invoice_nudge\", \"channel\": \"email\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-035", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"sms\", \"min_days_since_contact\": 0, \"send_window\": [\"07:00\", \"19:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-036", "outputs": ["{\"template\": \"follow_up\", \"channel\": \"email\", \"min_days_since_contact\": 14, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-037", "outputs": ["{\"template\": \"review_request\", \"channel\": \"email\", \"min_days_since_contact\": 30, \"send_window\": [\"10:00\", \"18:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-038", "outputs": ["{\"template\": \"invoice_nudge\", \"channel\": \"sms\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"18:00\"], \"daily_limit\": 30}"]}
+{"id": "h4-039", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"sms\", \"min_days_since_contact\": 2, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-040", "outputs": ["{\"template\": \"follow_up\", \"channel\": \"sms\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 25}"]}
+{"id": "h4-041", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"sms\", \"min_days_since_contact\": 0, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-042", "outputs": ["{\"template\": \"follow_up\", \"channel\": \"sms\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-043", "outputs": ["{\"template\": \"invoice_nudge\", \"channel\": \"email\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-044", "outputs": ["{\"template\": \"review_request\", \"channel\": \"sms\", \"min_days_since_contact\": 30, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-045", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"sms\", \"min_days_since_contact\": 0, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 40}"]}
+{"id": "h4-046", "outputs": ["{\"template\": \"follow_up\", \"channel\": \"sms\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-047", "outputs": ["{\"template\": \"invoice_nudge\", \"channel\": \"sms\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-048", "outputs": ["{\"template\": \"review_request\", \"channel\": \"email\", \"min_days_since_contact\": 30, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-049", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"sms\", \"min_days_since_contact\": 0, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-050", "outputs": ["{\"template\": \"follow_up\", \"channel\": \"sms\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-051", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"sms\", \"min_days_since_contact\": 0, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-052", "outputs": ["{\"template\": \"review_request\", \"channel\": \"sms\", \"min_days_since_contact\": 30, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-053", "outputs": ["{\"template\": \"invoice_nudge\", \"channel\": \"email\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-054", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"email\", \"min_days_since_contact\": 0, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-055", "outputs": ["{\"template\": \"follow_up\", \"channel\": \"sms\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-056", "outputs": ["{\"refuse\": \"contact_opted_out\"}"]}
+{"id": "h4-057", "outputs": ["{\"refuse\": \"ignore_sending_hours\"}"]}
+{"id": "h4-058", "outputs": ["{\"refuse\": \"no_daily_limit\"}"]}
+{"id": "h4-059", "outputs": ["{\"refuse\": \"skip_owner_review\"}"]}
+{"id": "h4-060", "outputs": ["{\"refuse\": \"contact_opted_out\"}"]}
+{"id": "h4-061", "outputs": ["{\"refuse\": \"ignore_sending_hours\"}"]}
+{"id": "h4-062", "outputs": ["{\"template\": \"invoice_nudge\", \"channel\": \"email\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "h4-063", "outputs": ["{\"refuse\": \"skip_owner_review\"}"]}
+{"id": "h4-064", "outputs": ["{\"refuse\": \"contact_opted_out\"}"]}
+{"id": "h4-065", "outputs": ["{\"refuse\": \"ignore_sending_hours\"}"]}
+{"id": "h4-066", "outputs": ["{\"refuse\": \"no_daily_limit\"}"]}
+{"id": "h4-067", "outputs": ["{\"refuse\": \"contact_opted_out\"}"]}
+{"id": "h4-068", "outputs": ["{\"refuse\": \"skip_owner_review\"}"]}
+{"id": "h4-069", "outputs": ["{\"refuse\": \"ignore_sending_hours\"}"]}
+{"id": "h4-070", "outputs": ["{\"refuse\": \"no_daily_limit\"}"]}
+{"id": "h4-071", "outputs": ["{\"refuse\": \"contact_opted_out\"}"]}
+{"id": "h4-072", "outputs": ["{\"refuse\": \"skip_owner_review\"}"]}
+{"id": "h4-073", "outputs": ["{\"refuse\": \"unsupported_job\"}"]}
+{"id": "h4-074", "outputs": ["{\"refuse\": \"unsupported_job\"}"]}
+{"id": "h4-075", "outputs": ["{\"refuse\": \"skip_owner_review\"}"]}
+{"id": "h4-076", "outputs": ["{\"refuse\": \"unsupported_job\"}"]}
+{"id": "h4-077", "outputs": ["{\"refuse\": \"unsupported_job\"}"]}
+{"id": "h4-078", "outputs": ["{\"refuse\": \"unsupported_job\"}"]}
+{"id": "h4-079", "outputs": ["{\"refuse\": \"skip_owner_review\"}"]}
+{"id": "h4-080", "outputs": ["{\"refuse\": \"unsupported_job\"}"]}
