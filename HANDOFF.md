@@ -2,7 +2,7 @@
 
 Updated 2026-10-26 afternoon by Claude Code (unattended session below). That session supersedes the Codex morning notes: the snapshot blocker is fixed and stages 3-4 and the dev comparison were run. Historical results remain below. Agents: update this file at the end of every session (see `AGENTS.md`).
 
-## Session 12 (2026-11-08, Claude Code, 4-hour time box from 17:10 CST): draft pack tool, job spec, held-out v4 (IN PROGRESS)
+## Session 12 (2026-11-08, Claude Code, 4-hour time box from 17:10 CST): draft pack tool, job spec, held-out v4 (DONE ~17:30; gate cleared, no model trained, GPU unused)
 
 ### If interrupted (computer shut down)
 Each step is committed when it finishes. Steps and how to resume:
@@ -10,7 +10,9 @@ Each step is committed when it finishes. Steps and how to resume:
 2. Job spec + compiler: DONE (`jobspec/`, `docs/jobspec/DESIGN.md`, `tests/test_jobspec.py`).
 3. Held-out v4 + dev split: DONE (`eval/heldout4/` frozen, `eval/jobspec-dev/`, evaluation plan and gate in `docs/jobspec/DESIGN.md`).
 4. Regex baseline + gate: DONE. Dev 59/60; gate cleared, so Steps 5-7 (model data, QLoRA, model held-out run) are SKIPPED by the declared rule; no GPU used.
-(later steps are added here as they start)
+5. Held-out v4, regex baseline only (conditions file `eval/heldout4/conditions.json` committed first, run once): 80/80 both ways (`eval/results/jobspec/heldout4_regex.json`). Do NOT rerun.
+6. Tool: one-sentence box fills the form (`Core.parseRequest`, a port of `jobspec/baseline.py`, parity-tested on dev). Wrap-up: SUMMARY.md (plain language + proposed README wording), 372 tests pass, `git ls-files private/` empty, GPU idle. Nothing pushed.
+Nothing to resume. The next real step is collecting real owner sentences (with consent, in `private/`) to test the one-sentence box.
 
 ### Decisions (with reasons)
 - **The draft pack does not run Aether.** The browser Aether demo loads Python (Pyodide) from a CDN, and this page must make no network calls; its Content-Security-Policy (`default-src 'none'`) blocks all network loads. So the rule checks are written directly in JavaScript, kept in one `CORE` block that `tests/test_tool.py` runs in Node (v26 on this machine) on made-up rows. `tool/README.md` says so plainly.
@@ -22,6 +24,8 @@ Each step is committed when it finishes. Steps and how to resume:
 - **Validation runs a real dry run.** "With checker validation" compiles each non-refusal spec, runs the Aether checker and a monitored dry run on made-up rows, and requires 0 monitor violations. This exposed a harness bug: the dry run started at 09:00 for a 09:30 window. It was fixed with a test; the fix is in the scorer harness, not the baseline.
 - **The gate was applied as declared.** The regex got 59/60 on dev (all traps and unsupported requests correct), above the 54/60 threshold, so no training data was generated, nothing was fine-tuned and the GPU was not used. A 1.5B model could at best fix the one remaining dev miss, and the authors of the sets and of the regex are the same, so dev cannot show a real gap. Training anyway would contradict the pre-registered rule.
 - **The baseline was run once on held-out v4 anyway.** The user asked for held-out v4 results, and the shipped version is the regex. This follows the same discipline: a committed conditions file and one run, with nothing changed afterwards. There is no McNemar test because there is no candidate model; the declared confirmatory comparison is reported as "not run (gate cleared)".
+- **A brittleness was found after the held-out run and was not fixed in the parser.** "Text patients the day before their appointment..." is refused, because it lacks the word "remind", and "only 9am to 6pm" is not read as sending hours. Changing the parser after the one held-out run would break the run-once rule and make the 80/80 figure stale. Only the page's example text was corrected. Any parser change needs new, unseen evaluation requests, ideally real owner wording.
+- **README and public docs were not edited.** The proposed wording is in SUMMARY.md for the owner's review.
 - `docs/outreach/AGENT-TODAY.md`, `one-page-handout.md` and `pilot-agreement-template.md` now say what the tool does and does not do (the owner uses their own CSV on their own computer; the student never needs the list; the page never sends).
 
 ## Session 11 (2026-11-08, Claude Code): impact phase, outreach kit and local-only tracking (no GPU, no model work; nothing sent, nothing pushed)
