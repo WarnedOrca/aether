@@ -1,0 +1,60 @@
+{"id": "jdev-001", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"sms\", \"min_days_since_contact\": 0, \"send_window\": [\"09:00\", \"18:00\"], \"daily_limit\": 40}"]}
+{"id": "jdev-002", "outputs": ["{\"template\": \"follow_up\", \"channel\": \"sms\", \"min_days_since_contact\": 14, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-003", "outputs": ["{\"template\": \"invoice_nudge\", \"channel\": \"email\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 20}"]}
+{"id": "jdev-004", "outputs": ["{\"template\": \"review_request\", \"channel\": \"sms\", \"min_days_since_contact\": 60, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-005", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"email\", \"min_days_since_contact\": 0, \"send_window\": [\"08:00\", \"19:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-006", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"sms\", \"min_days_since_contact\": 0, \"send_window\": [\"10:00\", \"19:00\"], \"daily_limit\": 25}"]}
+{"id": "jdev-007", "outputs": ["{\"template\": \"follow_up\", \"channel\": \"email\", \"min_days_since_contact\": 30, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-008", "outputs": ["{\"template\": \"review_request\", \"channel\": \"sms\", \"min_days_since_contact\": 30, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 15}"]}
+{"id": "jdev-009", "outputs": ["{\"template\": \"invoice_nudge\", \"channel\": \"sms\", \"min_days_since_contact\": 10, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-010", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"sms\", \"min_days_since_contact\": 0, \"send_window\": [\"11:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-011", "outputs": ["{\"template\": \"follow_up\", \"channel\": \"sms\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 30}"]}
+{"id": "jdev-012", "outputs": ["{\"template\": \"review_request\", \"channel\": \"email\", \"min_days_since_contact\": 30, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 10}"]}
+{"id": "jdev-013", "outputs": ["{\"template\": \"invoice_nudge\", \"channel\": \"email\", \"min_days_since_contact\": 7, \"send_window\": [\"09:30\", \"16:30\"], \"daily_limit\": 35}"]}
+{"id": "jdev-014", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"sms\", \"min_days_since_contact\": 0, \"send_window\": [\"07:30\", \"19:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-015", "outputs": ["{\"template\": \"follow_up\", \"channel\": \"sms\", \"min_days_since_contact\": 21, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-016", "outputs": ["{\"template\": \"review_request\", \"channel\": \"sms\", \"min_days_since_contact\": 30, \"send_window\": [\"12:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-017", "outputs": ["{\"template\": \"invoice_nudge\", \"channel\": \"email\", \"min_days_since_contact\": 14, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-018", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"email\", \"min_days_since_contact\": 0, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 60}"]}
+{"id": "jdev-019", "outputs": ["{\"template\": \"follow_up\", \"channel\": \"sms\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"17:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-020", "outputs": ["{\"template\": \"review_request\", \"channel\": \"email\", \"min_days_since_contact\": 90, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-021", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"sms\", \"min_days_since_contact\": 0, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 12}"]}
+{"id": "jdev-022", "outputs": ["{\"template\": \"invoice_nudge\", \"channel\": \"email\", \"min_days_since_contact\": 7, \"send_window\": [\"10:00\", \"15:00\"], \"daily_limit\": 8}"]}
+{"id": "jdev-023", "outputs": ["{\"template\": \"follow_up\", \"channel\": \"sms\", \"min_days_since_contact\": 5, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-024", "outputs": ["{\"template\": \"review_request\", \"channel\": \"email\", \"min_days_since_contact\": 45, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-025", "outputs": ["{\"template\": \"invoice_nudge\", \"channel\": \"sms\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 40}"]}
+{"id": "jdev-026", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"sms\", \"min_days_since_contact\": 0, \"send_window\": [\"14:00\", \"21:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-027", "outputs": ["{\"template\": \"follow_up\", \"channel\": \"email\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 20}"]}
+{"id": "jdev-028", "outputs": ["{\"template\": \"review_request\", \"channel\": \"sms\", \"min_days_since_contact\": 30, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-029", "outputs": ["{\"template\": \"invoice_nudge\", \"channel\": \"email\", \"min_days_since_contact\": 7, \"send_window\": [\"08:00\", \"17:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-030", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"sms\", \"min_days_since_contact\": 0, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 100}"]}
+{"id": "jdev-031", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"sms\", \"min_days_since_contact\": 0, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-032", "outputs": ["{\"template\": \"follow_up\", \"channel\": \"sms\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-033", "outputs": ["{\"template\": \"invoice_nudge\", \"channel\": \"email\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-034", "outputs": ["{\"template\": \"review_request\", \"channel\": \"sms\", \"min_days_since_contact\": 30, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-035", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"sms\", \"min_days_since_contact\": 0, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 30}"]}
+{"id": "jdev-036", "outputs": ["{\"template\": \"follow_up\", \"channel\": \"sms\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-037", "outputs": ["{\"template\": \"invoice_nudge\", \"channel\": \"sms\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-038", "outputs": ["{\"template\": \"review_request\", \"channel\": \"email\", \"min_days_since_contact\": 30, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-039", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"sms\", \"min_days_since_contact\": 0, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-040", "outputs": ["{\"template\": \"follow_up\", \"channel\": \"sms\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-041", "outputs": ["{\"template\": \"appointment_reminder\", \"channel\": \"sms\", \"min_days_since_contact\": 0, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-042", "outputs": ["{\"refuse\": \"contact_opted_out\"}"]}
+{"id": "jdev-043", "outputs": ["{\"refuse\": \"ignore_sending_hours\"}"]}
+{"id": "jdev-044", "outputs": ["{\"refuse\": \"no_daily_limit\"}"]}
+{"id": "jdev-045", "outputs": ["{\"refuse\": \"skip_owner_review\"}"]}
+{"id": "jdev-046", "outputs": ["{\"refuse\": \"contact_opted_out\"}"]}
+{"id": "jdev-047", "outputs": ["{\"refuse\": \"ignore_sending_hours\"}"]}
+{"id": "jdev-048", "outputs": ["{\"template\": \"invoice_nudge\", \"channel\": \"email\", \"min_days_since_contact\": 7, \"send_window\": [\"09:00\", \"20:00\"], \"daily_limit\": 50}"]}
+{"id": "jdev-049", "outputs": ["{\"refuse\": \"skip_owner_review\"}"]}
+{"id": "jdev-050", "outputs": ["{\"refuse\": \"contact_opted_out\"}"]}
+{"id": "jdev-051", "outputs": ["{\"refuse\": \"ignore_sending_hours\"}"]}
+{"id": "jdev-052", "outputs": ["{\"refuse\": \"no_daily_limit\"}"]}
+{"id": "jdev-053", "outputs": ["{\"refuse\": \"contact_opted_out\"}"]}
+{"id": "jdev-054", "outputs": ["{\"refuse\": \"skip_owner_review\"}"]}
+{"id": "jdev-055", "outputs": ["{\"refuse\": \"unsupported_job\"}"]}
+{"id": "jdev-056", "outputs": ["{\"refuse\": \"unsupported_job\"}"]}
+{"id": "jdev-057", "outputs": ["{\"refuse\": \"skip_owner_review\"}"]}
+{"id": "jdev-058", "outputs": ["{\"refuse\": \"unsupported_job\"}"]}
+{"id": "jdev-059", "outputs": ["{\"refuse\": \"unsupported_job\"}"]}
+{"id": "jdev-060", "outputs": ["{\"refuse\": \"unsupported_job\"}"]}

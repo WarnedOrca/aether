@@ -39,6 +39,12 @@ def test_compiled_program_checks_and_dry_runs_clean(template, channel):
     assert all(e["channel"] == channel for e in r["delivered"])
 
 
+def test_dry_run_starts_at_window_start_with_minutes():
+    spec = dict(default_spec("invoice_nudge"), send_window=["09:30", "16:30"])
+    r = dry_run(spec, fake_rows("invoice_nudge", "email"))
+    assert r["monitor_problems"] == [] and len(r["delivered"]) == 2
+
+
 def test_daily_limit_is_in_the_program():
     spec = dict(default_spec("follow_up"), daily_limit=1, min_days_since_contact=0)
     r = dry_run(spec, fake_rows("follow_up", "sms"))

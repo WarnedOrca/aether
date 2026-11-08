@@ -120,7 +120,8 @@ def dry_run(spec: dict, rows: list[dict], business: str = "Test Business") -> di
     errs = errors(check(proc, policy))
     if errs:
         raise SpecError(f"checker: {errs[0]}")
-    ws = workspace_for(proc, data={"Customers": rows}, now=DEFAULT_NOW.replace(hour=int(spec["send_window"][0][:2])))
+    start_h, start_m = (int(x) for x in spec["send_window"][0].split(":"))
+    ws = workspace_for(proc, data={"Customers": rows}, now=DEFAULT_NOW.replace(hour=start_h, minute=start_m))
     out = run_monitored(proc, policy, ws)
     sent = [e for e in ws.connector_log if e["kind"] == "deliver"]
     return {"status": out.result.status, "delivered": sent, "monitor_problems": out.problems}

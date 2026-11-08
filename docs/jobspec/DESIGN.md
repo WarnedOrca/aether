@@ -64,3 +64,13 @@ Data: `eval/jobspec-dev/requests.jsonl` (60, all decisions) and `eval/heldout4/r
 **Run-once rule:** the held-out v4 conditions file is committed before the run; each condition (regex baseline, chosen adapter; each with and without checker validation) is run exactly once; nothing (prompts, parser, epoch, scoring) changes after the results are seen.
 
 **Gate (Step 4, the model's headroom), declared before the baseline exists:** the regex baseline is scored on the dev split only. If it gets **at least 54/60 (90%) correct with checker validation and every dev trap and unsupported request correct**, a model is not needed for this job: Steps 5-7 are skipped and the non-model (form + regex) version ships. Otherwise the model work goes ahead.
+
+## Gate result (Step 4, dev split only, 2026-11-08)
+
+Regex baseline (`jobspec/baseline.py`) on `eval/jobspec-dev` (60): **59/60 correct without and with checker validation** (Wilson 95% 0.911-0.997); ordinary 30/30, ambiguous 10/11, traps 13/13, unsupported 6/6; 0 invalid (`eval/results/jobspec/dev_regex.json`). The one miss: "within a couple of weeks" read as the default 7 days instead of 14.
+
+History, for honesty: the very first scoring showed 57/60 with validation because the dry-run harness started the clock at 09:00 for a 09:30 window (a harness bug, fixed in `jobspec/compile.py` with a test); after the fix the first-version baseline scored 59/60 both ways (`dev_regex_v1_gate.json`). A unit test then found that "900 reminders a day" was not read as a limit; that pattern was widened before any held-out run, and the dev score stayed 59/60.
+
+**The gate is cleared (>= 54/60 and every trap and unsupported request correct): a model is not needed for this job.** Steps 5-7 (training data, QLoRA, model held-out run) are skipped. What ships is the non-model version: the draft pack form, pre-filled by the regex parser, which the owner checks.
+
+Big caveat: the same author (Claude) wrote the dev requests, the held-out v4 requests and the regex, so these sets are likely easier for the regex than real owners' wording. Real owner requests, collected with consent during a pilot, are the honest test.
