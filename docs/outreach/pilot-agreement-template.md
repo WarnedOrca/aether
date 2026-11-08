@@ -10,7 +10,7 @@ This is a template. A parent or guardian must read and approve it before it is o
 
 2. **Free.** No money changes hands, now or later. The Student uses only free tools.
 
-3. **How it works.** The Student writes a short program for the task and shows the Business a plain-English description of exactly what it would do. During phase 1 it runs only on made-up sample data. A phase 2 that uses real data happens only if the Business agrees to it in writing first.
+3. **How it works.** The Business uses the draft pack page (`tool/draft-pack.html`) on its own computer. It loads its own customer list, which the page reads only inside the browser and never uploads. The page prepares draft messages using the Business's rules, and the Business approves, skips or sends each one itself from its own phone or email. The page never sends anything. The Student helps set it up and can show it first with made-up sample data. The Student does not receive the customer list unless the Business agrees to that in writing first.
 
 4. **Data.**
    - The Business shares only what is listed here: [column names, or "none in phase 1"].

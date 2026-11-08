@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- No network: this policy blocks every fetch, image, font or script from anywhere else. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; form-action 'none'; base-uri 'none'">
+<title>Draft pack</title>
+<style>
+  :root { --ink:#1d2430; --muted:#5b6575; --line:#d8dde5; --bg:#f6f7f9; --card:#fff; --ok:#1f7a45; --warn:#9a5b00; --bad:#a3262c; --accent:#2457a6; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; color:var(--ink); background:var(--bg); }
+  main { max-width: 1000px; margin: 0 auto; padding: 16px; }
+  h1 { font-size: 22px; margin: 8px 0 4px; } h2 { font-size: 17px; margin: 0 0 10px; }
+  .notice { background:#eef5ee; border:1px solid #b9d8bf; padding:10px 12px; border-radius:8px; margin:10px 0 16px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px; margin-bottom:14px; }
+  label { display:block; font-weight:600; margin:8px 0 3px; } .hint { color:var(--muted); font-size:13px; font-weight:400; }
+  input[type=text], input[type=number], input[type=time], input[type=date], select, textarea { font:inherit; padding:6px 8px; border:1px solid var(--line); border-radius:6px; width:100%; max-width:420px; background:#fff; }
+  textarea { max-width:none; min-height:80px; }
+  .row { display:flex; flex-wrap:wrap; gap:14px; } .row > div { flex:1 1 200px; }
+  button { font:inherit; padding:6px 12px; border-radius:6px; border:1px solid var(--line); background:#fff; cursor:pointer; }
+  button.primary { background:var(--accent); color:#fff; border-color:var(--accent); }
+  table { width:100%; border-collapse:collapse; font-size:14px; } th, td { text-align:left; vertical-align:top; padding:6px; border-bottom:1px solid var(--line); }
+  .tag { display:inline-block; font-size:12px; padding:1px 7px; border-radius:10px; border:1px solid var(--line); }
+  .approved { color:var(--ok); border-color:var(--ok); } .skipped { color:var(--muted); } .flag { color:var(--bad); border-color:var(--bad); }
+  .msg { white-space:pre-wrap; background:#fafbfc; border:1px solid var(--line); border-radius:6px; padding:6px; }
+  .banner { padding:8px 10px; border-radius:6px; margin:8px 0; } .banner.warn { background:#fff4e0; border:1px solid #f0cf94; }
+  .muted { color:var(--muted); } a.send { margin-right:8px; }
+</style>
+</head>
+<body>
+<main>
+<h1>Draft pack</h1>
+<p class="muted">Prepare reminder, follow-up, review-request or invoice messages from your own customer list, check each one, and send them yourself from your own phone or email.</p>
+<div class="notice"><strong>Nothing is uploaded.</strong> Your file is read only inside this browser tab. This page makes no network connections, keeps no copy after you close it, and <strong>never sends anything</strong>: you send each approved message yourself.</div>
+
+<div class="card">
+  <h2>1. Load your list (CSV)</h2>
+  <input type="file" id="file" accept=".csv,text/csv">
+  <p class="hint">One row per customer. Export from your spreadsheet or booking app as CSV. Try it first with <code>SAMPLE-DATA.csv</code> (made-up people).</p>
+  <div id="cols"></div>
+</div>
+
+<div class="card">
+  <h2>2. Message</h2>
+  <div class="row">
+    <div><label>Job</label><select id="template"></select></div>
+    <div><label>Send by</label><select id="channel"><option value="sms">Text message</option><option value="email">Email</option></select></div>
+    <div><label>Business name <span class="hint">(used as {business})</span></label><input type="text" id="business" placeholder="Your business name"></div>
+  </div>
+  <div id="extra"></div>
+  <label>Email subject <span class="hint">(email only)</span></label><input type="text" id="subject">
+  <label>Message <span class="hint">{name}, {date} and {business} are filled in; you can also use any column name in braces, like {invoice}</span></label>
+  <textarea id="text"></textarea>
+</div>
+
+<div class="card">
+  <h2>3. Rules</h2>
+  <div class="row">
+    <div><label>Skip customers who opted out</label><input type="checkbox" checked disabled> <span class="hint">always on</span></div>
+    <div><label>Skip anyone contacted in the last <input type="number" id="minDays" min="0" max="365" value="7" style="width:80px"> days</label><span class="hint">0 = don't check</span></div>
+    <div><label>Who is due</label><select id="dateMode"><option value="ahead">date is this many days ahead</option><option value="ago">date was this many days ago</option><option value="overdue">date is at least this many days past</option><option value="none">everyone on the list</option></select>
+      <input type="number" id="dateDays" min="0" max="365" value="1" style="width:80px"> <span class="hint">days</span></div>
+  </div>
+  <div class="row">
+    <div><label>Only send between</label><input type="time" id="winStart" value="09:00"> and <input type="time" id="winEnd" value="20:00"></div>
+    <div><label>Daily limit</label><input type="number" id="limit" min="1" max="200" value="50"> <span class="hint">at most 200</span></div>
+    <div><label>Today's date <span class="hint">(for "who is due")</span></label><input type="date" id="today"></div>
+  </div>
+  <p><button class="primary" id="build">Prepare drafts for review</button></p>
+</div>
+
+<div class="card" id="reviewCard" style="display:none">
+  <h2>4. Review: approve or skip each draft</h2>
+  <div id="windowBanner"></div>
+  <div id="summary" class="muted"></div>
+  <table><thead><tr><th>Customer</th><th>To</th><th>Message</th><th>Decision</th><th>Send yourself</th></tr></thead><tbody id="drafts"></tbody></table>
+  <h2 style="margin-top:16px">Not drafted, and why</h2>
+  <table><thead><tr><th>Row</th><th>Customer</th><th>Reason</th></tr></thead><tbody id="skippedRows"></tbody></table>
+  <p><button id="dlAudit">Download audit log (CSV)</button> <span class="hint">The log stays on your computer. It contains names and contact details; delete it when you no longer need it.</span></p>
+</div>
+
+<div class="card">
+  <h2>Optional: time this task</h2>
+  <p class="hint">For your own records or the student project's pilot log. It records only how long you spent; it never estimates time saved.</p>
+  <div class="row">
+    <div><label>Business code</label><input type="text" id="swBiz" placeholder="e.g. initials"></div>
+    <div><label>Task</label><input type="text" id="swTask" placeholder="e.g. next-day reminders"></div>
+    <div><label>Phase</label><select id="swPhase"><option value="before">before (the old way)</option><option value="after">after (with this tool)</option></select></div>
+  </div>
+  <p><button id="swStart">Start</button> <button id="swStop" disabled>Stop</button> <span id="swShow" class="muted"></span></p>
+  <p><button id="swDl" disabled>Download timing rows (CSV)</button></p>
+</div>
+</main>
+
+<script>
+// CORE-START (pure logic, no page access; tested with Node in tests/test_tool.py)
+const TEMPLATES = /*TEMPLATES-START*/{"appointment_reminder": {"label": "Appointment reminder", "channel": "sms", "subject": "Appointment reminder", "text": "Hi {name}, this is a reminder from {business} about your appointment on {date}. Reply to this message if you need to change it.", "date_mode": "ahead", "date_days": 1}, "follow_up": {"label": "Follow-up after a visit", "channel": "sms", "subject": "Thanks for your visit", "text": "Hi {name}, thanks for visiting {business} on {date}. If anything wasn't right, just reply and let us know.", "date_mode": "ago", "date_days": 1}, "review_request": {"label": "Review request", "channel": "sms", "subject": "How did we do?", "text": "Hi {name}, thanks for choosing {business}. If you have a minute, we would appreciate a review: {review_link}", "date_mode": "ago", "date_days": 2}, "invoice_nudge": {"label": "Invoice reminder", "channel": "email", "subject": "Invoice reminder", "text": "Hi {name}, a friendly reminder that invoice {invoice} for {amount} was due on {date}. Please reply if you have any questions.", "date_mode": "overdue", "date_days": 1}}/*TEMPLATES-END*/;
+const MAX_DAILY_LIMIT = 200;
+const Core = {
+  parseCSV(text) {
+    const rows = []; let row = [], cell = "", q = false;
+    text = text.replace(/^\uFEFF/, "");
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+      if (q) { if (c === '"') { if (text[i + 1] === '"') { cell += '"'; i++; } else q = false; } else cell += c; }
+      else if (c === '"') q = true;
+      else if (c === ",") { row.push(cell); cell = ""; }
+      else if (c === "\n" || c === "\r") { if (c === "\r" && text[i + 1] === "\n") i++; row.push(cell); rows.push(row); row = []; cell = ""; }
+      else cell += c;
+    }
+    if (cell !== "" || row.length) { row.push(cell); rows.push(row); }
+    const nonEmpty = rows.filter(r => r.some(v => v.trim() !== ""));
+    if (!nonEmpty.length) return { headers: [], rows: [] };
+    const headers = nonEmpty[0].map(h => h.trim());
+    return { headers, rows: nonEmpty.slice(1).map(r => Object.fromEntries(headers.map((h, j) => [h, (r[j] ?? "").trim()]))) };
+  },
+  optOut(v) {  // true, false, or null when the value is not clear (never guess)
+    const s = String(v ?? "").trim().toLowerCase();
+    if (["", "no", "n", "false", "0", "subscribed", "ok"].includes(s)) return false;
+    if (["yes", "y", "true", "1", "x", "opted out", "opt out", "opted-out", "stop", "unsubscribed", "do not contact"].includes(s)) return true;
+    return null;
+  },
+  parseDate(v) {  // "YYYY-MM-DD" or "M/D/YYYY" -> "YYYY-MM-DD"; "" -> ""; anything else -> null
+    const s = String(v ?? "").trim();
+    if (!s) return "";
+    let m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/), y, mo, d;
+    if (m) { y = +m[1]; mo = +m[2]; d = +m[3]; }
+    else if ((m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/))) { y = +m[3]; mo = +m[1]; d = +m[2]; }
+    else return null;
+    const dt = new Date(Date.UTC(y, mo - 1, d));
+    if (dt.getUTCFullYear() !== y || dt.getUTCMonth() !== mo - 1 || dt.getUTCDate() !== d) return null;
+    return dt.toISOString().slice(0, 10);
+  },
+  daysBetween(a, b) { return Math.round((Date.parse(b + "T00:00:00Z") - Date.parse(a + "T00:00:00Z")) / 86400000); },
+  phone(v) {  // US numbers only: 10 digits, or 11 starting with 1; returns +1XXXXXXXXXX or null
+    const s = String(v ?? "").trim();
+    if (!/^[+\d\s().-]+$/.test(s)) return null;
+    let d = s.replace(/\D/g, "");
+    if (d.length === 11 && d[0] === "1") d = d.slice(1);
+    return d.length === 10 ? "+1" + d : null;
+  },
+  email(v) { const s = String(v ?? "").trim(); return /^[^\s@,;<>"]+@[^\s@,;<>"]+\.[A-Za-z]{2,}$/.test(s) ? s : null; },
+  fill(text, row, map, extra) {  // returns {text, missing:[...]} ; a blank or unknown placeholder is reported, never guessed
+    const missing = [];
+    const out = text.replace(/\{([^{}]+)\}/g, (all, key) => {
+      const k = key.trim();
+      let v;
+      if (k in (extra || {})) v = extra[k];
+      else if (map[k] && map[k] in row) v = row[map[k]];
+      else if (k in row) v = row[k];
+      if (v === undefined || String(v).trim() === "") { missing.push(k); return all; }
+      return String(v).trim();
+    });
+    return { text: out, missing };
+  },
+  inWindow(hhmm, start, end) { return start <= end ? (hhmm >= start && hhmm < end) : (hhmm >= start || hhmm < end); },
+  smsLink(phone, text) { return "sms:" + phone + "?&body=" + encodeURIComponent(text); },
+  mailtoLink(email, subject, text) { return "mailto:" + email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(text); },
+  checkConfig(cfg) {  // rules the owner cannot turn off; returns a list of problems (empty = ok)
+    const p = [];
+    if (!(Number.isInteger(cfg.daily_limit) && cfg.daily_limit >= 1 && cfg.daily_limit <= MAX_DAILY_LIMIT)) p.push("daily limit must be 1-" + MAX_DAILY_LIMIT);
+    if (!(Number.isInteger(cfg.min_days_since_contact) && cfg.min_days_since_contact >= 0 && cfg.min_days_since_contact <= 365)) p.push("days since last contact must be 0-365");
+    if (!/^\d\d:\d\d$/.test(cfg.window[0] || "") || !/^\d\d:\d\d$/.test(cfg.window[1] || "") || cfg.window[0] === cfg.window[1]) p.push("sending hours must be two different times");
+    if (!["sms", "email"].includes(cfg.channel)) p.push("channel must be sms or email");
+    if (!cfg.map.opted_out) p.push("choose the column that says who opted out");
+    if (!cfg.map.name) p.push("choose the name column");
+    if (cfg.channel === "sms" && !cfg.map.phone) p.push("choose the phone column");
+    if (cfg.channel === "email" && !cfg.map.email) p.push("choose the email column");
+    if (cfg.date_mode !== "none" && !cfg.map.date) p.push("choose the date column (or set 'who is due' to everyone)");
+    return p;
+  },
+  build(rows, cfg, today) {  // -> {drafts, skipped}; drafts keep CSV order; the daily limit applies after all other checks
+    const drafts = [], skipped = [];
+    const skip = (i, r, reason) => skipped.push({ row: i + 2, name: r[cfg.map.name] || "", reason });
+    rows.forEach((r, i) => {
+      const oo = Core.optOut(r[cfg.map.opted_out]);
+      if (oo === true) return skip(i, r, "opted out");
+      if (oo === null) return skip(i, r, "unclear opt-out value \"" + r[cfg.map.opted_out] + "\" (fix the sheet; not guessed)");
+      if (cfg.date_mode !== "none") {
+        const d = Core.parseDate(r[cfg.map.date]);
+        if (!d) return skip(i, r, d === "" ? "date is blank" : "can't read date \"" + r[cfg.map.date] + "\"");
+        const ahead = Core.daysBetween(today, d);
+        const due = cfg.date_mode === "ahead" ? ahead === cfg.date_days : cfg.date_mode === "ago" ? -ahead === cfg.date_days : -ahead >= cfg.date_days;
+        if (!due) return skip(i, r, "not due today (date " + d + ")");
+      }
+      if (cfg.min_days_since_contact > 0 && cfg.map.last_contacted) {
+        const lc = Core.parseDate(r[cfg.map.last_contacted]);
+        if (lc === null) return skip(i, r, "can't read last-contacted date \"" + r[cfg.map.last_contacted] + "\"");
+        if (lc && Core.daysBetween(lc, today) < cfg.min_days_since_contact) return skip(i, r, "contacted on " + lc + ", less than " + cfg.min_days_since_contact + " days ago");
+      }
+      const to = cfg.channel === "sms" ? Core.phone(r[cfg.map.phone]) : Core.email(r[cfg.map.email]);
+      if (!to) {
+        const raw = r[cfg.channel === "sms" ? cfg.map.phone : cfg.map.email] || "";
+        return skip(i, r, raw ? (cfg.channel === "sms" ? "phone number looks wrong" : "email address looks wrong") + " (\"" + raw + "\")" : "no " + (cfg.channel === "sms" ? "phone number" : "email address"));
+      }
+      const f = Core.fill(cfg.text, r, cfg.map, cfg.extra);
+      if (f.missing.length) return skip(i, r, "missing value for {" + f.missing.join("}, {") + "}");
+      const s = cfg.channel === "email" ? Core.fill(cfg.subject || "", r, cfg.map, cfg.extra) : { text: "", missing: [] };
+      if (s.missing.length) return skip(i, r, "missing value for {" + s.missing.join("}, {") + "} in the subject");
+      if (drafts.length >= cfg.daily_limit) return skip(i, r, "over today's limit of " + cfg.daily_limit);
+      drafts.push({ row: i + 2, name: r[cfg.map.name] || "", to, text: f.text, subject: s.text, decision: "pending" });
+    });
+    return { drafts, skipped };
+  },
+  csvCell(v) { const s = String(v ?? ""); return /[",\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; },
+  toCSV(header, rows) { return [header, ...rows].map(r => r.map(Core.csvCell).join(",")).join("\r\n") + "\r\n"; },
+  PILOT_COLUMNS: ["date", "business_code", "task", "phase_before_or_after", "minutes_per_task", "tasks_per_week", "messages_late_or_missed_per_week", "owner_rating_1_to_5", "how_measured", "owner_ok_to_mention_business_yes_no_and_date", "notes"],
+  pilotRow(date, biz, task, phase, minutes) { return [date, biz, task, phase, minutes.toFixed(1), "", "", "", "stopwatch in the draft pack tool (one run of the task)", "", ""]; },
+};
+// CORE-END
+</script>
+<script>
+(function () {
+  const $ = id => document.getElementById(id);
+  let data = { headers: [], rows: [] }, result = null, audit = [], timing = [], swStart = null, swTimer = null;
+  const now = () => new Date();
+  const pad = n => String(n).padStart(2, "0");
+  const localDate = d => d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+  const hhmm = d => pad(d.getHours()) + ":" + pad(d.getMinutes());
+  const log = (event, row, detail) => audit.push([now().toISOString(), event, row ?? "", detail ?? ""]);
+  const ROLES = [["name", "Customer name"], ["phone", "Phone (for texts)"], ["email", "Email"], ["date", "Date (appointment, visit or due date)"], ["opted_out", "Opted out (yes/no)"], ["last_contacted", "Last contacted (date, optional)"]];
+  const GUESS = { name: /name/i, phone: /phone|mobile|cell/i, email: /e-?mail/i, date: /date|appt|appointment|visit|due/i, opted_out: /opt|unsub|stop/i, last_contacted: /last.?contact/i };
+
+  $("today").value = localDate(now());
+  for (const [k, t] of Object.entries(TEMPLATES)) { const o = document.createElement("option"); o.value = k; o.textContent = t.label; $("template").appendChild(o); }
+  function applyTemplate() {
+    const t = TEMPLATES[$("template").value];
+    $("text").value = t.text; $("subject").value = t.subject; $("channel").value = t.channel;
+    $("dateMode").value = t.date_mode; $("dateDays").value = t.date_days;
+    $("extra").innerHTML = $("template").value === "review_request" ? '<label>Review link <span class="hint">(used as {review_link})</span></label><input type="text" id="reviewLink" placeholder="the link to your review page">' : "";
+  }
+  $("template").onchange = applyTemplate; applyTemplate();
+
+  $("file").onchange = async e => {
+    const f = e.target.files[0]; if (!f) return;
+    data = Core.parseCSV(await f.text());
+    log("file loaded", "", data.rows.length + " rows, columns: " + data.headers.join(" | "));
+    const opts = h => '<option value="">(none)</option>' + data.headers.map(x => '<option' + (GUESS[h].test(x) ? " selected" : "") + ">" + x.replace(/</g, "&lt;") + "</option>").join("");
+    $("cols").innerHTML = "<p class='hint'>" + data.rows.length + " rows loaded. Check which column is which:</p><div class='row'>" +
+      ROLES.map(([k, t]) => "<div><label>" + t + "</label><select id='map_" + k + "'>" + opts(k) + "</select></div>").join("") + "</div>";
+    const used = new Set();  // don't let two roles grab the same column by guess
+    ROLES.forEach(([k]) => { const s = $("map_" + k); if (used.has(s.value)) s.value = ""; else if (s.value) used.add(s.value); });
+  };
+
+  function config() {
+    const map = {}; ROLES.forEach(([k]) => { const s = $("map_" + k); if (s && s.value) map[k] = s.value; });
+    const extra = { business: $("business").value.trim() };
+    if ($("reviewLink")) extra.review_link = $("reviewLink").value.trim();
+    Object.keys(extra).forEach(k => { if (!extra[k]) delete extra[k]; });
+    return { map, extra, text: $("text").value, subject: $("subject").value, channel: $("channel").value,
+      date_mode: $("dateMode").value, date_days: parseInt($("dateDays").value, 10) || 0,
+      min_days_since_contact: parseInt($("minDays").value, 10), daily_limit: parseInt($("limit").value, 10),
+      window: [$("winStart").value, $("winEnd").value] };
+  }
+
+  function windowOpen(cfg) { return Core.inWindow(hhmm(now()), cfg.window[0], cfg.window[1]); }
+
+  function render() {
+    const cfg = config(), open = windowOpen(cfg);
+    $("windowBanner").innerHTML = open ? "" : "<div class='banner warn'>It is outside your sending hours (" + cfg.window[0] + " to " + cfg.window[1] + "). You can review now; the send links appear once it is within your hours.</div>";
+    const a = result.drafts.filter(d => d.decision === "approved").length, s = result.drafts.filter(d => d.decision === "skipped").length;
+    $("summary").textContent = result.drafts.length + " drafts (" + a + " approved, " + s + " skipped, " + (result.drafts.length - a - s) + " waiting), " + result.skipped.length + " rows not drafted.";
+    const tb = $("drafts"); tb.innerHTML = "";
+    result.drafts.forEach((d, i) => {
+      const tr = document.createElement("tr");
+      const esc = x => String(x).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+      let send = "<span class='muted'>approve first</span>";
+      if (d.decision === "approved") {
+        const href = cfg.channel === "sms" ? Core.smsLink(d.to, d.text) : Core.mailtoLink(d.to, d.subject, d.text);
+        send = "<button data-copy='" + i + "'>Copy</button> " + (open ? "<a class='send' data-open='" + i + "' href='" + href.replace(/'/g, "%27") + "'>Open in " + (cfg.channel === "sms" ? "Messages" : "email") + "</a>" : "<span class='muted'>after " + cfg.window[0] + "</span>");
+      }
+      tr.innerHTML = "<td>" + esc(d.name) + "<div class='muted'>row " + d.row + "</div></td><td>" + esc(d.to) + "</td><td><div class='msg'>" + (d.subject ? "<strong>" + esc(d.subject) + "</strong>\n" : "") + esc(d.text) + "</div></td>" +
+        "<td>" + (d.decision === "pending" ? "<button data-ok='" + i + "'>Approve</button> <button data-skip='" + i + "'>Skip</button>" : "<span class='tag " + d.decision + "'>" + d.decision + "</span> <button data-undo='" + i + "'>Undo</button>") + "</td><td>" + send + "</td>";
+      tb.appendChild(tr);
+    });
+    $("skippedRows").innerHTML = result.skipped.map(k => "<tr><td>" + k.row + "</td><td>" + String(k.name).replace(/</g, "&lt;") + "</td><td><span class='tag " + (k.reason === "opted out" || k.reason.startsWith("not due") || k.reason.startsWith("contacted") || k.reason.startsWith("over today") ? "skipped" : "flag") + "'>" + k.reason.replace(/</g, "&lt;") + "</span></td></tr>").join("") || "<tr><td colspan=3 class='muted'>none</td></tr>";
+  }
+
+  $("build").onclick = () => {
+    const cfg = config(), problems = Core.checkConfig(cfg);
+    if (!data.rows.length) problems.unshift("load a CSV file first");
+    if (problems.length) { alert("Please fix:\n- " + problems.join("\n- ")); return; }
+    result = Core.build(data.rows, cfg, $("today").value);
+    log("drafts prepared", "", result.drafts.length + " drafts, " + result.skipped.length + " not drafted; rules: opted-out skipped, min days " + cfg.min_days_since_contact + ", hours " + cfg.window.join("-") + ", limit " + cfg.daily_limit);
+    result.skipped.forEach(k => log("not drafted", k.row, k.reason));
+    $("reviewCard").style.display = ""; render();
+  };
+  $("drafts").onclick = async e => {
+    const t = e.target, get = a => t.getAttribute(a);
+    if (get("data-ok") !== null) { const d = result.drafts[+get("data-ok")]; d.decision = "approved"; log("approved", d.row, d.to); }
+    else if (get("data-skip") !== null) { const d = result.drafts[+get("data-skip")]; d.decision = "skipped"; log("skipped by owner", d.row, d.to); }
+    else if (get("data-undo") !== null) { const d = result.drafts[+get("data-undo")]; log("decision undone", d.row, d.decision); d.decision = "pending"; }
+    else if (get("data-copy") !== null) { const d = result.drafts[+get("data-copy")]; try { await navigator.clipboard.writeText(d.text); t.textContent = "Copied"; } catch { prompt("Copy this message:", d.text); } log("copied", d.row, d.to); return; }
+    else if (get("data-open") !== null) { const d = result.drafts[+get("data-open")]; log("opened in owner's app", d.row, d.to); return; }
+    else return;
+    render();
+  };
+  const download = (name, text) => { const a = document.createElement("a"); a.href = "data:text/csv;charset=utf-8," + encodeURIComponent(text); a.download = name; document.body.appendChild(a); a.click(); a.remove(); };
+  $("dlAudit").onclick = () => download("draft-pack-audit-" + localDate(now()) + ".csv", Core.toCSV(["time", "event", "csv_row", "detail"], audit));
+  $("swStart").onclick = () => { swStart = now(); $("swStart").disabled = true; $("swStop").disabled = false; swTimer = setInterval(() => { $("swShow").textContent = ((now() - swStart) / 60000).toFixed(1) + " min"; }, 1000); };
+  $("swStop").onclick = () => {
+    clearInterval(swTimer); const mins = (now() - swStart) / 60000;
+    timing.push(Core.pilotRow(localDate(now()), $("swBiz").value.trim(), $("swTask").value.trim(), $("swPhase").value, mins));
+    $("swShow").textContent = "Recorded " + mins.toFixed(1) + " min (" + timing.length + " row" + (timing.length > 1 ? "s" : "") + " ready to download)";
+    $("swStart").disabled = false; $("swStop").disabled = true; $("swDl").disabled = false;
+  };
+  $("swDl").onclick = () => download("draft-pack-timing-" + localDate(now()) + ".csv", Core.toCSV(Core.PILOT_COLUMNS, timing));
+  setInterval(() => { if (result) render(); }, 60000);  // send links follow the clock
+})();
+</script>
+</body>
+</html>

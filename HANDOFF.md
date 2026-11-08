@@ -2,6 +2,21 @@
 
 Updated 2026-10-26 afternoon by Claude Code (unattended session below). That session supersedes the Codex morning notes: the snapshot blocker is fixed and stages 3-4 and the dev comparison were run. Historical results remain below. Agents: update this file at the end of every session (see `AGENTS.md`).
 
+## Session 12 (2026-11-08, Claude Code, 4-hour time box from 17:10 CST): draft pack tool, job spec, held-out v4 (IN PROGRESS)
+
+### If interrupted (computer shut down)
+Each step is committed when it finishes. Steps and how to resume:
+1. Draft pack tool: DONE (`tool/draft-pack.html`, `tool/README.md`, `tool/SAMPLE-DATA.csv`, `tests/test_tool.py`).
+(later steps are added here as they start)
+
+### Decisions (with reasons)
+- **The draft pack does not run Aether.** The browser Aether demo loads Python (Pyodide) from a CDN, and this page must make no network calls; its Content-Security-Policy (`default-src 'none'`) blocks all network loads. So the rule checks are written directly in JavaScript, kept in one `CORE` block that `tests/test_tool.py` runs in Node (v26 on this machine) on made-up rows. `tool/README.md` says so plainly.
+- **Opt-out skipping cannot be turned off** in the page (the checkbox is locked on), and the daily limit is capped at 200, matching the job spec's limits.
+- **Unclear data is never guessed**: blank or unknown opt-out values, unreadable dates, malformed phone numbers or emails, and blank placeholder values make the row "not drafted" with the reason shown. Only US phone numbers are accepted.
+- **Send links follow the clock**: `sms:`/`mailto:` links appear only for approved drafts and only inside the owner's sending hours; drafts can be reviewed at any time.
+- The optional stopwatch writes rows with exactly the columns of `private/pilot-log.csv` (tested when that file exists) and never shows a time-saved estimate.
+- `docs/outreach/AGENT-TODAY.md`, `one-page-handout.md` and `pilot-agreement-template.md` now say what the tool does and does not do (the owner uses their own CSV on their own computer; the student never needs the list; the page never sends).
+
 ## Session 11 (2026-11-08, Claude Code): impact phase, outreach kit and local-only tracking (no GPU, no model work; nothing sent, nothing pushed)
 
 The model phase is finished (v0.2 final and published). The next phase is impact: real local businesses (local area) trying the business-workflow agent, and measuring what changes for real people. Nobody has been contacted.

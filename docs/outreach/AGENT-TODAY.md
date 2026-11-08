@@ -1,8 +1,19 @@
-# What the business-workflow agent can do today (2026-11-08)
+# What the business-workflow agent can do today (updated 2026-11-08, with the draft pack tool)
 
 Read this before talking to any business. Everything below was checked against the code and the result files on 2026-11-08. If something here stops being true, update this page before using the outreach kit.
 
-## The short version
+## New: the draft pack tool (`tool/draft-pack.html`)
+
+This is the part an owner can use for real today. It is one web page that runs entirely in the owner's browser, with no install and no internet connection. The owner loads their **own** customer list (a CSV export from their spreadsheet or booking app) on **their own computer**. The page prepares one draft per customer who is due (appointment reminder, follow-up, review request or invoice reminder). It applies the owner's rules: opted-out customers are always skipped, as is anyone contacted in the last N days. It only offers send links during the owner's sending hours, and it stops at a daily limit of at most 200. Rows with missing or malformed contact details, unclear opt-out values or unreadable dates are listed with the reason instead of being guessed. The owner approves or skips each draft and **sends the approved ones from their own phone or email** using a copy button or an `sms:`/`mailto:` link.
+
+- It never sends anything itself, never uploads anything, and keeps nothing after the tab is closed (its security policy blocks all network connections).
+- The student never needs to see the customer list: the owner runs it on their own machine.
+- It does **not** run Aether programs. The rule checks are plain JavaScript, tested in `tests/test_tool.py`.
+- Whether it saves time for a given owner is unknown until measured (`MEASURING-IMPACT.md`; the page has an optional stopwatch that writes a pilot-log row and never estimates time saved).
+
+How to try it: `tool/README.md`.
+
+## The Aether side: the short version
 
 Today the agent can take one repeated task a business owner describes in plain English and turn it into a short Aether program. The checker then verifies the program against the owner's rules, and it can be run against **made-up sample rows** so the owner sees, in plain English, exactly which messages it would draft and which changes it would make.
 
@@ -17,6 +28,7 @@ The only claim to make about safety: the checker verifies core rules C1-C8 for p
 | Checker (`python -m checker <file> --render`) | Parses an Aether program, rejects it if it breaks one of the core rules (for example, a customer message without the owner's approval, an unlisted column, a refund over the cap), and prints a plain-English description with a safety summary | 339 tests pass (2026-11-08); 88 of 88 rule-breaking mutants rejected (`eval/results/properties-2026-10-24.json`) |
 | Plain-English rendering | Shows the owner, step by step, what the program will do, plus every cap, the approval mode, the allowed sending hours and the exact columns it may read | Run on `data/examples/ProcessReturn.ae` on 2026-11-08 |
 | Interpreter + independent monitor | Runs a checked program against mock sheets, a mock outbox and a mock money ledger; a separate monitor compares what happened with what the owner approved | 25,000 generated cases, 0 violations (same result file); a dry run of `data/examples/AppointmentReminders.ae` on made-up rows finished with status `ok` and 0 monitor problems (2026-11-08) |
+| Draft pack tool (`tool/draft-pack.html`) | Offline drafts from the owner's own CSV, the owner's rules, approve or skip each, send from the owner's own apps | Tests in `tests/test_tool.py` (made-up rows only) |
 | Browser demo | Checker and interpreter in the browser, mock data only, no model | https://warnedorca.github.io/aether/ |
 | Model v0.2 (1.5B LoRA) | Drafts a program from an owner's English description | Correct on 18 of 72 brand-new held-out tasks (`eval/results/stage5/summary.json`). It is wrong most of the time, so every draft must be read and fixed by a person |
 | Local demo app (`demo/app.py`) | Same as the browser demo, plus a model tab | Does not start on this machine today: the `gradio` package is not installed (adding it is the owner's call) |
@@ -25,7 +37,7 @@ The 15 example procedures in `spec/SPEC.md` (section 10) show the kinds of tasks
 
 ## What it does not do yet
 
-- Connect to anything real: no Google Sheets, Square, Calendly, Gmail, SMS provider or bank. Real connectors are listed as future work in `spec/SPEC.md` (section 5, "What the checker does NOT guarantee").
+- Connect to anything real: no Google Sheets, Square, Calendly, Gmail, SMS provider or bank (the draft pack works from a CSV the owner exports, and the owner does the sending). Real connectors are listed as future work in `spec/SPEC.md` (section 5, "What the checker does NOT guarantee").
 - Send anything. Messages, refunds and orders are written to mock files.
 - Read replies from customers (out of scope for v1).
 - Write correct programs on its own. The model is a starting point; the student writes or fixes the program and the owner reads the rendering.
@@ -34,7 +46,7 @@ The 15 example procedures in `spec/SPEC.md` (section 10) show the kinds of tasks
 
 ## What a business would need to give
 
-For the first conversation and a dry run, **no customer data at all**:
+To use the draft pack, the owner needs only their own CSV export, on their own computer; nothing has to be given to the student. For the first conversation and an Aether dry run, **no customer data at all**:
 
 1. A description of one repeated task: what triggers it, what gets sent or changed, to whom.
 2. The column names of the sheet or app export they use (names only, not the rows).

@@ -1,0 +1,11 @@
+name,phone,email,appointment_date,opted_out,last_contacted,invoice,amount
+Fake Customer A,(214) 555-0101,fake.a@example.com,2026-12-02,no,,INV-TEST-1,$40.00
+Fake Customer B,(214) 555-0102,fake.b@example.com,2026-12-02,yes,,INV-TEST-2,$25.00
+Fake Customer C,555-01,fake.c@example.com,2026-12-02,no,,INV-TEST-3,$60.00
+Fake Customer D,(214) 555-0104,fake.d@example.com,2026-12-02,no,2026-11-28,INV-TEST-4,$15.00
+Fake Customer E,(214) 555-0105,fake.e@example.com,2026-12-05,no,,INV-TEST-5,$30.00
+Fake Customer F,,fake.f@example.com,2026-12-02,no,,INV-TEST-6,$45.00
+Fake Customer G,(214) 555-0107,fake.g@example.com,2026-12-02,maybe,,INV-TEST-7,$20.00
+Fake Customer H,(214) 555-0108,not-an-email,next week,no,,INV-TEST-8,$35.00
+Fake Customer I,214.555.0109,fake.i@example.com,12/2/2026,no,2026-10-01,INV-TEST-9,$50.00
+Fake Customer J,+1 214 555 0110,fake.j@example.com,2026-11-20,no,,INV-TEST-10,$80.00
