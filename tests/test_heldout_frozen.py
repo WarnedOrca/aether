@@ -27,3 +27,11 @@ def test_heldout3_files_unchanged():
     for name, digest in HELDOUT3_SHA256.items():
         data = Path("eval/heldout3", name).read_bytes()
         assert hashlib.sha256(data).hexdigest() == digest, name
+
+
+HELDOUT4_SHA256 = "343dc938652adcdc256befa1bb238e2ec3be76439b532a1f15beb8b4eb2a3f4b"
+
+
+def test_heldout4_unchanged():
+    data = Path("eval/heldout4/requests.jsonl").read_bytes()
+    assert hashlib.sha256(data).hexdigest() == HELDOUT4_SHA256
