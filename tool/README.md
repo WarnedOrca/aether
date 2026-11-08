@@ -16,6 +16,7 @@
 - Rules: always skips customers marked as opted out; skips anyone contacted in the last N days; only offers send links inside the owner's sending hours; stops at a daily limit (at most 200).
 - Never guesses: a blank or unclear opt-out value, an unreadable date, a missing or malformed phone number or email, or a blank value for any `{placeholder}` means the row is **not drafted**, and the review screen says why.
 - Lets the owner approve, skip or undo each draft. Approved drafts get a copy button and an `sms:` or `mailto:` link that opens the owner's own app with the message filled in; the owner presses send there.
+- Optional one-sentence box: "Fill in the form" reads a plain-English description (for example "Email clients about overdue invoices between 9:30 and 16:30, at most 35 a day") with keyword rules, **not an AI model**, and fills in the job, channel, days, hours and limit; anything not mentioned keeps the usual setting, and the owner checks every field. Requests to message opted-out customers, ignore sending hours, drop the daily limit, skip approval, or do another kind of job leave the form unchanged and say why. It is a port of `jobspec/baseline.py` (a test checks they agree).
 - Keeps an audit log of what happened (file loaded, drafts prepared, every skip reason, approvals, copies, links opened) that the owner can download as CSV.
 - Optional stopwatch: times one run of the task and downloads a CSV row with the same columns as `private/pilot-log.csv`. It never estimates time saved.
 
@@ -25,6 +26,7 @@
 - **It does not run Aether programs.** The browser demo of the Aether checker loads Python (Pyodide) from the internet, which this offline page must not do, so the rule checks here are written directly in JavaScript (tested in `tests/test_tool.py`). The matching checked Aether program for a job spec is produced separately by `jobspec/compile.py`.
 - It does not connect to a booking app, spreadsheet or phone, and does not read replies.
 - It only understands US phone numbers (10 digits, optionally starting with 1).
+- The one-sentence box only knows a fixed set of phrasings; unusual wording may be read wrongly or fall back to the usual settings, which is why the filled form must be checked.
 - It cannot tell whether a message is right for a customer; the owner reads each draft.
 
 The only claim made about the Aether side: programs the checker accepted caused 0 monitor violations on generated test data. Neither this page nor the model is called "safe".

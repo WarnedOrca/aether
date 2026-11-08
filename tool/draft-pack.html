@@ -43,6 +43,9 @@
 
 <div class="card">
   <h2>2. Message</h2>
+  <label>Optional: describe the job in one sentence <span class="hint">(for example "Text patients the day before their appointment, only 9am to 6pm, at most 40 a day")</span></label>
+  <input type="text" id="describe" placeholder="Describe the job"> <button id="fillForm">Fill in the form</button>
+  <div id="describeNote" class="hint"></div>
   <div class="row">
     <div><label>Job</label><select id="template"></select></div>
     <div><label>Send by</label><select id="channel"><option value="sms">Text message</option><option value="email">Email</option></select></div>
@@ -208,6 +211,85 @@ const Core = {
   PILOT_COLUMNS: ["date", "business_code", "task", "phase_before_or_after", "minutes_per_task", "tasks_per_week", "messages_late_or_missed_per_week", "owner_rating_1_to_5", "how_measured", "owner_ok_to_mention_business_yes_no_and_date", "notes"],
   pilotRow(date, biz, task, phase, minutes) { return [date, biz, task, phase, minutes.toFixed(1), "", "", "", "stopwatch in the draft pack tool (one run of the task)", "", ""]; },
 };
+// One sentence -> job spec. A port of jobspec/baseline.py (keyword rules, no model); tests check both give the same spec.
+Core.parseRequest = (function () {
+  const WORDNUM = { "a": 1, "an": 1, "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10, "couple of": 2, "few": 3 };
+  const UNIT = { day: 1, week: 7, fortnight: 14, month: 30 };
+  const DEF_DAYS = { appointment_reminder: 0, follow_up: 7, review_request: 30, invoice_nudge: 7 };
+  const OPT_OUT = /opted[- ]out|opted out|unsubscrib|do[- ]not[- ]contact|not to contact|asked us to stop|blocked|stop texting/;
+  const SKIP_REVIEW = /without me (checking|looking|approving)|(don't|do not|no) need (to )?(approve|to show)|need to approve|don't want to approve|no approval|skip (my |the )?(approval|review)|on their own|send themselves|automatically|make me approve|without (my )?approval/;
+  const NO_LIMIT = /no (daily )?limit|unlimited|no cap|as many|blast|whole list|entire customer list|as it takes/;
+  const ANY_TIME = /(ignore|forget)( the)?( usual)? sending hours|any time of day|around the clock|no quiet hours|night or day|day or night/;
+  const UNSUPPORTED = /\bcall\b|voicemail|instagram|facebook|\bpost\b|charge|card|reply to|answer|order|refund|calendar|book new|grades|scores|medical/;
+  const TIME = "(noon|midnight|\\d{1,2}(?::\\d{2})?\\s*(?:am|pm)?)";
+  const pad = n => String(n).padStart(2, "0");
+  function time(tok) {
+    tok = tok.trim().toLowerCase().replace(/\./g, "");
+    if (tok === "noon") return 720;
+    if (tok === "midnight") return 0;
+    const m = /^(\d{1,2})(?::(\d{2}))?\s*(am|pm)?$/.exec(tok);
+    if (!m) return null;
+    let h = +m[1]; const mi = +(m[2] || 0), ap = m[3];
+    if (ap === "pm" && h < 12) h += 12;
+    if (ap === "am" && h === 12) h = 0;
+    return h < 24 && mi < 60 ? h * 60 + mi : null;
+  }
+  const hhmm = v => pad(Math.floor(v / 60)) + ":" + pad(v % 60);
+  function windowOf(t) {
+    const m = new RegExp("(?:between|from) " + TIME + " (?:and|to|-) " + TIME).exec(t) || new RegExp("(?:no \\w+|nothing) before " + TIME + " or after " + TIME).exec(t);
+    if (!m) return null;
+    let a = time(m[1]), b = time(m[2]);
+    if (a === null || b === null) return null;
+    if (b <= a && !m[2].includes("am") && b < 720) b += 720;
+    return a < b ? [hhmm(a), hhmm(b)] : null;
+  }
+  function oddTime(t) {
+    const re = new RegExp("\\bat " + TIME + "( in the morning)?", "g"); let m;
+    while ((m = re.exec(t))) { const v = time(m[1]); if (v !== null && (m[2] || v < 420 || v >= 1260 || m[1] === "midnight")) return true; }
+    return false;
+  }
+  const num = s => { s = s.trim(); return /^\d+$/.test(s) ? +s : (WORDNUM[s] ?? null); };
+  function minDays(t) {
+    let m = /(?:last|past|within|in the last)\s+(?:the\s+)?(?:last\s+|past\s+)?(?:roughly the last\s+)?(\d+|a|an|one|two|three|four|five|six|couple of|few)?\s*(day|week|fortnight|month)s?/.exec(t);
+    if (!m) m = /once (?:every|per|a|each) (\d+|two|three)?\s*(day|week|fortnight|month)s?/.exec(t);
+    if (!m) return null;
+    const n = m[1] ? num(m[1]) : 1;
+    return n ? n * UNIT[m[2]] : null;
+  }
+  function limit(t) {
+    const pats = [/(?:max(?:imum)?(?: of)?|at most|up to|no more than|cap(?:ped)?(?: it)? at|limit(?: it to)?|keep it to|about|say) (\d+)/, /(\d+) (?:[a-z-]+ )?(?:a|per) day/, /(\d+) (?:max|tops|daily)/, /(\d+) per day/];
+    for (const p of pats) { const m = p.exec(t); if (m) return +m[1]; }
+    return null;
+  }
+  function template(t) {
+    if (/invoice|unpaid|overdue|past[- ]due|owe|haven't paid|payment|money/.test(t)) return "invoice_nudge";
+    if (/review/.test(t)) return "review_request";
+    if (/remind|reminder/.test(t)) return "appointment_reminder";
+    if (/follow[- ]?up|thank|check in|check on|how it went|how .* doing|after (each|a|their)/.test(t)) return "follow_up";
+    return null;
+  }
+  return function parseRequest(request) {
+    const t = " " + String(request).toLowerCase().replace(/’/g, "'") + " ";
+    if (OPT_OUT.test(t)) return { refuse: "contact_opted_out" };
+    if (NO_LIMIT.test(t)) return { refuse: "no_daily_limit" };
+    const big = limit(t);
+    if (big !== null && big > 200) return { refuse: "no_daily_limit" };
+    if (SKIP_REVIEW.test(t)) return { refuse: "skip_owner_review" };
+    if (ANY_TIME.test(t) || oddTime(t)) return { refuse: "ignore_sending_hours" };
+    const tpl = template(t);
+    if (tpl === null || (UNSUPPORTED.test(t) && !/remind|review|invoice|follow/.test(t))) return { refuse: "unsupported_job" };
+    const spec = { template: tpl, channel: TEMPLATES[tpl].channel, min_days_since_contact: DEF_DAYS[tpl], send_window: ["09:00", "20:00"], daily_limit: 50 };
+    const ch = /\b(e-?mail|text|sms)/.exec(t);
+    if (ch) spec.channel = ch[1].startsWith("e") ? "email" : "sms";
+    const d = minDays(t);
+    if (d !== null && d >= 0 && d <= 365) spec.min_days_since_contact = d;
+    const w = windowOf(t);
+    if (w) spec.send_window = w;
+    const n = limit(t);
+    if (n !== null && n >= 1 && n <= 200) spec.daily_limit = n;
+    return spec;
+  };
+})();
 // CORE-END
 </script>
 <script>
@@ -231,6 +313,23 @@ const Core = {
     $("extra").innerHTML = $("template").value === "review_request" ? '<label>Review link <span class="hint">(used as {review_link})</span></label><input type="text" id="reviewLink" placeholder="the link to your review page">' : "";
   }
   $("template").onchange = applyTemplate; applyTemplate();
+
+  const REFUSAL_NOTE = {
+    contact_opted_out: "This page never drafts messages to customers who opted out. That rule can't be turned off, so the form was not changed.",
+    ignore_sending_hours: "Sending hours can't be ignored; the send links only appear inside the hours you set. The form was not changed.",
+    no_daily_limit: "There is always a daily limit (at most 200). The form was not changed.",
+    skip_owner_review: "Every message needs your approval and is sent by you from your own app. The form was not changed.",
+    unsupported_job: "This page only handles appointment reminders, follow-ups, review requests and invoice reminders. The form was not changed.",
+  };
+  $("fillForm").onclick = () => {
+    const spec = Core.parseRequest($("describe").value);
+    if (spec.refuse) { $("describeNote").textContent = REFUSAL_NOTE[spec.refuse]; log("description not used", "", spec.refuse); return; }
+    $("template").value = spec.template; applyTemplate();
+    $("channel").value = spec.channel; $("minDays").value = spec.min_days_since_contact;
+    $("winStart").value = spec.send_window[0]; $("winEnd").value = spec.send_window[1]; $("limit").value = spec.daily_limit;
+    $("describeNote").textContent = "Filled in: " + TEMPLATES[spec.template].label + ", by " + (spec.channel === "sms" ? "text" : "email") + ", skip anyone contacted in the last " + spec.min_days_since_contact + " days, " + spec.send_window.join(" to ") + ", at most " + spec.daily_limit + " a day. Anything you didn't mention uses the usual setting. Check every field below before preparing drafts.";
+    log("form filled from description", "", JSON.stringify(spec));
+  };
 
   $("file").onchange = async e => {
     const f = e.target.files[0]; if (!f) return;

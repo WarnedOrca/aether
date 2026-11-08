@@ -117,3 +117,16 @@ def test_templates_in_page_match_the_job_spec_templates():
         pytest.skip("job spec templates not created yet")
     embedded = json.loads(PAGE.split("/*TEMPLATES-START*/", 1)[1].split("/*TEMPLATES-END*/", 1)[0])
     assert embedded == json.loads(spec.read_text(encoding="utf-8"))
+
+
+def test_page_parser_matches_python_baseline():
+    """The page's one-sentence parser is a port of jobspec/baseline.py; both give the same spec on the dev split
+    (never the held-out set) and on extra edge cases."""
+    from jobspec.baseline import parse
+
+    texts = [json.loads(line)["request"] for line in (ROOT / "eval/jobspec-dev/requests.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]
+    texts += ["", "hello", "Send 900 reminders a day", "Remind people between 9 and 5", "at noon remind", "review between 7pm and 6pm",
+              "Follow up, skip anyone from the last fortnight", "invoices once every 3 weeks by e-mail", "Remind at 3 in the morning"]
+    got = run_js("console.log(JSON.stringify(" + json.dumps(texts) + ".map(Core.parseRequest)))")
+    for text, js in zip(texts, got):
+        assert js == parse(text), text
