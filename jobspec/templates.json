@@ -1,0 +1,34 @@
+{
+  "appointment_reminder": {
+    "label": "Appointment reminder",
+    "channel": "sms",
+    "subject": "Appointment reminder",
+    "text": "Hi {name}, this is a reminder from {business} about your appointment on {date}. Reply to this message if you need to change it.",
+    "date_mode": "ahead",
+    "date_days": 1
+  },
+  "follow_up": {
+    "label": "Follow-up after a visit",
+    "channel": "sms",
+    "subject": "Thanks for your visit",
+    "text": "Hi {name}, thanks for visiting {business} on {date}. If anything wasn't right, just reply and let us know.",
+    "date_mode": "ago",
+    "date_days": 1
+  },
+  "review_request": {
+    "label": "Review request",
+    "channel": "sms",
+    "subject": "How did we do?",
+    "text": "Hi {name}, thanks for choosing {business}. If you have a minute, we would appreciate a review: {review_link}",
+    "date_mode": "ago",
+    "date_days": 2
+  },
+  "invoice_nudge": {
+    "label": "Invoice reminder",
+    "channel": "email",
+    "subject": "Invoice reminder",
+    "text": "Hi {name}, a friendly reminder that invoice {invoice} for {amount} was due on {date}. Please reply if you have any questions.",
+    "date_mode": "overdue",
+    "date_days": 1
+  }
+}

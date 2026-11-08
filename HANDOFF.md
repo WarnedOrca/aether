@@ -7,6 +7,7 @@ Updated 2026-10-26 afternoon by Claude Code (unattended session below). That ses
 ### If interrupted (computer shut down)
 Each step is committed when it finishes. Steps and how to resume:
 1. Draft pack tool: DONE (`tool/draft-pack.html`, `tool/README.md`, `tool/SAMPLE-DATA.csv`, `tests/test_tool.py`).
+2. Job spec + compiler: DONE (`jobspec/`, `docs/jobspec/DESIGN.md`, `tests/test_jobspec.py`).
 (later steps are added here as they start)
 
 ### Decisions (with reasons)
