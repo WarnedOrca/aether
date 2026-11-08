@@ -1,0 +1,11 @@
+{
+ "committed_before_run": "2026-11-08",
+ "set": "eval/heldout4/requests.jsonl",
+ "set_sha256": "343dc938652adcdc256befa1bb238e2ec3be76439b532a1f15beb8b4eb2a3f4b",
+ "conditions": ["regex_baseline_without_validation", "regex_baseline_with_validation"],
+ "not_run": {"candidate_model": "gate cleared on dev (59/60), so no model was trained (docs/jobspec/DESIGN.md, Gate result)", "mcnemar": "needs a candidate model; not run"},
+ "baseline_sha256": "9f9871f3580aa9a2ffe660bf8d3c45eba8dc07f19972b6892ca096b2076ada1b",
+ "scorer_sha256": "2e3af2ea3e1fda1af977296621cc78fb70632a177e7564d76cbb63307db231f0",
+ "commands": ["python -m eval.run_jobspec_baseline eval/heldout4/requests.jsonl eval/results/jobspec/heldout4_regex_preds.jsonl", "python -m eval.jobspec_score eval/heldout4/requests.jsonl eval/results/jobspec/heldout4_regex_preds.jsonl --out eval/results/jobspec/heldout4_regex.json"],
+ "rule": "run exactly once; nothing changes after the results are seen"
+}
