@@ -2,7 +2,7 @@
 
 Updated 2026-10-26 afternoon by Claude Code (unattended session below). That session supersedes the Codex morning notes: the snapshot blocker is fixed and stages 3-4 and the dev comparison were run. Historical results remain below. Agents: update this file at the end of every session (see `AGENTS.md`).
 
-## Session 13 (2026-11-08, Claude Code, 3.5-hour time box from 18:08 CST): AI setup helper, AI message writer, pilot measurement (IN PROGRESS)
+## Session 13 (2026-11-08, Claude Code, 3.5-hour time box from 18:08 CST): AI setup helper, AI message writer, pilot measurement (DONE ~18:30; nothing pushed; GPU idle)
 
 ### If interrupted (computer shut down)
 Each step is committed when it finishes. Resume commands (PowerShell or Git Bash, from the repo root):
@@ -12,7 +12,13 @@ Each step is committed when it finishes. Resume commands (PowerShell or Git Bash
 4. Author-written AI dev check: DONE (v1 and v2, `eval/results/jobspec-ai-dev/README.md`). Rerun: `HF_HUB_OFFLINE=1 .venv/Scripts/python.exe -u -m eval.run_jobspec_ai_dev --prompt-version interpret-v2 --out eval/results/jobspec-ai-dev/raw-interpret-v2.jsonl` (skips finished items), then `.venv/Scripts/python.exe -m eval.score_jobspec_ai_dev --raw <that file>`.
 5. Pilot measurement: DONE (`scripts/pilot_report.py`, `scripts/sample/` made-up files, `tests/test_pilot_report.py`, new pilot-log columns in the page and `private/pilot-log.csv`, `MEASURING-IMPACT.md`, `interview-guide.md`).
 6. Onboarding: DONE (`docs/outreach/ONBOARDING.md`; pilot agreement clause 8 and length updated; the page's audit-log hint corrected).
-(later steps are added here as they start)
+7. README + wrap-up: DONE. README has a new "Draft pack" section (the earlier proposal had never been applied, so the section was written fresh with the finished-design wording; every number checked against `eval/results/jobspec/` and `eval/results/jobspec-ai-dev/`), plus layout rows for `tool/`, `jobspec/`, `scripts/`. SUMMARY.md has a plain-language Session 13 section at the top.
+Nothing to resume. Next: the owner reviews the README section and starts a first pilot with `docs/outreach/ONBOARDING.md`.
+
+### Needs the owner
+- Review the README "Draft pack" section; nothing is pushed.
+- A parent or guardian approves the target list and the updated pilot agreement (8 weeks, check-ins, revenue confirmation in writing) before any outreach.
+- No real pilot data exists yet; every number in `scripts/sample/` is made up.
 
 ### Decisions (with reasons)
 - **One validation path for both interpreters.** `jobspec/validate.check_spec` reuses the held-out v4 scorer's `_compiles_clean` (schema, compiler, Aether checker, monitored dry run on made-up rows) by importing it rather than copying it. The scorer file stays byte-identical to the hash recorded in `eval/heldout4/conditions.json`.

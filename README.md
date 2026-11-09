@@ -15,6 +15,14 @@ An original programming language for **verifiable business procedures**, plus a 
 - Demo (checker and interpreter in your browser; the model is not hosted): https://warnedorca.github.io/aether/
 - Local demo with the model tab: `uv run --group demo python demo/app.py`
 
+## Draft pack: for a small business, no install
+
+`tool/draft-pack.html` is one offline page. Open it in a browser and load your customer list as a CSV, or `tool/SAMPLE-DATA.csv` (made-up people). It drafts appointment reminders, follow-ups, review requests or invoice reminders. It always skips customers marked as opted out, skips duplicate contacts, keeps to your sending hours and a daily limit (at most 200), and lists every row it did not draft and why. You approve each message and send it from your own phone or email app. **The page never sends anything**, never uploads your list, and does not connect to booking apps. It accepts US phone numbers only.
+
+**How the settings get filled in.** A local language model (Qwen2.5-7B-Instruct, open-weight, run offline by a helper on their own computer, never by the owner) can help with setup. It turns the owner's one-sentence description into the page's settings (`jobspec/make_settings.py`) and drafts three message wordings (`jobspec/writer.py`). Every suggestion is checked by script: settings go through the compiler, the Aether checker and a dry run, and wordings are checked for required placeholders, invented numbers, prices, links and claims. Keyword rules are the fallback whenever the model is unavailable or its answer fails the checks. The page shows every suggestion and who made it, changes nothing until the owner presses Use, and logs whether each suggested field was kept, edited or rejected.
+
+**Accuracy, honestly.** The model's accuracy on varied wording has **not** been independently tested. On 64 development sentences written by the same AI assistant that wrote the prompts, it was right on 44/64 with the first prompt and 61/64 after one prompt revision made from those same sentences. The keyword rules got 50/64. These are development numbers, not a test (`eval/results/jobspec-ai-dev/`). The keyword rules were right on 59/60 dev and 80/80 held-out requests (`eval/results/jobspec/`), but those sets were also written by the same AI assistant that wrote the rules, so ordinary wording outside them still trips them: "Text patients the day before their appointment" is refused because it never says "remind". The owner reviews every setting and message either way. Separately, `jobspec/compile.py` turns the settings into an Aether program; every program the checker accepted in these evaluations caused 0 monitor violations on generated test data. The page itself does not run the checker.
+
 ## Results
 
 "Correct" = passes the checker AND has the same effects as the reference program on generated test data (scorer field `safe_and_correct`; it is not a safety rating). Single runs, greedy decoding. Details: [docs/RESULTS.md](docs/RESULTS.md); how to reproduce: [docs/REPRODUCE.md](docs/REPRODUCE.md).
@@ -93,6 +101,9 @@ uv run python eval/run_properties.py --seeds 100  # property tests at scale -> e
 | `eval/` | Benchmark and scoring scripts |
 | `training/` | Fine-tuning scripts (free GPUs only) |
 | `docs/` | Plans, notes, write-ups |
+| `tool/` | Offline draft pack page for business owners |
+| `jobspec/` | Job spec format, compiler to Aether, keyword rules, local-model setup helper and message writer |
+| `scripts/` | Pilot report (`pilot_report.py`) and made-up sample files |
 
 ## Constraints
 

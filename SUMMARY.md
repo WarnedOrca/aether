@@ -1,3 +1,61 @@
+# Aether session 13: 2026-11-08, AI help for the draft pack, and pilot measurement
+
+**Outcome: the draft pack is now an AI-assisted tool that can be checked step by step, and pilots can produce numbers that hold up.** A local open-weight model (Qwen2.5-7B-Instruct, run offline on your computer) turns an owner's one-sentence description into settings and drafts message wordings. Scripts check every suggestion. Keyword rules take over whenever the model fails. The owner sees, edits and approves everything, and the page still sends nothing. A pilot report turns the page's downloads and your pilot log into per-business numbers. There are **no real pilot numbers yet**, and the model has **not** been tested on independent wording.
+
+## What exists now
+| Piece | What it does | Where |
+|---|---|---|
+| Draft pack page | Drafts messages from the owner's own CSV, skips opted-out and duplicate contacts, keeps sending hours and a daily limit, lists every skipped row and why. The owner approves each message, sends it from their own app and presses "Mark sent". | `tool/draft-pack.html` |
+| AI setup helper | One sentence → a settings file. Local model first, then keyword rules; the file says which one made it. Refuses jobs it must not do (opted-out customers, ignoring hours, no limit, skipping approval, other kinds of job). | `jobspec/make_settings.py`, `jobspec/interpret.py` |
+| AI message writer | Business type + tone (friendly, formal, brief) → 3 wordings, each checked: required placeholders, no numbers, prices, offers, links, or medical, legal or guarantee claims, at most 320 characters. Rejected ones are regenerated. | `jobspec/writer.py` |
+| Import buttons | "Import settings file" and "Import message suggestions" re-check the file, show every suggestion and who made it, and change nothing until the owner presses Use. | the page |
+| Accept/edit log | The audit log records, per AI-suggested field, kept / edited / rejected (names and outcomes only). It now holds no customer data at all (a fix to last session's page). | the page |
+| Pilot report | Per business and in total: drafted / approved / marked sent; skips by reason; timed minutes before → after and percent change; hours saved per month; AI kept/edited/rejected rates; owner-reported no-shows, rebookings, recommendation, referrals; owner-reported revenue printed separately; businesses with at least 4 weeks of data. | `scripts/pilot_report.py` |
+| Guides | First session, week-4 and week-8 check-ins, revenue tracking, and rules for classmates who help (they never see customer data). | `docs/outreach/ONBOARDING.md`, `MEASURING-IMPACT.md`, `interview-guide.md`, `pilot-agreement-template.md` |
+
+## How to try each piece (sample files only)
+1. **Page:** open `tool/draft-pack.html`, load `tool/SAMPLE-DATA.csv`, set Today's date to 2026-12-01, and press Prepare drafts. Expect 2 drafts and 8 rows not drafted, each with a reason.
+2. **AI setup (needs the GPU, about 1 minute):**
+   ```
+   .venv/Scripts/python.exe -m jobspec.make_settings "Remind customers by text the day before their appointment, from 9am to 6pm, at most 40 a day" --out settings.json
+   ```
+   Add `--no-model` to use only the keyword rules (no GPU). Then on the page press **Import settings file**, check the table, and press Use.
+3. **AI wording (GPU, about 1 minute):**
+   ```
+   .venv/Scripts/python.exe -m jobspec.writer --business-type "bike repair shop" --tone friendly --job review_request --out templates.json
+   ```
+   Then **Import message suggestions** on the page, pick one or none, and download the audit log to see the kept/edited/rejected rows.
+4. **Pilot report on made-up files:**
+   ```
+   .venv/Scripts/python.exe scripts/pilot_report.py --pilot-log scripts/sample/pilot-log.csv --logs scripts/sample/logs
+   ```
+   FAKE-A and FAKE-B are invented. The output shows the format; none of its numbers describe anyone.
+
+## Development results (author-written sentences, not an independent test)
+64 sentences across 20 business types, all written by Claude (`eval/jobspec-ai-dev/`, results in `eval/results/jobspec-ai-dev/`). Checker validation made no difference to any count.
+
+| | Keyword rules | Local model | Model + fallback (what ships) | Writer wordings passing checks |
+|---|---|---|---|---|
+| First prompts (v1) | 50/64 | 44/64 | 45/64 | 32 of 69 attempts |
+| After one revision (v2) | 50/64 | **61/64** | **61/64** | 33 of 83 attempts (not better; v1 kept) |
+
+- With the first prompt the model was **worse** than the keyword rules. Its mistakes were systematic, such as treating "the day before" as the contact rule. One prompt revision, made from those same 64 sentences, fixed them. So 61/64 is optimistic: it shows the prompt fits wording I wrote, not that it works on real owners' wording.
+- The message writer passed its checks on fewer than half of its attempts. It still reached 3 wordings in 10 of 12 cases. When it fails, no file is written and the owner keeps the built-in wording.
+- Held-out v4 was not used (it was spent once on the keyword rules in Session 12: 80/80).
+
+## What is still missing
+- **Real pilots.** No business has used the tool, so there are no real hours saved, percent change, sent counts or revenue. Every number in `scripts/sample/` is made up.
+- **An independent test of the AI on wording nobody here wrote.** Real owners' descriptions, written down during an actual setup with their consent, are the only honest source. Per your instruction, nothing was built to collect sentences from friends or family.
+- The page cannot see whether a message was really sent; "sent" means the owner pressed Mark sent.
+
+## What you need to do next
+1. **Read the new README section** "Draft pack: for a small business, no install" and change any wording you would not defend aloud. It was written into the README this time, as Step 7 asked. Nothing is pushed.
+2. **Try the four commands above** on your computer, then open the page and import the files they write.
+3. **Line up a first pilot** using `docs/outreach/ONBOARDING.md`: a parent or guardian approves the target list and the agreement (now 8 weeks with week-4 and week-8 check-ins), time the old way before showing the tool, and set up revenue tracking with the owner.
+4. **After each session**, save the owner's downloads in `private/pilot-logs/<code>/` and run `scripts/pilot_report.py --pilot-log private/pilot-log.csv --logs private/pilot-logs`. Use a revenue figure only if the owner confirmed it in writing, and only as "owners report …".
+
+---
+
 # Aether session 12: 2026-11-08, a draft pack tool a business owner can use, and the job spec
 
 **Outcome: for this job, a model is not needed.** The plan was to shrink the model's task from writing a whole program to filling in a small JSON "job spec". A simple keyword/regex parser then cleared the bar declared in advance on the dev split (59/60 correct; every trap and unsupported request handled). By that pre-registered rule, no training data was generated, nothing was fine-tuned and the GPU was not used. What ships is a non-model tool: an offline page that drafts messages from the owner's own spreadsheet, with a one-sentence box that fills in the form.
@@ -29,10 +87,10 @@
 ## What a business owner would actually experience
 They export their customer list as a CSV and open one page on their own computer. Optionally they type one sentence describing the job, then press one button. They get a list of ready-to-send drafts plus a list of the customers it skipped and why. They read each draft, approve or skip it, and tap a link that opens the message in their own Messages or email app, where they press send. Nothing is uploaded and nothing is sent automatically. It does **not** connect to their booking app, read replies, or send on a schedule; the owner has to open the page each time. Whether this actually saves them time is unmeasured. The stopwatch exists so a pilot can measure it honestly.
 
-## Proposed README wording (for your review; README and public docs were not edited)
-> **Try the draft pack (no install, works offline).** Open `tool/draft-pack.html` and load your own customer CSV (or `tool/SAMPLE-DATA.csv`, made-up data). It drafts appointment reminders, follow-ups, review requests or invoice reminders; it always skips customers who opted out, respects your sending hours and a daily limit, and lists every row it skipped and why. You approve each message and send it from your own phone or email; the page never sends anything and never uploads your list. For this narrow job a keyword parser fills in the settings from one sentence; on our own evaluation sets it was correct on 59/60 dev and 80/80 held-out requests, but those sets were written by the same author as the parser, so real-world wording will do worse. Programs the checker accepted caused 0 monitor violations on generated test data.
+## Proposed README wording
+Superseded in Session 13: the README now has a "Draft pack" section describing the finished design (see the Session 13 summary above).
 
-## What I need from you
+## What I needed from you (Session 12; see Session 13 above for the current list)
 1. **Try the tool yourself** on the sample file (steps above), then tell me anything confusing.
 2. **Decide on the README wording above** (accept, edit, or leave the README as it is). Nothing has been pushed.
 3. **For a real test, real owner sentences.** With an owner's permission during a pilot, write down how they describe the job in their own words and keep it in `private/`. Do not invent any. That is the only way to know whether the one-sentence box helps real people.
