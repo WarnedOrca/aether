@@ -94,7 +94,9 @@ Refuse with R = one of {list(REFUSALS)}:
 - unsupported_job: it is not one of the four jobs (calls, social posts, payments, bookings, replies, ...)"""
 
 
-def build_messages(sentence: str) -> list[dict]:
+def build_messages(sentence: str, version: str = PROMPT_VERSION) -> list[dict]:
+    if version != PROMPT_VERSION:
+        raise ValueError(f"unknown prompt version {version}")
     msgs = [{"role": "system", "content": system_prompt()}]
     for s in EXAMPLE_SPECS:
         msgs += [{"role": "user", "content": _script_sentence(s)}, {"role": "assistant", "content": json.dumps(s)}]
