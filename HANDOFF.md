@@ -11,6 +11,7 @@ Each step is committed when it finishes. Resume commands (PowerShell or Git Bash
 3. AI accept/edit log: DONE (audit rows `AI suggestion` with `Core.aiAuditDetail`; recorded when drafts are prepared or the audit log is downloaded).
 4. Author-written AI dev check: v1 DONE and scored (`eval/results/jobspec-ai-dev/summary-interpret-v1.json`); v2 prompts running. Resume/finish: `HF_HUB_OFFLINE=1 .venv/Scripts/python.exe -u -m eval.run_jobspec_ai_dev --prompt-version interpret-v2 --out eval/results/jobspec-ai-dev/raw-interpret-v2.jsonl` (skips finished items), then `.venv/Scripts/python.exe -m eval.score_jobspec_ai_dev --raw eval/results/jobspec-ai-dev/raw-interpret-v2.jsonl`.
 5. Pilot measurement: DONE (`scripts/pilot_report.py`, `scripts/sample/` made-up files, `tests/test_pilot_report.py`, new pilot-log columns in the page and `private/pilot-log.csv`, `MEASURING-IMPACT.md`, `interview-guide.md`).
+6. Onboarding: DONE (`docs/outreach/ONBOARDING.md`; pilot agreement clause 8 and length updated; the page's audit-log hint corrected).
 (later steps are added here as they start)
 
 ### Decisions (with reasons)

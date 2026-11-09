@@ -25,10 +25,10 @@ This is a template. A parent or guardian must read and approve it before it is o
 
 7. **No guarantees.** This is a student project. The tool can make mistakes, and there is no promise that it will save time or work for this task. The Business reviews everything before it is used and is responsible for what it approves.
 
-8. **Measuring.** With the Business's permission, the Student may write down how long the task took before and during the pilot, how often it happens, and how many messages were late or missed. The Business decides whether its name may be mentioned in any write-up (school applications, a project report). Default: **not mentioned**.
+8. **Measuring.** With the Business's permission, the Student may write down how long the task took before and during the pilot (timed with a stopwatch where possible), how often it happens, and how many messages were late or missed; receive the page's audit log downloads, which hold counts, row numbers, reason codes and settings but no customer details; and write down the Business's own answers about no-shows, rebookings and, if the Business chooses to track it, revenue it believes came from the messages. A revenue figure is only ever described as "the owner reports", and only if the Business confirms it in writing. The Business decides whether its name may be mentioned in any write-up (school applications, a project report). Default: **not mentioned**.
    - Name may be mentioned: ☐ yes ☐ no
 
-9. **Length.** About [4] weeks from [start date], unless either side stops earlier.
+9. **Length.** About [8] weeks from [start date], with check-ins at about week 4 and week 8, unless either side stops earlier.
 
 | | Name | Signature | Date |
 |---|---|---|---|
