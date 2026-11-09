@@ -8,7 +8,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from pilot_report import report  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
-REP = report(ROOT / "scripts/sample/pilot-log.csv", ROOT / "scripts/sample/logs")
+REP = report(ROOT / "scripts/sample/pilot-log.csv", ROOT / "scripts/sample/pilot-logs")
 
 
 def test_counts_and_reasons():
@@ -46,7 +46,7 @@ def test_ai_rates():
 
 def test_cli_prints_labels_and_no_data(tmp_path):
     out = subprocess.run([sys.executable, str(ROOT / "scripts/pilot_report.py"), "--pilot-log", str(ROOT / "scripts/sample/pilot-log.csv"),
-                          "--logs", str(ROOT / "scripts/sample/logs")], capture_output=True, text=True, check=True).stdout
+                          "--logs", str(ROOT / "scripts/sample/pilot-logs")], capture_output=True, text=True, check=True).stdout
     assert "OWNER-REPORTED, NOT MEASURED BY THE TOOL" in out and "NOT confirmed in writing: do not use anywhere" in out
     assert "owners report $270 over 4 weeks" in out and "no data" in out
     empty = subprocess.run([sys.executable, str(ROOT / "scripts/pilot_report.py"), "--pilot-log", str(tmp_path / "none.csv"),

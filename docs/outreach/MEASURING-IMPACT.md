@@ -46,7 +46,7 @@ Save the owner's downloads from the draft pack page (the audit log and the stopw
 .venv/Scripts/python.exe scripts/pilot_report.py --pilot-log private/pilot-log.csv --logs private/pilot-logs
 ```
 
-It prints, per business and in total: messages drafted, approved and marked sent by the owner; rows skipped by reason; timed minutes per batch before and after, and the percent change; hours saved per month; how often AI suggestions were kept, edited or rejected; owner-reported no-shows and rebookings; and owner-reported revenue, printed separately. It also prints how many businesses have at least 4 weeks of data. Anything missing prints as "no data". Try it on the made-up files first: `--pilot-log scripts/sample/pilot-log.csv --logs scripts/sample/logs`.
+It prints, per business and in total: messages drafted, approved and marked sent by the owner; rows skipped by reason; timed minutes per batch before and after, and the percent change; hours saved per month; how often AI suggestions were kept, edited or rejected; owner-reported no-shows and rebookings; and owner-reported revenue, printed separately. It also prints how many businesses have at least 4 weeks of data. Anything missing prints as "no data". Try it on the made-up files first: `--pilot-log scripts/sample/pilot-log.csv --logs scripts/sample/pilot-logs`.
 
 ## Definitions (use these words only in these meanings)
 

@@ -1,0 +1,8 @@
+time,event,csv_row,detail
+2026-02-02T16:00:00.000Z,file loaded,,"5 rows, columns: name | phone | appt | opted_out"
+2026-02-02T16:00:30.000Z,drafts prepared,,"2 drafts, 1 not drafted; rules: opted-out skipped, min days 7, hours 09:00-20:00, limit 50"
+2026-02-02T16:00:30.000Z,not drafted,4,contacted_recently
+2026-02-02T16:01:00.000Z,approved,2,
+2026-02-02T16:01:05.000Z,approved,3,
+2026-02-02T16:02:00.000Z,marked sent by owner,2,
+2026-02-02T16:02:10.000Z,marked sent by owner,3,

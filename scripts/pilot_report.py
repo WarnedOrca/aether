@@ -1,7 +1,7 @@
 """Pilot report: per business and in total, using only what is in the files.
 
     .venv/Scripts/python.exe scripts/pilot_report.py --pilot-log private/pilot-log.csv --logs private/pilot-logs
-    .venv/Scripts/python.exe scripts/pilot_report.py --pilot-log scripts/sample/pilot-log.csv --logs scripts/sample/logs   # made-up sample
+    .venv/Scripts/python.exe scripts/pilot_report.py --pilot-log scripts/sample/pilot-log.csv --logs scripts/sample/pilot-logs   # made-up sample
 
 --logs holds one folder per business code with the page's downloads:
     <logs>/<CODE>/draft-pack-audit-*.csv     (audit log: what was drafted, approved, marked sent, skipped and why)

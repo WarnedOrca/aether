@@ -1,0 +1,21 @@
+time,event,csv_row,detail
+2026-01-12T15:00:01.000Z,file loaded,,"7 rows, columns: name | phone | appt | opted_out"
+2026-01-12T15:00:05.000Z,settings file applied,,id=1; source=local_model:Qwen/Qwen2.5-7B-Instruct
+2026-01-12T15:01:00.000Z,AI suggestion,,kind=settings; id=1; field=template; outcome=accepted_unchanged; source=local_model:Qwen/Qwen2.5-7B-Instruct
+2026-01-12T15:01:00.000Z,AI suggestion,,kind=settings; id=1; field=channel; outcome=accepted_unchanged; source=local_model:Qwen/Qwen2.5-7B-Instruct
+2026-01-12T15:01:00.000Z,AI suggestion,,kind=settings; id=1; field=daily_limit; outcome=edited; source=local_model:Qwen/Qwen2.5-7B-Instruct
+2026-01-12T15:01:00.000Z,AI suggestion,,kind=template; id=2; field=text; outcome=rejected; source=local_model:Qwen/Qwen2.5-7B-Instruct
+2026-01-12T15:01:00.000Z,AI suggestion,,kind=template; id=3; field=text; outcome=edited; source=local_model:Qwen/Qwen2.5-7B-Instruct
+2026-01-12T15:01:01.000Z,drafts prepared,,"3 drafts, 4 not drafted; rules: opted-out skipped, min days 0, hours 09:00-20:00, limit 50"
+2026-01-12T15:01:01.000Z,not drafted,3,opted_out
+2026-01-12T15:01:01.000Z,not drafted,4,bad_contact
+2026-01-12T15:01:01.000Z,not drafted,6,duplicate_contact
+2026-01-12T15:01:01.000Z,not drafted,7,not_due
+2026-01-12T15:02:00.000Z,approved,2,
+2026-01-12T15:02:10.000Z,approved,5,
+2026-01-12T15:02:20.000Z,approved,8,
+2026-01-12T15:02:25.000Z,decision undone,8,approved
+2026-01-12T15:02:30.000Z,skipped by owner,8,
+2026-01-12T15:02:31.000Z,held: outside sending hours,2,
+2026-01-12T15:03:00.000Z,opened in owner's app,5,
+2026-01-12T15:03:20.000Z,marked sent by owner,5,

@@ -27,7 +27,7 @@
    Then **Import message suggestions** on the page, pick one or none, and download the audit log to see the kept/edited/rejected rows.
 4. **Pilot report on made-up files:**
    ```
-   .venv/Scripts/python.exe scripts/pilot_report.py --pilot-log scripts/sample/pilot-log.csv --logs scripts/sample/logs
+   .venv/Scripts/python.exe scripts/pilot_report.py --pilot-log scripts/sample/pilot-log.csv --logs scripts/sample/pilot-logs
    ```
    FAKE-A and FAKE-B are invented. The output shows the format; none of its numbers describe anyone.
 

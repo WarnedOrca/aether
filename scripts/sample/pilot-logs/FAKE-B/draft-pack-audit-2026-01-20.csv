@@ -1,0 +1,7 @@
+time,event,csv_row,detail
+2026-01-20T18:00:00.000Z,file loaded,,"4 rows, columns: name | email | due | opted_out"
+2026-01-20T18:00:30.000Z,drafts prepared,,"1 drafts, 3 not drafted; rules: opted-out skipped, min days 7, hours 09:00-17:00, limit 20"
+2026-01-20T18:00:30.000Z,not drafted,2,opted_out
+2026-01-20T18:00:30.000Z,not drafted,3,missing_contact
+2026-01-20T18:00:30.000Z,not drafted,5,unclear_opt_out
+2026-01-20T18:01:00.000Z,approved,4,
