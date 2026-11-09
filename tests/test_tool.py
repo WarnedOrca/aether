@@ -141,3 +141,33 @@ def test_ai_audit_detail_has_no_free_text():
     assert got == ["kind=settings; id=1; field=daily_limit; outcome=edited; source=local_model:Qwen/Qwen2.5-7B-Instruct",
                    "kind=template; id=2; field=other; outcome=other; source=keywordDROPxab",
                    "kind=other; id=0; field=text; outcome=rejected; source=unknown"]
+
+
+def test_duplicate_contact_is_not_drafted_twice():
+    csv = ("name,phone,email,appointment_date,opted_out,last_contacted\n"
+           "Fake A,2145550100,a@example.com,2026-12-02,no,\nFake B,(214) 555-0100,b@example.com,2026-12-02,no,\n")
+    got = run_js(f"const d = Core.parseCSV({json.dumps(csv)}); const cfg = {json.dumps(dict(CFG, text='Hi {name}'))};"
+                 "console.log(JSON.stringify(Core.build(d.rows, cfg, '2026-12-01')))")
+    assert [d["name"] for d in got["drafts"]] == ["Fake A"]
+    assert got["skipped"] == [{"row": 3, "name": "Fake B", "reason": "duplicate: same phone number as row 2", "code": "duplicate_contact"}]
+
+
+def test_reason_codes_never_quote_cells():
+    reasons = ["opted out", 'unclear opt-out value "maybe" (fix the sheet; not guessed)', "date is blank", 'can\'t read date "next week"',
+               "not due today (date 2026-12-05)", 'can\'t read last-contacted date "x"', "contacted on 2026-11-28, less than 7 days ago",
+               'phone number looks wrong ("555-01")', "no phone number", "duplicate: same phone number as row 2",
+               "missing value for {invoice}", "over today's limit of 2", "something new"]
+    got = run_js("console.log(JSON.stringify(" + json.dumps(reasons) + ".map(Core.reasonCode)))")
+    assert got == ["opted_out", "unclear_opt_out", "blank_date", "unreadable_date", "not_due", "unreadable_last_contacted",
+                   "contacted_recently", "bad_contact", "missing_contact", "duplicate_contact", "missing_value",
+                   "over_daily_limit", "other"]
+
+
+def test_audit_log_calls_carry_no_contact_details():
+    """Every log(...) call in the page script passes either a fixed string, a count, a code or a row number:
+    never d.to, a name, a reason text or message text."""
+    page_script = PAGE.split("// CORE-END", 1)[1]
+    calls = re.findall(r"log\(([^;]*?)\)\s*[;)}]", page_script)
+    assert calls, "no log calls found"
+    for c in calls:
+        assert not re.search(r"\.to\b|\.name\b|\.reason\b|\.text\b|\.value\b|sentence", c), c

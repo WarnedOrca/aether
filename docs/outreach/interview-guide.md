@@ -19,6 +19,9 @@ If they say no to notes, ask whether you can write a summary afterwards instead.
 5. **Who it affects.** "Who notices when it goes wrong: you, your staff, customers?"
 6. **Rules.** "If someone else did this for you, what should they never do without asking you first? Is there anything a customer must never see, or any money limit?"
 7. **Approval.** "Would you want to approve every message yourself, or check a batch at once?"
+8. **Who does it.** "Who else does this task besides you: staff, family, a front desk? Does it take them about the same time?" Write down who, not names.
+9. **No-shows and rebookings** (only if the task touches appointments). "In a normal week, about how many people don't show up? And of those, how many end up rebooking?" Mark both as their estimate unless they read them from their booking records.
+10. **How they would know it made money.** "If reminders brought customers back, how would you be able to tell? For example, people replying to the reminder to rebook, a rebooking link or code used only in these messages, or comparing the same weeks before and after." Write down the method they choose, and ask: "Roughly what is one appointment or sale worth to you?" Record their figure as owner-stated. Never suggest a number.
 
 ## Closing (2 minutes)
 
@@ -29,7 +32,8 @@ If they say no to notes, ask whether you can write a summary afterwards instead.
 ## Right after (your notes, kept in `private/`, never committed)
 
 - The one task, in one sentence.
-- Their estimates: times per week, minutes each time, problems per week. Copy them into `private/pilot-log.csv` as a **before** row with today's date and "owner's estimate" as the method.
+- Their estimates: times per week, minutes each time, problems per week, no-shows and rebookings per week, and who else does the task.
+- The revenue tracking method they chose and their stated value of one appointment or sale (columns `revenue_tracking_method` and `value_of_one_appointment_or_sale_owner_stated_usd`). Copy them into `private/pilot-log.csv` as a **before** row with today's date and "owner's estimate" as the method.
 - Their rules (who may be contacted, forbidden fields, limits, sending hours, approval preference).
 - Red flags: health, legal, children's or payment data; anything that would mean moving money. Prefer a different task for a first pilot.
 - What you promised them, if anything, and the date you said you would follow up.

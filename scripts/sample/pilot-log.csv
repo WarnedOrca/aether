@@ -1,0 +1,5 @@
+date,business_code,task,phase_before_or_after,minutes_per_task,tasks_per_week,messages_late_or_missed_per_week,owner_rating_1_to_5,how_measured,owner_ok_to_mention_business_yes_no_and_date,notes,check_in_baseline_week4_week8_other,no_shows_per_week_owner_reported,rebookings_per_week_owner_reported,would_recommend_yes_no,referrals_given_count,revenue_tracking_method,value_of_one_appointment_or_sale_owner_stated_usd,owner_reported_revenue_usd,owner_reported_revenue_period,revenue_confirmed_in_writing_yes_no_and_date
+2026-01-05,FAKE-A,reminder texts,before,40,5,3,4,owner timed it with a phone stopwatch,no,MADE-UP SAMPLE,baseline,4,1,,,,,,,
+2026-02-02,FAKE-A,reminder texts,after,,5,,2,owner's own report at check-in,no,MADE-UP SAMPLE,week4,2,3,yes,1,reply_to_rebook,45,270,4 weeks,yes 2026-02-03
+2026-03-02,FAKE-A,reminder texts,after,,5,,2,owner's own report at check-in,no,MADE-UP SAMPLE,week8,2,2,yes,2,reply_to_rebook,45,180,4 weeks,no
+2026-01-20,FAKE-B,invoice reminders,before,25,2,,3,owner's estimate in interview,no,MADE-UP SAMPLE,baseline,,,,,,,,,

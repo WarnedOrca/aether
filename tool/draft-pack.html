@@ -179,8 +179,8 @@ const Core = {
     return p;
   },
   build(rows, cfg, today) {  // -> {drafts, skipped}; drafts keep CSV order; the daily limit applies after all other checks
-    const drafts = [], skipped = [];
-    const skip = (i, r, reason) => skipped.push({ row: i + 2, name: r[cfg.map.name] || "", reason });
+    const drafts = [], skipped = [], seen = {};
+    const skip = (i, r, reason) => skipped.push({ row: i + 2, name: r[cfg.map.name] || "", reason, code: Core.reasonCode(reason) });
     rows.forEach((r, i) => {
       const oo = Core.optOut(r[cfg.map.opted_out]);
       if (oo === true) return skip(i, r, "opted out");
@@ -202,19 +202,34 @@ const Core = {
         const raw = r[cfg.channel === "sms" ? cfg.map.phone : cfg.map.email] || "";
         return skip(i, r, raw ? (cfg.channel === "sms" ? "phone number looks wrong" : "email address looks wrong") + " (\"" + raw + "\")" : "no " + (cfg.channel === "sms" ? "phone number" : "email address"));
       }
+      if (seen[to]) return skip(i, r, "duplicate: same " + (cfg.channel === "sms" ? "phone number" : "email address") + " as row " + seen[to]);
       const f = Core.fill(cfg.text, r, cfg.map, cfg.extra);
       if (f.missing.length) return skip(i, r, "missing value for {" + f.missing.join("}, {") + "}");
       const s = cfg.channel === "email" ? Core.fill(cfg.subject || "", r, cfg.map, cfg.extra) : { text: "", missing: [] };
       if (s.missing.length) return skip(i, r, "missing value for {" + s.missing.join("}, {") + "} in the subject");
       if (drafts.length >= cfg.daily_limit) return skip(i, r, "over today's limit of " + cfg.daily_limit);
+      seen[to] = i + 2;
       drafts.push({ row: i + 2, name: r[cfg.map.name] || "", to, text: f.text, subject: s.text, decision: "pending" });
     });
     return { drafts, skipped };
   },
+  // Fixed reason codes for the audit log: the on-screen reason can quote a cell value, the audit log never does.
+  reasonCode(reason) {
+    const r = String(reason);
+    return r === "opted out" ? "opted_out" : r.startsWith("unclear opt-out") ? "unclear_opt_out" : r === "date is blank" ? "blank_date"
+      : r.startsWith("can't read date") ? "unreadable_date" : r.startsWith("not due") ? "not_due"
+      : r.startsWith("can't read last-contacted") ? "unreadable_last_contacted" : r.startsWith("contacted on") ? "contacted_recently"
+      : /looks wrong/.test(r) ? "bad_contact" : r.startsWith("no phone") || r.startsWith("no email") ? "missing_contact"
+      : r.startsWith("duplicate") ? "duplicate_contact" : r.startsWith("missing value") ? "missing_value"
+      : r.startsWith("over today's limit") ? "over_daily_limit" : "other";
+  },
   csvCell(v) { const s = String(v ?? ""); return /[",\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; },
   toCSV(header, rows) { return [header, ...rows].map(r => r.map(Core.csvCell).join(",")).join("\r\n") + "\r\n"; },
-  PILOT_COLUMNS: ["date", "business_code", "task", "phase_before_or_after", "minutes_per_task", "tasks_per_week", "messages_late_or_missed_per_week", "owner_rating_1_to_5", "how_measured", "owner_ok_to_mention_business_yes_no_and_date", "notes"],
-  pilotRow(date, biz, task, phase, minutes) { return [date, biz, task, phase, minutes.toFixed(1), "", "", "", "stopwatch in the draft pack tool (one run of the task)", "", ""]; },
+  PILOT_COLUMNS: ["date", "business_code", "task", "phase_before_or_after", "minutes_per_task", "tasks_per_week", "messages_late_or_missed_per_week", "owner_rating_1_to_5", "how_measured", "owner_ok_to_mention_business_yes_no_and_date", "notes", "check_in_baseline_week4_week8_other", "no_shows_per_week_owner_reported", "rebookings_per_week_owner_reported", "would_recommend_yes_no", "referrals_given_count", "revenue_tracking_method", "value_of_one_appointment_or_sale_owner_stated_usd", "owner_reported_revenue_usd", "owner_reported_revenue_period", "revenue_confirmed_in_writing_yes_no_and_date"],
+  pilotRow(date, biz, task, phase, minutes) {  // one stopwatch measurement; owner-reported columns stay blank
+    const v = { date, business_code: biz, task, phase_before_or_after: phase, minutes_per_task: minutes.toFixed(1), how_measured: "stopwatch in the draft pack tool (one run of the task)" };
+    return Core.PILOT_COLUMNS.map(c => v[c] ?? "");
+  },
 };
 // One sentence -> job spec. A port of jobspec/baseline.py (keyword rules, no model); tests check both give the same spec.
 Core.parseRequest = (function () {
@@ -503,7 +518,8 @@ Core.compareSuggestion = function (suggested, current) {
       let send = "<span class='muted'>approve first</span>";
       if (d.decision === "approved") {
         const href = cfg.channel === "sms" ? Core.smsLink(d.to, d.text) : Core.mailtoLink(d.to, d.subject, d.text);
-        send = "<button data-copy='" + i + "'>Copy</button> " + (open ? "<a class='send' data-open='" + i + "' href='" + href.replace(/'/g, "%27") + "'>Open in " + (cfg.channel === "sms" ? "Messages" : "email") + "</a>" : "<span class='muted'>after " + cfg.window[0] + "</span>");
+        if (!open && !d.heldLogged) { d.heldLogged = true; log("held: outside sending hours", d.row, ""); }
+        send = (d.sent ? "<span class='tag approved'>sent</span> " : "<button data-sent='" + i + "' title='Press after you sent it from your own app'>Mark sent</button> ") + "<button data-copy='" + i + "'>Copy</button> " + (open ? "<a class='send' data-open='" + i + "' href='" + href.replace(/'/g, "%27") + "'>Open in " + (cfg.channel === "sms" ? "Messages" : "email") + "</a>" : "<span class='muted'>after " + cfg.window[0] + "</span>");
       }
       tr.innerHTML = "<td>" + esc(d.name) + "<div class='muted'>row " + d.row + "</div></td><td>" + esc(d.to) + "</td><td><div class='msg'>" + (d.subject ? "<strong>" + esc(d.subject) + "</strong>\n" : "") + esc(d.text) + "</div></td>" +
         "<td>" + (d.decision === "pending" ? "<button data-ok='" + i + "'>Approve</button> <button data-skip='" + i + "'>Skip</button>" : "<span class='tag " + d.decision + "'>" + d.decision + "</span> <button data-undo='" + i + "'>Undo</button>") + "</td><td>" + send + "</td>";
@@ -519,16 +535,17 @@ Core.compareSuggestion = function (suggested, current) {
     reportApplied();
     result = Core.build(data.rows, cfg, $("today").value);
     log("drafts prepared", "", result.drafts.length + " drafts, " + result.skipped.length + " not drafted; rules: opted-out skipped, min days " + cfg.min_days_since_contact + ", hours " + cfg.window.join("-") + ", limit " + cfg.daily_limit);
-    result.skipped.forEach(k => log("not drafted", k.row, k.reason));
+    result.skipped.forEach(k => log("not drafted", k.row, k.code));
     $("reviewCard").style.display = ""; render();
   };
   $("drafts").onclick = async e => {
     const t = e.target, get = a => t.getAttribute(a);
-    if (get("data-ok") !== null) { const d = result.drafts[+get("data-ok")]; d.decision = "approved"; log("approved", d.row, d.to); }
-    else if (get("data-skip") !== null) { const d = result.drafts[+get("data-skip")]; d.decision = "skipped"; log("skipped by owner", d.row, d.to); }
+    if (get("data-ok") !== null) { const d = result.drafts[+get("data-ok")]; d.decision = "approved"; log("approved", d.row, ""); }
+    else if (get("data-skip") !== null) { const d = result.drafts[+get("data-skip")]; d.decision = "skipped"; log("skipped by owner", d.row, ""); }
     else if (get("data-undo") !== null) { const d = result.drafts[+get("data-undo")]; log("decision undone", d.row, d.decision); d.decision = "pending"; }
-    else if (get("data-copy") !== null) { const d = result.drafts[+get("data-copy")]; try { await navigator.clipboard.writeText(d.text); t.textContent = "Copied"; } catch { prompt("Copy this message:", d.text); } log("copied", d.row, d.to); return; }
-    else if (get("data-open") !== null) { const d = result.drafts[+get("data-open")]; log("opened in owner's app", d.row, d.to); return; }
+    else if (get("data-copy") !== null) { const d = result.drafts[+get("data-copy")]; try { await navigator.clipboard.writeText(d.text); t.textContent = "Copied"; } catch { prompt("Copy this message:", d.text); } log("copied", d.row, ""); return; }
+    else if (get("data-open") !== null) { const d = result.drafts[+get("data-open")]; log("opened in owner's app", d.row, ""); return; }
+    else if (get("data-sent") !== null) { const d = result.drafts[+get("data-sent")]; d.sent = true; log("marked sent by owner", d.row, ""); }
     else return;
     render();
   };

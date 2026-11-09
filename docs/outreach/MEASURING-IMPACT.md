@@ -28,6 +28,32 @@ Each row records one measurement for one task, either **before** the pilot or **
 | `how_measured` | Exactly how the numbers were obtained | For example "owner's estimate in interview", "owner timed it", "counted from booking app" |
 | `owner_ok_to_mention_business_yes_no_and_date` | Whether the owner said the business may be named, and when | Written permission only (the pilot agreement has a box for this) |
 | `notes` | Anything that affects how to read the row | For example "holiday week", "new staff member" |
+| `check_in_baseline_week4_week8_other` | Which check-in the row belongs to | `baseline` at the first session, then `week4` and `week8` (see `ONBOARDING.md`) |
+| `no_shows_per_week_owner_reported` | No-shows in a normal week, as the owner tells it | Ask the same way each time; from their booking records if they have them, otherwise their estimate (say which in `how_measured`) |
+| `rebookings_per_week_owner_reported` | Missed or cancelled appointments that were rebooked in a normal week | Same as above |
+| `would_recommend_yes_no` | "Would you recommend this to another business owner?" | Ask at week 4 and week 8; write their answer, not yours |
+| `referrals_given_count` | How many other owners they actually introduced you to | Count real introductions only |
+| `revenue_tracking_method` | How the owner will tell whether reminders brought money back | One of `reply_to_rebook` (customers reply to the reminder to rebook), `rebooking_link_or_code` (a link or code only used in these messages), `before_after_comparison` (same weeks compared before and after), or `none` |
+| `value_of_one_appointment_or_sale_owner_stated_usd` | What one appointment or sale is worth, in dollars, as the owner states it | The owner's own figure; never yours |
+| `owner_reported_revenue_usd` and `owner_reported_revenue_period` | The revenue the owner says came from the reminders, and over what period | Only what the owner says, with the period ("4 weeks") |
+| `revenue_confirmed_in_writing_yes_no_and_date` | Whether the owner confirmed that revenue statement in writing (email, text or signed note), and when | `yes 2026-..-..` only when you have the written confirmation saved in `private/` |
+
+## Where the page's downloads go, and the report
+
+Save the owner's downloads from the draft pack page (the audit log and the stopwatch file) into `private/pilot-logs/<business code>/`, one folder per business. They contain row numbers, counts, reason codes and settings, never customer names, phone numbers or message text. Then run:
+
+```
+.venv/Scripts/python.exe scripts/pilot_report.py --pilot-log private/pilot-log.csv --logs private/pilot-logs
+```
+
+It prints, per business and in total: messages drafted, approved and marked sent by the owner; rows skipped by reason; timed minutes per batch before and after, and the percent change; hours saved per month; how often AI suggestions were kept, edited or rejected; owner-reported no-shows and rebookings; and owner-reported revenue, printed separately. It also prints how many businesses have at least 4 weeks of data. Anything missing prints as "no data". Try it on the made-up files first: `--pilot-log scripts/sample/pilot-log.csv --logs scripts/sample/logs`.
+
+## Definitions (use these words only in these meanings)
+
+- **Efficiency** means the percent drop in the owner's **timed** minutes for the **same job** (one batch of the same task), before versus after: (after - before) / before. It is computed only from timed runs: the page's stopwatch, or the owner timing it themselves. An estimate is never compared with a timing.
+- **Hours saved per month** = (mean timed minutes before - mean timed minutes after) x the owner's stated batches per week x 52 / 12 / 60. It is only computed when there is at least one timed run before and one after.
+- **Sent** means the owner pressed "Mark sent" after sending from their own app. The page never sends anything and cannot see whether a message went out.
+- **Revenue** is never measured by the tool. A revenue figure may be written anywhere (application, paper, README, website, conversation) **only if all three hold**: it is owner-reported (a row in `private/pilot-log.csv`); the owner confirmed it in writing (`revenue_confirmed_in_writing...` starts with `yes` and the confirmation is saved); and it is phrased as "owners report ..." with the period, never as a measured result. `scripts/pilot_report.py` counts only confirmed figures as usable.
 
 Time saved per week is worked out later from the before and after rows (minutes per task × tasks per week, before minus after). Do this only when both rows exist and were measured the same way. An estimate compared with a timed measurement is not a fair comparison; write down which is which.
 
