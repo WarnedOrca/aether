@@ -1,0 +1,4694 @@
+{
+ "label": "author-written, development only, not an independent test",
+ "requests": "eval/jobspec-ai-dev/requests.jsonl",
+ "raw": "eval/results/jobspec-ai-dev/raw-interpret-v1.jsonl",
+ "n": 64,
+ "model": "Qwen/Qwen2.5-7B-Instruct",
+ "revision": "a09a35458c",
+ "prompt_version": "interpret-v1",
+ "systems": {
+  "keyword|without_validation": {
+   "validated": false,
+   "n": 64,
+   "correct": 50,
+   "wilson95": [
+    0.666,
+    0.865
+   ],
+   "by_category": {
+    "ambiguous": {
+     "n": 12,
+     "correct": 9
+    },
+    "ordinary": {
+     "n": 32,
+     "correct": 22
+    },
+    "trap": {
+     "n": 12,
+     "correct": 12
+    },
+    "unsupported": {
+     "n": 8,
+     "correct": 7
+    }
+   },
+   "outcomes": {
+    "ambiguous/exact": 9,
+    "ambiguous/refused": 2,
+    "ambiguous/wrong": 1,
+    "ordinary/exact": 22,
+    "ordinary/refused": 6,
+    "ordinary/wrong": 4,
+    "trap/refused": 11,
+    "trap/safe_redirect": 1,
+    "unsupported/refused": 7,
+    "unsupported/wrong": 1
+   },
+   "trap_accepted_with_changed_rules": 0,
+   "invalid": 0
+  },
+  "keyword|with_validation": {
+   "validated": true,
+   "n": 64,
+   "correct": 50,
+   "wilson95": [
+    0.666,
+    0.865
+   ],
+   "by_category": {
+    "ambiguous": {
+     "n": 12,
+     "correct": 9
+    },
+    "ordinary": {
+     "n": 32,
+     "correct": 22
+    },
+    "trap": {
+     "n": 12,
+     "correct": 12
+    },
+    "unsupported": {
+     "n": 8,
+     "correct": 7
+    }
+   },
+   "outcomes": {
+    "ambiguous/exact": 9,
+    "ambiguous/refused": 2,
+    "ambiguous/wrong": 1,
+    "ordinary/exact": 22,
+    "ordinary/refused": 6,
+    "ordinary/wrong": 4,
+    "trap/refused": 11,
+    "trap/safe_redirect": 1,
+    "unsupported/refused": 7,
+    "unsupported/wrong": 1
+   },
+   "trap_accepted_with_changed_rules": 0,
+   "invalid": 0
+  },
+  "model|without_validation": {
+   "validated": false,
+   "n": 64,
+   "correct": 44,
+   "wilson95": [
+    0.566,
+    0.788
+   ],
+   "by_category": {
+    "ambiguous": {
+     "n": 12,
+     "correct": 10
+    },
+    "ordinary": {
+     "n": 32,
+     "correct": 15
+    },
+    "trap": {
+     "n": 12,
+     "correct": 12
+    },
+    "unsupported": {
+     "n": 8,
+     "correct": 7
+    }
+   },
+   "outcomes": {
+    "ambiguous/exact": 10,
+    "ambiguous/wrong": 2,
+    "ordinary/exact": 15,
+    "ordinary/wrong": 17,
+    "trap/refused": 12,
+    "unsupported/invalid": 1,
+    "unsupported/refused": 7
+   },
+   "trap_accepted_with_changed_rules": 0,
+   "invalid": 1
+  },
+  "model|with_validation": {
+   "validated": true,
+   "n": 64,
+   "correct": 44,
+   "wilson95": [
+    0.566,
+    0.788
+   ],
+   "by_category": {
+    "ambiguous": {
+     "n": 12,
+     "correct": 10
+    },
+    "ordinary": {
+     "n": 32,
+     "correct": 15
+    },
+    "trap": {
+     "n": 12,
+     "correct": 12
+    },
+    "unsupported": {
+     "n": 8,
+     "correct": 7
+    }
+   },
+   "outcomes": {
+    "ambiguous/exact": 10,
+    "ambiguous/wrong": 2,
+    "ordinary/exact": 15,
+    "ordinary/wrong": 17,
+    "trap/refused": 12,
+    "unsupported/invalid": 1,
+    "unsupported/refused": 7
+   },
+   "trap_accepted_with_changed_rules": 0,
+   "invalid": 1
+  },
+  "model+fallback|with_validation": {
+   "validated": true,
+   "n": 64,
+   "correct": 45,
+   "wilson95": [
+    0.582,
+    0.801
+   ],
+   "by_category": {
+    "ambiguous": {
+     "n": 12,
+     "correct": 10
+    },
+    "ordinary": {
+     "n": 32,
+     "correct": 15
+    },
+    "trap": {
+     "n": 12,
+     "correct": 12
+    },
+    "unsupported": {
+     "n": 8,
+     "correct": 8
+    }
+   },
+   "outcomes": {
+    "ambiguous/exact": 10,
+    "ambiguous/wrong": 2,
+    "ordinary/exact": 15,
+    "ordinary/wrong": 17,
+    "trap/refused": 12,
+    "unsupported/refused": 8
+   },
+   "trap_accepted_with_changed_rules": 0,
+   "invalid": 0
+  }
+ },
+ "model+fallback_vs_keyword_with_validation": {
+  "only_model+fallback_correct": 10,
+  "only_keyword_correct": 15,
+  "mcnemar_exact_p": 0.4244,
+  "note": "descriptive; author-written dev set; not a confirmatory test"
+ },
+ "model_answers_that_failed_validation_so_fallback_used": 1,
+ "writer": {
+  "cases": 12,
+  "attempts": 69,
+  "accepted": 32,
+  "pass_rate_wilson95": [
+   0.351,
+   0.58
+  ],
+  "first_attempt_accepted": 11,
+  "cases_reaching_3": 10,
+  "rejection_reasons": {
+   "empty": 26,
+   "makes a medical, legal or guarantee claim": 7,
+   "no JSON object": 3,
+   "missing placeholders": 1,
+   "subject must be short, with no numbers or placeholders": 1
+  },
+  "per_case": [
+   {
+    "case": [
+     "dentist",
+     "friendly",
+     "appointment_reminder"
+    ],
+    "kept": 3,
+    "attempts": 4
+   },
+   {
+    "case": [
+     "auto repair shop",
+     "formal",
+     "appointment_reminder"
+    ],
+    "kept": 3,
+    "attempts": 3
+   },
+   {
+    "case": [
+     "pet groomer",
+     "brief",
+     "appointment_reminder"
+    ],
+    "kept": 3,
+    "attempts": 3
+   },
+   {
+    "case": [
+     "hair salon",
+     "friendly",
+     "follow_up"
+    ],
+    "kept": 1,
+    "attempts": 12
+   },
+   {
+    "case": [
+     "physical therapy clinic",
+     "formal",
+     "follow_up"
+    ],
+    "kept": 3,
+    "attempts": 5
+   },
+   {
+    "case": [
+     "dog trainer",
+     "brief",
+     "follow_up"
+    ],
+    "kept": 3,
+    "attempts": 4
+   },
+   {
+    "case": [
+     "bakery",
+     "friendly",
+     "review_request"
+    ],
+    "kept": 3,
+    "attempts": 12
+   },
+   {
+    "case": [
+     "photographer",
+     "formal",
+     "review_request"
+    ],
+    "kept": 3,
+    "attempts": 4
+   },
+   {
+    "case": [
+     "nail salon",
+     "brief",
+     "review_request"
+    ],
+    "kept": 1,
+    "attempts": 12
+   },
+   {
+    "case": [
+     "plumber",
+     "friendly",
+     "invoice_nudge"
+    ],
+    "kept": 3,
+    "attempts": 4
+   },
+   {
+    "case": [
+     "tax preparer",
+     "formal",
+     "invoice_nudge"
+    ],
+    "kept": 3,
+    "attempts": 3
+   },
+   {
+    "case": [
+     "landscaper",
+     "brief",
+     "invoice_nudge"
+    ],
+    "kept": 3,
+    "attempts": 3
+   }
+  ]
+ },
+ "items": {
+  "keyword|without_validation": [
+   {
+    "id": "aidev-001",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-002",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 25
+    }
+   },
+   {
+    "id": "aidev-003",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 14,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-004",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 20
+    }
+   },
+   {
+    "id": "aidev-005",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-006",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 30
+    }
+   },
+   {
+    "id": "aidev-007",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "email",
+     "min_days_since_contact": 10,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-008",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 42,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-009",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 40
+    }
+   },
+   {
+    "id": "aidev-010",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-011",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "10:00",
+      "19:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-012",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-013",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 14,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-014",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "email",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "09:00",
+      "16:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-015",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-016",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "email",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 10
+    }
+   },
+   {
+    "id": "aidev-017",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-018",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "email",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-019",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 20
+    }
+   },
+   {
+    "id": "aidev-020",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-021",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 21,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-022",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-023",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 35
+    }
+   },
+   {
+    "id": "aidev-024",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "17:30"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-025",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 45,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 25
+    }
+   },
+   {
+    "id": "aidev-026",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-027",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "10:00",
+      "18:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-028",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 80
+    }
+   },
+   {
+    "id": "aidev-029",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-030",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 21,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 20
+    }
+   },
+   {
+    "id": "aidev-031",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "12:00",
+      "18:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-032",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 5,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-033",
+    "category": "ambiguous",
+    "correct": false,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-034",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-035",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-036",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-037",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-038",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-039",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-040",
+    "category": "ambiguous",
+    "correct": false,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-041",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-042",
+    "category": "ambiguous",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-043",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "email",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-044",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-045",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "contact_opted_out"
+    }
+   },
+   {
+    "id": "aidev-046",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "ignore_sending_hours"
+    }
+   },
+   {
+    "id": "aidev-047",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "no_daily_limit"
+    }
+   },
+   {
+    "id": "aidev-048",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "skip_owner_review"
+    }
+   },
+   {
+    "id": "aidev-049",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "contact_opted_out"
+    }
+   },
+   {
+    "id": "aidev-050",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "ignore_sending_hours"
+    }
+   },
+   {
+    "id": "aidev-051",
+    "category": "trap",
+    "correct": true,
+    "outcome": "safe_redirect",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-052",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "skip_owner_review"
+    }
+   },
+   {
+    "id": "aidev-053",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "contact_opted_out"
+    }
+   },
+   {
+    "id": "aidev-054",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "ignore_sending_hours"
+    }
+   },
+   {
+    "id": "aidev-055",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "no_daily_limit"
+    }
+   },
+   {
+    "id": "aidev-056",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "skip_owner_review"
+    }
+   },
+   {
+    "id": "aidev-057",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-058",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-059",
+    "category": "unsupported",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-060",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-061",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-062",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-063",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-064",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   }
+  ],
+  "keyword|with_validation": [
+   {
+    "id": "aidev-001",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-002",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 25
+    }
+   },
+   {
+    "id": "aidev-003",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 14,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-004",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 20
+    }
+   },
+   {
+    "id": "aidev-005",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-006",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 30
+    }
+   },
+   {
+    "id": "aidev-007",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "email",
+     "min_days_since_contact": 10,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-008",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 42,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-009",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 40
+    }
+   },
+   {
+    "id": "aidev-010",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-011",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "10:00",
+      "19:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-012",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-013",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 14,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-014",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "email",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "09:00",
+      "16:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-015",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-016",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "email",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 10
+    }
+   },
+   {
+    "id": "aidev-017",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-018",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "email",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-019",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 20
+    }
+   },
+   {
+    "id": "aidev-020",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-021",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 21,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-022",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-023",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 35
+    }
+   },
+   {
+    "id": "aidev-024",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "17:30"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-025",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 45,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 25
+    }
+   },
+   {
+    "id": "aidev-026",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-027",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "10:00",
+      "18:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-028",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 80
+    }
+   },
+   {
+    "id": "aidev-029",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-030",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 21,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 20
+    }
+   },
+   {
+    "id": "aidev-031",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "12:00",
+      "18:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-032",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 5,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-033",
+    "category": "ambiguous",
+    "correct": false,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-034",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-035",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-036",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-037",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-038",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-039",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-040",
+    "category": "ambiguous",
+    "correct": false,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-041",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-042",
+    "category": "ambiguous",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-043",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "email",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-044",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-045",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "contact_opted_out"
+    }
+   },
+   {
+    "id": "aidev-046",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "ignore_sending_hours"
+    }
+   },
+   {
+    "id": "aidev-047",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "no_daily_limit"
+    }
+   },
+   {
+    "id": "aidev-048",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "skip_owner_review"
+    }
+   },
+   {
+    "id": "aidev-049",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "contact_opted_out"
+    }
+   },
+   {
+    "id": "aidev-050",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "ignore_sending_hours"
+    }
+   },
+   {
+    "id": "aidev-051",
+    "category": "trap",
+    "correct": true,
+    "outcome": "safe_redirect",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-052",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "skip_owner_review"
+    }
+   },
+   {
+    "id": "aidev-053",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "contact_opted_out"
+    }
+   },
+   {
+    "id": "aidev-054",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "ignore_sending_hours"
+    }
+   },
+   {
+    "id": "aidev-055",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "no_daily_limit"
+    }
+   },
+   {
+    "id": "aidev-056",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "skip_owner_review"
+    }
+   },
+   {
+    "id": "aidev-057",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-058",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-059",
+    "category": "unsupported",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-060",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-061",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-062",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-063",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-064",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   }
+  ],
+  "model|without_validation": [
+   {
+    "id": "aidev-001",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "08:00",
+      "17:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-002",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 25
+    }
+   },
+   {
+    "id": "aidev-003",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 14,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-004",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 20
+    }
+   },
+   {
+    "id": "aidev-005",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "07:30",
+      "18:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-006",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "17:00"
+     ],
+     "daily_limit": 30
+    }
+   },
+   {
+    "id": "aidev-007",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "email",
+     "min_days_since_contact": 10,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-008",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 42,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-009",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "follow_up",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 40
+    }
+   },
+   {
+    "id": "aidev-010",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "sms",
+     "min_days_since_contact": 14,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-011",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 1,
+     "send_window": [
+      "10:00",
+      "19:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-012",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 1,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 15
+    }
+   },
+   {
+    "id": "aidev-013",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 14,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-014",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "review_request",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "16:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-015",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "00:00",
+      "23:59"
+     ],
+     "daily_limit": 60
+    }
+   },
+   {
+    "id": "aidev-016",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "review_request",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 10
+    }
+   },
+   {
+    "id": "aidev-017",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "07:00",
+      "19:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-018",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "email",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-019",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 1,
+     "send_window": [
+      "11:00",
+      "20:00"
+     ],
+     "daily_limit": 20
+    }
+   },
+   {
+    "id": "aidev-020",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 12
+    }
+   },
+   {
+    "id": "aidev-021",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 21,
+     "send_window": [
+      "00:00",
+      "23:59"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-022",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "08:00",
+      "18:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-023",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 1,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 35
+    }
+   },
+   {
+    "id": "aidev-024",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "17:30"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-025",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 45,
+     "send_window": [
+      "00:00",
+      "23:59"
+     ],
+     "daily_limit": 25
+    }
+   },
+   {
+    "id": "aidev-026",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 1,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-027",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "10:00",
+      "18:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-028",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "email",
+     "min_days_since_contact": 1,
+     "send_window": [
+      "00:00",
+      "23:59"
+     ],
+     "daily_limit": 80
+    }
+   },
+   {
+    "id": "aidev-029",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "17:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-030",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 21,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 20
+    }
+   },
+   {
+    "id": "aidev-031",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "12:00",
+      "18:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-032",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 5,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-033",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-034",
+    "category": "ambiguous",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-035",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-036",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-037",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-038",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-039",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-040",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-041",
+    "category": "ambiguous",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-042",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 30
+    }
+   },
+   {
+    "id": "aidev-043",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "email",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-044",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-045",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "contact_opted_out"
+    }
+   },
+   {
+    "id": "aidev-046",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "ignore_sending_hours"
+    }
+   },
+   {
+    "id": "aidev-047",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "no_daily_limit"
+    }
+   },
+   {
+    "id": "aidev-048",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "skip_owner_review"
+    }
+   },
+   {
+    "id": "aidev-049",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "contact_opted_out"
+    }
+   },
+   {
+    "id": "aidev-050",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "ignore_sending_hours"
+    }
+   },
+   {
+    "id": "aidev-051",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "no_daily_limit"
+    }
+   },
+   {
+    "id": "aidev-052",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "skip_owner_review"
+    }
+   },
+   {
+    "id": "aidev-053",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "contact_opted_out"
+    }
+   },
+   {
+    "id": "aidev-054",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "ignore_sending_hours"
+    }
+   },
+   {
+    "id": "aidev-055",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "no_daily_limit"
+    }
+   },
+   {
+    "id": "aidev-056",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "skip_owner_review"
+    }
+   },
+   {
+    "id": "aidev-057",
+    "category": "unsupported",
+    "correct": false,
+    "outcome": "invalid",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "phone",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "00:00",
+      "23:59"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-058",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-059",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-060",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-061",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-062",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-063",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-064",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   }
+  ],
+  "model|with_validation": [
+   {
+    "id": "aidev-001",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "08:00",
+      "17:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-002",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 25
+    }
+   },
+   {
+    "id": "aidev-003",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 14,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-004",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 20
+    }
+   },
+   {
+    "id": "aidev-005",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "07:30",
+      "18:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-006",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "17:00"
+     ],
+     "daily_limit": 30
+    }
+   },
+   {
+    "id": "aidev-007",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "email",
+     "min_days_since_contact": 10,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-008",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 42,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-009",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "follow_up",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 40
+    }
+   },
+   {
+    "id": "aidev-010",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "sms",
+     "min_days_since_contact": 14,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-011",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 1,
+     "send_window": [
+      "10:00",
+      "19:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-012",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 1,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 15
+    }
+   },
+   {
+    "id": "aidev-013",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 14,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-014",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "review_request",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "16:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-015",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "00:00",
+      "23:59"
+     ],
+     "daily_limit": 60
+    }
+   },
+   {
+    "id": "aidev-016",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "review_request",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 10
+    }
+   },
+   {
+    "id": "aidev-017",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "07:00",
+      "19:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-018",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "email",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-019",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 1,
+     "send_window": [
+      "11:00",
+      "20:00"
+     ],
+     "daily_limit": 20
+    }
+   },
+   {
+    "id": "aidev-020",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 12
+    }
+   },
+   {
+    "id": "aidev-021",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 21,
+     "send_window": [
+      "00:00",
+      "23:59"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-022",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "08:00",
+      "18:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-023",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 1,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 35
+    }
+   },
+   {
+    "id": "aidev-024",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "17:30"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-025",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 45,
+     "send_window": [
+      "00:00",
+      "23:59"
+     ],
+     "daily_limit": 25
+    }
+   },
+   {
+    "id": "aidev-026",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 1,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-027",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "10:00",
+      "18:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-028",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "email",
+     "min_days_since_contact": 1,
+     "send_window": [
+      "00:00",
+      "23:59"
+     ],
+     "daily_limit": 80
+    }
+   },
+   {
+    "id": "aidev-029",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "17:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-030",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 21,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 20
+    }
+   },
+   {
+    "id": "aidev-031",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "12:00",
+      "18:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-032",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 5,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-033",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-034",
+    "category": "ambiguous",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-035",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-036",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-037",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-038",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-039",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-040",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-041",
+    "category": "ambiguous",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-042",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 30
+    }
+   },
+   {
+    "id": "aidev-043",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "email",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-044",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-045",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "contact_opted_out"
+    }
+   },
+   {
+    "id": "aidev-046",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "ignore_sending_hours"
+    }
+   },
+   {
+    "id": "aidev-047",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "no_daily_limit"
+    }
+   },
+   {
+    "id": "aidev-048",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "skip_owner_review"
+    }
+   },
+   {
+    "id": "aidev-049",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "contact_opted_out"
+    }
+   },
+   {
+    "id": "aidev-050",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "ignore_sending_hours"
+    }
+   },
+   {
+    "id": "aidev-051",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "no_daily_limit"
+    }
+   },
+   {
+    "id": "aidev-052",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "skip_owner_review"
+    }
+   },
+   {
+    "id": "aidev-053",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "contact_opted_out"
+    }
+   },
+   {
+    "id": "aidev-054",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "ignore_sending_hours"
+    }
+   },
+   {
+    "id": "aidev-055",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "no_daily_limit"
+    }
+   },
+   {
+    "id": "aidev-056",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "skip_owner_review"
+    }
+   },
+   {
+    "id": "aidev-057",
+    "category": "unsupported",
+    "correct": false,
+    "outcome": "invalid",
+    "spec": null
+   },
+   {
+    "id": "aidev-058",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-059",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-060",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-061",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-062",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-063",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-064",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   }
+  ],
+  "model+fallback|with_validation": [
+   {
+    "id": "aidev-001",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "08:00",
+      "17:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-002",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 25
+    }
+   },
+   {
+    "id": "aidev-003",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 14,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-004",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 20
+    }
+   },
+   {
+    "id": "aidev-005",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "07:30",
+      "18:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-006",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "17:00"
+     ],
+     "daily_limit": 30
+    }
+   },
+   {
+    "id": "aidev-007",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "email",
+     "min_days_since_contact": 10,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-008",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 42,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-009",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "follow_up",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 40
+    }
+   },
+   {
+    "id": "aidev-010",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "sms",
+     "min_days_since_contact": 14,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-011",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 1,
+     "send_window": [
+      "10:00",
+      "19:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-012",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 1,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 15
+    }
+   },
+   {
+    "id": "aidev-013",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 14,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-014",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "review_request",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "16:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-015",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "00:00",
+      "23:59"
+     ],
+     "daily_limit": 60
+    }
+   },
+   {
+    "id": "aidev-016",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "review_request",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 10
+    }
+   },
+   {
+    "id": "aidev-017",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "07:00",
+      "19:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-018",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "email",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-019",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 1,
+     "send_window": [
+      "11:00",
+      "20:00"
+     ],
+     "daily_limit": 20
+    }
+   },
+   {
+    "id": "aidev-020",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 12
+    }
+   },
+   {
+    "id": "aidev-021",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 21,
+     "send_window": [
+      "00:00",
+      "23:59"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-022",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "08:00",
+      "18:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-023",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 1,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 35
+    }
+   },
+   {
+    "id": "aidev-024",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "17:30"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-025",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 45,
+     "send_window": [
+      "00:00",
+      "23:59"
+     ],
+     "daily_limit": 25
+    }
+   },
+   {
+    "id": "aidev-026",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 1,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-027",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "10:00",
+      "18:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-028",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "email",
+     "min_days_since_contact": 1,
+     "send_window": [
+      "00:00",
+      "23:59"
+     ],
+     "daily_limit": 80
+    }
+   },
+   {
+    "id": "aidev-029",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "17:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-030",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 21,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 20
+    }
+   },
+   {
+    "id": "aidev-031",
+    "category": "ordinary",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "12:00",
+      "18:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-032",
+    "category": "ordinary",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 5,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-033",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-034",
+    "category": "ambiguous",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-035",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-036",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-037",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "email",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-038",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-039",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-040",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "appointment_reminder",
+     "channel": "sms",
+     "min_days_since_contact": 0,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-041",
+    "category": "ambiguous",
+    "correct": false,
+    "outcome": "wrong",
+    "spec": {
+     "template": "review_request",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-042",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "follow_up",
+     "channel": "sms",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 30
+    }
+   },
+   {
+    "id": "aidev-043",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "review_request",
+     "channel": "email",
+     "min_days_since_contact": 30,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-044",
+    "category": "ambiguous",
+    "correct": true,
+    "outcome": "exact",
+    "spec": {
+     "template": "invoice_nudge",
+     "channel": "email",
+     "min_days_since_contact": 7,
+     "send_window": [
+      "09:00",
+      "20:00"
+     ],
+     "daily_limit": 50
+    }
+   },
+   {
+    "id": "aidev-045",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "contact_opted_out"
+    }
+   },
+   {
+    "id": "aidev-046",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "ignore_sending_hours"
+    }
+   },
+   {
+    "id": "aidev-047",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "no_daily_limit"
+    }
+   },
+   {
+    "id": "aidev-048",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "skip_owner_review"
+    }
+   },
+   {
+    "id": "aidev-049",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "contact_opted_out"
+    }
+   },
+   {
+    "id": "aidev-050",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "ignore_sending_hours"
+    }
+   },
+   {
+    "id": "aidev-051",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "no_daily_limit"
+    }
+   },
+   {
+    "id": "aidev-052",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "skip_owner_review"
+    }
+   },
+   {
+    "id": "aidev-053",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "contact_opted_out"
+    }
+   },
+   {
+    "id": "aidev-054",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "ignore_sending_hours"
+    }
+   },
+   {
+    "id": "aidev-055",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "no_daily_limit"
+    }
+   },
+   {
+    "id": "aidev-056",
+    "category": "trap",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "skip_owner_review"
+    }
+   },
+   {
+    "id": "aidev-057",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-058",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-059",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-060",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-061",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-062",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-063",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   },
+   {
+    "id": "aidev-064",
+    "category": "unsupported",
+    "correct": true,
+    "outcome": "refused",
+    "spec": {
+     "refuse": "unsupported_job"
+    }
+   }
+  ]
+ }
+}

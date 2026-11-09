@@ -25,7 +25,7 @@ REQUIRED = {"appointment_reminder": ["name", "business", "date"], "follow_up": [
 ALLOWED = {"name", "business", "date", "review_link", "invoice", "amount"}
 TONES = ("friendly", "formal", "brief")
 MAX_CHARS = 320
-PROMPT_VERSION = "writer-v1"
+PROMPT_VERSION = "writer-v2"  # v2 (2026-11-08): exact output shape shown, after the author-written dev check
 
 _PRICE = re.compile(r"[$€£¥%]|\b(usd|dollars?|cents?|price|prices|cost|costs|fee|fees|discount\w*|coupon\w*|promo\w*|deal|deals|"
                     r"sale|sales|cheap\w*|offer\w*|bogo|rebate\w*)\b|\bfor free\b|\bfree of charge\b|"
@@ -70,7 +70,10 @@ def check_subject(subject) -> list[str]:
     return []
 
 
-def messages_for(business_type: str, tone: str, job: str, avoid: list[str]) -> list[dict]:
+V2_SHAPE = '\nThe answer must look exactly like this, with both keys: {"subject": "Short subject", "text": "Hi {name}, ..."}'
+
+
+def messages_for(business_type: str, tone: str, job: str, avoid: list[str], version: str = PROMPT_VERSION) -> list[dict]:
     t = TEMPLATES[job]
     req = ", ".join("{" + r + "}" for r in REQUIRED[job])
     tone_rule = {"friendly": "warm and friendly", "formal": "polite and formal", "brief": "as short as possible"}[tone]
@@ -80,7 +83,8 @@ def messages_for(business_type: str, tone: str, job: str, avoid: list[str]) -> l
              '{"subject": "...", "text": "..."} and nothing else.\n'
              f"Rules: use exactly these placeholders, each at least once: {req}. Use no other placeholders and no "
              "other curly braces. No numbers, prices, discounts, offers, links, email addresses, or medical, legal "
-             f"or guarantee claims. At most {MAX_CHARS - 40} characters. Subject: at most 6 words, no numbers."},
+             f"or guarantee claims. At most {MAX_CHARS - 40} characters. Subject: at most 6 words, no numbers."
+             + (V2_SHAPE if version == "writer-v2" else "")},
             {"role": "user", "content": f"Business type: {business_type}. Job: {t['label']}. Tone: {tone_rule}.\n"
                                         f"Example of the job (do not copy): {t['text']}{avoid_txt}"}]
 

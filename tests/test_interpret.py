@@ -58,10 +58,15 @@ def test_check_spec_rejects_invalid_and_accepts_valid():
 
 
 def test_prompt_examples_are_script_made_and_valid():
-    msgs = build_messages("x")
-    assert msgs[-1] == {"role": "user", "content": "x"} and len(msgs) == 2 + 2 * len(EXAMPLE_SPECS)
-    for s in EXAMPLE_SPECS:
-        assert check_spec(s)[0] and _script_sentence(s)
+    from jobspec.interpret import EXAMPLE_SPECS_V2_EXTRA, _default_sentence
+    v1, v2 = build_messages("x", "interpret-v1"), build_messages("x")
+    assert v1[-1] == v2[-1] == {"role": "user", "content": "x"}
+    assert len(v1) == 2 + 2 * len(EXAMPLE_SPECS) and len(v2) == len(v1) + 2 * len(EXAMPLE_SPECS_V2_EXTRA)
+    assert "Never use" in v2[0]["content"] and "Never use" not in v1[0]["content"]
+    for s in EXAMPLE_SPECS + EXAMPLE_SPECS_V2_EXTRA:
+        assert check_spec(s)[0] and _script_sentence(s) and _default_sentence(s) if "refuse" not in s else check_spec(s)[0]
+    with pytest.raises(ValueError):
+        build_messages("x", "interpret-v9")
 
 
 def test_cli_writes_settings_file_and_page_accepts_it(tmp_path, capsys):

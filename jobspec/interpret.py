@@ -21,7 +21,8 @@ from jobspec.spec import DEFAULT_LIMIT, DEFAULT_MIN_DAYS, DEFAULT_WINDOW, REFUSA
 from jobspec.validate import REFUSAL_REASON, check_spec
 
 DEFAULT_MODEL = "Qwen/Qwen2.5-7B-Instruct"
-PROMPT_VERSION = "interpret-v1"
+PROMPT_VERSION = "interpret-v2"  # v2 (2026-11-08): default rules spelled out after the author-written dev check
+PROMPT_VERSIONS = ("interpret-v1", "interpret-v2")
 
 
 @dataclass
@@ -67,6 +68,11 @@ def _script_sentence(spec: dict) -> str:
             f"Only send between {s} and {e}. At most {spec['daily_limit']} per day.")
 
 
+EXAMPLE_SPECS_V2_EXTRA = [  # v2: script-made examples where nothing but the job is stated -> every default
+    {"template": "follow_up", "channel": "sms", "min_days_since_contact": 7, "send_window": ["09:00", "20:00"], "daily_limit": 50},
+    {"template": "review_request", "channel": "email", "min_days_since_contact": 30, "send_window": ["09:00", "20:00"], "daily_limit": 25},
+]
+
 EXAMPLE_SPECS = [
     {"template": "appointment_reminder", "channel": "sms", "min_days_since_contact": 0, "send_window": ["08:00", "18:00"], "daily_limit": 30},
     {"template": "invoice_nudge", "channel": "email", "min_days_since_contact": 14, "send_window": ["09:00", "17:00"], "daily_limit": 20},
@@ -75,7 +81,24 @@ EXAMPLE_SPECS = [
 ]
 
 
-def system_prompt() -> str:
+def _default_sentence(spec: dict) -> str:
+    """v2 script-made example: states only the job, the channel and (if not 50) the limit; everything else is default."""
+    job = {"appointment_reminder": "appointment reminders", "follow_up": "follow-up messages the day after a visit",
+           "review_request": "review requests", "invoice_nudge": "overdue invoice reminders"}[spec["template"]]
+    lim = "" if spec["daily_limit"] == DEFAULT_LIMIT else f", at most {spec['daily_limit']} per day"
+    return f"Send {job} by {'text' if spec['channel'] == 'sms' else 'email'}{lim}."
+
+
+V2_RULES = """
+Important:
+- WHO is due is fixed by the job (reminders: the day before; follow-ups: the day after a visit; review requests: two days after; invoices: overdue). Words like "the day before" or "the day after" are NOT min_days_since_contact.
+- min_days_since_contact changes ONLY when the request says to skip people contacted recently (for example "skip anyone we texted in the last 2 weeks" = 14). Otherwise use the job's default exactly: appointment_reminder 0, follow_up 7, review_request 30, invoice_nudge 7.
+- send_window changes ONLY when the request gives sending hours. Otherwise use exactly ["09:00", "20:00"]. Never use ["00:00", "23:59"].
+- daily_limit changes ONLY when the request gives a number per day. Otherwise 50.
+- A request that asks for a review is review_request, even if it also says when (for example "after a shoot")."""
+
+
+def system_prompt(version: str = PROMPT_VERSION) -> str:
     jobs = "\n".join(f'- "{k}": {v["label"]} (default channel {v["channel"]}, default min_days_since_contact {DEFAULT_MIN_DAYS[k]})'
                       for k, v in TEMPLATES.items())
     return f"""You turn a small-business owner's one-sentence request into a JSON job spec for a message-drafting tool.
@@ -91,15 +114,18 @@ Refuse with R = one of {list(REFUSALS)}:
 - ignore_sending_hours: it asks to ignore sending hours or send at night / any time
 - no_daily_limit: it asks for no limit or more than 200 per day
 - skip_owner_review: it asks to send without the owner approving each message
-- unsupported_job: it is not one of the four jobs (calls, social posts, payments, bookings, replies, ...)"""
+- unsupported_job: it is not one of the four jobs (calls, social posts, payments, bookings, replies, ...)""" + (V2_RULES if version == "interpret-v2" else "")
 
 
 def build_messages(sentence: str, version: str = PROMPT_VERSION) -> list[dict]:
-    if version != PROMPT_VERSION:
+    if version not in PROMPT_VERSIONS:
         raise ValueError(f"unknown prompt version {version}")
-    msgs = [{"role": "system", "content": system_prompt()}]
+    msgs = [{"role": "system", "content": system_prompt(version)}]
     for s in EXAMPLE_SPECS:
         msgs += [{"role": "user", "content": _script_sentence(s)}, {"role": "assistant", "content": json.dumps(s)}]
+    if version == "interpret-v2":
+        for s in EXAMPLE_SPECS_V2_EXTRA:
+            msgs += [{"role": "user", "content": _default_sentence(s)}, {"role": "assistant", "content": json.dumps(s)}]
     return msgs + [{"role": "user", "content": sentence}]
 
 
