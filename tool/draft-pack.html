@@ -46,6 +46,11 @@
   <label>Optional: describe the job in one sentence <span class="hint">(for example "Remind customers by text the day before their appointment, from 9am to 6pm, at most 40 a day"; it knows a limited set of phrasings, so check what it fills in)</span></label>
   <input type="text" id="describe" placeholder="Describe the job"> <button id="fillForm">Fill in the form</button>
   <div id="describeNote" class="hint"></div>
+  <p><label style="display:inline">Or, if your helper made one: </label>
+    <button id="importSettingsBtn">Import settings file</button> <button id="importTemplatesBtn">Import message suggestions</button>
+    <input type="file" id="settingsFile" accept=".json,application/json" style="display:none">
+    <input type="file" id="templatesFile" accept=".json,application/json" style="display:none"></p>
+  <div id="importPanel"></div>
   <div class="row">
     <div><label>Job</label><select id="template"></select></div>
     <div><label>Send by</label><select id="channel"><option value="sms">Text message</option><option value="email">Email</option></select></div>
@@ -290,6 +295,62 @@ Core.parseRequest = (function () {
     return spec;
   };
 })();
+// Settings files made by `python -m jobspec.make_settings` (keyword rules or a local model). Never trusted: re-checked here.
+Core.SETTING_FIELDS = ["template", "channel", "min_days_since_contact", "send_window", "daily_limit"];
+Core.checkSettings = function (obj) {
+  const p = [], isInt = (v, lo, hi) => Number.isInteger(v) && v >= lo && v <= hi, hm = /^([01]\d|2[0-3]):[0-5]\d$/;
+  if (!obj || typeof obj !== "object" || obj.format !== "draft-pack-settings" || obj.version !== 1) return ["not a draft pack settings file"];
+  const s = obj.settings || {};
+  if (Object.keys(s).sort().join() !== Core.SETTING_FIELDS.slice().sort().join()) p.push("settings must have exactly: " + Core.SETTING_FIELDS.join(", "));
+  if (!TEMPLATES[s.template]) p.push("unknown job");
+  if (s.channel !== "sms" && s.channel !== "email") p.push("channel must be sms or email");
+  if (!isInt(s.min_days_since_contact, 0, 365)) p.push("days since contact must be a whole number 0-365");
+  const w = s.send_window;
+  if (!(Array.isArray(w) && w.length === 2 && hm.test(w[0]) && hm.test(w[1]) && w[0] < w[1])) p.push("sending hours must be HH:MM to HH:MM, start before end");
+  if (!isInt(s.daily_limit, 1, 200)) p.push("daily limit must be a whole number 1-200");
+  if (obj.message !== undefined) {
+    const m = obj.message;
+    if (!m || typeof m.text !== "string" || typeof m.subject !== "string") p.push("message must have text and subject");
+    else if (TEMPLATES[s.template]) Core.checkTemplate(m.text, s.template).forEach(x => p.push("message: " + x));
+  }
+  return p;
+};
+// Rules for any suggested message wording (same rules as jobspec/writer.py; a test checks they agree).
+Core.REQUIRED_PLACEHOLDERS = { appointment_reminder: ["name", "business", "date"], follow_up: ["name", "business", "date"], review_request: ["name", "business", "review_link"], invoice_nudge: ["name", "invoice", "amount", "date"] };
+Core.MAX_TEMPLATE_CHARS = 320;
+Core.checkTemplate = function (text, template) {
+  const p = [], req = Core.REQUIRED_PLACEHOLDERS[template] || [], allowed = new Set(["name", "business", "date", "review_link", "invoice", "amount"]);
+  if (typeof text !== "string" || !text.trim()) return ["empty"];
+  const used = [...text.matchAll(/\{([^{}]*)\}/g)].map(m => m[1]);
+  const missing = req.filter(r => !used.includes(r)), unknown = [...new Set(used.filter(u => !allowed.has(u) || !req.includes(u)))];
+  if (missing.length) p.push("missing placeholders: " + missing.join(", "));
+  if (unknown.length) p.push("placeholders not allowed for this job: " + unknown.join(", "));
+  const bare = text.replace(/\{[^{}]*\}/g, "");
+  if (/[{}]/.test(bare)) p.push("stray brace");
+  if (text.length > Core.MAX_TEMPLATE_CHARS) p.push("longer than " + Core.MAX_TEMPLATE_CHARS + " characters");
+  if (/\d/.test(bare)) p.push("contains a number (prices, times or amounts must come from your list, not the wording)");
+  if (/[$€£¥%]|\b(usd|dollars?|cents?|price|prices|cost|costs|fee|fees|discount\w*|coupon\w*|promo\w*|deal|deals|sale|sales|cheap\w*|offer\w*|bogo|rebate\w*)\b|\bfor free\b|\bfree of charge\b|\bfree (gift|service|session|consultation|trial|month|week)\b/i.test(bare)) p.push("mentions a price, discount or offer");
+  if (/https?:|www\.|\.(com|net|org|io|co|us|biz|info)\b|@/i.test(bare)) p.push("contains a link or address");
+  if (/\b(cure|cures|heal|heals|healing|treat|treats|treatment|diagnos\w*|prescri\w*|medical|medicine|symptoms?|guarantee\w*|warrant\w*|legal|lawsuit|liab\w*|attorney|lawyer|insurance|risk-free|safe|proven|clinically)\b/i.test(bare)) p.push("makes a medical, legal or guarantee claim");
+  return p;
+};
+Core.TONES = ["friendly", "formal", "brief"];
+Core.checkTemplatesFile = function (obj) {
+  if (!obj || typeof obj !== "object" || obj.format !== "draft-pack-templates" || obj.version !== 1) return ["not a message suggestions file"];
+  if (!TEMPLATES[obj.template]) return ["unknown job"];
+  if (!Core.TONES.includes(obj.tone)) return ["unknown tone"];
+  if (!Array.isArray(obj.templates) || obj.templates.length < 1 || obj.templates.length > 5) return ["needs 1 to 5 suggestions"];
+  const p = [];
+  obj.templates.forEach((m, i) => {
+    if (!m || typeof m.text !== "string" || typeof m.subject !== "string") { p.push("suggestion " + (i + 1) + ": needs text and subject"); return; }
+    Core.checkTemplate(m.text, obj.template).forEach(x => p.push("suggestion " + (i + 1) + ": " + x));
+    if (m.subject.length > 80 || /\{|\}|\d/.test(m.subject)) p.push("suggestion " + (i + 1) + ": subject must be short, with no numbers or placeholders");
+  });
+  return p;
+};
+Core.compareSuggestion = function (suggested, current) {
+  return Object.keys(suggested).map(f => ({ field: f, outcome: JSON.stringify(suggested[f]) === JSON.stringify(current[f]) ? "accepted_unchanged" : "edited" }));
+};
 // CORE-END
 </script>
 <script>
@@ -321,6 +382,72 @@ Core.parseRequest = (function () {
     skip_owner_review: "Every message needs your approval and is sent by you from your own app. The form was not changed.",
     unsupported_job: "This page only handles appointment reminders, follow-ups, review requests and invoice reminders. The form was not changed.",
   };
+  // ---- AI suggestions: imported settings files and message suggestions. The owner reviews; nothing applies by itself.
+  // Audit rows record only kinds, field names, outcomes and which interpreter made the suggestion (no customer data, no text).
+  const suggestions = [];  // {id, kind, source, fields: {name: value}, decision: "pending"|"applied"|"rejected", reported}
+  const escH = x => String(x).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+  const srcLabel = s => String(s || "unknown").startsWith("local_model") ? "a local AI model (" + String(s).split(":").slice(1).join(":") + ")" : s === "keyword" ? "keyword rules (no AI)" : "unknown";
+  const cleanSource = s => String(s || "unknown").replace(/[^A-Za-z0-9_.:\/-]/g, "").slice(0, 80);
+  function currentValues(kind) {
+    if (kind === "settings") return { template: $("template").value, channel: $("channel").value, min_days_since_contact: parseInt($("minDays").value, 10),
+      send_window: [$("winStart").value, $("winEnd").value], daily_limit: parseInt($("limit").value, 10), text: $("text").value, subject: $("subject").value };
+    return { text: $("text").value, subject: $("subject").value };
+  }
+  function logDecision(sg, outcomes) {
+    outcomes.forEach(o => log("AI suggestion", "", "kind=" + sg.kind + "; id=" + sg.id + "; field=" + o.field + "; outcome=" + o.outcome + "; source=" + sg.source));
+  }
+  function reject(sg) { sg.decision = "rejected"; sg.reported = true; logDecision(sg, Object.keys(sg.fields).map(f => ({ field: f, outcome: "rejected" }))); }
+  function reportApplied() {  // called when drafts are prepared: compare what the owner kept with what was suggested
+    suggestions.filter(s => s.decision === "applied" && !s.reported).forEach(sg => { sg.reported = true; logDecision(sg, Core.compareSuggestion(sg.fields, currentValues(sg.kind))); });
+  }
+  const readJSON = f => f.text().then(t => JSON.parse(t));
+  $("importSettingsBtn").onclick = () => $("settingsFile").click();
+  $("importTemplatesBtn").onclick = () => $("templatesFile").click();
+  $("settingsFile").onchange = async e => {
+    const f = e.target.files[0]; e.target.value = ""; if (!f) return;
+    let obj; try { obj = await readJSON(f); } catch { $("importPanel").innerHTML = "<div class='banner warn'>That file is not a settings file (not valid JSON).</div>"; return; }
+    const problems = Core.checkSettings(obj);
+    if (problems.length) { $("importPanel").innerHTML = "<div class='banner warn'>This settings file was not used: " + escH(problems.join("; ")) + "</div>"; log("settings file refused", "", problems.length + " problems"); return; }
+    const s = obj.settings, t = TEMPLATES[s.template];
+    const sg = { id: suggestions.length + 1, kind: "settings", source: cleanSource(obj.produced_by), fields: Object.assign({}, s), decision: "pending", reported: false };
+    if (obj.message) { sg.fields.text = obj.message.text; sg.fields.subject = obj.message.subject; }
+    suggestions.push(sg);
+    const rows = [["Job", t.label], ["Send by", s.channel === "sms" ? "Text message" : "Email"], ["Skip anyone contacted in the last", s.min_days_since_contact + " days"],
+      ["Sending hours", s.send_window.join(" to ")], ["Daily limit", s.daily_limit]].concat(obj.message ? [["Email subject", obj.message.subject], ["Message", obj.message.text]] : []);
+    $("importPanel").innerHTML = "<div class='banner'><strong>Suggested settings</strong> made by " + escH(srcLabel(obj.produced_by)) + (obj.sentence ? " from: &ldquo;" + escH(obj.sentence) + "&rdquo;" : "") +
+      "<table>" + rows.map(r => "<tr><td>" + escH(r[0]) + "</td><td>" + escH(r[1]) + "</td></tr>").join("") + "</table>" +
+      "<p class='hint'>Nothing changes until you press Use. After that you can still change any field below; the audit log records which suggested settings you kept, edited or rejected (names only).</p>" +
+      "<button class='primary' id='useSettings'>Use these settings</button> <button id='rejectSettings'>Don't use</button></div>";
+    $("useSettings").onclick = () => {
+      $("template").value = s.template; applyTemplate();
+      $("channel").value = s.channel; $("minDays").value = s.min_days_since_contact; $("winStart").value = s.send_window[0]; $("winEnd").value = s.send_window[1]; $("limit").value = s.daily_limit;
+      if (obj.message) { $("text").value = obj.message.text; $("subject").value = obj.message.subject; }
+      sg.decision = "applied"; log("settings file applied", "", "id=" + sg.id + "; source=" + sg.source);
+      $("importPanel").innerHTML = "<div class='banner'>Settings filled in below. Check every field before preparing drafts.</div>";
+    };
+    $("rejectSettings").onclick = () => { reject(sg); $("importPanel").innerHTML = "<div class='banner'>Suggested settings not used.</div>"; };
+  };
+  $("templatesFile").onchange = async e => {
+    const f = e.target.files[0]; e.target.value = ""; if (!f) return;
+    let obj; try { obj = await readJSON(f); } catch { $("importPanel").innerHTML = "<div class='banner warn'>That file is not a message suggestions file (not valid JSON).</div>"; return; }
+    const problems = Core.checkTemplatesFile(obj);
+    if (problems.length) { $("importPanel").innerHTML = "<div class='banner warn'>These message suggestions were not used: " + escH(problems.join("; ")) + "</div>"; log("message suggestions refused", "", problems.length + " problems"); return; }
+    const opts = obj.templates.map((m, i) => ({ id: suggestions.length + 1 + i, kind: "template", source: cleanSource(obj.produced_by), fields: { text: m.text, subject: m.subject }, decision: "pending", reported: false }));
+    opts.forEach(o => suggestions.push(o));
+    $("importPanel").innerHTML = "<div class='banner'><strong>" + opts.length + " suggested wordings</strong> for " + escH(TEMPLATES[obj.template].label) + " (" + escH(obj.tone) + "), made by " + escH(srcLabel(obj.produced_by)) +
+      ". Pick one to put it in the message box, where you can edit it, or use none.<ol>" +
+      opts.map((o, i) => "<li><div class='msg'>" + (o.fields.subject ? "<strong>" + escH(o.fields.subject) + "</strong>\n" : "") + escH(o.fields.text) + "</div><button data-pick='" + i + "'>Use this one</button></li>").join("") +
+      "</ol><button id='rejectTemplates'>Use none</button></div>";
+    $("importPanel").querySelectorAll("[data-pick]").forEach(b => b.onclick = () => {
+      const k = +b.getAttribute("data-pick");
+      if ($("template").value !== obj.template) { $("template").value = obj.template; applyTemplate(); }
+      $("text").value = opts[k].fields.text; $("subject").value = opts[k].fields.subject;
+      opts.forEach((o, i) => { if (i === k) { o.decision = "applied"; log("message suggestion applied", "", "id=" + o.id + "; source=" + o.source); } else reject(o); });
+      $("importPanel").innerHTML = "<div class='banner'>Wording put in the message box. You can still edit it.</div>";
+    });
+    $("rejectTemplates").onclick = () => { opts.forEach(reject); $("importPanel").innerHTML = "<div class='banner'>Suggested wordings not used.</div>"; };
+  };
+
   $("fillForm").onclick = () => {
     const spec = Core.parseRequest($("describe").value);
     if (spec.refuse) { $("describeNote").textContent = REFUSAL_NOTE[spec.refuse]; log("description not used", "", spec.refuse); return; }
@@ -380,6 +507,7 @@ Core.parseRequest = (function () {
     const cfg = config(), problems = Core.checkConfig(cfg);
     if (!data.rows.length) problems.unshift("load a CSV file first");
     if (problems.length) { alert("Please fix:\n- " + problems.join("\n- ")); return; }
+    reportApplied();
     result = Core.build(data.rows, cfg, $("today").value);
     log("drafts prepared", "", result.drafts.length + " drafts, " + result.skipped.length + " not drafted; rules: opted-out skipped, min days " + cfg.min_days_since_contact + ", hours " + cfg.window.join("-") + ", limit " + cfg.daily_limit);
     result.skipped.forEach(k => log("not drafted", k.row, k.reason));

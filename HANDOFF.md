@@ -2,6 +2,20 @@
 
 Updated 2026-10-26 afternoon by Claude Code (unattended session below). That session supersedes the Codex morning notes: the snapshot blocker is fixed and stages 3-4 and the dev comparison were run. Historical results remain below. Agents: update this file at the end of every session (see `AGENTS.md`).
 
+## Session 13 (2026-11-08, Claude Code, 3.5-hour time box from 18:08 CST): AI setup helper, AI message writer, pilot measurement (IN PROGRESS)
+
+### If interrupted (computer shut down)
+Each step is committed when it finishes. Resume commands (PowerShell or Git Bash, from the repo root):
+1. AI setup helper: DONE (`jobspec/interpret.py`, `jobspec/validate.py`, `jobspec/make_settings.py`, page "Import settings file", `tests/test_interpret.py`). Try: `.venv/Scripts/python.exe -m jobspec.make_settings "Remind customers by text from 9am to 6pm, at most 40 a day" --out settings.json [--no-model]`.
+(later steps are added here as they start)
+
+### Decisions (with reasons)
+- **One validation path for both interpreters.** `jobspec/validate.check_spec` reuses the held-out v4 scorer's `_compiles_clean` (schema, compiler, Aether checker, monitored dry run on made-up rows) by importing it rather than copying it. The scorer file stays byte-identical to the hash recorded in `eval/heldout4/conditions.json`.
+- **Fallback rule.** The model is tried first. If the model can't load (GPU guard, memory, missing files), crashes, or returns output that fails validation, the keyword rules are used, and the result's `source` and `notes` say so. A *validated model refusal* (for example "message opted-out customers") is kept, not overridden by the keyword rules: refusing is the cautious outcome.
+- **Model: Qwen/Qwen2.5-7B-Instruct**, the locked revision in `models.lock.json` (Apache-2.0), 4-bit NF4, offline from `.hf-cache`, inside `stages.gpu.gpu_job()` (needs 10 GiB free and the repo GPU lock). It fits: a smoke run loaded in about 30 s and returned a validated spec. The prompt holds the schema plus 4 **script-made** example sentences (`_script_sentence`). Nothing is trained, so no training-data provenance question arises.
+- **The page never trusts an imported file.** `Core.checkSettings` / `Core.checkTemplatesFile` repeat the schema and wording checks in the page's tested core. The page shows every suggested setting and who made it (local AI model or keyword rules), and nothing changes until the owner presses "Use these settings".
+- **Settings files contain only settings**, the owner's sentence and the producer, never customer data.
+
 ## Session 12 (2026-11-08, Claude Code, 4-hour time box from 17:10 CST): draft pack tool, job spec, held-out v4 (DONE ~17:30; gate cleared, no model trained, GPU unused)
 
 ### If interrupted (computer shut down)
