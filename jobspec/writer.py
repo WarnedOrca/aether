@@ -25,7 +25,7 @@ REQUIRED = {"appointment_reminder": ["name", "business", "date"], "follow_up": [
 ALLOWED = {"name", "business", "date", "review_link", "invoice", "amount"}
 TONES = ("friendly", "formal", "brief")
 MAX_CHARS = 320
-PROMPT_VERSION = "writer-v2"  # v2 (2026-11-08): exact output shape shown, after the author-written dev check
+PROMPT_VERSION = "writer-v1"  # v2 (exact output shape) was tried on the author-written dev check and was not better; v1 stays default
 
 _PRICE = re.compile(r"[$€£¥%]|\b(usd|dollars?|cents?|price|prices|cost|costs|fee|fees|discount\w*|coupon\w*|promo\w*|deal|deals|"
                     r"sale|sales|cheap\w*|offer\w*|bogo|rebate\w*)\b|\bfor free\b|\bfree of charge\b|"
