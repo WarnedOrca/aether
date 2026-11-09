@@ -130,3 +130,14 @@ def test_page_parser_matches_python_baseline():
     got = run_js("console.log(JSON.stringify(" + json.dumps(texts) + ".map(Core.parseRequest)))")
     for text, js in zip(texts, got):
         assert js == parse(text), text
+
+
+def test_ai_audit_detail_has_no_free_text():
+    """Audit rows for AI suggestions hold only kind, id, a known field name, an outcome and the producer id."""
+    got = run_js('console.log(JSON.stringify(['
+                 'Core.aiAuditDetail("settings", 1, "daily_limit", "edited", "local_model:Qwen/Qwen2.5-7B-Instruct"),'
+                 'Core.aiAuditDetail("template", 2, "Fake Customer A, 214-555-0100", "maybe", "keyword; DROP <x> @a b"),'
+                 'Core.aiAuditDetail("x", "7", "text", "rejected", "")]))')
+    assert got == ["kind=settings; id=1; field=daily_limit; outcome=edited; source=local_model:Qwen/Qwen2.5-7B-Instruct",
+                   "kind=template; id=2; field=other; outcome=other; source=keywordDROPxab",
+                   "kind=other; id=0; field=text; outcome=rejected; source=unknown"]

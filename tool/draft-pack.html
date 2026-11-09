@@ -348,6 +348,15 @@ Core.checkTemplatesFile = function (obj) {
   });
   return p;
 };
+// One audit-log detail string per AI-suggested field. Only fixed words: kind, a number, a known field name, an outcome and the
+// producer id (letters, digits and : / . _ - only). Never customer data or free text; anything else is replaced by "other".
+Core.AI_FIELDS = ["template", "channel", "min_days_since_contact", "send_window", "daily_limit", "text", "subject"];
+Core.aiAuditDetail = function (kind, id, field, outcome, source) {
+  const k = ["settings", "template"].includes(kind) ? kind : "other", f = Core.AI_FIELDS.includes(field) ? field : "other";
+  const o = ["accepted_unchanged", "edited", "rejected"].includes(outcome) ? outcome : "other";
+  const src = String(source || "unknown").replace(/[^A-Za-z0-9_.:\/-]/g, "").slice(0, 80) || "unknown";
+  return "kind=" + k + "; id=" + (Number.isInteger(id) ? id : 0) + "; field=" + f + "; outcome=" + o + "; source=" + src;
+};
 Core.compareSuggestion = function (suggested, current) {
   return Object.keys(suggested).map(f => ({ field: f, outcome: JSON.stringify(suggested[f]) === JSON.stringify(current[f]) ? "accepted_unchanged" : "edited" }));
 };
@@ -394,7 +403,7 @@ Core.compareSuggestion = function (suggested, current) {
     return { text: $("text").value, subject: $("subject").value };
   }
   function logDecision(sg, outcomes) {
-    outcomes.forEach(o => log("AI suggestion", "", "kind=" + sg.kind + "; id=" + sg.id + "; field=" + o.field + "; outcome=" + o.outcome + "; source=" + sg.source));
+    outcomes.forEach(o => log("AI suggestion", "", Core.aiAuditDetail(sg.kind, sg.id, o.field, o.outcome, sg.source)));
   }
   function reject(sg) { sg.decision = "rejected"; sg.reported = true; logDecision(sg, Object.keys(sg.fields).map(f => ({ field: f, outcome: "rejected" }))); }
   function reportApplied() {  // called when drafts are prepared: compare what the owner kept with what was suggested
@@ -524,7 +533,7 @@ Core.compareSuggestion = function (suggested, current) {
     render();
   };
   const download = (name, text) => { const a = document.createElement("a"); a.href = "data:text/csv;charset=utf-8," + encodeURIComponent(text); a.download = name; document.body.appendChild(a); a.click(); a.remove(); };
-  $("dlAudit").onclick = () => download("draft-pack-audit-" + localDate(now()) + ".csv", Core.toCSV(["time", "event", "csv_row", "detail"], audit));
+  $("dlAudit").onclick = () => { reportApplied(); download("draft-pack-audit-" + localDate(now()) + ".csv", Core.toCSV(["time", "event", "csv_row", "detail"], audit)); };
   $("swStart").onclick = () => { swStart = now(); $("swStart").disabled = true; $("swStop").disabled = false; swTimer = setInterval(() => { $("swShow").textContent = ((now() - swStart) / 60000).toFixed(1) + " min"; }, 1000); };
   $("swStop").onclick = () => {
     clearInterval(swTimer); const mins = (now() - swStart) / 60000;
